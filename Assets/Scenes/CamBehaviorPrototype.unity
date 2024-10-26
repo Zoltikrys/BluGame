@@ -272,7 +272,7 @@ Transform:
   m_GameObject: {fileID: 697476062}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.013412587, z: -0, w: 0.99991006}
-  m_LocalPosition: {x: -10, y: 10, z: 1.27}
+  m_LocalPosition: {x: -10, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -629,8 +629,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8fa02148e325f4d985b4da93447433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <UsePresets>k__BackingField: 0
-  <UseFocalPoint>k__BackingField: 1
+  <UsePresets>k__BackingField: 1
+  <UseFocalPoint>k__BackingField: 0
+  <FollowFocalPoint>k__BackingField: 0
+  <Distance>k__BackingField: 0
+  <Height>k__BackingField: 0
   <FocalPoint>k__BackingField: {fileID: 519077220}
   <CameraMoveSpeed>k__BackingField: 1
 --- !u!1 &1809149889
