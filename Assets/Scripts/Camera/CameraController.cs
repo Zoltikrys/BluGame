@@ -116,7 +116,7 @@ public class CameraController : MonoBehaviour
 
 
         switch(CameraRotation){
-            case 3: offsetDistance.x = -Distance * 2;
+            case 3: offsetDistance.x = -Distance;
                     offsetDistance.z = 0;
                     break;
             case 2: offsetDistance.x = 0;
