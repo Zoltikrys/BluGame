@@ -11,7 +11,7 @@ using UnityEngine;
 /// This Script should not be applied to the camera! It is attached to an empty object and inside
 /// it (as a child object) should be your game's MainCamera.
 /// </summary>
-public class CameraController : MonoBehaviour
+public class CameraControllera : MonoBehaviour
 {
 
     [Tooltip("Enable to move the camera by holding the right mouse button. Does not work with joysticks.")]
