@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +14,14 @@ public class WeightedFocalPoint
 [System.Serializable]
 public class DollySettings
 {
+
+    public DollySettings(DollySettings settings)
+    {
+        XLimits = new Vector2(settings.XLimits.x, settings.XLimits.y);
+        YLimits = new Vector2(settings.YLimits.x, settings.YLimits.y);
+        DistanceFromTarget = new Vector2(settings.DistanceFromTarget.x, settings.DistanceFromTarget.y);
+    }
+
     [field: SerializeField]
     public Vector2 XLimits{get; set;}
 
@@ -54,11 +61,11 @@ public class CameraController : MonoBehaviour
     [field: SerializeField]
     [field: Header("Camera Settings")]
     [field: Tooltip("How far away from FocalPoint should we be?")]
-    public int Distance {get; set;}
+    public float Distance {get; set;}
     
     [field: SerializeField]
     [field: Tooltip("How high should the camera be?")]
-    public int Height {get; set;}
+    public float Height {get; set;}
 
     [field: Tooltip("How many times faster the camera should move towards its target")]
     [field: SerializeField]
@@ -90,6 +97,8 @@ public class CameraController : MonoBehaviour
 
     private bool IsDollyTargetSet = false;
 
+    private GameObject CameraPositionsForLevel;
+
     /// <summary>
     /// Contains the current lerp target for the camera. Used when shifting from 1 camera to another
     /// </summary>
@@ -97,6 +106,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        CameraPositionsForLevel = GameObject.FindGameObjectWithTag("CameraPositions");
         RefreshPresetCameraPositions();
 
     }
@@ -106,10 +116,9 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void RefreshPresetCameraPositions(){
         CameraPositions.Clear();
-        var cameraPositionsForlevel = GameObject.FindGameObjectWithTag("CameraPositions");
 
-        if (cameraPositionsForlevel != null){
-            foreach(Transform cameraPos in cameraPositionsForlevel.transform){
+        if (CameraPositionsForLevel != null){
+            foreach(Transform cameraPos in CameraPositionsForLevel.transform){
                 CameraPositions.Add(new TransformData(cameraPos));
             }
             Debug.Log($"Found {CameraPositions.Count} camera presets for scene");
@@ -125,7 +134,7 @@ public class CameraController : MonoBehaviour
             if(WeightedFocalPoints.Count != 0){
                 if(FollowFocalPoint) HandleFollowFocalPoint();
                 if(UseFocalPoint){
-                    if(IsDollyTracking) HandleDollyTracking();
+                    if(IsDollyTracking) HandleDollyTracking(GetFocalPointPosition(), false);
                     else HandleCameraRotation();
                 }
             }
@@ -153,24 +162,50 @@ public class CameraController : MonoBehaviour
         CameraTargetPosition.position = CalculateCameraPlacementFromFocalPoint();
     }
 
-    private void HandleDollyTracking(){
+    private void HandleDollyTracking(Vector3 targetPosition, bool instantCameraSwitch){
         
-        Vector3 targetPosition = GetFocalPointPosition();
 
-        if (targetPosition.x >= Limits.XLimits.x && targetPosition.x <= Limits.XLimits.y) CameraTargetPosition.position.x = targetPosition.x - Limits.DistanceFromTarget.x;
-        if (targetPosition.z >= Limits.YLimits.x && targetPosition.z <= Limits.YLimits.y) CameraTargetPosition.position.z = targetPosition.z - Limits.DistanceFromTarget.y;
         CameraTargetPosition.position.y = Height;
+        CameraTargetPosition.position.x = Mathf.Clamp(targetPosition.x , Limits.XLimits.x, Limits.XLimits.y);
+        CameraTargetPosition.position.z = Mathf.Clamp(targetPosition.z, Limits.YLimits.x, Limits.YLimits.y);
+        CameraTargetPosition.position.x += Limits.DistanceFromTarget.x;
+        CameraTargetPosition.position.z += Limits.DistanceFromTarget.y;
 
         if(!IsDollyTargetSet) {
-            IsDollyTargetSet = true;
-            transform.position = CameraTargetPosition.position;
-            Quaternion lookRotation = Quaternion.LookRotation(targetPosition - transform.position);
-            transform.rotation = lookRotation;
+            var alignedDirection = GetAlignedDirection(targetPosition - CameraTargetPosition.position);
+            Quaternion lookRotation = Quaternion.LookRotation(targetPosition - CameraTargetPosition.position);
+
+            if(instantCameraSwitch){
+                transform.position = CameraTargetPosition.position;
+                transform.rotation = lookRotation;
+                IsDollyTargetSet = true;
+            }else{
+                float distanceToTarget = Vector3.Distance(transform.position, CameraTargetPosition.position);
+                float angleToTarget = Quaternion.Angle(transform.rotation, lookRotation);
+                if(distanceToTarget <= 0.1 && angleToTarget <= 1.0) IsDollyTargetSet = true;
+                CameraTargetPosition.rotation = lookRotation;
+            }
+            
+
         }
 
+    }
 
+    private Vector3 GetAlignedDirection(Vector3 direction)
+    {
+        direction.y = 0;  // Keep it on the horizontal plane
 
-        //CameraTargetPosition.rotation = transform.rotation;
+        // Determine whether to align to x or z axis based on which is larger
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
+        {
+            // Align to the x-axis
+            return new Vector3(Mathf.Sign(direction.x), 0, 0);
+        }
+        else
+        {
+            // Align to the z-axis
+            return new Vector3(0, 0, Mathf.Sign(direction.z));
+        }
     }
 
 
@@ -249,5 +284,27 @@ public class CameraController : MonoBehaviour
             Debug.Log($"Camera Rotation {CameraRotation}");
 
         }
+    }
+
+    public void UpdateCamera(Vector3 posToLookAt, bool instantCameraSwitch, bool usePresets, bool useFocalPoint, bool isDollyTracking, float distance, float height, float speed, DollySettings settings, GameObject presets){
+        Debug.Log("Updating camera");
+        
+        UsePresets = usePresets;
+        UseFocalPoint = useFocalPoint;
+        IsDollyTracking = isDollyTracking;
+        Distance = distance;
+        Height = height;
+        CameraMoveSpeed = speed;
+        Limits = new DollySettings(settings);
+        CameraPositionsForLevel = presets;
+
+        RefreshPresetCameraPositions();
+
+        if(isDollyTracking){
+            IsDollyTargetSet = false;            
+            HandleDollyTracking(posToLookAt, instantCameraSwitch);
+        }
+        
+
     }
 }
