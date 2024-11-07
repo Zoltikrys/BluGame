@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,25 +10,49 @@ public class WeightedFocalPoint
     public GameObject FocalPoint;
     public float Weight;
 }
+
+
+[System.Serializable]
+public class DollySettings
+{
+    [field: SerializeField]
+    public Vector2 XLimits{get; set;}
+
+    [field: SerializeField]
+    public Vector2 YLimits{get; set;}
+
+    [field: SerializeField]
+    public Vector2 DistanceBeforeMovement{get; set;}
+
+}
 public class CameraController : MonoBehaviour
 {
 
     [field: Header("Camera Flags")]
-    [field: Tooltip("Use the camera presets")]
+    [field: Tooltip("Use camera position presets.")]
     [field: SerializeField]
     public bool UsePresets {get; set;} = false;
 
-
     [field: SerializeField]
-    [field: Header("Camera focus targets")]
-    [field: Tooltip("Should the camera focus on the FocalPoint?")]
+
+    [field: Tooltip("Should the camera focus on the Weighted focus points?")]
     public bool UseFocalPoint {get; set;} = true;
 
     [field: SerializeField]
-    [field: Tooltip("Should camera follow along with focal point?")]
+    [field: Tooltip("Should camera follow along with weighted focal point?")]
     public bool FollowFocalPoint{get; set;} = true;
 
+    [field:SerializeField]
+    [field: Tooltip("Should the camera rotate to follow the focal points?")]
+    public bool IsDollyTracking {get; set;} = true;
+
     [field: SerializeField]
+    [field: Header("Camera focus targets")]
+    [field: Tooltip("Weighted list of focal points for the camera to follow. Each element should be a decimal below 1. i.e. 0.1 = 10% weight strength. ")]
+    public List<WeightedFocalPoint> WeightedFocalPoints { get; set; } = new List<WeightedFocalPoint>();
+
+    [field: SerializeField]
+    [field: Header("Camera Settings")]
     [field: Tooltip("How far away from FocalPoint should we be?")]
     public int Distance {get; set;}
     
@@ -40,8 +65,9 @@ public class CameraController : MonoBehaviour
     public float CameraMoveSpeed{get; set; } = 1.0f;
 
     [field: SerializeField]
-    [field: Tooltip("Weighted list of focal points for the camera to follow")]
-    public List<WeightedFocalPoint> WeightedFocalPoints { get; set; } = new List<WeightedFocalPoint>();
+    [field: Header("Dolly Tracking settings")]
+    [field: Tooltip("Define the X and Y max distances the camera can move before stopping. e.g.  -5 to 5")]
+    public DollySettings Limits{get; set;}
 
 
     /// <summary>
@@ -69,7 +95,6 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-
         RefreshPresetCameraPositions();
     }
 
@@ -90,26 +115,47 @@ public class CameraController : MonoBehaviour
     {
         HandleKeyPress();
     
-        if(UsePresets){
-            if(PrevCameraIndex != CurrentCameraIndex && CameraPositions.Count > 0){
-                CameraTargetPosition = CameraPositions.ElementAt(CurrentCameraIndex);
-                PrevCameraIndex = CurrentCameraIndex;
-                Debug.Log($"Setting camera to {CurrentCameraIndex}");
+        if(UsePresets) HandlePresets();
+        else{
+            if(WeightedFocalPoints.Count != 0){
+                if(FollowFocalPoint) HandleFollowFocalPoint();
+                if(UseFocalPoint){
+                    if(IsDollyTracking) HandleDollyTracking();
+                    else HandleCameraRotation();
+                }
             }
-        }
-
-        if(FollowFocalPoint && WeightedFocalPoints.Count != 0){ // Camera follow focal point
-            CameraTargetPosition.position = CalculateCameraPlacementFromFocalPoint();
-        } 
-
-        if(UseFocalPoint && WeightedFocalPoints.Count != 0) {  // Looks at focal point
-            Quaternion lookRotation = Quaternion.LookRotation(GetFocalPointPosition() - CameraTargetPosition.position);
-            CameraTargetPosition.rotation = lookRotation;
         }
 
         transform.position = Vector3.Lerp(transform.position, CameraTargetPosition.position, Time.deltaTime * CameraMoveSpeed);
         transform.rotation = Quaternion.Lerp(transform.rotation, CameraTargetPosition.rotation, Time.deltaTime * CameraMoveSpeed);
+    }
 
+    private void HandleCameraRotation()
+    {
+        Quaternion lookRotation = Quaternion.LookRotation(GetFocalPointPosition() - CameraTargetPosition.position);
+        CameraTargetPosition.rotation = lookRotation;
+    }
+
+    private void HandlePresets(){
+        if(PrevCameraIndex != CurrentCameraIndex && CameraPositions.Count > 0){
+            CameraTargetPosition = CameraPositions.ElementAt(CurrentCameraIndex);
+            PrevCameraIndex = CurrentCameraIndex;
+            Debug.Log($"Setting camera to {CurrentCameraIndex}");
+        }
+    }
+
+    private void HandleFollowFocalPoint(){
+        CameraTargetPosition.position = CalculateCameraPlacementFromFocalPoint();
+    }
+
+    private void HandleDollyTracking(){
+        CameraTargetPosition.rotation = transform.rotation; // explicitly set rotation to what we currently have
+        Vector3 targetPosition = GetFocalPointPosition();
+
+        if (targetPosition.x >= Limits.XLimits.x && targetPosition.x <= Limits.XLimits.y) CameraTargetPosition.position.x = targetPosition.x;
+        if (targetPosition.z >= Limits.YLimits.x && targetPosition.z <= Limits.YLimits.y) CameraTargetPosition.position.z = targetPosition.z - Distance;
+        
+        CameraTargetPosition.position.y = Height;
     }
 
 
@@ -128,7 +174,7 @@ public class CameraController : MonoBehaviour
         }
 
 
-        return position;
+        return position / totalWeight;
     }
 
     /// <summary>
