@@ -140,8 +140,12 @@ public class CameraController : MonoBehaviour
             }
         }
 
+
+    }
+
+    void FixedUpdate(){
         transform.position = Vector3.Lerp(transform.position, CameraTargetPosition.position, Time.deltaTime * CameraMoveSpeed);
-        transform.rotation = Quaternion.Lerp(transform.rotation, CameraTargetPosition.rotation, Time.deltaTime * CameraMoveSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, CameraTargetPosition.rotation, Time.deltaTime * CameraMoveSpeed);
     }
 
     private void HandleCameraRotation()
