@@ -2,6 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
+[System.Serializable]
+public class WeightedFocalPoint
+{
+    public GameObject FocalPoint;
+    public float Weight;
+}
 public class CameraController : MonoBehaviour
 {
 
@@ -28,16 +35,15 @@ public class CameraController : MonoBehaviour
     [field: Tooltip("How high should the camera be?")]
     public int Height {get; set;}
 
-
-    [field: SerializeField]
-    [field: Tooltip("The object the camera should be looking at")]
-    public GameObject FocalPoint {get; set;}
-
     [field: Tooltip("How many times faster the camera should move towards its target")]
     [field: SerializeField]
     public float CameraMoveSpeed{get; set; } = 1.0f;
 
-    private Vector3 DistanceFromFocalPoint{get; set;}
+    [field: SerializeField]
+    [field: Tooltip("Weighted list of focal points for the camera to follow")]
+    public List<WeightedFocalPoint> WeightedFocalPoints { get; set; } = new List<WeightedFocalPoint>();
+
+
     /// <summary>
     /// List containing the camera presets found within a scene.
     /// </summary>
@@ -83,7 +89,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         HandleKeyPress();
-
+    
         if(UsePresets){
             if(PrevCameraIndex != CurrentCameraIndex && CameraPositions.Count > 0){
                 CameraTargetPosition = CameraPositions.ElementAt(CurrentCameraIndex);
@@ -92,12 +98,12 @@ public class CameraController : MonoBehaviour
             }
         }
 
-        if(FollowFocalPoint && FocalPoint != null){ // Camera follow focal point
+        if(FollowFocalPoint && WeightedFocalPoints.Count != 0){ // Camera follow focal point
             CameraTargetPosition.position = CalculateCameraPlacementFromFocalPoint();
         } 
 
-        if(UseFocalPoint && FocalPoint != null) {  // Looks at focal point
-            Quaternion lookRotation = Quaternion.LookRotation(FocalPoint.transform.position - CameraTargetPosition.position);
+        if(UseFocalPoint && WeightedFocalPoints.Count != 0) {  // Looks at focal point
+            Quaternion lookRotation = Quaternion.LookRotation(GetFocalPointPosition() - CameraTargetPosition.position);
             CameraTargetPosition.rotation = lookRotation;
         }
 
@@ -106,12 +112,31 @@ public class CameraController : MonoBehaviour
 
     }
 
+
+    private Vector3 GetFocalPointPosition(){
+        Vector3 position = Vector3.zero;
+        float totalWeight = WeightedFocalPoints.Sum(fp => fp.Weight);
+
+        if (totalWeight <= 0)
+        {
+            Debug.LogWarning("Total weight is zero or negative; returning zero position.");
+            return position;
+        }
+
+        for(int i = 0; i < WeightedFocalPoints.Count; i++){
+            position += WeightedFocalPoints[i].FocalPoint.transform.position * WeightedFocalPoints[i].Weight;
+        }
+
+
+        return position;
+    }
+
     /// <summary>
     /// Handles camera rotation when not using presets. Currently only processes 90* camera movements
     /// </summary>
     /// <returns>A position to place the camera at</returns>
     private Vector3 CalculateCameraPlacementFromFocalPoint(){
-        Vector3 cameraPosition = FocalPoint.transform.position;
+        Vector3 cameraPosition = GetFocalPointPosition();
         Vector3 offsetDistance = new Vector3(0, Height, 0);
 
 
