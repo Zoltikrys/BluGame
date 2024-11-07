@@ -22,7 +22,7 @@ public class DollySettings
     public Vector2 YLimits{get; set;}
 
     [field: SerializeField]
-    public Vector2 DistanceBeforeMovement{get; set;}
+    public Vector2 DistanceFromTarget{get; set;}
 
 }
 public class CameraController : MonoBehaviour
@@ -88,6 +88,8 @@ public class CameraController : MonoBehaviour
 
     private int CameraRotation = 0;
 
+    private bool IsDollyTargetSet = false;
+
     /// <summary>
     /// Contains the current lerp target for the camera. Used when shifting from 1 camera to another
     /// </summary>
@@ -96,6 +98,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         RefreshPresetCameraPositions();
+
     }
 
     /// <summary>
@@ -105,10 +108,12 @@ public class CameraController : MonoBehaviour
         CameraPositions.Clear();
         var cameraPositionsForlevel = GameObject.FindGameObjectWithTag("CameraPositions");
 
-        foreach(Transform cameraPos in cameraPositionsForlevel.transform){
-            CameraPositions.Add(new TransformData(cameraPos));
+        if (cameraPositionsForlevel != null){
+            foreach(Transform cameraPos in cameraPositionsForlevel.transform){
+                CameraPositions.Add(new TransformData(cameraPos));
+            }
+            Debug.Log($"Found {CameraPositions.Count} camera presets for scene");
         }
-        Debug.Log($"Found {CameraPositions.Count} camera presets for scene");
     }
 
     void Update()
@@ -149,13 +154,23 @@ public class CameraController : MonoBehaviour
     }
 
     private void HandleDollyTracking(){
-        CameraTargetPosition.rotation = transform.rotation; // explicitly set rotation to what we currently have
+        
         Vector3 targetPosition = GetFocalPointPosition();
 
-        if (targetPosition.x >= Limits.XLimits.x && targetPosition.x <= Limits.XLimits.y) CameraTargetPosition.position.x = targetPosition.x;
-        if (targetPosition.z >= Limits.YLimits.x && targetPosition.z <= Limits.YLimits.y) CameraTargetPosition.position.z = targetPosition.z - Distance;
-        
+        if (targetPosition.x >= Limits.XLimits.x && targetPosition.x <= Limits.XLimits.y) CameraTargetPosition.position.x = targetPosition.x - Limits.DistanceFromTarget.x;
+        if (targetPosition.z >= Limits.YLimits.x && targetPosition.z <= Limits.YLimits.y) CameraTargetPosition.position.z = targetPosition.z - Limits.DistanceFromTarget.y;
         CameraTargetPosition.position.y = Height;
+
+        if(!IsDollyTargetSet) {
+            IsDollyTargetSet = true;
+            transform.position = CameraTargetPosition.position;
+            Quaternion lookRotation = Quaternion.LookRotation(targetPosition - transform.position);
+            transform.rotation = lookRotation;
+        }
+
+
+
+        //CameraTargetPosition.rotation = transform.rotation;
     }
 
 
