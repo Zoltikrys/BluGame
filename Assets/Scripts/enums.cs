@@ -8,3 +8,8 @@ public enum RGBSTATE{  // The order of this is really important.
     GB,
     RGB,
 }
+
+public enum CAMERA_EFFECTS{
+    ENTER_ROOM,
+    LEAVE_ROOM
+}

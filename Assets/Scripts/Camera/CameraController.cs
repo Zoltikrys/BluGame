@@ -1,43 +1,16 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BrewedInk.CRT;
 using UnityEngine;
 
-
-[System.Serializable]
-public class WeightedFocalPoint
-{
-    public GameObject FocalPoint;
-    public float Weight;
-}
-
-
-[System.Serializable]
-public class DollySettings
-{
-
-    public DollySettings(DollySettings settings)
-    {
-        XLimits = new Vector2(settings.XLimits.x, settings.XLimits.y);
-        YLimits = new Vector2(settings.YLimits.x, settings.YLimits.y);
-        DistanceFromTarget = new Vector2(settings.DistanceFromTarget.x, settings.DistanceFromTarget.y);
-    }
-
-    [field: SerializeField]
-    public Vector2 XLimits{get; set;}
-
-    [field: SerializeField]
-    public Vector2 YLimits{get; set;}
-
-    [field: SerializeField]
-    public Vector2 DistanceFromTarget{get; set;}
-
-}
 public class CameraController : MonoBehaviour
 {
 
+    // Removed for now
     [field: Header("Camera Flags")]
     [field: Tooltip("Use camera position presets.")]
-    [field: SerializeField]
     public bool UsePresets {get; set;} = false;
 
     [field: SerializeField]
@@ -45,7 +18,7 @@ public class CameraController : MonoBehaviour
     [field: Tooltip("Should the camera focus on the Weighted focus points?")]
     public bool UseFocalPoint {get; set;} = true;
 
-    [field: SerializeField]
+    // Removed for now
     [field: Tooltip("Should camera follow along with weighted focal point?")]
     public bool FollowFocalPoint{get; set;} = true;
 
@@ -58,7 +31,7 @@ public class CameraController : MonoBehaviour
     [field: Tooltip("Weighted list of focal points for the camera to follow. Each element should be a decimal below 1. i.e. 0.1 = 10% weight strength. ")]
     public List<WeightedFocalPoint> WeightedFocalPoints { get; set; } = new List<WeightedFocalPoint>();
 
-    [field: SerializeField]
+    // Removed for now
     [field: Header("Camera Settings")]
     [field: Tooltip("How far away from FocalPoint should we be?")]
     public float Distance {get; set;}
@@ -69,7 +42,7 @@ public class CameraController : MonoBehaviour
 
     [field: Tooltip("How many times faster the camera should move towards its target")]
     [field: SerializeField]
-    public float CameraMoveSpeed{get; set; } = 1.0f;
+    public float CameraMoveSpeed{get; set; } = 10.0f;
 
     [field: SerializeField]
     [field: Header("Dolly Tracking settings")]
@@ -107,6 +80,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         CameraPositionsForLevel = GameObject.FindGameObjectWithTag("CameraPositions");
+        if(IsDollyTracking) CameraTargetPosition = new TransformData(transform);
         RefreshPresetCameraPositions();
 
     }
@@ -308,7 +282,32 @@ public class CameraController : MonoBehaviour
             IsDollyTargetSet = false;            
             HandleDollyTracking(posToLookAt, instantCameraSwitch);
         }
-        
+    }
 
+    public void StartCameraTransitionEffect(CAMERA_EFFECTS effect, Action callback){
+        Debug.Log("Triggered CameraTransitionEffect");
+        CRTCameraBehaviour cRTCameraBehaviour = GetComponent<CRTCameraBehaviour>();
+
+        switch(effect){
+            case CAMERA_EFFECTS.ENTER_ROOM: StartCoroutine(RoomTransition(cRTCameraBehaviour, 3.0f, 1.0f, callback));
+                                            break;
+            case CAMERA_EFFECTS.LEAVE_ROOM: StartCoroutine(RoomTransition(cRTCameraBehaviour, 0.0f, 1.0f, callback));
+                                            break;
+        }
+    }
+
+    private IEnumerator RoomTransition(CRTCameraBehaviour cameraBehaviour, float targetValue, float duration, Action callback){
+
+        float startValue = cameraBehaviour.data.innerCurve;
+        float time = 0f;
+
+        while(time < duration){
+            cameraBehaviour.data.innerCurve = Mathf.Lerp(startValue, targetValue, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        cameraBehaviour.data.innerCurve = targetValue;
+        callback?.Invoke();
     }
 }
