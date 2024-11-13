@@ -5,28 +5,41 @@ using UnityEngine;
 public class BluController : MonoBehaviour
 {
 
+    public CharacterController controller;
+    public Transform cam;
 
-    [SerializeField] private CharacterController Controller;
-    [SerializeField] private Vector3 playerVelocity;
-    [SerializeField] private float Speed;
-    [SerializeField] private float Time;
-    [SerializeField] private float JumpForce;
-    [SerializeField] private float Gravity = -9.81f;
-    [SerializeField] private bool playerGrounded = true;
-    [SerializeField] private float Sensitivity;
+    public float speed = 6f;
+    public float sensitivity = 0.1f;
+    public float turnSmoothTime = 0.1f;
+    float turnSmoothVelocity;
+
+    
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        Controller = GetComponent<CharacterController>();
+        //Controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerGrounded= Controller.isGrounded;
-        if (playerGrounded)
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+        if (direction.magnitude > sensitivity) 
         {
-            playerVelocity.y = 0;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
+
     }
 }
