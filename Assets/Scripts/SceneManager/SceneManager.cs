@@ -138,7 +138,7 @@ public class SceneManager : MonoBehaviour
             Debug.LogWarning("Could not find any spawn points in scene. Character will default to (0,0,0)");
         }
 
-        Debug.Log($"Setting Player spawn to: {newSpawnPoint}");
+        Debug.Log($"Setting Player spawn to: {newSpawnPoint.transform.position}, {newSpawnPoint.transform.rotation}");
 
         SetPlayer(newSpawnPoint.transform.position, newSpawnPoint.transform.rotation);
 
