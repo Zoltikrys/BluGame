@@ -26,6 +26,8 @@ public class SceneManager : MonoBehaviour
 
     void Start()
     {
+        DontDestroyOnLoad(this);
+
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
         if(FirstLoad)LoadScene(FirstLoad, RequestedSpawnPoint);
@@ -40,11 +42,11 @@ public class SceneManager : MonoBehaviour
     private void LoadScene(SceneAsset scene, uint requestedSpawnpoint){
         RequestedSpawnPoint = requestedSpawnpoint;
 
-        if(CurrentScene && IsSceneLoaded(CurrentScene)) UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(CurrentScene.name);
+        if(CurrentScene && IsSceneLoaded(CurrentScene)) UnityEngine.SceneManagement.SceneManager.LoadScene(CurrentScene.name);
 
         string sceneName = scene.name;
         CurrentScene = scene;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     public void RequestLoadScene(SceneAsset scene, uint requestedSpawnpoint){
@@ -84,29 +86,36 @@ public class SceneManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
         Debug.Log($"Loaded scene: {scene.name}");
         if(GameObject.FindWithTag("Player")) UnlockPlayer();
-        else Player = Instantiate(Player, new Vector3(), Quaternion.identity);
+        else {
+            Player = Instantiate(Player, new Vector3(), Quaternion.identity);
+            DontDestroyOnLoad(Player);
+        }
         SetSpawn(scene);
         SetCamera(scene);
         UnlockPlayer();
+    }
 
+    void OnDestroy(){
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
 
-    private void SetPlayer(Vector3 position)
+    private void SetPlayer(Vector3 position, Quaternion rotation)
     {
         if(Player){ 
             // TODO: Update this when we change the character controller
             Debug.Log($"Setting position to: {position}");
             CharacterController controller = Player.GetComponent<CharacterController>();
             controller.enabled = false;
-            Player.transform.position = position;           
+            Player.transform.position = position;     
+            Player.transform.rotation =  rotation;    
             controller.enabled = true; 
         }
     }
 
     private void SetSpawn(Scene scene)
     {
-        Vector3 newSpawnPoint = new Vector3();
+        GameObject newSpawnPoint = new GameObject();
         GameObject[] rootObjects = UnityEngine.SceneManagement.SceneManager.GetSceneByName(CurrentScene.name).GetRootGameObjects();
         GameObject SpawnPoints = null;
 
@@ -122,7 +131,7 @@ public class SceneManager : MonoBehaviour
                 Debug.LogWarning("Requested spawn point larger than number of spawn points. Defaulting to index 0");
                 RequestedSpawnPoint = 0;
             }
-            if(SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).gameObject) newSpawnPoint = SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).position;
+            if(SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).gameObject) newSpawnPoint = SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).transform.gameObject;
             else Debug.LogWarning($"Could not find spawn point {RequestedSpawnPoint}. Setting Player to {new Vector3()}");
         } 
         else{
@@ -131,7 +140,7 @@ public class SceneManager : MonoBehaviour
 
         Debug.Log($"Setting Player spawn to: {newSpawnPoint}");
 
-        SetPlayer(newSpawnPoint);
+        SetPlayer(newSpawnPoint.transform.position, newSpawnPoint.transform.rotation);
 
         
     }

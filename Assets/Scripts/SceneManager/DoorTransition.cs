@@ -10,7 +10,6 @@ public class DoorTransition : MonoBehaviour
     public uint IndexOfSpawnPointInNextScene;
 
     private SceneManager SceneManager;
-    private CameraController CurrentCamera;
 
     void Start(){
         SceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManager>();

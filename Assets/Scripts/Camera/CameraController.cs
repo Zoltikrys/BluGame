@@ -55,22 +55,9 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private List<TransformData> CameraPositions = new List<TransformData>();
 
-
-    /// <summary>
-    /// The currently active camera index
-    /// </summary>
-    private int CurrentCameraIndex = 0;
-
-    /// <summary>
-    /// The previous active camera index
-    /// </summary>
-    private int PrevCameraIndex = -1;
-
     private int CameraRotation = 0;
 
     private bool IsDollyTargetSet = false;
-
-    private GameObject CameraPositionsForLevel;
 
     /// <summary>
     /// Contains the current lerp target for the camera. Used when shifting from 1 camera to another
@@ -79,42 +66,19 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        CameraPositionsForLevel = GameObject.FindGameObjectWithTag("CameraPositions");
         if(IsDollyTracking) CameraTargetPosition = new TransformData(transform);
-        RefreshPresetCameraPositions();
 
-    }
-
-    /// <summary>
-    /// Obtains any child transforms from a game object tagged with CameraPositions. Stores their transforms to use as camera view
-    /// </summary>
-    private void RefreshPresetCameraPositions(){
-        CameraPositions.Clear();
-
-        if (CameraPositionsForLevel != null){
-            foreach(Transform cameraPos in CameraPositionsForLevel.transform){
-                CameraPositions.Add(new TransformData(cameraPos));
-            }
-            Debug.Log($"Found {CameraPositions.Count} camera presets for scene");
-        }
     }
 
     void Update()
     {
-        HandleKeyPress();
-    
-        if(UsePresets) HandlePresets();
-        else{
-            if(WeightedFocalPoints.Count != 0){
-                if(FollowFocalPoint) HandleFollowFocalPoint();
-                if(UseFocalPoint){
-                    if(IsDollyTracking) HandleDollyTracking(GetFocalPointPosition(), false);
-                    else HandleCameraRotation();
-                }
+        if(WeightedFocalPoints.Count != 0){
+            if(FollowFocalPoint) HandleFollowFocalPoint();
+            if(UseFocalPoint){
+                if(IsDollyTracking) HandleDollyTracking(GetFocalPointPosition(), false);
+                else HandleCameraRotation();
             }
         }
-
-
     }
 
     void FixedUpdate(){
@@ -127,15 +91,6 @@ public class CameraController : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(GetFocalPointPosition() - CameraTargetPosition.position);
         CameraTargetPosition.rotation = lookRotation;
     }
-
-    private void HandlePresets(){
-        if(PrevCameraIndex != CurrentCameraIndex && CameraPositions.Count > 0){
-            CameraTargetPosition = CameraPositions.ElementAt(CurrentCameraIndex);
-            PrevCameraIndex = CurrentCameraIndex;
-            Debug.Log($"Setting camera to {CurrentCameraIndex}");
-        }
-    }
-
     private void HandleFollowFocalPoint(){
         CameraTargetPosition.position = CalculateCameraPlacementFromFocalPoint();
     }
@@ -150,7 +105,6 @@ public class CameraController : MonoBehaviour
         CameraTargetPosition.position.z += Limits.DistanceFromTarget.y;
 
         if(!IsDollyTargetSet) {
-            var alignedDirection = GetAlignedDirection(targetPosition - CameraTargetPosition.position);
             Quaternion lookRotation = Quaternion.LookRotation(targetPosition - CameraTargetPosition.position);
 
             if(instantCameraSwitch){
@@ -168,24 +122,6 @@ public class CameraController : MonoBehaviour
         }
 
     }
-
-    private Vector3 GetAlignedDirection(Vector3 direction)
-    {
-        direction.y = 0;  // Keep it on the horizontal plane
-
-        // Determine whether to align to x or z axis based on which is larger
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
-        {
-            // Align to the x-axis
-            return new Vector3(Mathf.Sign(direction.x), 0, 0);
-        }
-        else
-        {
-            // Align to the z-axis
-            return new Vector3(0, 0, Mathf.Sign(direction.z));
-        }
-    }
-
 
     private Vector3 GetFocalPointPosition(){
         Vector3 position = Vector3.zero;
@@ -231,52 +167,15 @@ public class CameraController : MonoBehaviour
         return cameraPosition + offsetDistance;
     }
 
-    /// <summary>
-    /// Handles inputs that control the camera. Currently uses Q and E to rotate between camera presets or rotate the camera 90*
-    /// </summary>
-    private void HandleKeyPress()
-    {
-        if(Input.GetKeyUp(KeyCode.Q)){
-            if(FollowFocalPoint){
-                CameraRotation -= 1;
-                if(CameraRotation < 0) CameraRotation = 3;
-            }
-            else{
-                PrevCameraIndex = CurrentCameraIndex;
-                CurrentCameraIndex -= 1;
-                if(CurrentCameraIndex < 0) CurrentCameraIndex = CameraPositions.Count - 1;
-            }
-            Debug.Log($"Camera Rotation {CameraRotation}");
-
-        }
-        if(Input.GetKeyUp(KeyCode.E)){
-            if(FollowFocalPoint){
-                CameraRotation += 1;
-                if(CameraRotation > 3) CameraRotation = 0;
-            }
-            else{
-                PrevCameraIndex = CurrentCameraIndex;
-                CurrentCameraIndex += 1;
-                if(CurrentCameraIndex >= CameraPositions.Count) CurrentCameraIndex = 0;
-            }
-            Debug.Log($"Camera Rotation {CameraRotation}");
-
-        }
-    }
-
-    public void UpdateCamera(Vector3 posToLookAt, bool instantCameraSwitch, bool usePresets, bool useFocalPoint, bool isDollyTracking, float distance, float height, float speed, DollySettings settings, GameObject presets){
+    public void UpdateCamera(Vector3 posToLookAt, bool instantCameraSwitch, bool useFocalPoint, bool isDollyTracking, float distance, float height, float speed, DollySettings settings){
         Debug.Log("Updating camera");
-        
-        UsePresets = usePresets;
+    
         UseFocalPoint = useFocalPoint;
         IsDollyTracking = isDollyTracking;
         Distance = distance;
         Height = height;
         CameraMoveSpeed = speed;
         Limits = new DollySettings(settings);
-        CameraPositionsForLevel = presets;
-
-        RefreshPresetCameraPositions();
 
         if(isDollyTracking){
             IsDollyTargetSet = false;            
@@ -285,7 +184,7 @@ public class CameraController : MonoBehaviour
     }
 
     public void StartCameraTransitionEffect(CAMERA_EFFECTS effect, Action callback){
-        Debug.Log("Triggered CameraTransitionEffect");
+        Debug.Log($"Triggered CameraTransitionEffect: {effect.ToString()}");
         CRTCameraBehaviour cRTCameraBehaviour = GetComponent<CRTCameraBehaviour>();
 
         switch(effect){
