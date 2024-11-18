@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,18 +33,20 @@ public class RgbGoggles : MonoBehaviour
     public RGBSTATE CurrentGoggleState{get; set;} = RGBSTATE.ALL_OFF;
 
     [field: SerializeField]
-    public RGBSTATE PrevGoggleState{get; set;} = RGBSTATE.ALL_OFF;
+    public RGBSTATE PrevGoggleState{get; set;} = RGBSTATE.RGB;
 
     [field: SerializeField]
     public TextMeshProUGUI DebugText;
 
     [field: SerializeField]
-    public GameObject FilterObjects {get; set;}
+    public List<GameObject> FilterObjects = new List<GameObject>();
 
     void Start(){
         colorFlags.r = false;
         colorFlags.g = false;
         colorFlags.b = false;
+        GetFilterObjects();
+        SetFilterObjects();
     }
 
     void Update()
@@ -54,18 +59,31 @@ public class RgbGoggles : MonoBehaviour
 
     private void UpdateWorldObjects()
     {
+
         if(FilterObjects != null && CurrentGoggleState != PrevGoggleState){
-            for(int i = 0; i < FilterObjects.transform.childCount; i++){
-                Transform child = FilterObjects.transform.GetChild(i);
-                RgbFilterObject obj = child.gameObject.GetComponent<RgbFilterObject>();
-
-                if(CurrentGoggleState == obj.FilterLayer){
-                    obj.Show();
-                } else obj.Hide();
-                
-            }
-
+            GetFilterObjects();
+            SetFilterObjects();
             PrevGoggleState = CurrentGoggleState;
+        }
+    }
+
+    private void GetFilterObjects()
+    {
+        FilterObjects.Clear();
+        FilterObjects = GameObject.FindObjectsOfType<GameObject>().Where(obj => obj.layer == LayerMask.NameToLayer("RGB_FilterObjects")).ToList<GameObject>();
+    }
+
+    private void SetFilterObjects(){
+        foreach(GameObject filterObject in FilterObjects){
+            RgbFilterObject obj = filterObject.GetComponent<RgbFilterObject>();
+            if(obj != null){
+                if(obj.Filterable){
+                    if(CurrentGoggleState == obj.FilterLayer){
+                        obj.Show();
+                    } else obj.Hide();
+                }
+            }
+            
         }
     }
 

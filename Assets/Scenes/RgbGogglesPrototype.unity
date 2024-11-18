@@ -198,7 +198,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -242,8 +242,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 6
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &69770066
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +333,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -365,8 +377,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 1
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 1
+    FadeDuration: 1
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 1
+    FadeDuration: 1
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &160199999
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +467,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -487,8 +511,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 7
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &286668933
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +669,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -677,8 +713,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 1
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,7 +897,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -893,8 +941,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 4
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &514928431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,8 +1141,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 7
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!21 &534498141
 Material:
   serializedVersion: 8
@@ -1467,7 +1539,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1511,8 +1583,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 2
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1026515100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,7 +1673,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1633,8 +1717,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 3
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1028094746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1712,7 +1808,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1756,8 +1852,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 1
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 1
+    FadeDuration: 1
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 1
+    FadeDuration: 1
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1105482116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,7 +1942,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1878,8 +1986,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 3
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1160830811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1956,7 +2076,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2000,8 +2120,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 0
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1241889106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,7 +2210,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2122,8 +2254,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 5
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1316228848
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,8 +2454,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 4
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1434696170
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,9 +2505,9 @@ MonoBehaviour:
   <CurrentColor>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
   <CurrentAlpha>k__BackingField: 0
   <RgbActivatedAlpha>k__BackingField: 0.5
-  <RgbDeactivatedColor>k__BackingField: {r: 0.12, g: 0.12, b: 0.17, a: 0.9}
+  <RgbDeactivatedColor>k__BackingField: {r: 1, g: 1, b: 1, a: 0}
   <GogglesActivated>k__BackingField: 1
-  <CurrentGoggleState>k__BackingField: 7
+  <CurrentGoggleState>k__BackingField: 0
   <PrevGoggleState>k__BackingField: 0
   DebugText: {fileID: 1438855765}
   <FilterObjects>k__BackingField: {fileID: 1819928822}
@@ -2759,7 +2915,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2803,8 +2959,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 1
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1001 &1736957294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3069,7 +3237,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3113,8 +3281,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 5
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1847773345
 GameObject:
   m_ObjectHideFlags: 0
@@ -3191,7 +3371,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3235,8 +3415,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 4
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1986842913
 GameObject:
   m_ObjectHideFlags: 0
@@ -3313,7 +3505,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3357,8 +3549,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 0
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &2012603749
 GameObject:
   m_ObjectHideFlags: 0
@@ -3435,7 +3639,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3479,8 +3683,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 6
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &2071575510
 GameObject:
   m_ObjectHideFlags: 0
@@ -3557,7 +3773,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3601,8 +3817,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 2
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &2113338821
 GameObject:
   m_ObjectHideFlags: 0
@@ -3679,7 +3907,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3723,8 +3951,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 7
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
