@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class RgbGoggles : MonoBehaviour
 {
-
     [SerializeField]
     public Image colorFilter;
     
@@ -28,7 +27,7 @@ public class RgbGoggles : MonoBehaviour
     public bool GogglesActivated {get; set;} = true;
 
     [field: SerializeField]
-    public RGBSTATE CurrentGoggleState{get; set;} = RGBSTATE.RGB;
+    public RGBSTATE CurrentGoggleState{get; set;} = RGBSTATE.ALL_OFF;
 
     [field: SerializeField]
     public RGBSTATE PrevGoggleState{get; set;} = RGBSTATE.ALL_OFF;
@@ -40,9 +39,9 @@ public class RgbGoggles : MonoBehaviour
     public GameObject FilterObjects {get; set;}
 
     void Start(){
-        colorFlags.r = true;
-        colorFlags.g = true;
-        colorFlags.b = true;
+        colorFlags.r = false;
+        colorFlags.g = false;
+        colorFlags.b = false;
     }
 
     void Update()
@@ -71,9 +70,27 @@ public class RgbGoggles : MonoBehaviour
     }
 
     void HandleKeypress(){
-        if(Input.GetKeyUp(KeyCode.R)) colorFlags.r = !colorFlags.r;
-        if(Input.GetKeyUp(KeyCode.G)) colorFlags.g = !colorFlags.g;
-        if(Input.GetKeyUp(KeyCode.B)) colorFlags.b = !colorFlags.b;
+        if(Input.GetKeyUp(KeyCode.R)){ 
+            colorFlags.r = !colorFlags.r;
+            if(colorFlags.r){
+                colorFlags.g = false;
+                colorFlags.b = false;
+            }
+        }
+        if(Input.GetKeyUp(KeyCode.G)) {
+            colorFlags.g = !colorFlags.g;
+            if(colorFlags.g){
+                colorFlags.r = false;
+                colorFlags.b = false;
+            }
+        }
+        if(Input.GetKeyUp(KeyCode.B)) {
+            colorFlags.b = !colorFlags.b;
+            if(colorFlags.b){
+                colorFlags.g = false;
+                colorFlags.r = false;
+            }
+        }
     }
 
     private void UpdateGoggleState()
