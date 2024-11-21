@@ -179,6 +179,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268bbd229edfdba45a4d45903e472716, type: 3}
+--- !u!1 &508423889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 508423890}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &508423890
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508423889}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.34, y: 2.3820615, z: -0.82028913}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519077220 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5760493320708922015, guid: 268bbd229edfdba45a4d45903e472716, type: 3}
@@ -610,13 +641,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681484116}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.27197343, y: -0, z: -0, w: 0.9623048}
+  m_LocalPosition: {x: 0, y: 6.87, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 31.564, y: 0, z: 0}
 --- !u!114 &1681484120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,13 +660,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8fa02148e325f4d985b4da93447433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <UsePresets>k__BackingField: 1
-  <UseFocalPoint>k__BackingField: 0
+  <UsePresets>k__BackingField: 0
+  <UseFocalPoint>k__BackingField: 1
   <FollowFocalPoint>k__BackingField: 0
-  <Distance>k__BackingField: 0
-  <Height>k__BackingField: 0
-  <FocalPoint>k__BackingField: {fileID: 519077220}
+  <IsDollyTracking>k__BackingField: 1
+  <WeightedFocalPoints>k__BackingField:
+  - FocalPoint: {fileID: 519077220}
+    Weight: 1
+  <Distance>k__BackingField: 5
+  <Height>k__BackingField: 5
   <CameraMoveSpeed>k__BackingField: 1
+  <Limits>k__BackingField:
+    <XLimits>k__BackingField: {x: -10, y: 10}
+    <YLimits>k__BackingField: {x: -5, y: 5}
+    <DistanceBeforeMovement>k__BackingField: {x: 0, y: 0}
 --- !u!1 &1809149889
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,7 +775,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -912,3 +950,4 @@ SceneRoots:
   - {fileID: 2083234690}
   - {fileID: 1114059877}
   - {fileID: 302246808}
+  - {fileID: 508423890}
