@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 42190078}
   - component: {fileID: 42190077}
   - component: {fileID: 42190080}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,14 +247,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &69770066
 GameObject:
@@ -269,7 +272,7 @@ GameObject:
   - component: {fileID: 69770070}
   - component: {fileID: 69770069}
   - component: {fileID: 69770072}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane_NO_COLLISION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,14 +385,17 @@ MonoBehaviour:
     FadeDuration: 1
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 1
     FadeDuration: 1
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &160199999
 GameObject:
@@ -404,7 +410,7 @@ GameObject:
   - component: {fileID: 160200003}
   - component: {fileID: 160200002}
   - component: {fileID: 160200005}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RGB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,14 +522,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &286668933
 GameObject:
@@ -606,7 +615,7 @@ GameObject:
   - component: {fileID: 313726789}
   - component: {fileID: 313726788}
   - component: {fileID: 313726791}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: R_NO_COLLISION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -718,14 +727,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &410087039
 GameObject:
@@ -834,7 +846,7 @@ GameObject:
   - component: {fileID: 485845325}
   - component: {fileID: 485845324}
   - component: {fileID: 485845327}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: B_NO_COLLISION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -946,14 +958,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &514928431
 GameObject:
@@ -1146,14 +1161,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!21 &534498141
 Material:
@@ -1458,6 +1476,7 @@ MonoBehaviour:
       sizeMultiplier: 1.73
     innerMonitorShineRadius: -0.087
     innerMonitorShineCurve: 10
+  active: 1
 --- !u!20 &929808161 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 800265177447694303, guid: 0090731b51e488b43a6a7307adf4cfef, type: 3}
@@ -1476,7 +1495,7 @@ GameObject:
   - component: {fileID: 986757223}
   - component: {fileID: 986757222}
   - component: {fileID: 986757225}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1588,14 +1607,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &1026515100
 GameObject:
@@ -1610,7 +1632,7 @@ GameObject:
   - component: {fileID: 1026515104}
   - component: {fileID: 1026515103}
   - component: {fileID: 1026515106}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1722,14 +1744,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &1028094746
 GameObject:
@@ -1744,7 +1769,7 @@ GameObject:
   - component: {fileID: 1028094750}
   - component: {fileID: 1028094749}
   - component: {fileID: 1028094752}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1857,14 +1882,17 @@ MonoBehaviour:
     FadeDuration: 1
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 1
     FadeDuration: 1
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &1105482116
 GameObject:
@@ -1879,7 +1907,7 @@ GameObject:
   - component: {fileID: 1105482120}
   - component: {fileID: 1105482119}
   - component: {fileID: 1105482122}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RG_NO_COLLISION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1991,14 +2019,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &1160830811
 GameObject:
@@ -2013,7 +2044,7 @@ GameObject:
   - component: {fileID: 1160830815}
   - component: {fileID: 1160830814}
   - component: {fileID: 1160830817}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: NO_FILTER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2125,14 +2156,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &1241889106
 GameObject:
@@ -2147,7 +2181,7 @@ GameObject:
   - component: {fileID: 1241889110}
   - component: {fileID: 1241889109}
   - component: {fileID: 1241889112}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2259,14 +2293,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &1316228848
 GameObject:
@@ -2459,14 +2496,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &1434696170
 GameObject:
@@ -2510,7 +2550,7 @@ MonoBehaviour:
   <CurrentGoggleState>k__BackingField: 0
   <PrevGoggleState>k__BackingField: 0
   DebugText: {fileID: 1438855765}
-  <FilterObjects>k__BackingField: {fileID: 1819928822}
+  FilterObjects: []
 --- !u!4 &1434696172
 Transform:
   m_ObjectHideFlags: 0
@@ -2852,7 +2892,7 @@ GameObject:
   - component: {fileID: 1722660132}
   - component: {fileID: 1722660131}
   - component: {fileID: 1722660134}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2964,14 +3004,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1001 &1736957294
 PrefabInstance:
@@ -3174,7 +3217,7 @@ GameObject:
   - component: {fileID: 1837354631}
   - component: {fileID: 1837354630}
   - component: {fileID: 1837354633}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RB_NO_COLLISION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3286,14 +3329,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &1847773345
 GameObject:
@@ -3308,7 +3354,7 @@ GameObject:
   - component: {fileID: 1847773349}
   - component: {fileID: 1847773348}
   - component: {fileID: 1847773351}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3420,14 +3466,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &1986842913
 GameObject:
@@ -3442,7 +3491,7 @@ GameObject:
   - component: {fileID: 1986842917}
   - component: {fileID: 1986842916}
   - component: {fileID: 1986842919}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: NO_FILTER_NO_COLLISION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3554,14 +3603,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &2012603749
 GameObject:
@@ -3576,7 +3628,7 @@ GameObject:
   - component: {fileID: 2012603753}
   - component: {fileID: 2012603752}
   - component: {fileID: 2012603755}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BG_NO_COLLISION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3688,14 +3740,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &2071575510
 GameObject:
@@ -3710,7 +3765,7 @@ GameObject:
   - component: {fileID: 2071575514}
   - component: {fileID: 2071575513}
   - component: {fileID: 2071575516}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: G_NO_COLLISION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3822,14 +3877,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1 &2113338821
 GameObject:
@@ -3844,7 +3902,7 @@ GameObject:
   - component: {fileID: 2113338825}
   - component: {fileID: 2113338824}
   - component: {fileID: 2113338827}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RGB_NO_COLLISION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3956,14 +4014,17 @@ MonoBehaviour:
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   FadeInStyle:
     Style: 0
     FadeDuration: 0
     StartDelay: 0
     CollisionThresholdPercentage: 1
-  RevealStyle:
-    Style: 2
-    DestroyDelay: 0
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
   Filterable: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
