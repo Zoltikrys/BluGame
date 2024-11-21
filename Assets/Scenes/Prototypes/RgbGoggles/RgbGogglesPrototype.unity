@@ -198,7 +198,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -242,8 +242,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 6
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &69770066
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +333,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -365,8 +377,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 1
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 1
+    FadeDuration: 1
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 1
+    FadeDuration: 1
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &160199999
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +467,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -487,8 +511,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 7
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &286668933
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +669,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -677,8 +713,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 1
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,7 +897,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -893,113 +941,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 4
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
---- !u!1 &501316055
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 501316059}
-  - component: {fileID: 501316058}
-  - component: {fileID: 501316057}
-  - component: {fileID: 501316056}
-  m_Layer: 7
-  m_Name: bigMagnet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &501316056
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501316055}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &501316057
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501316055}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &501316058
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501316055}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &501316059
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501316055}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.46, y: 1.53, z: 5.17}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &514928431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,8 +1141,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 7
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!21 &534498141
 Material:
   serializedVersion: 8
@@ -1572,7 +1539,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1616,8 +1583,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 2
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1026515100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,7 +1673,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1738,8 +1717,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 3
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1028094746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,7 +1808,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1861,8 +1852,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 1
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 1
+    FadeDuration: 1
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 1
+    FadeDuration: 1
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1105482116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1939,7 +1942,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1983,8 +1986,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 3
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1160830811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2061,7 +2076,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2105,8 +2120,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 0
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1241889106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,7 +2210,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2227,8 +2254,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 5
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1316228848
 GameObject:
   m_ObjectHideFlags: 0
@@ -2415,141 +2454,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 4
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
---- !u!1 &1339219843
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1339219847}
-  - component: {fileID: 1339219846}
-  - component: {fileID: 1339219845}
-  - component: {fileID: 1339219844}
-  - component: {fileID: 1339219848}
-  m_Layer: 6
-  m_Name: smallMagnet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1339219844
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339219843}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1339219845
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339219843}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1339219846
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339219843}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1339219847
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339219843}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.0866838, y: 1.59, z: -2.32}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1339219848
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339219843}
-  serializedVersion: 4
-  m_Mass: 0.1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1434696170
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,9 +2505,9 @@ MonoBehaviour:
   <CurrentColor>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
   <CurrentAlpha>k__BackingField: 0
   <RgbActivatedAlpha>k__BackingField: 0.5
-  <RgbDeactivatedColor>k__BackingField: {r: 0.12, g: 0.12, b: 0.17, a: 0.9}
+  <RgbDeactivatedColor>k__BackingField: {r: 1, g: 1, b: 1, a: 0}
   <GogglesActivated>k__BackingField: 1
-  <CurrentGoggleState>k__BackingField: 7
+  <CurrentGoggleState>k__BackingField: 0
   <PrevGoggleState>k__BackingField: 0
   DebugText: {fileID: 1438855765}
   <FilterObjects>k__BackingField: {fileID: 1819928822}
@@ -2743,60 +2661,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438855763}
   m_CullTransparentMesh: 1
---- !u!1 &1460241248 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5760493320708922015, guid: 268bbd229edfdba45a4d45903e472716, type: 3}
-  m_PrefabInstance: {fileID: 1797803124}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1460241254
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1460241248}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &1460241255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1460241248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae94dfe37fa99c0428c367c95010bfef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pullForce: 10
-  pushForce: 10
-  MagneticSmall:
-    serializedVersion: 2
-    m_Bits: 64
-  MagneticLarge:
-    serializedVersion: 2
-    m_Bits: 128
-  interactionRadius: 20
-  largeMagnetThreshold: 5
 --- !u!1 &1480695502
 GameObject:
   m_ObjectHideFlags: 0
@@ -3051,7 +2915,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3095,8 +2959,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 1
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1001 &1736957294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3232,13 +3108,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5760493320708922015, guid: 268bbd229edfdba45a4d45903e472716, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1460241254}
-    - targetCorrespondingSourceObject: {fileID: 5760493320708922015, guid: 268bbd229edfdba45a4d45903e472716, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1460241255}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 268bbd229edfdba45a4d45903e472716, type: 3}
 --- !u!1 &1819928822
 GameObject:
@@ -3367,7 +3237,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3411,8 +3281,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 5
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1847773345
 GameObject:
   m_ObjectHideFlags: 0
@@ -3489,7 +3371,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3533,8 +3415,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 4
   CollisionWhenHidden: 1
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &1986842913
 GameObject:
   m_ObjectHideFlags: 0
@@ -3611,7 +3505,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3655,8 +3549,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 0
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &2012603749
 GameObject:
   m_ObjectHideFlags: 0
@@ -3733,7 +3639,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3777,8 +3683,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 6
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &2071575510
 GameObject:
   m_ObjectHideFlags: 0
@@ -3855,7 +3773,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3899,8 +3817,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 2
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1 &2113338821
 GameObject:
   m_ObjectHideFlags: 0
@@ -3977,7 +3907,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 2222703f9efe56245b5a6e4acc93e2f2, type: 3}
+  - {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4021,8 +3951,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FilterLayer>k__BackingField: 7
   CollisionWhenHidden: 0
-  DestroyAfterRevealed: 0
-  TimeToDestroy: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 1
+  RevealStyle:
+    Style: 2
+    DestroyDelay: 0
+  Filterable: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4035,5 +3977,3 @@ SceneRoots:
   - {fileID: 851362613}
   - {fileID: 1434696172}
   - {fileID: 286668936}
-  - {fileID: 1339219847}
-  - {fileID: 501316059}
