@@ -7,20 +7,13 @@ using UnityEngine.UIElements;
 
 public class RgbFilterObject : MonoBehaviour
 {
-    [field: SerializeField]
-    public RGBSTATE FilterLayer { get; set; }
-
-    [field: SerializeField]
-    public bool CollisionWhenHidden = false;
-
-    [field: SerializeField]
-    public FadeStyle FadeOutStyle = new FadeStyle(RGB_FILTER_FADE_STYLE.INSTANT_FADE, 0.0f, 0.0f, 0.0f, new RevealStyle());
-
-    [field: SerializeField]
-    public FadeStyle FadeInStyle = new FadeStyle(RGB_FILTER_FADE_STYLE.INSTANT_FADE, 0.0f, 0.0f, 1.0f, new RevealStyle());
+    [field: SerializeField] public RGBSTATE FilterLayer { get; set; }
+    [field: SerializeField] public bool CollisionWhenHidden = false;
+    [field: SerializeField] public bool ActiveOnColour = true;
+    [field: SerializeField] public FadeStyle FadeInStyle = new FadeStyle(RGB_FILTER_FADE_STYLE.INSTANT_FADE, 0.0f, 0.0f, 1.0f, new RevealStyle());
+    [field: SerializeField] public FadeStyle FadeOutStyle = new FadeStyle(RGB_FILTER_FADE_STYLE.INSTANT_FADE, 0.0f, 0.0f, 0.0f, new RevealStyle());
 
     public bool Filterable = true;
-
     private MeshRenderer meshRenderer = null;
     private TextMeshPro textMesh = null;
 
