@@ -78,9 +78,17 @@ public class RgbGoggles : MonoBehaviour
             RgbFilterObject obj = filterObject.GetComponent<RgbFilterObject>();
             if(obj != null){
                 if(obj.Filterable){
-                    if(CurrentGoggleState == obj.FilterLayer){
-                        obj.Show();
-                    } else obj.Hide();
+                    if(obj.ActiveOnColour){
+                        if(CurrentGoggleState == obj.FilterLayer){
+                            obj.Show();
+                        } else obj.Hide();
+                    }
+                    else{
+                         if(CurrentGoggleState != obj.FilterLayer){
+                            obj.Show();
+                        } else obj.Hide();
+                    }
+                    
                 }
             }
             
