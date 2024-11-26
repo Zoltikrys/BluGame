@@ -279,7 +279,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.00001
-  m_Center: {x: 0, y: -1.6, z: 0}
+  m_Center: {x: 0, y: -1.55, z: 0}
 --- !u!114 &673324058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,11 +304,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b643be4309db84c4eb6874297801b263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterController: {fileID: 673324057}
-  _playerCamera: {fileID: 628730758}
-  runAcceleration: 50
-  runSpeed: 4
-  drag: 15
+  controller: {fileID: 673324057}
+  playerSpeed: 2
+  jumpHeight: 1
+  gravity: -9.81
 --- !u!1 &738408621
 GameObject:
   m_ObjectHideFlags: 0

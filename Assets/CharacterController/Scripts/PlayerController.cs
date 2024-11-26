@@ -7,49 +7,49 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] private CharacterController _characterController;
-    [SerializeField] private Camera _playerCamera; //probably dont need this
-
-
-    public float runAcceleration = 50f;
-    public float runSpeed = 4f;
-    public float drag = 15f;
-
+    [SerializeField] private CharacterController controller;
+    private Vector3 playerVelocity;
+    private bool groundedPlayer;
+    public float playerSpeed = 2.0f;
+    public float jumpHeight = 1.0f;
     public float gravity = -9.81f;
-    public float jumpHeight = 4f;
 
-    Vector3 verticalVelocity;
-    private PlayerLocomotionInput _playerLocomotionInput;
-
+    private PlayerLocomotionInput locomotionInput;
 
     private void Awake()
     {
-        _playerLocomotionInput = GetComponent<PlayerLocomotionInput>();
+        locomotionInput = GetComponent<PlayerLocomotionInput>();
     }
-    // Update is called once per frame
+
+    //private void Start()
+    //{
+    //    controller = gameObject.AddComponent<CharacterController>();
+    //}
+
     void Update()
     {
-        //Vector3 cameraForwardXZ = new Vector3(_playerCamera.transform.forward.x, 0f, _playerCamera.transform.forward.z).normalized;
-        //Vector3 cameraRightXZ = new Vector3(_playerCamera.transform.right.x, 0f, _playerCamera.transform.right.z).normalized;
-        Vector3 movementDirection = new Vector3(_playerLocomotionInput.MovementInput.x, 0f, _playerLocomotionInput.MovementInput.y).normalized;
-
-        Vector3 movementDelta = movementDirection * runAcceleration * Time.deltaTime;
-        Vector3 newVelocity = _characterController.velocity + movementDelta;
-
-        //Add drag to player
-        Vector3 currentDrag = newVelocity.normalized * drag * Time.deltaTime;
-        newVelocity = (newVelocity.magnitude > drag * Time.deltaTime) ? newVelocity - currentDrag : Vector3.zero;
-        newVelocity = Vector3.ClampMagnitude(newVelocity, runSpeed);
-
-        verticalVelocity.y += gravity * Time.deltaTime;
-
-        if (_playerLocomotionInput.JumpPressed)
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
         {
-            verticalVelocity.y = jumpHeight;
+            playerVelocity.y = 0f;
         }
 
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 movementDirection = new Vector3(locomotionInput.MovementInput.x, 0f, locomotionInput.MovementInput.y).normalized;
+        controller.Move(move * Time.deltaTime * playerSpeed);
 
-        //Move character, unity suggests only calling this once per frame
-        _characterController.Move((newVelocity * Time.deltaTime) + (verticalVelocity * Time.deltaTime));
+        if (move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
+        }
+
+        // Makes the player jump
+        if (locomotionInput.JumpPressed && groundedPlayer)
+        {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+        }
+
+        playerVelocity.y += gravity * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 }
