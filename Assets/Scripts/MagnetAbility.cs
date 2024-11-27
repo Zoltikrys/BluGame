@@ -1,74 +1,121 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MagnetAbility : MonoBehaviour
 {
-    public float pullForce = 10f;
-    public float pushForce = 10f;
-    public LayerMask MagneticSmall;  // For objects that the player pulls
-    public LayerMask MagneticLarge;  // For large objects that pull the player
-    public float interactionRadius = 20f;  // Range of magnetic ability
-    public float largeMagnetThreshold = 5f;  // Distance at which large objects affect the player
+    [Header("Small Magnet Settings")]
+    public string smallMagnetTag = "SmallMagnet"; // Tag for small magnetic objects
+    public float smallMagnetPullSpeed = 10f;     // Speed for pulling small magnets
+    public float smallMagnetStopDistance = 1.5f; // Distance in front of the player
 
+    [Header("Big Magnet Settings")]
+    public string bigMagnetTag = "BigMagnet";    // Tag for big magnetic objects
+    public float bigMagnetPullSpeed = 5f;       // Speed to pull player toward big magnets
+    public float bigMagnetRange = 20f;          // Range for detecting big magnets
+
+    [Header("General Settings")]
+    public float detectionRadius = 20f; // Radius for detecting magnets
     private bool isMagnetActive = false;
+
+    private GameObject smallMagnetTarget; // Currently tracked small magnet
+    private CharacterController characterController; // Reference to player movement
+
+    void Start()
+    {
+        characterController = GetComponent<CharacterController>();
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        // Toggle magnet ability
+        if (Input.GetKeyDown(KeyCode.M)) // Change "M" to your preferred key
         {
             isMagnetActive = !isMagnetActive;
+
+            if (!isMagnetActive) // Release any active small magnet
+            {
+                ReleaseSmallMagnet();
+            }
         }
 
         if (isMagnetActive)
         {
-            HandleMagnetInteraction();
+            HandleSmallMagnets();
+            HandleBigMagnets();
         }
     }
 
-    void HandleMagnetInteraction()
+    void HandleSmallMagnets()
     {
-        AttractSmallObjects();  // Pull small objects towards the player
-        PullPlayerToLargeObjects();  // Pull player towards large objects
-    }
-
-    // Pull small objects towards the player
-    void AttractSmallObjects()
-    {
-        Collider[] smallObjects = Physics.OverlapSphere(transform.position, interactionRadius, MagneticSmall);
-
-        foreach (Collider obj in smallObjects)
+        if (smallMagnetTarget == null) // Look for a new small magnet if none is being targeted
         {
-            Rigidbody rb = obj.GetComponent<Rigidbody>();
-            if (rb != null)
+            Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, detectionRadius);
+
+            foreach (Collider obj in nearbyObjects)
             {
-                Vector3 directionToPlayer = (transform.position - obj.transform.position).normalized;
-                rb.AddForce(directionToPlayer * pullForce);
+                if (obj.CompareTag(smallMagnetTag))
+                {
+                    smallMagnetTarget = obj.gameObject;
+                    break; // Stop searching after finding one
+                }
             }
         }
-    }
 
-    // Pull player towards large magnetic objects
-    void PullPlayerToLargeObjects()
-    {
-        Collider[] largeObjects = Physics.OverlapSphere(transform.position, interactionRadius, MagneticLarge);
-
-        foreach (Collider obj in largeObjects)
+        if (smallMagnetTarget != null)
         {
-            Rigidbody rb = GetComponent<Rigidbody>();
+            // Calculate stop position in front of the player
+            Vector3 stopPosition = transform.position + transform.forward * smallMagnetStopDistance;
+
+            // Move the small magnet toward the stop position
+            Rigidbody rb = smallMagnetTarget.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                Vector3 directionToObject = (obj.transform.position - transform.position).normalized;
-                float distance = Vector3.Distance(transform.position, obj.transform.position);
+                Vector3 directionToStop = (stopPosition - smallMagnetTarget.transform.position).normalized;
+                float distanceToStop = Vector3.Distance(smallMagnetTarget.transform.position, stopPosition);
 
-                // Only apply force when within the threshold
-                if (distance < largeMagnetThreshold)
+                if (distanceToStop > 0.1f) // If not yet at stop position
                 {
-                    rb.AddForce(directionToObject * pushForce);
+                    rb.velocity = directionToStop * smallMagnetPullSpeed;
+                }
+                else
+                {
+                    rb.velocity = Vector3.zero; // Stop movement
+                    smallMagnetTarget.transform.SetParent(transform); // Parent to the player
                 }
             }
         }
     }
+
+    void HandleBigMagnets()
+    {
+        Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, detectionRadius);
+
+        foreach (Collider obj in nearbyObjects)
+        {
+            if (obj.CompareTag(bigMagnetTag))
+            {
+                Vector3 directionToMagnet = (obj.transform.position - transform.position).normalized;
+                float distanceToMagnet = Vector3.Distance(transform.position, obj.transform.position);
+
+                if (distanceToMagnet <= bigMagnetRange)
+                {
+                    // Move the player toward the magnet
+                    characterController.Move(directionToMagnet * bigMagnetPullSpeed * Time.deltaTime);
+                }
+            }
+        }
+    }
+
+    void ReleaseSmallMagnet()
+    {
+        if (smallMagnetTarget != null)
+        {
+            smallMagnetTarget.transform.SetParent(null); // Unparent the magnet
+            Rigidbody rb = smallMagnetTarget.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.velocity = Vector3.zero; // Reset velocity
+            }
+            smallMagnetTarget = null; // Clear the reference
+        }
+    }
 }
-
-
