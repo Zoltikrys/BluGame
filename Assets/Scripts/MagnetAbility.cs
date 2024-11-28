@@ -17,7 +17,8 @@ public class MagnetAbility : MonoBehaviour
     private bool isMagnetActive = false;
     public bool isMagnetized;
 
-    private GameObject smallMagnetTarget; // Currently tracked small magnet
+    [field: SerializeField] public GameObject smallMagnetTarget
+    { get; private set; }// Currently tracked small magnet
     private CharacterController characterController; // Reference to player movement
     private GameObject controllerScript;
 
