@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
+    public bool isMagnetized;
+
     public float playerSpeed = 2.0f;
     public float jumpHeight = 1.0f;
     public float gravity = -9.81f;
@@ -21,10 +23,6 @@ public class PlayerController : MonoBehaviour
         locomotionInput = GetComponent<PlayerLocomotionInput>();
     }
 
-    //private void Start()
-    //{
-    //    controller = gameObject.AddComponent<CharacterController>();
-    //}
 
     void Update()
     {
@@ -33,6 +31,15 @@ public class PlayerController : MonoBehaviour
         {
             playerVelocity.y = 0f;
         }
+
+        isMagnetized = GetComponent<MagnetAbility>().isMagnetized;
+        if(isMagnetized && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+        }
+
+
+
 
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         Vector3 movementDirection = new Vector3(locomotionInput.MovementInput.x, 0f, locomotionInput.MovementInput.y).normalized;

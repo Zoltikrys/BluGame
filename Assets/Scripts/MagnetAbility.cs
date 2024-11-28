@@ -15,13 +15,16 @@ public class MagnetAbility : MonoBehaviour
     [Header("General Settings")]
     public float detectionRadius = 20f; // Radius for detecting magnets
     private bool isMagnetActive = false;
+    public bool isMagnetized;
 
     private GameObject smallMagnetTarget; // Currently tracked small magnet
     private CharacterController characterController; // Reference to player movement
+    private GameObject controllerScript;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        //controllerScript = GetComponent<PlayerController>();
     }
 
     void Update()
@@ -31,9 +34,10 @@ public class MagnetAbility : MonoBehaviour
         {
             isMagnetActive = !isMagnetActive;
 
-            if (!isMagnetActive) // Release any active small magnet
+            if (!isMagnetActive) // Release any active magnet
             {
                 ReleaseSmallMagnet();
+                isMagnetized = false;
             }
         }
 
@@ -100,6 +104,8 @@ public class MagnetAbility : MonoBehaviour
                 {
                     // Move the player toward the magnet
                     characterController.Move(directionToMagnet * bigMagnetPullSpeed * Time.deltaTime);
+                    isMagnetized = true;
+                    
                 }
             }
         }
