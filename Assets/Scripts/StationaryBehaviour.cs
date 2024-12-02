@@ -23,6 +23,11 @@ public class StationaryBehaviour : MonoBehaviour
 
     [SerializeField] EnemyState _currentState = EnemyState.Idle;
 
+    private void Start()
+    {
+        target = GameObject.Find("Player").transform;
+    }
+
     void Update()
     {
         switch (_currentState)
@@ -45,18 +50,18 @@ public class StationaryBehaviour : MonoBehaviour
             transform.Rotate(Vector3.up * 10f * Time.deltaTime);
         }
 
-        if(_currentState == EnemyState.Track)
+        if (_currentState == EnemyState.Track)
         {
             //Vector3 targetPosition = new Vector3(target.transform.position.x,
-            //                                 transform.position.y,
-            //                                 target.transform.position.z);
+            // transform.position.y,
+            // target.transform.position.z);
 
             //transform.LookAt(targetPosition);
 
             Quaternion OriginalRot = transform.rotation;
             transform.LookAt(new Vector3(target.transform.position.x,
-                                             transform.position.y,
-                                             target.transform.position.z));
+            transform.position.y,
+            target.transform.position.z));
             Quaternion NewRot = transform.rotation;
             transform.rotation = OriginalRot;
             transform.rotation = Quaternion.Lerp(transform.rotation, NewRot, 5f * Time.deltaTime);
@@ -100,7 +105,7 @@ public class StationaryBehaviour : MonoBehaviour
 
     IEnumerator Attack()
     {
-        if(attackCooldown <= 0f)
+        if (attackCooldown <= 0f)
         {
             Debug.Log("attack");
             yield return new WaitForSeconds(3);

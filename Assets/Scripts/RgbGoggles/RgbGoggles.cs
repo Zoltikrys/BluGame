@@ -24,7 +24,7 @@ public class RgbGoggles : MonoBehaviour
     public float RgbActivatedAlpha {get; set;} = 0.5f;
 
     [field: SerializeField]
-    public Color RgbDeactivatedColor {get; set;} = new Color(0.12f, 0.12f, 0.17f, 0.9f);
+    public Color RgbDeactivatedColor {get; set;} = new Color(0f, 0f, 0f, 0f);
 
     [field: SerializeField]
     public bool GogglesActivated {get; set;} = true;

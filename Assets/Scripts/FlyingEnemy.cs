@@ -54,7 +54,7 @@ public class FlyingEnemy : MonoBehaviour
                 if (timeRemaining > 0)
                 {
                     timeRemaining -= Time.deltaTime;
-                    Debug.Log(timeRemaining);
+                    //Debug.Log(timeRemaining);
                 }
                 else
                 {
@@ -109,6 +109,8 @@ public class FlyingEnemy : MonoBehaviour
             //If the GameObject has the same tag as specified, output this message in the console
             Debug.Log("Hit BLU");
             hasHit = true;
+            HealthManager healthMan = collision.gameObject.GetComponent<HealthManager>();
+            healthMan.DamagePlayer();
         }
         else
         {
