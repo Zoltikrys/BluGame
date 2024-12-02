@@ -592,7 +592,7 @@ Transform:
   m_GameObject: {fileID: 673324054}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.593, z: 0}
+  m_LocalPosition: {x: 0, y: 4.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -618,13 +618,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.6
+  m_Height: 1.56
   m_Radius: 0.35
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.00001
-  m_Center: {x: 0, y: -1.55, z: 0}
+  m_Center: {x: -0.06, y: 0, z: 0}
 --- !u!114 &673324058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,18 +790,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 673324055}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8b781f87a4fef3d4db0a6a547aa6f4c3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.051
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8b781f87a4fef3d4db0a6a547aa6f4c3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.5219998
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8b781f87a4fef3d4db0a6a547aa6f4c3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.000000025623194
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8b781f87a4fef3d4db0a6a547aa6f4c3, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.000048443675
       objectReference: {fileID: 0}
@@ -832,6 +820,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8b781f87a4fef3d4db0a6a547aa6f4c3, type: 3}
       propertyPath: m_Name
       value: BLU_TEST
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8b781f87a4fef3d4db0a6a547aa6f4c3, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1047,6 +1039,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1395269623}
   - component: {fileID: 1395269622}
+  - component: {fileID: 1395269624}
   m_Layer: 0
   m_Name: FlyingEnemy
   m_TagString: Untagged
@@ -1069,6 +1062,8 @@ MonoBehaviour:
   currentState: 0
   target: {fileID: 673324055}
   playerSeen: 0
+  forwardBoost: 3
+  speed: 10
   timeToTarget: 5
 --- !u!4 &1395269623
 Transform:
@@ -1079,13 +1074,40 @@ Transform:
   m_GameObject: {fileID: 1395269621}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.72, y: 3.81, z: -3.8}
+  m_LocalPosition: {x: 4.72, y: 0.91, z: -3.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 114370383}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1395269624
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395269621}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &4621497676217885643
 PrefabInstance:
   m_ObjectHideFlags: 0

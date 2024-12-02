@@ -55,10 +55,10 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
     {
         if (!context.performed)
         {
-            print(JumpPressed);
+            //print(JumpPressed);
             return;
         }
         JumpPressed = true;
-        print(JumpPressed);
+        //print(JumpPressed);
     }
 }

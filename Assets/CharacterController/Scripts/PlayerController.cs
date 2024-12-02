@@ -59,4 +59,17 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
+
+
+    void OnCollisionEnter(Collision collision)
+    {
+        print(collision.gameObject.name + " is colliding with BLU");
+
+        //Check for a match with the specific tag on any GameObject that collides with your GameObject
+        /*if (collision.gameObject.tag == "Player")
+        {
+            //If the GameObject has the same tag as specified, output this message in the console
+            Debug.Log("Do something else here");
+        }*/
+    }
 }
