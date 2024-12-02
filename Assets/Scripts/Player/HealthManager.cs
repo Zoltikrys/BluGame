@@ -62,13 +62,4 @@ public class HealthManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //private IEnumerator DamageDelay()
-    //{
-    //    // Wait for the specified amount of time
-    //    yield return new WaitForSeconds(cooldownTime);
-
-    //    // Set the invulnerable flag to false
-    //    damageBool = false;
-    //}
-
 }
