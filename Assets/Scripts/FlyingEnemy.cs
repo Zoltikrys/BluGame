@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,6 +12,7 @@ public class FlyingEnemy : MonoBehaviour
     private bool isIdle;
     private bool isSearching;
     private bool isAttacking;
+    private bool hasHit = false;
 
     [SerializeField] private Transform target;
 
@@ -30,7 +32,7 @@ public class FlyingEnemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    async void Update()
     {
         switch (currentState)
         {
@@ -45,6 +47,8 @@ public class FlyingEnemy : MonoBehaviour
                 break;
             case State.Targeting:
                 //Debug.Log("Targeting!");
+                //reset playerSeen
+                playerSeen = false;
                 //face player
                 transform.LookAt(target);
                 if (timeRemaining > 0)
@@ -54,52 +58,65 @@ public class FlyingEnemy : MonoBehaviour
                 }
                 else
                 {
-
-                    playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-                    currentState = State.Attack;
                     //take player's current pos + forward
+                    playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
                     //switch state to attacking
+                    currentState = State.Attack;
                 }
 
                 break;
             case State.Attack:
                 //Debug.Log("Attacking!!!");
+
                 //reset timeRemaining
                 timeRemaining = timeToTarget;
 
                 //move towards player pos + forward
                 transform.localPosition = Vector3.MoveTowards(transform.localPosition, (playerPos + (transform.forward * forwardBoost)), Time.deltaTime * speed);
 
-                //if hits player: stop moving, switch state to targeting
+                //await OnCollisionEnter(Collision collision);
 
-                //OnCollisionEnter()
-                /*Collision collision = Collision(this.gameObject);
-                if (collision.gameObject.tag == "Player")
+                /*if (hasHit) //////////// this is doing my head in need to sort it
                 {
-                    Debug.Log("Hit player");
+                    currentState = State.Targeting;
+                }
+                else
+                {
+                    currentState = State.Searching;
                 }*/
-
-                //if hits nothing: switch state to searching
-                //if hits wall: explode
                     break;
             case State.Searching:
                 Debug.Log("Searching for BLU");
                 //Rotate and move around area
+
+
                 //if BLU spotted: switch state to targeting
+                if (playerSeen)
+                {
+                    currentState = State.Targeting; 
+                }
                 break;
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        print(collision.gameObject.name + " is colliding");
+        //print(collision.gameObject.name + " is colliding");
 
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
-        /*if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             //If the GameObject has the same tag as specified, output this message in the console
-            Debug.Log("Do something else here");
-        }*/
+            Debug.Log("Hit BLU");
+            hasHit = true;
+        }
+        else
+        {
+            //has hit something else
+            //explode animation ig?
+            Debug.Log("Gonna explode now");
+            Destroy(this.gameObject); //deletes self
+        }
     }
 }
 
