@@ -9,7 +9,7 @@ public class PressurePlate : MonoBehaviour
         if(other.tag == "SmallMagnet")
         {
             float distance = Vector3.Distance(transform.position, other.transform.position);
-            //Debug.Log("Distance: " + distance);
+            Debug.Log("Distance: " + distance);
 
             if(distance < 0.2f)
             {
