@@ -11,7 +11,8 @@ public class Laser : MonoBehaviour
     [field: SerializeField] public bool BlockOnCollision = true;
     [field: SerializeField] public bool isActive = true;
     [field: SerializeField] public float WidthWhenLaserOn = 0.4f;
-    [field: SerializeField] public LayerMask layerMask;
+    [field: SerializeField] public LayerMask LayerMask;
+
     private RgbFilterObject rgbFilterObject;
 
     private RaycastHit[] collidedObjects = new RaycastHit[500];
@@ -21,6 +22,7 @@ public class Laser : MonoBehaviour
         laser = GetComponent<LineRenderer>();
         laser.positionCount = 2;
         laser.useWorldSpace = true;
+        SetLaserWidth(0.0f, 0.0f);
         rgbFilterObject = GetComponent<RgbFilterObject>();
     }
 
@@ -28,13 +30,14 @@ public class Laser : MonoBehaviour
     void Update()
     {
         ResetLaserLine();
+        Array.Clear(collidedObjects, 0, collidedObjects.Length);
 
         ray = new Ray(transform.position, transform.forward);
         Vector3 scaledDirection = new Vector3(ray.direction.x * MaxDistance, ray.direction.y * MaxDistance, ray.direction.z * MaxDistance);
         if(ShowDebugLaser) Debug.DrawRay(ray.origin, scaledDirection, Color.cyan, 0.1f);
 
         laser.SetPosition(1, transform.position + scaledDirection);
-        int objectCount = Physics.RaycastNonAlloc(ray, collidedObjects, MaxDistance, layerMask);
+        int objectCount = Physics.RaycastNonAlloc(ray, collidedObjects, MaxDistance, LayerMask);
 
         // This might be a performance bottle neck later on with many elements, consider reducing the raycast hit array max value
         Array.Sort(collidedObjects, 0, objectCount, new RaycastHitDistanceComparer());
@@ -56,8 +59,9 @@ public class Laser : MonoBehaviour
                         float clampedDistance = Mathf.Min(distanceToCollision, MaxDistance);
 
                         laser.SetPosition(1, ray.origin + ray.direction * clampedDistance);
+                        break;
                     }
-                    break;
+                    
                 }
             }
         }

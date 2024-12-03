@@ -12,6 +12,7 @@ public class doorBehaviour : MonoBehaviour
     [SerializeField] 
     private GameObject rightDoor;
 
+
     private void Start()
     {
         if(doorOpenFlag == false) {

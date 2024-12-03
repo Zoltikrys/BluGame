@@ -27,8 +27,8 @@ public class SceneManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this);
-        Player = Instantiate(Player, new Vector3(), Quaternion.identity);
-        DontDestroyOnLoad(Player);
+        //Player = Instantiate(Player, new Vector3(), Quaternion.identity);
+        //DontDestroyOnLoad(Player);
 
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -87,6 +87,7 @@ public class SceneManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
         Debug.Log($"Loaded scene: {scene.name}");
+        Player = GameObject.FindGameObjectWithTag("Player");
         SetSpawn(scene);
         SetCamera(scene);
         UnlockPlayer();

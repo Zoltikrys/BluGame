@@ -230,7 +230,7 @@ public struct FadeStyle
         Style = requiredStyle;
         FadeDuration = requiredDuration;
         StartDelay = requiredDelay;
-        CollisionThresholdPercentage = Math.Clamp(collisionThreshold, 0.0f, 1.0f);
+        CollisionThresholdPercentage = Math.Clamp(collisionThreshold, 0.1f, 0.9f);
         RevealStyle = revealStyle;
     }
 }
