@@ -15,10 +15,15 @@ public class HealthManager : MonoBehaviour
 
     float m_DamageCooldown = 0;
 
+    public float flashTime;
+    Color originalColor;
+    public MeshRenderer renderer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        renderer = gameObject.GetComponentInChildren<MeshRenderer>();
+        originalColor = renderer.material.color;
     }
 
     // Update is called once per frame
@@ -42,6 +47,8 @@ public class HealthManager : MonoBehaviour
         Debug.Log(b_Health);
         damageBool = false;
 
+        StartCoroutine(EFlash());
+
         if (b_Health <= 0)
         {
             PlayerDeath();
@@ -61,5 +68,24 @@ public class HealthManager : MonoBehaviour
         Debug.Log("you died :(");
         Destroy(gameObject);
     }
+
+    void FlashStart()
+    {
+        renderer.material.color = Color.red;
+        Invoke("FlashStop", flashTime);
+    }
+
+    void FlashStop()
+    {
+        renderer.material.color = originalColor;
+    }
+
+    IEnumerator EFlash()
+    {
+        renderer.material.color = Color.red;
+        yield return new WaitForSeconds(flashTime);
+        renderer.material.color = originalColor;
+    }
+    
 
 }

@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PressurePlate : MonoBehaviour
 {
+    [SerializeField]
+    [Header("What should this pressure plate activate?")]
+    private UnityEvent triggerEvent;
+
     private void OnTriggerStay(Collider other)
     {
         if(other.tag == "SmallMagnet")
@@ -26,6 +31,8 @@ public class PressurePlate : MonoBehaviour
                 {
                     renderer.material.color = Color.blue;
                 }
+
+                triggerEvent.Invoke();
 
                 Destroy(this);
             }
