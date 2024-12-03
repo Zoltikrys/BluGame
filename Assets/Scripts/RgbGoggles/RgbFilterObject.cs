@@ -13,16 +13,21 @@ public class RgbFilterObject : MonoBehaviour
     [field: SerializeField] public FadeStyle FadeInStyle = new FadeStyle(RGB_FILTER_FADE_STYLE.INSTANT_FADE, 0.0f, 0.0f, 1.0f, new RevealStyle());
     [field: SerializeField] public FadeStyle FadeOutStyle = new FadeStyle(RGB_FILTER_FADE_STYLE.INSTANT_FADE, 0.0f, 0.0f, 0.0f, new RevealStyle());
 
+    public bool IsDisplayed;
+
     public bool Filterable = true;
     private MeshRenderer meshRenderer = null;
     private TextMeshPro textMesh = null;
+    private Laser laser = null;
 
     void Start(){
         meshRenderer = transform.gameObject.GetComponent<MeshRenderer>();
         textMesh = transform.gameObject.GetComponent<TextMeshPro>();
+        laser = transform.gameObject.GetComponent<Laser>();
 
         if(meshRenderer) Debug.Log("Found MeshRenderer on FilterObject");
         if(textMesh) Debug.Log("Found Textmesh on Filterobject");
+        if(laser) Debug.Log("Found laser on FilterObject");
 
     }
 
@@ -60,21 +65,32 @@ public class RgbFilterObject : MonoBehaviour
     private void HandleInstantFade()
     {
         if (transform){
-            MeshRenderer mesh = transform.gameObject.GetComponent<MeshRenderer>();
-            BoxCollider collider = transform.gameObject.GetComponent<BoxCollider>();
-            mesh.enabled = false;
+            MeshRenderer mesh;
+            BoxCollider collider;
+            transform.gameObject.TryGetComponent<MeshRenderer>(out mesh);
+            transform.gameObject.TryGetComponent<BoxCollider>(out collider);
 
-            // TODO: This needs to be changed for text meshes.
-            if(mesh.material.HasProperty("_Color")){
-                Color newColor = mesh.material.color;
-                newColor.a = 0.0f;
-                mesh.material.color = newColor;
+            if(mesh != null){
+                mesh.enabled = false;
+                if(mesh.material.HasProperty("_Color")){
+                    Color newColor = mesh.material.color;
+                    newColor.a = 0.0f;
+                    mesh.material.color = newColor;
+                }
             }
+            
 
-            if (collider)
+            if (collider != null)
             {
                 if(CollisionWhenHidden)collider.enabled = true;
                 else collider.enabled = false;
+            }
+
+            if(laser != null){
+                Debug.Log("Line renderer hide");
+                laser.SetLaserWidth(0.0f, 0.0f);
+                if(CollisionWhenHidden) laser.isActive = true;
+                else laser.isActive = false;
             }
         }
     }
@@ -83,21 +99,39 @@ public class RgbFilterObject : MonoBehaviour
     private void HandleInstantShow()
     {
         if (transform){
-            MeshRenderer mesh = transform.gameObject.GetComponent<MeshRenderer>();
-            BoxCollider collider = transform.gameObject.GetComponent<BoxCollider>();
-            mesh.enabled = true;
-            
-            // TODO: This needs to be changed for text meshes.
-            if(mesh.material.HasProperty("_Color")){
-                Color newColor = mesh.material.color;
-                newColor.a = 1.0f;
-                mesh.material.color = newColor;
+            MeshRenderer mesh;
+            BoxCollider collider;
+            transform.gameObject.TryGetComponent<MeshRenderer>(out mesh);
+            transform.gameObject.TryGetComponent<BoxCollider>(out collider);
+
+            if(mesh != null){
+                mesh.enabled = true;
+                if(mesh.material.HasProperty("_Color")){
+                    Color newColor = mesh.material.color;
+                    newColor.a = 1.0f;
+                    mesh.material.color = newColor;
+                }
             }
 
             if (collider) collider.enabled = true;
+
+            if(laser != null){
+                Debug.Log("Line renderer show");
+                laser.SetLaserWidth(laser.WidthWhenLaserOn, laser.WidthWhenLaserOn);
+                laser.isActive = true;
+                
+            }
         }
     }
 
+    /// <summary>
+    /// Starts a slow fade on the renderer for the given renderer (textmesh, meshrenderer, linerenderer)
+    /// </summary>
+    /// <param name="targetValue">the alpha to fade to</param>
+    /// <param name="startDelay">Delay in seconds</param>
+    /// <param name="fadeDuration">Fade duration in seconds</param>
+    /// <param name="fadeStyle">fade specific settings</param>
+    /// <returns></returns>
     private IEnumerator HandleSlowFade(float targetValue, float startDelay, float fadeDuration, FadeStyle fadeStyle)
     {
         yield return new WaitForSeconds(startDelay);
@@ -113,7 +147,6 @@ public class RgbFilterObject : MonoBehaviour
             targetTextMeshColor.a = targetValue;
         }
 
-
         Color targetMeshColor = new Color();
         Color oldMeshColor = new Color();
         if(meshRenderer && !textMesh){
@@ -123,10 +156,20 @@ public class RgbFilterObject : MonoBehaviour
             targetMeshColor.a  = targetValue;
         }
 
+        Vector2 oldLaserWidth = new Vector2();
+        if(laser) {
+            oldLaserWidth = laser.GetLaserWidth();
+        }
+
         while(elapsedTime <=  fadeDuration){
             elapsedTime += Time.deltaTime;
             if(textMesh) textMesh.color = Color.Lerp(oldTextMeshColor, targetTextMeshColor, elapsedTime / fadeDuration);
-            else if (meshRenderer) meshRenderer.material.color = Color.Lerp(oldMeshColor, targetMeshColor, elapsedTime / fadeDuration);
+            if (meshRenderer) meshRenderer.material.color = Color.Lerp(oldMeshColor, targetMeshColor, elapsedTime / fadeDuration);
+            if (laser) {
+                laser.SetLaserWidth(Mathf.Lerp(oldLaserWidth.x, targetValue * laser.WidthWhenLaserOn, elapsedTime/ fadeDuration), 
+                                    Mathf.Lerp(oldLaserWidth.y, targetValue * laser.WidthWhenLaserOn, elapsedTime/ fadeDuration)
+                );
+            }
 
 
             // Change collision here
@@ -140,6 +183,12 @@ public class RgbFilterObject : MonoBehaviour
             if(!CollisionWhenHidden && meshCollider){
                 if(meshRenderer.material.color.a >= fadeStyle.CollisionThresholdPercentage) meshCollider.enabled = true;
                 else meshCollider.enabled = false;
+            }
+
+            if( !CollisionWhenHidden && laser){
+                Vector2 currentWidth = laser.GetLaserWidth();
+                if(currentWidth.x >= fadeStyle.CollisionThresholdPercentage) laser.isActive = true;
+                else laser.isActive = false;
             }
             
             

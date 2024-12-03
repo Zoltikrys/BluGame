@@ -27,6 +27,8 @@ public class SceneManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this);
+        Player = Instantiate(Player, new Vector3(), Quaternion.identity);
+        DontDestroyOnLoad(Player);
 
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -85,11 +87,6 @@ public class SceneManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
         Debug.Log($"Loaded scene: {scene.name}");
-        if(GameObject.FindWithTag("Player")) UnlockPlayer();
-        else {
-            Player = Instantiate(Player, new Vector3(), Quaternion.identity);
-            DontDestroyOnLoad(Player);
-        }
         SetSpawn(scene);
         SetCamera(scene);
         UnlockPlayer();
@@ -116,6 +113,7 @@ public class SceneManager : MonoBehaviour
     private void SetSpawn(Scene scene)
     {
         GameObject newSpawnPoint = new GameObject();
+        newSpawnPoint.transform.position = new Vector3(0,4,0);
         GameObject[] rootObjects = UnityEngine.SceneManagement.SceneManager.GetSceneByName(CurrentScene.name).GetRootGameObjects();
         GameObject SpawnPoints = null;
 

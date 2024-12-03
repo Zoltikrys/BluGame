@@ -133,8 +133,10 @@ public class CameraController : MonoBehaviour
             return position;
         }
 
-        for(int i = 0; i < WeightedFocalPoints.Count; i++){
-            position += WeightedFocalPoints[i].FocalPoint.transform.position * WeightedFocalPoints[i].Weight;
+        if(WeightedFocalPoints != null){
+            for(int i = 0; i < WeightedFocalPoints.Count; i++){
+                position += WeightedFocalPoints[i].FocalPoint.transform.position * WeightedFocalPoints[i].Weight;
+            }
         }
 
 
