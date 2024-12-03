@@ -402,7 +402,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5681594720515111584}
-  - component: {fileID: 5019143144241346535}
   - component: {fileID: 6605262549195290149}
   m_Layer: 0
   m_Name: StationaryEnemy
@@ -428,23 +427,6 @@ Transform:
   - {fileID: 22796414327877201}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: -179.988}
---- !u!114 &5019143144241346535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3915369591344202504}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f1dab5b7fc5c646b114b2476310865, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  rotateBody: {fileID: 6992075700828846205}
-  targetTag: 0
-  attackCooldown: 3
-  _currentState: 0
 --- !u!136 &6605262549195290149
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -462,9 +444,9 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 7.64
+  m_Radius: 7
   m_Height: 1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
@@ -624,7 +606,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 5
   m_Height: 1.0000002
