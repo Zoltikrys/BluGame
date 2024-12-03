@@ -51,6 +51,10 @@ public class RgbGoggles : MonoBehaviour
 
     void Update()
     {
+        if(colorFilter == null) {
+            var canvasLayer = GameObject.FindGameObjectWithTag("UI_FILTER");
+            if(canvasLayer != null) canvasLayer.TryGetComponent<Image>(out colorFilter);
+        }
         HandleKeypress();
         ProcessColorChange(); // This is probably going to need to do something with the postprocessor
         UpdateGoggleState();
@@ -147,6 +151,6 @@ public class RgbGoggles : MonoBehaviour
         else if(colorFlags.r && colorFlags.g && colorFlags.b) CurrentColor = new Color(CurrentColor.r, CurrentColor.g, CurrentColor.b, 0.0f);
         else CurrentColor = new Color(CurrentColor.r, CurrentColor.g, CurrentColor.b, RgbActivatedAlpha);
 
-        if(GogglesActivated) colorFilter.color = CurrentColor;
+        if(GogglesActivated && colorFilter != null) colorFilter.color = CurrentColor;
     }
 }

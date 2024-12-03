@@ -190,7 +190,7 @@ public class CameraController : MonoBehaviour
         CRTCameraBehaviour cRTCameraBehaviour = GetComponent<CRTCameraBehaviour>();
 
         switch(effect){
-            case CAMERA_EFFECTS.ENTER_ROOM: StartCoroutine(RoomTransition(cRTCameraBehaviour, 3.0f, 1.0f, callback));
+            case CAMERA_EFFECTS.ENTER_ROOM: StartCoroutine(RoomTransition(cRTCameraBehaviour, 4.0f, 1.0f, callback));
                                             break;
             case CAMERA_EFFECTS.LEAVE_ROOM: StartCoroutine(RoomTransition(cRTCameraBehaviour, 0.0f, 1.0f, callback));
                                             break;
