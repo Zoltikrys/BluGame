@@ -24,13 +24,16 @@ public class doorBehaviour : MonoBehaviour
 
     public void OpenDoor()
     {
-        Destroy(leftDoor);
-        Destroy(rightDoor);
+        leftDoor.SetActive(false);
+        rightDoor.SetActive(false);
+        doorOpenFlag = true;
     }
 
     public void CloseDoor()
     {
         Debug.Log("this door should be closed");
+        leftDoor.SetActive(true);
+        rightDoor.SetActive(true);
         doorOpenFlag = false;
     }
 }

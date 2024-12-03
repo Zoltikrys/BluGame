@@ -7,35 +7,49 @@ public class PressurePlate : MonoBehaviour
 {
     [SerializeField]
     [Header("What should this pressure plate activate?")]
-    private UnityEvent triggerEvent;
+    private UnityEvent triggerEventOne;
+    [SerializeField]
+    [Header("What should happen when the pressure is removed?")]
+    private UnityEvent triggerEventTwo;
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "SmallMagnet")
-        {
-            float distance = Vector3.Distance(transform.position, other.transform.position);
-            //Debug.Log("Distance: " + distance);
+        //if(other.tag == "SmallMagnet")
+        //{
+        //    float distance = Vector3.Distance(transform.position, other.transform.position);
+        //    //Debug.Log("Distance: " + distance);
 
-            if(distance < 0.2f)
-            {
-                other.tag = "Untagged";
-                Rigidbody box = GetComponent<Rigidbody>();
-                if(box != null)
-                {
+        //    if(distance < 0.2f)
+        //    {
+        //        other.tag = "Untagged";
+        //        Rigidbody box = GetComponent<Rigidbody>();
+        //        if(box != null)
+        //        {
                     
-                    box.isKinematic = true;
-                }
+        //            box.isKinematic = true;
+        //        }
 
-                MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
-                if(renderer != null)
-                {
-                    renderer.material.color = Color.blue;
-                }
+        //        //Destroy(this);
+        //    }
+        //}
 
-                triggerEvent.Invoke();
-
-                Destroy(this);
-            }
+        MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
+        if (renderer != null) {
+            renderer.material.color = Color.blue;
         }
+
+        triggerEventOne?.Invoke();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
+        if (renderer != null) {
+             renderer.material.color = Color.red;
+        }
+
+        triggerEventTwo?.Invoke();
+
+        //Destroy(this);
     }
 }
