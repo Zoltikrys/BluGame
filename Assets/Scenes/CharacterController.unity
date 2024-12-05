@@ -2135,7 +2135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2613230712092152565, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.03
       objectReference: {fileID: 0}
     - target: {fileID: 2613230712092152565, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3363,7 +3363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  target: {fileID: 0}
+  target: {fileID: 1564032306}
   playerSeen: 0
   forwardBoost: 3
   speed: 5
@@ -3517,6 +3517,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517328184}
   m_CullTransparentMesh: 1
+--- !u!4 &1564032306 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2613230712092152565, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+  m_PrefabInstance: {fileID: 779025004}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1624466547
 GameObject:
   m_ObjectHideFlags: 0
