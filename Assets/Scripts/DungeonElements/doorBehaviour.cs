@@ -11,6 +11,10 @@ public class doorBehaviour : MonoBehaviour
     private GameObject leftDoor;
     [SerializeField] 
     private GameObject rightDoor;
+    [SerializeField] public GameObject collider;
+
+
+    private DoorTransition doorTransition;
 
 
     private void Start()
@@ -21,6 +25,7 @@ public class doorBehaviour : MonoBehaviour
         else {
             OpenDoor();
         }
+        TryGetComponent<DoorTransition>(out doorTransition);
     }
 
     public void OpenDoor()
@@ -28,6 +33,7 @@ public class doorBehaviour : MonoBehaviour
         leftDoor.SetActive(false);
         rightDoor.SetActive(false);
         doorOpenFlag = true;
+        collider.GetComponent<Collider>().enabled = true;
     }
 
     public void CloseDoor()
@@ -36,5 +42,6 @@ public class doorBehaviour : MonoBehaviour
         leftDoor.SetActive(true);
         rightDoor.SetActive(true);
         doorOpenFlag = false;
+        collider.GetComponent<Collider>().enabled = false;
     }
 }
