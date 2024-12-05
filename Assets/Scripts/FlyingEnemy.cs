@@ -1,5 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class FlyingEnemy : MonoBehaviour
 {
@@ -20,65 +23,96 @@ public class FlyingEnemy : MonoBehaviour
     public float timeToTarget = 5;
     private float timeRemaining = 5;
 
+    public float attackTravelTime = 3f;
+
     private Vector3 playerPos;
 
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
-    void Update()
+    /*async*/ void Update()
     {
         switch (currentState)
         {
             case State.Idle:
+                //Debug.Log("Idle state...");
+                //create a vision cone to spot player later
+                //also make enemy patrol ig? ask logan on specifics later
                 if (playerSeen)
                 {
                     currentState = State.Targeting;
                 }
                 break;
-
             case State.Targeting:
-                playerSeen = false;  // reset playerSeen
+                //Debug.Log("Targeting!");
+                playerSeen = false; //reset playerSeen
+                hasHit = false; //reset hasHit
+                //face player
                 transform.LookAt(target);
                 if (timeRemaining > 0)
                 {
                     timeRemaining -= Time.deltaTime;
+                    //Debug.Log(timeRemaining);
                 }
                 else
                 {
+                    //take player's current pos + forward
                     playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+                    //switch state to attacking
                     currentState = State.Attack;
                 }
-                break;
 
+                break;
             case State.Attack:
-                timeRemaining = timeToTarget;  // reset timeRemaining
-                // Move towards player position + forward
+                //Debug.Log("Attacking!!!");
+
+                //reset timeRemaining
+                timeRemaining = timeToTarget;
+
+                //move towards player pos + forward
                 transform.localPosition = Vector3.MoveTowards(transform.localPosition, (playerPos + (transform.forward * forwardBoost)), Time.deltaTime * speed);
 
-                // Start coroutine for handling collision logic
+
                 StartCoroutine(HandleAttack());
 
+                //await OnCollisionEnter(Collision collision);
+
+                /*if (hasHit) //////////// this is doing my head in need to sort it
+                {
+                    currentState = State.Targeting;
+                }
+                else
+                {
+                    currentState = State.Searching;
+                }*/
+
                 break;
+
 
             case State.Searching:
                 Debug.Log("Searching for BLU");
+                //Rotate and move around area
+
+
+                //if BLU spotted: switch state to targeting
                 if (playerSeen)
                 {
-                    currentState = State.Targeting;
+                    currentState = State.Targeting; 
                 }
                 break;
         }
     }
 
-    // Coroutine for handling attack logic
+    //Coroutine for handling attack logic
     private IEnumerator HandleAttack()
     {
-        yield return new WaitForSeconds(1f);  // Delay before checking for collision
+        yield return new WaitForSeconds(attackTravelTime); //delay before checking for collision
 
-        if (hasHit) // Collision already happened
+        if (hasHit)
         {
             currentState = State.Targeting;
         }
@@ -86,13 +120,23 @@ public class FlyingEnemy : MonoBehaviour
         {
             currentState = State.Searching;
         }
+
+
     }
 
-    // Unity collision detection
+
+
+
+
+
     void OnCollisionEnter(Collision collision)
     {
+        //print(collision.gameObject.name + " is colliding");
+
+        //Check for a match with the specific tag on any GameObject that collides with your GameObject
         if (collision.gameObject.tag == "Player")
         {
+            //If the GameObject has the same tag as specified, output this message in the console
             Debug.Log("Hit BLU");
             hasHit = true;
             HealthManager healthMan = collision.gameObject.GetComponent<HealthManager>();
@@ -100,8 +144,10 @@ public class FlyingEnemy : MonoBehaviour
         }
         else
         {
+            //has hit something else
+            //explode animation ig?
             Debug.Log("Gonna explode now");
-            Destroy(this.gameObject); // Destroys the enemy
+            Destroy(this.gameObject); //deletes self
         }
     }
 }
