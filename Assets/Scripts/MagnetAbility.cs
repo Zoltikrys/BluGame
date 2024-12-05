@@ -76,7 +76,8 @@ public class MagnetAbility : MonoBehaviour
             {
                 Vector3 directionToStop = (stopPosition - smallMagnetTarget.transform.position).normalized;
                 float distanceToStop = Vector3.Distance(smallMagnetTarget.transform.position, stopPosition);
-
+                rb.constraints = RigidbodyConstraints.FreezeRotation;
+                
                 if (distanceToStop > 0.1f) // If not yet at stop position
                 {
                     rb.velocity = directionToStop * smallMagnetPullSpeed;
@@ -85,6 +86,7 @@ public class MagnetAbility : MonoBehaviour
                 {
                     rb.velocity = Vector3.zero; // Stop movement
                     smallMagnetTarget.transform.SetParent(transform); // Parent to the player
+                    rb.useGravity = false;
                 }
             }
         }
@@ -121,6 +123,9 @@ public class MagnetAbility : MonoBehaviour
             if (rb != null)
             {
                 rb.velocity = Vector3.zero; // Reset velocity
+                rb.useGravity = true;
+                rb.constraints = RigidbodyConstraints.None;
+
             }
             smallMagnetTarget = null; // Clear the reference
         }
