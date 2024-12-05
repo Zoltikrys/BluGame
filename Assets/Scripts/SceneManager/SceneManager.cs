@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using BrewedInk.CRT;
 using UnityEditor;
 using UnityEngine;
@@ -7,32 +10,29 @@ using UnityEngine.SceneManagement;
 public class SceneManager : MonoBehaviour
 {
     [Tooltip("Scene to load first")]
-    [field: SerializeField]
-    public SceneAsset FirstLoad;
+    [field: SerializeField] public SceneAsset FirstLoad;
 
     [Tooltip("Current Scene loaded")]
-    [field: SerializeField]
-    public SceneAsset CurrentScene;
+    [field: SerializeField] public SceneAsset CurrentScene;
 
     [Tooltip("The current active camera")]
-    [field: SerializeField]
-    public Camera CurrentCamera;
+    [field: SerializeField] public Camera CurrentCamera;
+    [field: SerializeField] public uint RequestedSpawnPoint = 0;
 
-    [field: SerializeField]
-    public uint RequestedSpawnPoint = 2;
+    public int RoomID { get; set; }
 
-    [field: SerializeField]
-    public GameObject Player;
+    [field: SerializeField] public GameObject Player;
+
+    //room ID
+    private Dictionary<int, RoomInfo> StateTracker = new Dictionary<int, RoomInfo>();
 
     void Start()
     {
         DontDestroyOnLoad(this);
-        //Player = Instantiate(Player, new Vector3(), Quaternion.identity);
-        //DontDestroyOnLoad(Player);
 
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
-        if(FirstLoad)LoadScene(FirstLoad, RequestedSpawnPoint);
+        if(FirstLoad)LoadScene(FirstLoad);
         else {
             Debug.LogError("No Scene given to load first. Please add a scene to load initially.");
             Application.Quit();
@@ -41,8 +41,8 @@ public class SceneManager : MonoBehaviour
 
     }
 
-    private void LoadScene(SceneAsset scene, uint requestedSpawnpoint){
-        RequestedSpawnPoint = requestedSpawnpoint;
+    private void LoadScene(SceneAsset scene){
+
 
         if(CurrentScene && IsSceneLoaded(CurrentScene)) UnityEngine.SceneManagement.SceneManager.LoadScene(CurrentScene.name);
 
@@ -51,11 +51,13 @@ public class SceneManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
-    public void RequestLoadScene(SceneAsset scene, uint requestedSpawnpoint){
+    public void RequestLoadScene(SceneAsset scene, int id, uint requestedSpawnpoint){
         LockPlayer();
+        RequestedSpawnPoint = requestedSpawnpoint;
+        RoomID = id;
 
-        if(CurrentCamera) CurrentCamera.GetComponent<CameraController>().StartCameraTransitionEffect(CAMERA_EFFECTS.LEAVE_ROOM, () => LoadScene(scene, requestedSpawnpoint));
-        else LoadScene(scene, requestedSpawnpoint);
+        if(CurrentCamera) CurrentCamera.GetComponent<CameraController>().StartCameraTransitionEffect(CAMERA_EFFECTS.LEAVE_ROOM, () => LoadScene(scene));
+        else LoadScene(scene);
     }
 
     private void LockPlayer()
@@ -87,10 +89,26 @@ public class SceneManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
         Debug.Log($"Loaded scene: {scene.name}");
+        SetRoomState(scene, RoomID);
         Player = GameObject.FindGameObjectWithTag("Player");
         SetSpawn(scene);
         SetCamera(scene);
         UnlockPlayer();
+    }
+
+    private void SetRoomState(Scene scene, int roomID)
+    {
+        if(StateTracker.ContainsKey(roomID)){
+            
+        }
+        var trackedComponenets = scene.GetRootGameObjects()
+                                    .SelectMany(s => scene.GetRootGameObjects())
+                                    .Where(g => g.activeInHierarchy)
+                                    .SelectMany(g => g.GetComponents<TrackedObject>())
+                                    .ToList();
+        foreach(var trackedComponent in trackedComponenets){
+            Debug.Log($"TRACKED OBJECT {trackedComponent.name} found tracked");
+        }
     }
 
     void OnDestroy(){
