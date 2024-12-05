@@ -23,8 +23,6 @@ public class FlyingEnemy : MonoBehaviour
     public float timeToTarget = 5;
     private float timeRemaining = 5;
 
-    public float attackTravelTime = 3f;
-
     private Vector3 playerPos;
 
     // Start is called before the first frame update
@@ -34,7 +32,7 @@ public class FlyingEnemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    /*async*/ void Update()
+    void Update()
     {
         switch (currentState)
         {
@@ -49,8 +47,10 @@ public class FlyingEnemy : MonoBehaviour
                 break;
             case State.Targeting:
                 //Debug.Log("Targeting!");
+                
                 playerSeen = false; //reset playerSeen
                 hasHit = false; //reset hasHit
+
                 //face player
                 transform.LookAt(target);
                 if (timeRemaining > 0)
@@ -74,25 +74,18 @@ public class FlyingEnemy : MonoBehaviour
                 timeRemaining = timeToTarget;
 
                 //move towards player pos + forward
-                transform.localPosition = Vector3.MoveTowards(transform.localPosition, (playerPos + (transform.forward * forwardBoost)), Time.deltaTime * speed);
 
+                Vector3 targetPos = playerPos + (transform.forward * forwardBoost);
 
-                StartCoroutine(HandleAttack());
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPos, Time.deltaTime * speed);
 
-                //await OnCollisionEnter(Collision collision);
-
-                /*if (hasHit) //////////// this is doing my head in need to sort it
-                {
-                    currentState = State.Targeting;
-                }
-                else
+                //wont run until enemy reaches targetPos
+                if (transform.localPosition == targetPos)
                 {
                     currentState = State.Searching;
-                }*/
+                }
 
                 break;
-
-
             case State.Searching:
                 Debug.Log("Searching for BLU");
                 //Rotate and move around area
@@ -106,28 +99,6 @@ public class FlyingEnemy : MonoBehaviour
                 break;
         }
     }
-
-    //Coroutine for handling attack logic
-    private IEnumerator HandleAttack()
-    {
-        yield return new WaitForSeconds(attackTravelTime); //delay before checking for collision
-
-        if (hasHit)
-        {
-            currentState = State.Targeting;
-        }
-        else
-        {
-            currentState = State.Searching;
-        }
-
-
-    }
-
-
-
-
-
 
     void OnCollisionEnter(Collision collision)
     {
@@ -149,6 +120,18 @@ public class FlyingEnemy : MonoBehaviour
             Debug.Log("Gonna explode now");
             Destroy(this.gameObject); //deletes self
         }
+
+
+        if (hasHit)
+        {
+            currentState = State.Targeting;
+        }
+        else //might be redundant
+        {
+            currentState = State.Searching;
+        }
+
+
     }
 }
 
