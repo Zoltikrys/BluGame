@@ -110,7 +110,7 @@ public class FlyingEnemy : MonoBehaviour
             //If the GameObject has the same tag as specified, output this message in the console
             Debug.Log("Hit BLU");
             hasHit = true;
-            HealthManager healthMan = collision.gameObject.GetComponent<HealthManager>();
+            HealthManager healthMan = collision.gameObject.GetComponent<HealthManager>(); //damage player
             healthMan.DamagePlayer();
         }
         else
