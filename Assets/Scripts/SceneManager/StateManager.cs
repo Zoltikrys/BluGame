@@ -11,6 +11,8 @@ public class StateManager : MonoBehaviour
     public Dictionary<string, int> roomStates = new Dictionary<string, int>();
     [field: SerializeField] public Checkpoint CurrentCheckPoint { get; set; }
 
+    [field: SerializeField] public PlayerInfo PlayerInfo {get; set;}
+
     void Start(){
         DontDestroyOnLoad(this);
     }
@@ -32,6 +34,36 @@ public class StateManager : MonoBehaviour
     public void SetCheckpoint(Scene scene, uint roomId, uint requestedSpawnPoint)
     {
         CurrentCheckPoint = new Checkpoint(scene, roomId, requestedSpawnPoint);
+    }
+
+    public void SetPlayerState(GameObject player)
+    {
+        if(PlayerInfo != null){
+            HealthManager currentPlayerHealth;
+            RgbGoggles currentPlayerGoggles;
+            player.TryGetComponent<HealthManager>(out currentPlayerHealth);
+            player.TryGetComponent<RgbGoggles>(out currentPlayerGoggles);
+
+            if(currentPlayerHealth) currentPlayerHealth.b_Health = PlayerInfo.HP;
+            if(currentPlayerGoggles) currentPlayerGoggles.enabled = PlayerInfo.RGB_GoggleState;
+            
+        }
+    }
+
+    internal void StorePlayerInfo(GameObject player)
+    {
+        PlayerInfo = new PlayerInfo(player.GetComponent<HealthManager>().b_Health, player.GetComponent<RgbGoggles>().isActiveAndEnabled);
+    }
+}
+
+[Serializable]
+public class PlayerInfo{
+    [field: SerializeField] public int HP;
+    [field: SerializeField] public bool RGB_GoggleState;
+
+    public PlayerInfo(int health, bool rgb_state){
+        HP = health;
+        RGB_GoggleState = rgb_state;
     }
 }
 

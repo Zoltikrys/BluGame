@@ -47,6 +47,7 @@ public class SceneManager : MonoBehaviour
 
     public void RequestLoadScene(SceneAsset scene, uint id, uint requestedSpawnpoint){
         LockPlayer();
+        StateManager.StorePlayerInfo(Player);
         RequestedSpawnPoint = requestedSpawnpoint;
         RoomID = id;
 
@@ -88,9 +89,13 @@ public class SceneManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
         Debug.Log($"Loaded scene: {scene.name}");
         Player = GameObject.FindGameObjectWithTag("Player");
+
         StateManager.SetRoomState(scene, RoomID);
+        StateManager.SetPlayerState(Player);
+
         SetSpawn(scene);
         SetCamera(scene);
+
         UnlockPlayer();
     }
 

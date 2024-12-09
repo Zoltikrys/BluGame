@@ -6,7 +6,7 @@ using UnityEngine;
 public class HealthManager : MonoBehaviour
 {
     [SerializeField]
-    private int b_Health = 3;
+    [field: SerializeField] public int b_Health {get; set;} = 0;
 
     private bool damageBool = true;
     private bool newState = false;
@@ -35,7 +35,10 @@ public class HealthManager : MonoBehaviour
             m_DamageCooldown -= Time.deltaTime;
         }
     }
-
+    
+    public void SetHealth(int amount){
+        b_Health = amount;
+    }
     public void Damage()
     {
         if(m_DamageCooldown > 0)
