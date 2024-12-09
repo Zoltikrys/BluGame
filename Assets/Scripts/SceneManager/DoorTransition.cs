@@ -6,7 +6,7 @@ public class DoorTransition : MonoBehaviour
 {
     [field: SerializeField] public SceneAsset SceneToLoad;
     [field: SerializeField] public uint IndexOfSpawnPointInNextScene;
-    [field: SerializeField] public int SceneID;
+    [field: SerializeField] public uint SceneID;
 
     private SceneManager SceneManager;
 

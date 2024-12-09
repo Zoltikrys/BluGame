@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using BrewedInk.CRT;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,13 +13,14 @@ public class SceneManager : MonoBehaviour
     [Tooltip("The current active camera")]
     [field: SerializeField] public Camera CurrentCamera;
     [field: SerializeField] public uint RequestedSpawnPoint = 0;
+    [field: SerializeField] public StateManager StateManager {get; set;}
 
-    public int RoomID { get; set; }
+    public uint RoomID { get; set; }
 
     [field: SerializeField] public GameObject Player;
 
     //room ID
-    private Dictionary<int, RoomInfo> StateTracker = new Dictionary<int, RoomInfo>();
+
 
     void Start()
     {
@@ -42,8 +38,6 @@ public class SceneManager : MonoBehaviour
     }
 
     private void LoadScene(SceneAsset scene){
-
-
         if(CurrentScene && IsSceneLoaded(CurrentScene)) UnityEngine.SceneManagement.SceneManager.LoadScene(CurrentScene.name);
 
         string sceneName = scene.name;
@@ -51,13 +45,17 @@ public class SceneManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
-    public void RequestLoadScene(SceneAsset scene, int id, uint requestedSpawnpoint){
+    public void RequestLoadScene(SceneAsset scene, uint id, uint requestedSpawnpoint){
         LockPlayer();
         RequestedSpawnPoint = requestedSpawnpoint;
         RoomID = id;
 
         if(CurrentCamera) CurrentCamera.GetComponent<CameraController>().StartCameraTransitionEffect(CAMERA_EFFECTS.LEAVE_ROOM, () => LoadScene(scene));
         else LoadScene(scene);
+    }
+
+    public void Respawn(){
+        RequestLoadScene(StateManager.CurrentCheckPoint.scene, StateManager.CurrentCheckPoint.RoomID, StateManager.CurrentCheckPoint.SpawnPoint);
     }
 
     private void LockPlayer()
@@ -89,26 +87,11 @@ public class SceneManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
         Debug.Log($"Loaded scene: {scene.name}");
-        SetRoomState(scene, RoomID);
         Player = GameObject.FindGameObjectWithTag("Player");
+        StateManager.SetRoomState(scene, RoomID);
         SetSpawn(scene);
         SetCamera(scene);
         UnlockPlayer();
-    }
-
-    private void SetRoomState(Scene scene, int roomID)
-    {
-        if(StateTracker.ContainsKey(roomID)){
-            
-        }
-        var trackedComponenets = scene.GetRootGameObjects()
-                                    .SelectMany(s => scene.GetRootGameObjects())
-                                    .Where(g => g.activeInHierarchy)
-                                    .SelectMany(g => g.GetComponents<TrackedObject>())
-                                    .ToList();
-        foreach(var trackedComponent in trackedComponenets){
-            Debug.Log($"TRACKED OBJECT {trackedComponent.name} found tracked");
-        }
     }
 
     void OnDestroy(){
@@ -148,7 +131,13 @@ public class SceneManager : MonoBehaviour
                 Debug.LogWarning("Requested spawn point larger than number of spawn points. Defaulting to index 0");
                 RequestedSpawnPoint = 0;
             }
-            if(SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).gameObject) newSpawnPoint = SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).transform.gameObject;
+            if(SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).gameObject) {
+                newSpawnPoint = SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).transform.gameObject;
+                CheckPointable a;
+                if(newSpawnPoint.TryGetComponent<CheckPointable>(out a)) {
+                    if(a.isCheckpoint) StateManager.SetCheckpoint(scene, RoomID, RequestedSpawnPoint);
+                }
+            }
             else Debug.LogWarning($"Could not find spawn point {RequestedSpawnPoint}. Setting Player to {new Vector3()}");
         } 
         else{
@@ -158,8 +147,6 @@ public class SceneManager : MonoBehaviour
         Debug.Log($"Setting Player spawn to: {newSpawnPoint.transform.position}, {newSpawnPoint.transform.rotation}");
 
         SetPlayer(newSpawnPoint.transform.position, newSpawnPoint.transform.rotation);
-
-        
     }
 
     private void SetCamera(Scene scene){
@@ -175,5 +162,4 @@ public class SceneManager : MonoBehaviour
             }
         }
     }
-
 }
