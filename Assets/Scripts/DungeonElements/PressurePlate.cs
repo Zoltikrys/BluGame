@@ -12,6 +12,8 @@ public class PressurePlate : MonoBehaviour
     [Header("What should happen when the pressure is removed?")]
     private UnityEvent triggerEventTwo;
 
+    public BoxCollider BoxCollider;
+
     private void OnTriggerEnter(Collider other)
     {
         //if(other.tag == "SmallMagnet")
@@ -52,4 +54,5 @@ public class PressurePlate : MonoBehaviour
 
         //Destroy(this);
     }
+
 }
