@@ -16,6 +16,8 @@ public class FlyingEnemy : MonoBehaviour
 
     [SerializeField] private Transform target;
 
+    
+
     public bool playerSeen; //public for testing purposes, change to private when implementation finished
 
     public float forwardBoost = 3f;
@@ -28,7 +30,7 @@ public class FlyingEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
