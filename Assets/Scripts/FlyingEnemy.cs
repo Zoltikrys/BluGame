@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class FlyingEnemy : MonoBehaviour
 {
@@ -16,11 +14,11 @@ public class FlyingEnemy : MonoBehaviour
 
     private FieldOfView FOV;
 
-
     [SerializeField] private Transform target;
+    [SerializeField] private Transform[] patrolPoints;  // Array of patrol points
+    private int currentPatrolPoint = 0;
 
-
-    public bool playerSeen; //public for testing purposes, change to private when implementation finished
+    public bool playerSeen; // public for testing purposes, change to private when implementation finished
 
     public float forwardBoost = 3f;
     public float speed = 10f;
@@ -44,101 +42,128 @@ public class FlyingEnemy : MonoBehaviour
         switch (currentState)
         {
             case State.Patrolling:
-                //Debug.Log("Idle state...");
-                //create a vision cone to spot player later
-                //also make enemy patrol ig? ask logan on specifics later
-                if (playerSeen)
-                {
-                    currentState = State.Targeting;
-                }
+                PatrollingState();
                 break;
             case State.Targeting:
-                //Debug.Log("Targeting!");
-                
-                playerSeen = false; //reset playerSeen
-                hasHit = false; //reset hasHit
-
-                //face player
-                transform.LookAt(target);
-                if (timeRemaining > 0)
-                {
-                    timeRemaining -= Time.deltaTime;
-                    //Debug.Log(timeRemaining);
-                }
-                else
-                {
-                    //take player's current pos + forward
-                    playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-                    //switch state to attacking
-                    currentState = State.Attack;
-                }
-
+                TargetingState();
                 break;
             case State.Attack:
-                //Debug.Log("Attacking!!!");
-
-                //reset timeRemaining
-                timeRemaining = timeToTarget;
-
-                //move towards player pos + forward
-
-                Vector3 targetPos = playerPos + (transform.forward * forwardBoost);
-
-                transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPos, Time.deltaTime * speed);
-
-                //wont run until enemy reaches targetPos
-                if (transform.localPosition == targetPos)
-                {
-                    currentState = State.Searching;
-                }
-
+                AttackState();
                 break;
             case State.Searching:
-                Debug.Log("Searching for BLU");
-                //Rotate and move around area
-
-
-                //if BLU spotted: switch state to targeting
-                if (playerSeen)
-                {
-                    currentState = State.Targeting; 
-                }
+                SearchingState();
                 break;
+        }
+    }
+
+    private void PatrollingState()
+    {
+        // Check if there are patrol points defined
+        if (patrolPoints.Length > 0)
+        {
+            // Get the target patrol point
+            Vector3 targetPosition = patrolPoints[currentPatrolPoint].position;
+
+            // Calculate the direction towards the patrol point
+            Vector3 directionToTarget = targetPosition - transform.position;
+
+            // Rotate the enemy towards the direction it's moving
+            if (directionToTarget != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
+            }
+
+            // Move towards the current patrol point
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * speed);
+
+            // When the enemy reaches the patrol point, move to the next one
+            if (transform.position == targetPosition)
+            {
+                currentPatrolPoint = (currentPatrolPoint + 1) % patrolPoints.Length; // Loop back to the first point if needed
+            }
+        }
+
+        // If the player is seen, switch to the Targeting state
+        if (playerSeen)
+        {
+            currentState = State.Targeting;
+        }
+    }
+
+
+    private void TargetingState()
+    {
+        playerSeen = false; // Reset playerSeen
+        hasHit = false; // Reset hasHit
+
+        // Face player
+        transform.LookAt(target);
+
+        if (timeRemaining > 0)
+        {
+            timeRemaining -= Time.deltaTime;
+        }
+        else
+        {
+            playerPos = target.position;
+            currentState = State.Attack;
+        }
+    }
+
+    private void AttackState()
+    {
+        // Reset timeRemaining
+        timeRemaining = timeToTarget;
+
+        // Move towards player
+        Vector3 targetPos = playerPos + (transform.forward * forwardBoost);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPos, Time.deltaTime * speed);
+
+        // If the enemy reaches the target, switch to searching
+        if (transform.localPosition == targetPos)
+        {
+            currentState = State.Patrolling;
+            //currentState = State.Searching; implement for vertical slice - stays stationary but rotates to look around for player
+        }
+    }
+
+    private void SearchingState()
+    {
+        Debug.Log("Searching for BLU");
+
+        // If the player is seen, switch to Targeting state
+        if (playerSeen)
+        {
+            currentState = State.Targeting;
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        //print(collision.gameObject.name + " is colliding");
-
-        //Check for a match with the specific tag on any GameObject that collides with your GameObject
         if (collision.gameObject.tag == "Player")
         {
-            //If the GameObject has the same tag as specified, output this message in the console
             Debug.Log("Hit BLU");
             hasHit = true;
-            HealthManager healthMan = collision.gameObject.GetComponent<HealthManager>(); //damage player
+            HealthManager healthMan = collision.gameObject.GetComponent<HealthManager>(); // damage player
             healthMan.DamagePlayer();
         }
         else
         {
-            //has hit something else
-            //explode animation ig?
             Debug.Log("Gonna explode now");
-            Destroy(this.gameObject); //deletes self
+            Destroy(this.gameObject); // deletes self
         }
 
-
+        // Handle state transitions based on collisions
         if (hasHit)
         {
             currentState = State.Targeting;
         }
-        else //might be redundant
+        else
         {
-            currentState = State.Searching;
+            currentState = State.Patrolling;
+            //currentState = State.Searching; implement for vertical slice - stays stationary but rotates to look around for player
         }
-
-
     }
 }
 
