@@ -54,8 +54,8 @@ public class SceneManager : MonoBehaviour
         RequestedSpawnPoint = requestedSpawnpoint;
         RoomID = id;
 
-        if(CurrentCamera) CurrentCamera.GetComponent<CameraController>().StartCameraTransitionEffect(CAMERA_EFFECTS.LEAVE_ROOM, () => LoadScene(scene));
-        else LoadScene(scene);
+        //if(CurrentCamera) //CurrentCamera.GetComponent<CameraController>().StartCameraTransitionEffect(CAMERA_EFFECTS.LEAVE_ROOM, () => LoadScene(scene));
+        LoadScene(scene);
     }
 
     public void Respawn(){
