@@ -6,6 +6,7 @@ public class DoorTransition : MonoBehaviour
 {
     [field: SerializeField] public SceneAsset SceneToLoad;
     [field: SerializeField] public uint IndexOfSpawnPointInNextScene;
+    [field: SerializeField] public uint SceneID;
 
     private SceneManager SceneManager;
 
@@ -17,7 +18,7 @@ public class DoorTransition : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player")){
-            if(SceneManager) SceneManager.RequestLoadScene(SceneToLoad, IndexOfSpawnPointInNextScene);
+            if(SceneManager) SceneManager.RequestLoadScene(SceneToLoad, SceneID, IndexOfSpawnPointInNextScene);
         }
     }
 }

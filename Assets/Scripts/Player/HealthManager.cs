@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,7 +36,7 @@ public class HealthManager : MonoBehaviour
         }
     }
 
-    public void DamagePlayer()
+    public void Damage()
     {
         if(m_DamageCooldown > 0)
         {
@@ -56,7 +57,7 @@ public class HealthManager : MonoBehaviour
 
     }
 
-    public void HealPlayer()
+    public void Heal()
     {
         b_Health += 1;
         Debug.Log(b_Health);
@@ -66,7 +67,14 @@ public class HealthManager : MonoBehaviour
     public void PlayerDeath()
     {
         Debug.Log("you died :(");
-        Destroy(gameObject);
+        PlayDeathAnimation();
+        SceneManager sceneManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManager>();
+        sceneManager.Respawn();
+    }
+
+    private void PlayDeathAnimation()
+    {
+        Debug.LogWarning("No player death animation.");
     }
 
     void FlashStart()

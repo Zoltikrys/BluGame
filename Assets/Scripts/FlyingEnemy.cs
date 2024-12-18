@@ -110,7 +110,7 @@ public class FlyingEnemy : MonoBehaviour
             Debug.Log("Hit BLU");
             hasHit = true;
             HealthManager healthMan = collision.gameObject.GetComponent<HealthManager>();
-            healthMan.DamagePlayer();
+            healthMan.Damage();
         }
         else
         {

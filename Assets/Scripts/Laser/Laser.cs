@@ -50,7 +50,7 @@ public class Laser : MonoBehaviour
                     HealthManager health;
                     if(collidedObjects[i].collider.gameObject.TryGetComponent<HealthManager>(out health)){
                         if(isActive){
-                            health.DamagePlayer();
+                            health.Damage();
                         }
                     }
                     

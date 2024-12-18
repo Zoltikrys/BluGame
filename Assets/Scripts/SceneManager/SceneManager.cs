@@ -1,5 +1,3 @@
-using System.Collections;
-using BrewedInk.CRT;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,32 +5,30 @@ using UnityEngine.SceneManagement;
 public class SceneManager : MonoBehaviour
 {
     [Tooltip("Scene to load first")]
-    [field: SerializeField]
-    public SceneAsset FirstLoad;
+    [field: SerializeField] public SceneAsset FirstLoad;
 
     [Tooltip("Current Scene loaded")]
-    [field: SerializeField]
-    public SceneAsset CurrentScene;
+    [field: SerializeField] public SceneAsset CurrentScene;
 
     [Tooltip("The current active camera")]
-    [field: SerializeField]
-    public Camera CurrentCamera;
+    [field: SerializeField] public Camera CurrentCamera;
+    [field: SerializeField] public uint RequestedSpawnPoint = 0;
+    [field: SerializeField] public StateManager StateManager {get; set;}
 
-    [field: SerializeField]
-    public uint RequestedSpawnPoint = 2;
+    public uint RoomID { get; set; }
 
-    [field: SerializeField]
-    public GameObject Player;
+    [field: SerializeField] public GameObject Player;
+
+    //room ID
+
 
     void Start()
     {
         DontDestroyOnLoad(this);
-        //Player = Instantiate(Player, new Vector3(), Quaternion.identity);
-        //DontDestroyOnLoad(Player);
 
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
-        if(FirstLoad)LoadScene(FirstLoad, RequestedSpawnPoint);
+        if(FirstLoad)LoadScene(FirstLoad);
         else {
             Debug.LogError("No Scene given to load first. Please add a scene to load initially.");
             Application.Quit();
@@ -41,9 +37,7 @@ public class SceneManager : MonoBehaviour
 
     }
 
-    private void LoadScene(SceneAsset scene, uint requestedSpawnpoint){
-        RequestedSpawnPoint = requestedSpawnpoint;
-
+    private void LoadScene(SceneAsset scene){
         if(CurrentScene && IsSceneLoaded(CurrentScene)) UnityEngine.SceneManagement.SceneManager.LoadScene(CurrentScene.name);
 
         string sceneName = scene.name;
@@ -51,11 +45,17 @@ public class SceneManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
-    public void RequestLoadScene(SceneAsset scene, uint requestedSpawnpoint){
+    public void RequestLoadScene(SceneAsset scene, uint id, uint requestedSpawnpoint){
         LockPlayer();
+        RequestedSpawnPoint = requestedSpawnpoint;
+        RoomID = id;
 
-        if(CurrentCamera) CurrentCamera.GetComponent<CameraController>().StartCameraTransitionEffect(CAMERA_EFFECTS.LEAVE_ROOM, () => LoadScene(scene, requestedSpawnpoint));
-        else LoadScene(scene, requestedSpawnpoint);
+        if(CurrentCamera) CurrentCamera.GetComponent<CameraController>().StartCameraTransitionEffect(CAMERA_EFFECTS.LEAVE_ROOM, () => LoadScene(scene));
+        else LoadScene(scene);
+    }
+
+    public void Respawn(){
+        RequestLoadScene(StateManager.CurrentCheckPoint.scene, StateManager.CurrentCheckPoint.RoomID, StateManager.CurrentCheckPoint.SpawnPoint);
     }
 
     private void LockPlayer()
@@ -88,6 +88,7 @@ public class SceneManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
         Debug.Log($"Loaded scene: {scene.name}");
         Player = GameObject.FindGameObjectWithTag("Player");
+        StateManager.SetRoomState(scene, RoomID);
         SetSpawn(scene);
         SetCamera(scene);
         UnlockPlayer();
@@ -130,7 +131,13 @@ public class SceneManager : MonoBehaviour
                 Debug.LogWarning("Requested spawn point larger than number of spawn points. Defaulting to index 0");
                 RequestedSpawnPoint = 0;
             }
-            if(SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).gameObject) newSpawnPoint = SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).transform.gameObject;
+            if(SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).gameObject) {
+                newSpawnPoint = SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).transform.gameObject;
+                CheckPointable a;
+                if(newSpawnPoint.TryGetComponent<CheckPointable>(out a)) {
+                    if(a.isCheckpoint) StateManager.SetCheckpoint(scene, RoomID, RequestedSpawnPoint);
+                }
+            }
             else Debug.LogWarning($"Could not find spawn point {RequestedSpawnPoint}. Setting Player to {new Vector3()}");
         } 
         else{
@@ -140,8 +147,6 @@ public class SceneManager : MonoBehaviour
         Debug.Log($"Setting Player spawn to: {newSpawnPoint.transform.position}, {newSpawnPoint.transform.rotation}");
 
         SetPlayer(newSpawnPoint.transform.position, newSpawnPoint.transform.rotation);
-
-        
     }
 
     private void SetCamera(Scene scene){
@@ -157,5 +162,4 @@ public class SceneManager : MonoBehaviour
             }
         }
     }
-
 }
