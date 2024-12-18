@@ -6,17 +6,19 @@ using UnityEngine.UIElements;
 
 public class FlyingEnemy : MonoBehaviour
 {
-    public State currentState = State.Idle;
+    public State currentState = State.Patrolling;
 
     private bool isTargeting;
-    private bool isIdle;
+    private bool isPatrolling;
     private bool isSearching;
     private bool isAttacking;
     private bool hasHit = false;
 
+    private FieldOfView FOV;
+
+
     [SerializeField] private Transform target;
 
-    
 
     public bool playerSeen; //public for testing purposes, change to private when implementation finished
 
@@ -31,14 +33,17 @@ public class FlyingEnemy : MonoBehaviour
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        FOV = GetComponent<FieldOfView>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        playerSeen = FOV.canSeePlayer;
+
         switch (currentState)
         {
-            case State.Idle:
+            case State.Patrolling:
                 //Debug.Log("Idle state...");
                 //create a vision cone to spot player later
                 //also make enemy patrol ig? ask logan on specifics later
@@ -138,4 +143,4 @@ public class FlyingEnemy : MonoBehaviour
 }
 
 [System.Serializable]
-public enum State { Idle, Targeting, Attack, Searching }
+public enum State { Patrolling, Targeting, Attack, Searching }
