@@ -65,9 +65,9 @@ public class RgbFilterObject : MonoBehaviour
     {
         if (transform){
             MeshRenderer mesh;
-            BoxCollider collider;
+            Collider collider;
             transform.gameObject.TryGetComponent<MeshRenderer>(out mesh);
-            transform.gameObject.TryGetComponent<BoxCollider>(out collider);
+            transform.gameObject.TryGetComponent<Collider>(out collider);
 
             if(mesh != null){
                 mesh.enabled = false;
@@ -99,9 +99,9 @@ public class RgbFilterObject : MonoBehaviour
     {
         if (transform){
             MeshRenderer mesh;
-            BoxCollider collider;
+            Collider collider;
             transform.gameObject.TryGetComponent<MeshRenderer>(out mesh);
-            transform.gameObject.TryGetComponent<BoxCollider>(out collider);
+            transform.gameObject.TryGetComponent<Collider>(out collider);
 
             if(mesh != null){
                 mesh.enabled = true;
