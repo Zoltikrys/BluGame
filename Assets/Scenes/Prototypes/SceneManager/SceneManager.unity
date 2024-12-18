@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024991ffe1c261e478475b96cb969c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstLoad: {fileID: 102900000, guid: afad5b4436d946442941b7ce8f983353, type: 3}
+  FirstLoad: {fileID: 102900000, guid: fa54f22988f96c24390a1df4a0dfcff4, type: 3}
   CurrentScene: {fileID: 0}
   CurrentCamera: {fileID: 0}
   RequestedSpawnPoint: 1
@@ -205,6 +205,12 @@ MonoBehaviour:
     scene: {fileID: 0}
     SpawnPoint: 0
     RoomID: 0
+    PlayerInfo:
+      HP: 0
+      RGB_GoggleState: 0
+  <PlayerInfo>k__BackingField:
+    HP: 0
+    RGB_GoggleState: 0
 --- !u!4 &868272233
 Transform:
   m_ObjectHideFlags: 0

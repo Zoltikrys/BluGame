@@ -1863,13 +1863,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConveyorBeltPrototype (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4646006316021075901, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
+      propertyPath: direction.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646006316021075901, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
+      propertyPath: direction.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5025284751601860975, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.57
       objectReference: {fileID: 0}
     - target: {fileID: 5025284751601860975, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.79
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5025284751601860975, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4486,6 +4494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneToLoad: {fileID: 102900000, guid: 2d87cfa1cf2532b4bab4cbbf3f89d79a, type: 3}
   IndexOfSpawnPointInNextScene: 2
+  SceneID: 0
 --- !u!1 &848003468
 GameObject:
   m_ObjectHideFlags: 0
@@ -7047,6 +7056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneToLoad: {fileID: 102900000, guid: 2d87cfa1cf2532b4bab4cbbf3f89d79a, type: 3}
   IndexOfSpawnPointInNextScene: 1
+  SceneID: 0
 --- !u!1 &1516357936
 GameObject:
   m_ObjectHideFlags: 0

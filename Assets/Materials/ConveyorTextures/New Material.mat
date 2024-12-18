@@ -23,6 +23,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlbedoTex:
+        m_Texture: {fileID: 2800000, guid: 81fa430bc1ef173478a1c33a5f726f84, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 0bc483f13eb4b084cba83cb27bba66a8, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -47,6 +51,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _LightRamp:
+        m_Texture: {fileID: 2800000, guid: 341d1c0e64d4ec244840a7cb6f57a8dd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 81fa430bc1ef173478a1c33a5f726f84, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -56,6 +64,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 0bc483f13eb4b084cba83cb27bba66a8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -81,6 +93,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - FRESNEL: 1
     - _AmbientStrength: 0.25
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -109,6 +122,7 @@ Material:
     - _RimAlpha: 0.066
     - _RimDropOff: 0
     - _RimPower: 0.083
+    - _RimStrength: 0.25
     - _Smoothness: 1000
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -125,6 +139,7 @@ Material:
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Tint: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7495586115918575712
 MonoBehaviour:
