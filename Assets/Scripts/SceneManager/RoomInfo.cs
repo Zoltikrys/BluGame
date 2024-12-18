@@ -1,6 +1,4 @@
-
-using System.Collections.Generic;
-using UnityEngine.Pool;
+using UnityEngine;
 
 public struct RoomInfo{
     public int RoomId;
@@ -15,9 +13,13 @@ public struct RoomInfo{
 public struct TrackedValues{
     public bool IsDead;
     public bool IsRespawnable;
+    public Vector3 Position;
+    public bool isPositionTracked;
 
-    public TrackedValues(bool isDead, bool isRespawnable){
+    public TrackedValues(bool isDead, bool isRespawnable, Vector3 position, bool positionTracked){
         IsDead = isDead;
         IsRespawnable = isRespawnable;
+        Position = position;
+        isPositionTracked = positionTracked;
     }
 }
