@@ -28,7 +28,9 @@ public class SceneManager : MonoBehaviour
 
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
-        if(FirstLoad)LoadScene(FirstLoad);
+        if(FirstLoad) {
+            RequestLoadScene(FirstLoad, 0, 0);
+        }
         else {
             Debug.LogError("No Scene given to load first. Please add a scene to load initially.");
             Application.Quit();
@@ -47,7 +49,8 @@ public class SceneManager : MonoBehaviour
 
     public void RequestLoadScene(SceneAsset scene, uint id, uint requestedSpawnpoint){
         LockPlayer();
-        StateManager.StorePlayerInfo(Player);
+        if(Player) StateManager.StorePlayerInfo(Player);
+        else StateManager.StorePlayerInfo(1, false);
         RequestedSpawnPoint = requestedSpawnpoint;
         RoomID = id;
 
@@ -56,6 +59,7 @@ public class SceneManager : MonoBehaviour
     }
 
     public void Respawn(){
+        StateManager.SetPlayerState(Player);
         RequestLoadScene(StateManager.CurrentCheckPoint.scene, StateManager.CurrentCheckPoint.RoomID, StateManager.CurrentCheckPoint.SpawnPoint);
     }
 
@@ -140,9 +144,15 @@ public class SceneManager : MonoBehaviour
                 newSpawnPoint = SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).transform.gameObject;
                 CheckPointable a;
                 if(newSpawnPoint.TryGetComponent<CheckPointable>(out a)) {
-                    if(a.isCheckpoint) StateManager.SetCheckpoint(scene, RoomID, RequestedSpawnPoint);
+                    if(a.isCheckpoint){
+                        StateManager.SetCheckpoint(scene, RoomID, RequestedSpawnPoint);
+                        StateManager.SetPlayerState(Player);
+                    }
                     
-                }else if(StateManager.CurrentCheckPoint.scene == null) StateManager.SetCheckpoint(scene, RoomID, RequestedSpawnPoint);
+                }else if(StateManager.CurrentCheckPoint.scene == null){
+                    StateManager.SetCheckpoint(scene, RoomID, RequestedSpawnPoint);
+                    StateManager.SetPlayerState(Player);
+                }
             }
             else Debug.LogWarning($"Could not find spawn point {RequestedSpawnPoint}. Setting Player to {new Vector3()}");
         } 

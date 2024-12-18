@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class StateManager : MonoBehaviour
 {
     private Dictionary<uint, RoomInfo> StateTracker = new Dictionary<uint, RoomInfo>();
-    public Dictionary<string, int> roomStates = new Dictionary<string, int>();
     [field: SerializeField] public Checkpoint CurrentCheckPoint { get; set; }
 
     [field: SerializeField] public PlayerInfo PlayerInfo {get; set;}
@@ -18,6 +17,7 @@ public class StateManager : MonoBehaviour
     }
 
     public void SetRoomState(Scene scene, uint roomID){
+        // TODO
         Debug.Log("Setting room state");
         if(StateTracker.ContainsKey(roomID)){
             
@@ -34,7 +34,7 @@ public class StateManager : MonoBehaviour
 
     public void SetCheckpoint(Scene scene, uint roomId, uint requestedSpawnPoint)
     {
-        CurrentCheckPoint = new Checkpoint(scene, roomId, requestedSpawnPoint);
+        CurrentCheckPoint = new Checkpoint(scene, roomId, requestedSpawnPoint, new PlayerInfo(PlayerInfo.HP, PlayerInfo.RGB_GoggleState));
     }
 
     public void SetPlayerState(GameObject player)
@@ -51,7 +51,11 @@ public class StateManager : MonoBehaviour
         }
     }
 
-    internal void StorePlayerInfo(GameObject player)
+
+    public void StorePlayerInfo(int hp, bool goggleState){
+        PlayerInfo = new PlayerInfo(hp, goggleState);
+    }
+    public void StorePlayerInfo(GameObject player)
     {
         PlayerInfo = new PlayerInfo(player.GetComponent<HealthManager>().b_Health, player.GetComponent<RgbGoggles>().isActiveAndEnabled);
     }
