@@ -54,8 +54,8 @@ public class SceneManager : MonoBehaviour
         RequestedSpawnPoint = requestedSpawnpoint;
         RoomID = id;
 
-        if(CurrentCamera) CurrentCamera.GetComponent<CameraController>().StartCameraTransitionEffect(CAMERA_EFFECTS.LEAVE_ROOM, () => LoadScene(scene));
-        else LoadScene(scene);
+        //if(CurrentCamera) //CurrentCamera.GetComponent<CameraController>().StartCameraTransitionEffect(CAMERA_EFFECTS.LEAVE_ROOM, () => LoadScene(scene));
+        LoadScene(scene);
     }
 
     public void Respawn(){
@@ -171,9 +171,9 @@ public class SceneManager : MonoBehaviour
             if(obj.CompareTag("MainCamera")){
                 Debug.Log("Found Camera");
                 CurrentCamera = obj.GetComponent<Camera>();
-                CameraController camController = CurrentCamera.GetComponent<CameraController>();
-                camController.WeightedFocalPoints.Add(new WeightedFocalPoint(Player, 1.0f));
-                camController.StartCameraTransitionEffect(CAMERA_EFFECTS.ENTER_ROOM, () => {});
+                // CameraController camController = CurrentCamera.GetComponent<CameraController>();
+                // camController.WeightedFocalPoints.Add(new WeightedFocalPoint(Player, 1.0f));
+                // camController.StartCameraTransitionEffect(CAMERA_EFFECTS.ENTER_ROOM, () => {});
                 break;
             }
         }
