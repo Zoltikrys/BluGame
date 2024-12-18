@@ -18,6 +18,7 @@ public class StateManager : MonoBehaviour
     }
 
     public void SetRoomState(Scene scene, uint roomID){
+        Debug.Log("Setting room state");
         if(StateTracker.ContainsKey(roomID)){
             
         }

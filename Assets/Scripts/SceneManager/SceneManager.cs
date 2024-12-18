@@ -141,7 +141,8 @@ public class SceneManager : MonoBehaviour
                 CheckPointable a;
                 if(newSpawnPoint.TryGetComponent<CheckPointable>(out a)) {
                     if(a.isCheckpoint) StateManager.SetCheckpoint(scene, RoomID, RequestedSpawnPoint);
-                }
+                    
+                }else if(StateManager.CurrentCheckPoint.scene == null) StateManager.SetCheckpoint(scene, RoomID, RequestedSpawnPoint);
             }
             else Debug.LogWarning($"Could not find spawn point {RequestedSpawnPoint}. Setting Player to {new Vector3()}");
         } 
