@@ -51,7 +51,7 @@ public class HealthManager : MonoBehaviour
         Debug.Log(b_Health);
         damageBool = false;
 
-        StartCoroutine(EFlash());
+        //StartCoroutine(EFlash());
 
         if (b_Health <= 0)
         {

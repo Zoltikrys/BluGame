@@ -39,7 +39,7 @@ public class PressurePlate : MonoBehaviour
         if (renderer != null) {
             renderer.material.color = Color.blue;
         }
-
+        Debug.Log("trying to do it");
         triggerEventOne?.Invoke();
     }
 

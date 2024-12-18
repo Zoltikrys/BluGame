@@ -21,10 +21,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material
-  m_Shader: {fileID: -6465566751694194690, guid: a8620047d32b9c84e86f34e6c433a4bb, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 8e8901e508048a24cbb585e81d6c6a75, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - FRESNEL_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -36,6 +37,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlbedoTex:
+        m_Texture: {fileID: 2800000, guid: 83a9e60a122c5db4a8dd4df0cc4b9659, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 43422582e5cf41c459a60abe3a2ae2bf, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -70,6 +75,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmmisTex:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightRamp:
+        m_Texture: {fileID: 2800000, guid: 341d1c0e64d4ec244840a7cb6f57a8dd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -113,7 +122,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 2800000, guid: 601b1486e535a5b4b8b9711bac13eea0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3337a3bb8202b8f42850957aa6a49a8c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTexture:
@@ -170,6 +179,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - FRESNEL: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _AmbientStrength: 0.25
@@ -220,6 +230,7 @@ Material:
     - _RimAlpha: 0
     - _RimDropOff: 0
     - _RimPower: 0
+    - _RimStrength: 0.25
     - _SampleGI: 0
     - _Smoothness: 994.62
     - _Smoothness0: 0.5
@@ -246,4 +257,5 @@ Material:
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Tint: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
