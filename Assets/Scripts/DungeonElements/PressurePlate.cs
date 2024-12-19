@@ -14,26 +14,16 @@ public class PressurePlate : MonoBehaviour
 
     public BoxCollider BoxCollider;
 
+    [SerializeField] private Animator anim;
+
+    public void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        //if(other.tag == "SmallMagnet")
-        //{
-        //    float distance = Vector3.Distance(transform.position, other.transform.position);
-        //    //Debug.Log("Distance: " + distance);
-
-        //    if(distance < 0.2f)
-        //    {
-        //        other.tag = "Untagged";
-        //        Rigidbody box = GetComponent<Rigidbody>();
-        //        if(box != null)
-        //        {
-                    
-        //            box.isKinematic = true;
-        //        }
-
-        //        //Destroy(this);
-        //    }
-        //}
+        anim.Play("Press");
 
         MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
         if (renderer != null) {
@@ -45,6 +35,8 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        anim.Play("Release");
+
         MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
         if (renderer != null) {
              renderer.material.color = Color.red;

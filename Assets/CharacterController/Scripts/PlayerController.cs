@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Makes the player jump
-        if (locomotionInput.JumpPressed && groundedPlayer)
+        if ((locomotionInput.JumpPressed || Input.GetButtonDown("Fire1")) && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
         }

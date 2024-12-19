@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class MagnetAbility : MonoBehaviour
 {
@@ -31,7 +33,7 @@ public class MagnetAbility : MonoBehaviour
     void Update()
     {
         // Toggle magnet ability
-        if (Input.GetKeyDown(KeyCode.M)) // Change "M" to your preferred key
+        if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Fire2")) // Change "M" to your preferred key
         {
             isMagnetActive = !isMagnetActive;
 

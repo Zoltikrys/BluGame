@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2269962996790488932}
   - component: {fileID: 5815112477307389719}
   - component: {fileID: 1871511807889649414}
+  - component: {fileID: 2987715966282467166}
   m_Layer: 11
   m_Name: PressurePlatePrototype
   m_TagString: Untagged
@@ -77,6 +78,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   BoxCollider: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!65 &1871511807889649414
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -98,6 +100,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.4839487, y: 0.21131355, z: 2.024947}
   m_Center: {x: 0.014737606, y: 0.5330384, z: -0.029254556}
+--- !u!95 &2987715966282467166
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6928088814824663156}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de6c17251ee62a44fb2d3f5b44e723a1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &2260920425188541350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218,6 +241,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 30835c804a17e7645a5be019867ad9f6, type: 2}
+    - target: {fileID: 2029525369266837727, guid: c09d0126e23f15941a6a71a216e189cd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029525369266837727, guid: c09d0126e23f15941a6a71a216e189cd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.000000001346312
+      objectReference: {fileID: 0}
     - target: {fileID: 2586607309129781981, guid: c09d0126e23f15941a6a71a216e189cd, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
