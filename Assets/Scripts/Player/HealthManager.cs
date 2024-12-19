@@ -90,15 +90,15 @@ public class HealthManager : MonoBehaviour
 
     void FlashStop()
     {
-        material.SetColor("_Tint", originalColor);
+        material.SetColor("_Tint", Color.white);
     }
 
     IEnumerator EFlash()
     {
         material.SetColor("_Tint", Color.red);
         yield return new WaitForSeconds(flashTime);
-        renderer.material.color = originalColor;
+        material.SetColor("_Tint", originalColor);
     }
-    
+
 
 }
