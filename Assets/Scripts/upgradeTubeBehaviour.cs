@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class upgradeTubeBehaviour : MonoBehaviour
 {
     [SerializeField] private int reqPower;
     [SerializeField] public int powerSources;
     [SerializeField] private GameObject goggles;
+    [SerializeField] private GameObject player;
 
     [SerializeField] public Animator anim;
 
@@ -19,6 +21,8 @@ public class upgradeTubeBehaviour : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         goggles = GameObject.Find("Goggles");
+        player = GameObject.Find("Player");
+        
     }
 
     // Update is called once per frame
@@ -43,7 +47,7 @@ public class upgradeTubeBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.name == "Player") {
-            
+            GetComponent<CapsuleCollider>().enabled = false; // turn off collider so it triggers once per room
             Upgrade();
         }
     }
@@ -52,12 +56,12 @@ public class upgradeTubeBehaviour : MonoBehaviour
     {
         if (isGoggles) {
             CloseDoor();
-            GameObject player = GameObject.Find("Player");
-            player.GetComponent<RgbGoggles>().enabled = true;
-            goggles.SetActive(true);
-            StartCoroutine(Cooldown(2f));
-            anim.SetTrigger("Upgraded");
-            //OpenDoor();
+            player.GetComponent<PlayerController>().LockMovement();
+            player.GetComponent<RgbGoggles>().GogglesActivated = true;
+            //goggles.SetActive(true);   Was this for the top of the upgrade tube?
+
+            StartCoroutine(Cooldown(2f, OpenDoor));
+            //anim.SetTrigger("Upgraded");
         }
     }
 
@@ -65,6 +69,7 @@ public class upgradeTubeBehaviour : MonoBehaviour
     {
         anim.StopPlayback();
         anim.Play("openTube");
+        player.GetComponent<PlayerController>().UnlockMovement();
     }
 
     public void CloseDoor()
@@ -73,8 +78,9 @@ public class upgradeTubeBehaviour : MonoBehaviour
         anim.Play("closeTube");
     }
 
-    IEnumerator Cooldown(float waitTime)
+    IEnumerator Cooldown(float waitTime, Action callback)
     {
         yield return new WaitForSeconds(waitTime);
+        callback?.Invoke();
     }
 }

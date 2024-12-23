@@ -66,13 +66,13 @@ public class SceneManager : MonoBehaviour
     private void LockPlayer()
     {
         //TODO when we have new character controller
-        if(Player) Player.GetComponent<CharacterController>();
+        if(Player) Player.GetComponent<PlayerController>().LockMovement();
     }
 
     private void UnlockPlayer()
     {
         //TODO when we have new character controller
-        if(Player) Player.GetComponent<CharacterController>();
+        if(Player) Player.GetComponent<PlayerController>().UnlockMovement();
     }
 
 

@@ -46,7 +46,7 @@ public class StateManager : MonoBehaviour
             player.TryGetComponent<RgbGoggles>(out currentPlayerGoggles);
 
             if(currentPlayerHealth) currentPlayerHealth.b_Health = PlayerInfo.HP;
-            if(currentPlayerGoggles) currentPlayerGoggles.enabled = PlayerInfo.RGB_GoggleState;
+            if(currentPlayerGoggles) currentPlayerGoggles.GogglesActivated = PlayerInfo.RGB_GoggleState;
             
         }
     }
@@ -57,7 +57,7 @@ public class StateManager : MonoBehaviour
     }
     public void StorePlayerInfo(GameObject player)
     {
-        PlayerInfo = new PlayerInfo(player.GetComponent<HealthManager>().b_Health, player.GetComponent<RgbGoggles>().isActiveAndEnabled);
+        PlayerInfo = new PlayerInfo(player.GetComponent<HealthManager>().b_Health, player.GetComponent<RgbGoggles>().GogglesActivated);
     }
 }
 

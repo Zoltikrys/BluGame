@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     public bool isMagnetized;
+    private bool canMove = true;
 
     public float playerSpeed = 2.0f;
     public float jumpHeight = 1.0f;
@@ -23,9 +24,18 @@ public class PlayerController : MonoBehaviour
         locomotionInput = GetComponent<PlayerLocomotionInput>();
     }
 
+    public void LockMovement(){
+        canMove = false;
+    }
+
+    public void UnlockMovement(){
+        canMove = true;
+    }
+
 
     void Update()
-    {
+    {   
+
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
@@ -39,21 +49,21 @@ public class PlayerController : MonoBehaviour
         }
 
 
+        if(canMove){ // Block input if player cannot move
+            Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            Vector3 movementDirection = new Vector3(locomotionInput.MovementInput.x, 0f, locomotionInput.MovementInput.y).normalized;
+            controller.Move(move * Time.deltaTime * playerSpeed);
 
+            if (move != Vector3.zero)
+            {
+                gameObject.transform.forward = move;
+            }
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        Vector3 movementDirection = new Vector3(locomotionInput.MovementInput.x, 0f, locomotionInput.MovementInput.y).normalized;
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.forward = move;
-        }
-
-        // Makes the player jump
-        if ((locomotionInput.JumpPressed || Input.GetButtonDown("Fire1")) && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+            // Makes the player jump
+            if ((locomotionInput.JumpPressed || Input.GetButtonDown("Fire1")) && groundedPlayer)
+            {
+                playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+            }
         }
 
         playerVelocity.y += gravity * Time.deltaTime;

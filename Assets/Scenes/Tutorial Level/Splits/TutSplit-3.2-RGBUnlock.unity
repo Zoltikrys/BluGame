@@ -6746,7 +6746,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3647002279214618310, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1464935671355033948, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_Name
@@ -8687,10 +8687,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.2
   m_Height: 4.0791926
   m_Direction: 2
-  m_Center: {x: -0.015657729, y: -0.0000008367785, z: 2.5580633}
+  m_Center: {x: 0, y: 0.54, z: 2}
 --- !u!114 &1640423916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8706,6 +8706,7 @@ MonoBehaviour:
   reqPower: 1
   powerSources: 0
   goggles: {fileID: 0}
+  player: {fileID: 0}
   anim: {fileID: 1640423914}
   isGoggles: 1
   isMagnet: 0

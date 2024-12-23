@@ -48,6 +48,14 @@ public class RgbGoggles : MonoBehaviour
         SetFilterObjects();
     }
 
+    void Activate(){
+        GogglesActivated = true;
+    }
+
+    void Deactivate(){
+        GogglesActivated = false;
+    }
+
     void Update()
     {
         if(colorFilter == null) {
@@ -99,6 +107,9 @@ public class RgbGoggles : MonoBehaviour
     }
 
     void HandleKeypress(){
+        if(!GogglesActivated) return;
+        
+        // THESE KEYBINDS MUST CHANGE FOR SWITCH
         if(Input.GetKeyUp(KeyCode.R)){ 
             colorFlags.r = !colorFlags.r;
             if(colorFlags.r){
