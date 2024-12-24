@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6634369268908500646}
   - component: {fileID: 1479766441217421866}
   - component: {fileID: 4255190177343882042}
-  - component: {fileID: 6142877506885641153}
+  - component: {fileID: 8295214552630636827}
   - component: {fileID: -1123812824170141987}
   m_Layer: 0
   m_Name: FlyingEnemy 1
@@ -46,15 +46,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6224600381772812662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a3a1ccab5a308547bae9d1bea5958fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 10f6201088fd00f44b2603b933552978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
+  CurrentState: 0
+  playerSeen: 0
+  speed: 10
+  attackCooldown: 3
   target: {fileID: 0}
   patrolPoints: []
-  playerSeen: 0
   forwardBoost: 3
-  speed: 5
   timeToTarget: 5
 --- !u!54 &1479766441217421866
 Rigidbody:
@@ -104,7 +105,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.38
   m_Center: {x: 0, y: -0.12, z: 0}
---- !u!114 &6142877506885641153
+--- !u!114 &8295214552630636827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,7 +114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6224600381772812662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2e536fb936b8f542b5febf0013321a0, type: 3}
+  m_Script: {fileID: 11500000, guid: f57d3bdab70719a4eaa2fc0f359b8f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
@@ -139,7 +140,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doNotTrack: 0
-  uniqueID: c93712f2-6b61-411c-be89-b3168105b4da
+  <TrackedValues>k__BackingField:
+    IsDead: 0
+    IsRespawnable: 0
+    Position: {x: 0, y: 0, z: 0}
+    isPositionTracked: 0
+  <UniqueID>k__BackingField: 0f749d1829f86a647a41563e9f18a281
 --- !u!1001 &6889621749236400557
 PrefabInstance:
   m_ObjectHideFlags: 0

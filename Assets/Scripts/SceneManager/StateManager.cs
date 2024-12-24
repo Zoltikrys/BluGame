@@ -7,28 +7,29 @@ using UnityEngine.SceneManagement;
 
 public class StateManager : MonoBehaviour
 {
-    private Dictionary<uint, RoomInfo> StateTracker = new Dictionary<uint, RoomInfo>();
+    private Dictionary<string, Dictionary<GUID, TrackedValues>> StateTracker = new Dictionary<string, Dictionary<GUID, TrackedValues>>();
     [field: SerializeField] public Checkpoint CurrentCheckPoint { get; set; }
-
     [field: SerializeField] public PlayerInfo PlayerInfo {get; set;}
 
     void Start(){
         DontDestroyOnLoad(this);
     }
 
-    public void SetRoomState(Scene scene, uint roomID){
+    public void SetRoomState(Scene scene){
         // TODO
         Debug.Log("Setting room state");
-        if(StateTracker.ContainsKey(roomID)){
+        var trackedComponents = scene.GetRootGameObjects()
+                                .SelectMany(g => g.GetComponentsInChildren<Trackable>(true))
+                                .ToList();
+        if(StateTracker.ContainsKey(scene.name)){
             
         }
-        var trackedComponenets = scene.GetRootGameObjects()
-                                    .SelectMany(s => scene.GetRootGameObjects())
-                                    .Where(g => g.activeInHierarchy)
-                                    .SelectMany(g => g.GetComponents<Trackable>())
-                                    .ToList();
-        foreach(var trackedComponent in trackedComponenets){
-            //Debug.Log($"TRACKED OBJECT {trackedComponent.name} found tracked");
+        else{
+
+        }
+
+        foreach(var trackedComponent in trackedComponents){
+            Debug.Log($"TRACKED OBJECT {trackedComponent.UniqueID} found tracked");
         }
     }
 

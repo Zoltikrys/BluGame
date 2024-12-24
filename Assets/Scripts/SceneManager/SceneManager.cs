@@ -94,7 +94,7 @@ public class SceneManager : MonoBehaviour
         Debug.Log($"Loaded scene: {scene.name}");
         Player = GameObject.FindGameObjectWithTag("Player");
 
-        StateManager.SetRoomState(scene, RoomID);
+        StateManager.SetRoomState(scene);
         StateManager.SetPlayerState(Player);
 
         SetSpawn(scene);

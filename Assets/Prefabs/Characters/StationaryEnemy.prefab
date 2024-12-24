@@ -490,14 +490,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6199195068510868833}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f1dab5b7fc5c646b114b2476310865, type: 3}
+  m_Script: {fileID: 11500000, guid: 964884f9ec9535045bd1838e371208f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  rotateBody: {fileID: 6713671280161271693}
-  targetTag: 0
+  CurrentState: 0
+  playerSeen: 0
+  speed: 10
   attackCooldown: 3
-  _currentState: 0
+  target: {fileID: 0}
+  patrolPoints: []
 --- !u!136 &8720493338588979095
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -24,7 +24,7 @@ public class batteryCylinderBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.name == "BatteryPrefab") {
-            Debug.Log("print");
+            Debug.Log("Battery accepted");
             Destroy(other.gameObject);
             battery.SetActive(true);
             anim.StopPlayback();

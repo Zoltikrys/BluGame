@@ -5578,6 +5578,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &932195368 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1351291917624807958, guid: aa90736d8486b5544940c205dafb868f, type: 3}
+  m_PrefabInstance: {fileID: 5022351343483401797}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &932195369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932195368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab72b25440b748b45bc536e09da09f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  battery: {fileID: 940991607}
+  powerPurpose: {fileID: 1640423909}
 --- !u!1 &940991607
 GameObject:
   m_ObjectHideFlags: 0
@@ -5996,7 +6016,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 963142335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4097c9a73894ea348ace1adb7c173bf9, type: 3}
+  m_Script: {fileID: 11500000, guid: ab72b25440b748b45bc536e09da09f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
@@ -6746,6 +6766,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3647002279214618310, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3647002279214618310, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <GogglesActivated>k__BackingField
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1464935671355033948, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
@@ -7609,6 +7633,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1400958525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1464935671355033948, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+  m_PrefabInstance: {fileID: 1119673341}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1406062441
 Mesh:
   m_ObjectHideFlags: 0
@@ -8700,14 +8729,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1640423909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f46e2537cfb410f4eb0cea745f08b395, type: 3}
+  m_Script: {fileID: 11500000, guid: d2b4ee85fb670a6488656126c558835d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   reqPower: 1
   powerSources: 0
   goggles: {fileID: 0}
-  player: {fileID: 0}
-  anim: {fileID: 1640423914}
+  player: {fileID: 1400958525}
+  anim: {fileID: 0}
   isGoggles: 1
   isMagnet: 0
 --- !u!1 &1640769934
@@ -9167,6 +9196,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -346244200705801105, guid: 65d71bb1a9dbcf74f802cb407707464b, type: 3}
+      propertyPath: m_Name
+      value: RightDoor
+      objectReference: {fileID: 0}
     - target: {fileID: -90668064151305992, guid: 65d71bb1a9dbcf74f802cb407707464b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -9179,6 +9212,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 718bc5c3c0e9ea14ab581e8973030885, type: 2}
+    - target: {fileID: 2958219597199096320, guid: 65d71bb1a9dbcf74f802cb407707464b, type: 3}
+      propertyPath: m_Name
+      value: LeftDoor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10284,13 +10321,17 @@ PrefabInstance:
       propertyPath: powerPurpose
       value: 
       objectReference: {fileID: 1640423909}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3028010194231395052, guid: aa90736d8486b5544940c205dafb868f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 215234340329946355, guid: aa90736d8486b5544940c205dafb868f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1822629826}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1351291917624807958, guid: aa90736d8486b5544940c205dafb868f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 932195369}
   m_SourcePrefab: {fileID: 100100000, guid: aa90736d8486b5544940c205dafb868f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

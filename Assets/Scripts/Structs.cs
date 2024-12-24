@@ -18,6 +18,19 @@ public struct TransformData{
         rotation = transform.rotation;
         scale = transform.localScale;
     }
+}
 
+[Serializable]
+public struct TrackedValues{
+    [SerializeField] public bool IsDead;
+    [SerializeField] public bool IsRespawnable;
+    [SerializeField] public Vector3 Position;
+    [SerializeField] public bool isPositionTracked;
 
+    public TrackedValues(bool isDead, bool isRespawnable, Vector3 position, bool positionTracked){
+        IsDead = isDead;
+        IsRespawnable = isRespawnable;
+        Position = position;
+        isPositionTracked = positionTracked;
+    }
 }
