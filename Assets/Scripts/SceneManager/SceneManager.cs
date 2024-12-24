@@ -51,6 +51,9 @@ public class SceneManager : MonoBehaviour
         LockPlayer();
         if(Player) StateManager.StorePlayerInfo(Player);
         else StateManager.StorePlayerInfo(1, false);
+
+
+        if(CurrentScene != null) StateManager.SetRoomState(CurrentScene);
         RequestedSpawnPoint = requestedSpawnpoint;
         RoomID = id;
 
@@ -60,18 +63,17 @@ public class SceneManager : MonoBehaviour
 
     public void Respawn(){
         StateManager.SetPlayerState(Player);
+        StateManager.RestoreRoomState();
         RequestLoadScene(StateManager.CurrentCheckPoint.scene, StateManager.CurrentCheckPoint.RoomID, StateManager.CurrentCheckPoint.SpawnPoint);
     }
 
     private void LockPlayer()
     {
-        //TODO when we have new character controller
         if(Player) Player.GetComponent<PlayerController>().LockMovement();
     }
 
     private void UnlockPlayer()
     {
-        //TODO when we have new character controller
         if(Player) Player.GetComponent<PlayerController>().UnlockMovement();
     }
 

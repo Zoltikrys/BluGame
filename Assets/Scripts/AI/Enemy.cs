@@ -23,7 +23,6 @@ public abstract class Enemy : MonoBehaviour {
     protected virtual void Start(){
         target = GameObject.Find("Player").transform;
         playerPos = target.position;
-
     }
 
     protected virtual void Update()

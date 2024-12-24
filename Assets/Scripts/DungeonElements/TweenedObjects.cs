@@ -9,16 +9,12 @@ public class TweenedObject : MonoBehaviour{
     public TweenType type;
     public float DelayBeforeStarting = 1.0f;
     public int tweenIndex = 0;
-    private float currentTime;
-    private float tweenStartTime;
     public bool paused = false;
 
     public bool ForwardsAndBackwards = false;
 
 
     void Start(){
-        currentTime = Time.time;
-        tweenStartTime = Time.time;
         prevPosition = new TweenDestination();
         prevPosition.WaitAtDestinationTime = DelayBeforeStarting;
         prevPosition.PositionToHit = transform.position;
@@ -104,8 +100,3 @@ public class TweenDestination{
     [field:SerializeField] public Quaternion RotationToHit {get; set;}
 }
 
-public enum TweenType{
-    FORWARDS_ONLY,
-    BACKWARDS_ONLY,
-    FORWARDS_AND_BACKWARDS
-}

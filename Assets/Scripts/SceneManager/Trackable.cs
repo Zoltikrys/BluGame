@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -36,5 +37,10 @@ public class Trackable : MonoBehaviour
     {
         GUID = UnityEditor.GUID.Generate();
         UniqueID = GUID.ToString();
+    }
+
+    public void SetState(TrackedValues trackedValues)
+    {
+        TrackedValues = trackedValues;
     }
 }

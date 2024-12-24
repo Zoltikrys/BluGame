@@ -1,4 +1,4 @@
-public enum RGBSTATE{  // The order of this is really important.
+public enum RGBSTATE{  // The order of this is really important since its a bitwise operation
     ALL_OFF,
     R,
     G,
@@ -16,3 +16,9 @@ public enum CAMERA_EFFECTS{
 
 [System.Serializable]
 public enum NpcState { Idle, Patrolling, Targeting, Attack, Searching }
+
+public enum TweenType{
+    FORWARDS_ONLY,
+    BACKWARDS_ONLY,
+    FORWARDS_AND_BACKWARDS
+}
