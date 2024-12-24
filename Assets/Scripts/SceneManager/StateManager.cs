@@ -25,7 +25,7 @@ public class StateManager : MonoBehaviour
         var trackedComponenets = scene.GetRootGameObjects()
                                     .SelectMany(s => scene.GetRootGameObjects())
                                     .Where(g => g.activeInHierarchy)
-                                    .SelectMany(g => g.GetComponents<TrackedObject>())
+                                    .SelectMany(g => g.GetComponents<Trackable>())
                                     .ToList();
         foreach(var trackedComponent in trackedComponenets){
             //Debug.Log($"TRACKED OBJECT {trackedComponent.name} found tracked");
@@ -39,7 +39,7 @@ public class StateManager : MonoBehaviour
 
     public void SetPlayerState(GameObject player)
     {
-        if(PlayerInfo != null){
+        if(PlayerInfo != null && player){
             HealthManager currentPlayerHealth;
             RgbGoggles currentPlayerGoggles;
             player.TryGetComponent<HealthManager>(out currentPlayerHealth);
