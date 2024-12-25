@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4255190177343882042}
   - component: {fileID: 8295214552630636827}
   - component: {fileID: -1123812824170141987}
+  - component: {fileID: 4198614521401788000}
   m_Layer: 0
   m_Name: FlyingEnemy 1
   m_TagString: Untagged
@@ -146,6 +147,23 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     isPositionTracked: 0
   <UniqueID>k__BackingField: 0f749d1829f86a647a41563e9f18a281
+--- !u!114 &4198614521401788000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6224600381772812662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c649326cbc669c439b1c212c1ad6a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <b_Health>k__BackingField: 5
+  cooldownTime: 1
+  flashTime: 0
+  renderer: {fileID: 0}
+  material: {fileID: 0}
 --- !u!1001 &6889621749236400557
 PrefabInstance:
   m_ObjectHideFlags: 0

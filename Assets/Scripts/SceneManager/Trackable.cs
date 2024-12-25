@@ -10,7 +10,7 @@ public class Trackable : MonoBehaviour
     [field: SerializeField] public string UniqueID { get; private set; }
 
     private void OnValidate(){
-        // no need for a unique ID to be set. clear current GUID
+        // no need for a unique ID to be setif not tracking. clear current GUID
         if(doNotTrack) {
             UniqueID = string.Empty;
             return;

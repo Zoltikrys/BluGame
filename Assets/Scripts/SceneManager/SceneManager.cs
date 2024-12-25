@@ -63,7 +63,7 @@ public class SceneManager : MonoBehaviour
 
     public void Respawn(){
         StateManager.SetPlayerState(Player);
-        StateManager.RestoreRoomState();
+        //StateManager.RestoreRoomState();
         RequestLoadScene(StateManager.CurrentCheckPoint.scene, StateManager.CurrentCheckPoint.RoomID, StateManager.CurrentCheckPoint.SpawnPoint);
     }
 

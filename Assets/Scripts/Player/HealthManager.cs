@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthManager : MonoBehaviour
@@ -57,7 +55,7 @@ public class HealthManager : MonoBehaviour
 
         if (b_Health <= 0)
         {
-            PlayerDeath();
+            Death();
         }
 
     }
@@ -69,17 +67,23 @@ public class HealthManager : MonoBehaviour
 
     }
 
-    public void PlayerDeath()
+    public void Death()
     {
-        Debug.Log("you died :(");
+        Debug.Log($"{name} died");
         PlayDeathAnimation();
-        SceneManager sceneManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManager>();
-        sceneManager.Respawn();
+        if(CompareTag("Player")){
+            SceneManager sceneManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManager>();
+            sceneManager.Respawn();
+        }
+        else{
+            Destroy(transform.gameObject);
+        }
+
     }
 
     private void PlayDeathAnimation()
     {
-        Debug.LogWarning("No player death animation.");
+        Debug.LogWarning("No death animation.");
     }
 
     void FlashStart()

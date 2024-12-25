@@ -65,11 +65,12 @@ public class FlyingEnemy : Enemy
             hasHit = true;
             HealthManager healthMan = collision.gameObject.GetComponent<HealthManager>(); // damage player
             healthMan.Damage();
+            GetComponent<HealthManager>().Damage();
         }
         else
         {
             Debug.Log("Gonna explode now");
-            Destroy(this.gameObject); // deletes self
+            //Destroy(this.gameObject); // deletes self
         }
 
         // Handle state transitions based on collisions
