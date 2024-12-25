@@ -41,6 +41,28 @@ public class Trackable : MonoBehaviour
 
     public void SetState(TrackedValues trackedValues)
     {
+        if(doNotTrack) return;
         TrackedValues = trackedValues;
+
+        HealthManager healthManager;
+        Transform gameObjectTransform;
+
+        transform.gameObject.TryGetComponent<HealthManager>(out healthManager);
+        transform.gameObject.TryGetComponent<Transform>(out gameObjectTransform);
+
+        if(healthManager){
+            if(TrackedValues.isDeathTracked){
+                if(TrackedValues.HealthStatus.isRespawnable && TrackedValues.HealthStatus.isDead){
+                   healthManager.Respawn();
+                }
+                else if(TrackedValues.HealthStatus.isDead) transform.gameObject.SetActive(false);
+                
+                if(TrackedValues.isHPTracked) healthManager.b_Health = TrackedValues.HealthStatus.HP;
+            }
+        }
+        if(gameObjectTransform){
+            if(TrackedValues.isPositionTracked) gameObjectTransform.position = TrackedValues.Transform.position;
+            if(TrackedValues.isRotationTracked) gameObjectTransform.rotation = TrackedValues.Transform.rotation;
+        }
     }
 }

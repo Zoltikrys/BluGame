@@ -5,6 +5,7 @@ public class HealthManager : MonoBehaviour
 {
     [SerializeField]
     [field: SerializeField] public int b_Health {get; set;} = 0;
+    [field: SerializeField] public int StartingHP {get; set;} = 0;
 
     private bool damageBool = true;
     private bool newState = false;
@@ -102,6 +103,10 @@ public class HealthManager : MonoBehaviour
         material.SetColor("_Tint", Color.red);
         yield return new WaitForSeconds(flashTime);
         material.SetColor("_Tint", originalColor);
+    }
+
+    public void Respawn(){
+        b_Health = StartingHP;
     }
 
 

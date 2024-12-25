@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 
+[Serializable]
 public class TrackedValues{
     [SerializeField] public bool isDeathTracked;
     [SerializeField] public bool isPositionTracked;
@@ -9,7 +11,7 @@ public class TrackedValues{
     [SerializeField] public Transform Transform;
 }
 
-[System.Serializable]
+[Serializable]
 public struct HealthStatus {
     public int HP;
     public bool isRespawnable;
