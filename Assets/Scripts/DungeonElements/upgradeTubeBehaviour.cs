@@ -39,7 +39,7 @@ public class upgradeTubeBehaviour : MonoBehaviour
     public void PowerCheck()
     {
         if (powerSources >= reqPower) {
-            Debug.Log("power check should have worked");
+            Debug.Log($"Powersources ({powerSources}/{reqPower}) in tube");
             Unlock();
         }
     }
@@ -47,6 +47,7 @@ public class upgradeTubeBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.name == "Player") {
+            Debug.Log("Player entered tube");
             GetComponent<CapsuleCollider>().enabled = false; // turn off collider so it triggers once per room
             Upgrade();
         }
@@ -55,6 +56,7 @@ public class upgradeTubeBehaviour : MonoBehaviour
     public void Upgrade()
     {
         if (isGoggles) {
+            Debug.Log("Updagrading");
             CloseDoor();
             player.GetComponent<PlayerController>().LockMovement();
             player.GetComponent<RgbGoggles>().GogglesActivated = true;
@@ -67,6 +69,7 @@ public class upgradeTubeBehaviour : MonoBehaviour
 
     public void OpenDoor()
     {
+        Debug.Log("Opening door");
         anim.StopPlayback();
         anim.Play("openTube");
         player.GetComponent<PlayerController>().UnlockMovement();
