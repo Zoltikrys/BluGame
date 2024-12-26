@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class StateManager : MonoBehaviour
 {
     // public for now so i can see the state changes
-    [field: SerializeField] public Dictionary<string, Dictionary<GUID, TrackedValues>> StateTracker = new Dictionary<string, Dictionary<GUID, TrackedValues>>();
+    [field: SerializeField] public Dictionary<string, Dictionary<string, TrackedValues>> StateTracker = new Dictionary<string, Dictionary<string, TrackedValues>>();
     [field: SerializeField] public Checkpoint CurrentCheckPoint { get; set; }
     [field: SerializeField] public PlayerInfo PlayerInfo {get; set;}    
     [field: SerializeField] private List<StateEntry> displayList = new List<StateEntry>();
@@ -35,22 +35,26 @@ public class StateManager : MonoBehaviour
         SetRoomState(realScene);
     }
 
-    private Dictionary<GUID, TrackedValues> BuildRoomState(List<Trackable> trackedComponents)
+    private Dictionary<string, TrackedValues> BuildRoomState(List<Trackable> trackedComponents)
     {
-        Dictionary<GUID, TrackedValues> RoomState = new Dictionary<GUID, TrackedValues>();
+        Debug.Log("Building room state");
+        Dictionary<string, TrackedValues> RoomState = new Dictionary<string, TrackedValues>();
         foreach(var trackedComponent in trackedComponents){
             if(!trackedComponent.doNotTrack){
-                RoomState.Add(trackedComponent.GUID, trackedComponent.TrackedValues);
+                trackedComponent.PopulateTrackedValues();
+                RoomState.Add(trackedComponent.UniqueID, trackedComponent.TrackedValues);
             }
         }
         return RoomState;
     }
 
-    private void SetGameObjectsState(Dictionary<GUID, TrackedValues> trackedState, List<Trackable> trackedComponents)
+    private void SetGameObjectsState(Dictionary<string, TrackedValues> trackedState, List<Trackable> trackedComponents)
     {
+        Debug.Log("Setting game object state");
         foreach(var trackedComponent in trackedComponents){
-            if(trackedState.ContainsKey(trackedComponent.GUID)){
-                trackedComponent.SetState(trackedState[trackedComponent.GUID]);
+            if(trackedState.ContainsKey(trackedComponent.UniqueID)){
+                trackedComponent.PopulateTrackedValues();
+                trackedComponent.SetState(trackedState[trackedComponent.UniqueID]);
             }
         }
     }

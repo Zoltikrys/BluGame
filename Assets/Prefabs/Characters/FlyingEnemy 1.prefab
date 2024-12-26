@@ -142,10 +142,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doNotTrack: 0
   <TrackedValues>k__BackingField:
-    IsDead: 0
-    IsRespawnable: 0
-    Position: {x: 0, y: 0, z: 0}
+    isDeathTracked: 0
     isPositionTracked: 0
+    isRotationTracked: 0
+    isHPTracked: 0
+    HealthStatus:
+      HP: 0
+      isRespawnable: 0
+      isDead: 0
+    Transform: {fileID: 0}
   <UniqueID>k__BackingField: 0f749d1829f86a647a41563e9f18a281
 --- !u!114 &4198614521401788000
 MonoBehaviour:
@@ -159,7 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c649326cbc669c439b1c212c1ad6a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <b_Health>k__BackingField: 5
+  <b_Health>k__BackingField: 4
+  <StartingHP>k__BackingField: 4
   cooldownTime: 1
   flashTime: 0
   renderer: {fileID: 0}

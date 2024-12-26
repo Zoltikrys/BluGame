@@ -1,4 +1,3 @@
-using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,6 +17,10 @@ public class Trackable : MonoBehaviour
         
         // otherwise set GUID
         if(string.IsNullOrEmpty(UniqueID) || IsDuplicate()) GenerateID();
+    }
+
+    void Start(){
+        Debug.Log($"GUID: {GUID.ToString()}");
     }
 
     private bool IsDuplicate()
@@ -64,5 +67,29 @@ public class Trackable : MonoBehaviour
             if(TrackedValues.isPositionTracked) gameObjectTransform.position = TrackedValues.Transform.position;
             if(TrackedValues.isRotationTracked) gameObjectTransform.rotation = TrackedValues.Transform.rotation;
         }
+    }
+
+    public void PopulateTrackedValues(){
+
+        if(doNotTrack) return;
+        
+        HealthManager healthManager;
+        Transform gameObjectTransform;
+
+        transform.gameObject.TryGetComponent<HealthManager>(out healthManager);
+        transform.gameObject.TryGetComponent<Transform>(out gameObjectTransform);
+
+        if(healthManager){
+            if(TrackedValues.isDeathTracked){
+                if(healthManager.b_Health <= 0) TrackedValues.HealthStatus.isDead = true;
+            }
+            if(TrackedValues.isHPTracked) TrackedValues.HealthStatus.HP = healthManager.b_Health;
+        }
+
+        if(gameObjectTransform){
+            if(TrackedValues.isPositionTracked) TrackedValues.Transform.position = gameObjectTransform.position;
+            if(TrackedValues.isRotationTracked) TrackedValues.Transform.rotation = gameObjectTransform.rotation;
+        }
+
     }
 }

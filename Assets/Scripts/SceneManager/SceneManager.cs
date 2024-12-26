@@ -113,7 +113,6 @@ public class SceneManager : MonoBehaviour
     private void SetPlayer(Vector3 position, Quaternion rotation)
     {
         if(Player){ 
-            // TODO: Update this when we change the character controller
             Debug.Log($"Setting position to: {position}");
             CharacterController controller = Player.GetComponent<CharacterController>();
             controller.enabled = false;

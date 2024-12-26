@@ -77,7 +77,7 @@ public class HealthManager : MonoBehaviour
             sceneManager.Respawn();
         }
         else{
-            Destroy(transform.gameObject);
+            transform.gameObject.SetActive(false);
         }
 
     }
