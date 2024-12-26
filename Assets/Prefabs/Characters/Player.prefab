@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3395225010870587025}
   - component: {fileID: 1739906687256751477}
   - component: {fileID: -3647002279214618310}
+  - component: {fileID: 645921805136267893}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -158,6 +159,23 @@ MonoBehaviour:
   <PrevGoggleState>k__BackingField: 7
   DebugText: {fileID: 0}
   FilterObjects: []
+--- !u!114 &645921805136267893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464935671355033948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0fe942b8da13e54ea038dae19147a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentBatteryCharge: 0
+  MaxCharge: 100
+  MinCharge: 0
+  AbsoluteMaximumBatteryChargeIncrease: 200
+  AbsoluteMinimumBatteryChargeDecrease: 50
 --- !u!1001 &4565890587019788149
 PrefabInstance:
   m_ObjectHideFlags: 0

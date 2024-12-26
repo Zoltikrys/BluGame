@@ -19,10 +19,6 @@ public class Trackable : MonoBehaviour
         if(string.IsNullOrEmpty(UniqueID) || IsDuplicate()) GenerateID();
     }
 
-    void Start(){
-        Debug.Log($"GUID: {GUID.ToString()}");
-    }
-
     private bool IsDuplicate()
     {
         bool duplicateFound = false;
