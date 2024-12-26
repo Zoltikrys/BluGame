@@ -58,6 +58,10 @@ MonoBehaviour:
   patrolPoints: []
   forwardBoost: 3
   timeToTarget: 5
+  TargettingColour: {r: 0.8018868, g: 0.61777973, b: 0.23829654, a: 0}
+  PatrollingColour: {r: 0.29428852, g: 0.8301887, b: 0.21537916, a: 0}
+  AttackingColour: {r: 0.7830189, g: 0.003693494, b: 0.003693494, a: 0}
+  light: {fileID: 8025767756965549514}
 --- !u!54 &1479766441217421866
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -150,7 +154,8 @@ MonoBehaviour:
       HP: 0
       isRespawnable: 0
       isDead: 0
-    Transform: {fileID: 0}
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
   <UniqueID>k__BackingField: 0f749d1829f86a647a41563e9f18a281
 --- !u!114 &4198614521401788000
 MonoBehaviour:
@@ -170,6 +175,124 @@ MonoBehaviour:
   flashTime: 0
   renderer: {fileID: 0}
   material: {fileID: 0}
+--- !u!1 &8025767756965549514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2347132077200934144}
+  - component: {fileID: 2590317241865662271}
+  - component: {fileID: 386986451787057934}
+  m_Layer: 0
+  m_Name: Spot Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2347132077200934144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8025767756965549514}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.12, z: 0.28}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6347369606922364486}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &2590317241865662271
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8025767756965549514}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 0.2007832, g: 0.9056604, b: 0.216264, a: 1}
+  m_Intensity: 500
+  m_Range: 20
+  m_SpotAngle: 34.53547
+  m_InnerSpotAngle: 17.810728
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 2
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!114 &386986451787057934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8025767756965549514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1001 &6889621749236400557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -280,7 +403,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8036229bdf91767489312b85a5ed67e7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e8c3788a3ff500541a7bbbb7d5880a41, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2347132077200934144}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c3788a3ff500541a7bbbb7d5880a41, type: 3}
 --- !u!4 &6347369606922364486 stripped

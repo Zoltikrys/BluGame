@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class FlyingEnemy : Enemy
 {
     public float forwardBoost = 3f;
     public float timeToTarget = 5;
     private float timeRemaining = 5;
+    [field: SerializeField] public Color TargettingColour;
+    [field: SerializeField] public Color PatrollingColour;
+    [field: SerializeField] public Color AttackingColour;
+    [field: SerializeField] public GameObject light;
 
     protected override void Start()
     {
@@ -20,9 +25,16 @@ public class FlyingEnemy : Enemy
         playerSeen = FOV.canSeePlayer;
     }
 
+    protected override void PatrollingState()
+    {
+        light.GetComponent<Light>().color = PatrollingColour;
+        base.PatrollingState();
+    }
+
 
     protected override void TargetingState()
     {
+        light.GetComponent<Light>().color = TargettingColour;
         playerSeen = false; // Reset playerSeen
         hasHit = false; // Reset hasHit
 
@@ -42,6 +54,7 @@ public class FlyingEnemy : Enemy
 
     protected override void AttackState()
     {
+        light.GetComponent<Light>().color = AttackingColour;
         // Reset timeRemaining
         timeRemaining = timeToTarget;
 
