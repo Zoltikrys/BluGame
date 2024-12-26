@@ -8,9 +8,7 @@ public class killZone : MonoBehaviour
     {
         if(other.gameObject.name == "Player") {
             HealthManager healthMan = other.GetComponent<HealthManager>();
-            healthMan.Damage();
-            healthMan.Damage();
-            healthMan.Damage();
+            healthMan.Death();
         }
     }
 }

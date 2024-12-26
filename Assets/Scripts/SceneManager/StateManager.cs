@@ -61,7 +61,7 @@ public class StateManager : MonoBehaviour
 
     public void SetCheckpoint(Scene scene, uint roomId, uint requestedSpawnPoint)
     {
-        CurrentCheckPoint = new Checkpoint(scene, roomId, requestedSpawnPoint, new PlayerInfo(PlayerInfo.HP, PlayerInfo.RGB_GoggleState));
+        CurrentCheckPoint = new Checkpoint(scene, roomId, requestedSpawnPoint, new PlayerInfo(PlayerInfo.HP, PlayerInfo.RGB_GoggleState), StateTracker);
     }
 
     public void SetPlayerState(GameObject player)
@@ -113,9 +113,9 @@ public class StateManager : MonoBehaviour
         UpdateDisplayList();
     }
 
-    public void RestoreRoomState()
+    public void SetStateTracker(Dictionary<string, Dictionary<string, TrackedValues>> stateTracker)
     {
-        throw new NotImplementedException();
+        StateTracker = stateTracker;
     }
 }
 

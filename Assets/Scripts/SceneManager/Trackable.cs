@@ -59,13 +59,12 @@ public class Trackable : MonoBehaviour
                    healthManager.Respawn();
                 }
                 else if(TrackedValues.HealthStatus.isDead) transform.gameObject.SetActive(false);
-                
-                if(TrackedValues.isHPTracked) healthManager.b_Health = TrackedValues.HealthStatus.HP;
+                else if(TrackedValues.isHPTracked) healthManager.b_Health = TrackedValues.HealthStatus.HP;
             }
         }
         if(gameObjectTransform){
-            if(TrackedValues.isPositionTracked) gameObjectTransform.position = TrackedValues.Transform.position;
-            if(TrackedValues.isRotationTracked) gameObjectTransform.rotation = TrackedValues.Transform.rotation;
+            if(TrackedValues.isPositionTracked) gameObjectTransform.position = TrackedValues.Position;
+            if(TrackedValues.isRotationTracked) gameObjectTransform.rotation = TrackedValues.Rotation;
         }
     }
 
@@ -87,8 +86,8 @@ public class Trackable : MonoBehaviour
         }
 
         if(gameObjectTransform){
-            if(TrackedValues.isPositionTracked) TrackedValues.Transform.position = gameObjectTransform.position;
-            if(TrackedValues.isRotationTracked) TrackedValues.Transform.rotation = gameObjectTransform.rotation;
+            if(TrackedValues.isPositionTracked) TrackedValues.Position = gameObjectTransform.position;
+            if(TrackedValues.isRotationTracked) TrackedValues.Rotation = gameObjectTransform.rotation;
         }
 
     }

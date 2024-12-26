@@ -8,7 +8,8 @@ public class TrackedValues{
     [SerializeField] public bool isRotationTracked;
     [SerializeField] public bool isHPTracked;
     [SerializeField] public HealthStatus HealthStatus;
-    [SerializeField] public Transform Transform;
+    [SerializeField] public Vector3 Position;
+    [SerializeField] public Quaternion Rotation;
 }
 
 [Serializable]
