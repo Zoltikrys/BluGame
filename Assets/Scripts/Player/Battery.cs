@@ -11,7 +11,7 @@ public class Battery : MonoBehaviour
     [field: SerializeField] public float AbsoluteMaximumBatteryChargeIncrease = 200.0f; // Absolute maximum we can increase the battery to.
     [field: SerializeField] public float AbsoluteMinimumBatteryChargeDecrease = 50.0f; // Absolute minimum we can decrease the battery to.
     [field: SerializeField] public List<BatteryEffect> ProcessingBatteryEffects = new List<BatteryEffect>(); // currently processing battery effects
-    [field: SerializeField] public List<BatteryEffect> QueuedBatteryEffects = new List<BatteryEffect>(); // current queued batter effects (just used to start the coroutines)
+    [field: SerializeField] public List<BatteryEffect> QueuedBatteryEffects = new List<BatteryEffect>(); // current queued battery effects (just used to start the coroutines)
 
     private float QueuedProcessTime = 1.0f;
     private GameObject RenderTarget;
@@ -21,22 +21,14 @@ public class Battery : MonoBehaviour
         StartCoroutine("ProcessQueuedBatteryEffects");
         RenderTarget = GameObject.FindGameObjectWithTag("BatteryLife");
         if(RenderTarget != null) RenderTarget.GetComponent<BatteryRenderer>().UpdateBatteryLife(CurrentBatteryCharge, MaxCharge);
-        
-
-        QueuedBatteryEffects.Add(new BatteryEffect("BaseIncrease", BatteryEffectType.CHARGE_INCREASE, -1.0f, 1.0f, 2.0f, 1.0f, false));
-        QueuedBatteryEffects.Add(new BatteryEffect("BaseDecrease", BatteryEffectType.CHARGE_DECREASE, 10.0f, 1.0f, 4.0f, 1.0f, false));
-
-        QueuedBatteryEffects.Add(new BatteryEffect("BaseMaxIncrease", BatteryEffectType.MAX_CHARGE_DECREASE, -1.0f, 1.0f, 2.0f, 1.0f, true));
-        QueuedBatteryEffects.Add(new BatteryEffect("BaseMaxDecrease", BatteryEffectType.MAX_CHARGE_INCREASE, 5.0f, 50.0f, 1.0f, 5.0f, false));
-
-        QueuedBatteryEffects.Add(new BatteryEffect("MAX DECREASE", BatteryEffectType.MAX_CHARGE_DECREASE, -1.0f, 300.0f, 1.0f, 5.0f, true));
     }
 
     public void SetBatteryState(float desiredBatteryCharge, float desiredMaxBatteryCharge, List<BatteryEffect> queuedEffects, List<BatteryEffect> processingEffects){
         CurrentBatteryCharge = desiredBatteryCharge;
         MaxCharge = desiredMaxBatteryCharge;
 
-        //QueuedBatteryEffects 
+        QueuedBatteryEffects.AddRange(queuedEffects);
+        ProcessingBatteryEffects.AddRange(processingEffects);
 
 
         if(RenderTarget != null) RenderTarget.GetComponent<BatteryRenderer>().UpdateBatteryLife(CurrentBatteryCharge, MaxCharge);
@@ -60,6 +52,7 @@ public class Battery : MonoBehaviour
         float elapsedTime = batteryEffect.TickRate;
         
         while(elapsedTime < batteryEffect.Duration || batteryEffect.Duration < 0.0f){ // if duration is negative, run forever, otherwise wait for elapsed time and exit
+            Debug.Log($"Processing: {batteryEffect.Print()}");
             switch(batteryEffect.EffectType){
                 case BatteryEffectType.CHARGE_INCREASE: HandleChargeIncease(batteryEffect);
                                                              break;

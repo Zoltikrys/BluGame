@@ -50,7 +50,14 @@ public class SceneManager : MonoBehaviour
     public void RequestLoadScene(SceneAsset scene, uint id, uint requestedSpawnpoint){
         LockPlayer();
         if(Player) StateManager.StorePlayerInfo(Player);
-        else StateManager.StorePlayerInfo(1, false);
+        else {
+            Battery bat = new Battery();
+            bat.CurrentBatteryCharge = 0;
+            bat.MaxCharge = 100.0f;
+            bat.MinCharge = 0.0f;
+            bat.AddBatteryEffect(new BatteryEffect("Default", BatteryEffectType.CHARGE_INCREASE, -1.0f, 1.0f, 1.0f, 1.0f, false));
+            StateManager.StorePlayerInfo(1, false, false, bat);
+        }
 
 
         if(CurrentScene != null) StateManager.SetRoomState(CurrentScene);

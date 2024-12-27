@@ -18,6 +18,7 @@ public class MagnetAbility : MonoBehaviour
     public float detectionRadius = 20f; // Radius for detecting magnets
     private bool isMagnetActive = false;
     public bool isMagnetized;
+    public bool isMagnetAbilityActive = true;
 
     [field: SerializeField] public GameObject smallMagnetTarget
     { get; private set; }// Currently tracked small magnet
