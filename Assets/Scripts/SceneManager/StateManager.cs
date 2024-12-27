@@ -86,7 +86,7 @@ public class StateManager : MonoBehaviour
                 currentBattery.CurrentBatteryCharge = PlayerInfo.BatteryCharge;
                 currentBattery.MaxCharge = PlayerInfo.MaxBatteryCharge;
                 currentBattery.QueuedBatteryEffects = DeepCopyUtils.DeepCopyBatteryEffectList(PlayerInfo.QueuedEffects);
-                currentBattery.ProcessingBatteryEffects = DeepCopyUtils.DeepCopyBatteryEffectList(PlayerInfo.ProcessingEffects);
+                currentBattery.QueuedBatteryEffects.AddRange(DeepCopyUtils.DeepCopyBatteryEffectList(PlayerInfo.ProcessingEffects));
 
                 Debug.Log($"Set {currentBattery.QueuedBatteryEffects.Count} queued effects, {currentBattery.ProcessingBatteryEffects.Count} processing effects");
             }
@@ -95,7 +95,9 @@ public class StateManager : MonoBehaviour
     }
 
     public void StorePlayerInfo(int hp, bool goggleState, bool magnetState, Battery battery){
-        PlayerInfo = new PlayerInfo(hp, goggleState, magnetState, battery.CurrentBatteryCharge, battery.MaxCharge,
+        PlayerInfo = new PlayerInfo(hp, goggleState, magnetState, 
+                                    battery.CurrentBatteryCharge, 
+                                    battery.MaxCharge,
                                     DeepCopyUtils.DeepCopyBatteryEffectList(battery.QueuedBatteryEffects),
                                     DeepCopyUtils.DeepCopyBatteryEffectList(battery.ProcessingBatteryEffects));
         Debug.Log($"Battery input: {battery.CurrentBatteryCharge}/{battery.MaxCharge}");

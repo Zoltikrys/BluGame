@@ -48,10 +48,9 @@ public class Battery : MonoBehaviour
     private IEnumerator BatteryTick(BatteryEffect batteryEffect)
     {   
         Debug.Log($"Start processing battery effect: {batteryEffect.Print()}");
-        yield return new WaitForSeconds(batteryEffect.TickRate);
-        float elapsedTime = batteryEffect.TickRate;
+        ProcessingBatteryEffects.Add(batteryEffect);
         
-        while(elapsedTime < batteryEffect.Duration || batteryEffect.Duration < 0.0f){ // if duration is negative, run forever, otherwise wait for elapsed time and exit
+        while(batteryEffect.Runtime < batteryEffect.Duration || batteryEffect.Duration < 0.0f){ // if duration is negative, run forever, otherwise wait for elapsed time and exit
             Debug.Log($"Processing: {batteryEffect.Print()}");
             switch(batteryEffect.EffectType){
                 case BatteryEffectType.CHARGE_INCREASE: HandleChargeIncease(batteryEffect);
@@ -68,7 +67,7 @@ public class Battery : MonoBehaviour
             if(RenderTarget != null) RenderTarget.GetComponent<BatteryRenderer>().UpdateBatteryLife(CurrentBatteryCharge, MaxCharge); 
 
             yield return new WaitForSeconds(batteryEffect.TickRate);
-            elapsedTime += batteryEffect.TickRate;
+            batteryEffect.Runtime += batteryEffect.TickRate;
         }
 
         Debug.Log($"Finished processing battery effect: {batteryEffect.Print()}");
@@ -129,6 +128,7 @@ public class BatteryEffect{
     /// When should this effect fire next (in seconds)
     /// </summary>
     public float TickRate {get; set;}
+    public float Runtime { get; set; }
 
     /// <summary>
     /// should this effect fire once
