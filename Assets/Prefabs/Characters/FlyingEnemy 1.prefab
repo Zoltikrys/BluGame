@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8295214552630636827}
   - component: {fileID: -1123812824170141987}
   - component: {fileID: 4198614521401788000}
+  - component: {fileID: 1203633023867932607}
   m_Layer: 0
   m_Name: FlyingEnemy 1
   m_TagString: Untagged
@@ -62,6 +63,7 @@ MonoBehaviour:
   PatrollingColour: {r: 0.29428852, g: 0.8301887, b: 0.21537916, a: 0}
   AttackingColour: {r: 0.7830189, g: 0.003693494, b: 0.003693494, a: 0}
   light: {fileID: 8025767756965549514}
+  anim: {fileID: 1203633023867932607}
 --- !u!54 &1479766441217421866
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -175,6 +177,27 @@ MonoBehaviour:
   flashTime: 0
   renderer: {fileID: 0}
   material: {fileID: 0}
+--- !u!95 &1203633023867932607
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6224600381772812662}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f48633f8f294f894184f27354131fb6c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8025767756965549514
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,6 +324,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6735958828258364268}
     m_Modifications:
+    - target: {fileID: -8802035442810479027, guid: e8c3788a3ff500541a7bbbb7d5880a41, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: -8802035442810479027, guid: e8c3788a3ff500541a7bbbb7d5880a41, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.005
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e8c3788a3ff500541a7bbbb7d5880a41, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4066

@@ -12,12 +12,14 @@ public class FlyingEnemy : Enemy
     [field: SerializeField] public Color PatrollingColour;
     [field: SerializeField] public Color AttackingColour;
     [field: SerializeField] public GameObject light;
+    [field: SerializeField] public Animator anim;
 
     protected override void Start()
     {
         base.Start();
         CurrentState = NpcState.Patrolling;
         FOV = GetComponent<FieldOfView>();
+        anim.Play("NormalFlying");
     }
 
     protected override void Update(){
@@ -27,22 +29,31 @@ public class FlyingEnemy : Enemy
 
     protected override void PatrollingState()
     {
+        anim.Play("NormalFlying");
         light.GetComponent<Light>().color = PatrollingColour;
         base.PatrollingState();
     }
 
-
+    protected override void SearchingState()
+    {
+        base.SearchingState();
+    }
     protected override void TargetingState()
     {
         light.GetComponent<Light>().color = TargettingColour;
+
         playerSeen = false; // Reset playerSeen
         hasHit = false; // Reset hasHit
 
         // Face player
         transform.LookAt(target);
+        anim.Play("Spotted");
+
 
         if (timeRemaining > 0)
         {
+
+
             timeRemaining -= Time.deltaTime;
         }
         else
@@ -55,6 +66,7 @@ public class FlyingEnemy : Enemy
     protected override void AttackState()
     {
         light.GetComponent<Light>().color = AttackingColour;
+        anim.Play("AngryFlying");
         // Reset timeRemaining
         timeRemaining = timeToTarget;
 
