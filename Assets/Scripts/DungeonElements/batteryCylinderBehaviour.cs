@@ -9,10 +9,14 @@ public class batteryCylinderBehaviour : MonoBehaviour
 
     [SerializeField] private GameObject powerPurpose;
 
+    [field: SerializeField] public bool IsActive {get; set;} = true;
+
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        if(IsActive) anim.Play("Rise");
+        else anim.Play("Sink");
     }
 
     // Update is called once per frame
@@ -23,7 +27,7 @@ public class batteryCylinderBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "BatteryPrefab") {
+        if(other.gameObject.name == battery.name && IsActive) {
             Debug.Log("Battery accepted");
             Destroy(other.gameObject);
             battery.SetActive(true);
@@ -33,6 +37,12 @@ public class batteryCylinderBehaviour : MonoBehaviour
             upgradeTubeBehaviour powerPurposeScript = powerPurpose.GetComponent<upgradeTubeBehaviour>();
             powerPurposeScript.powerSources += 1;
             powerPurposeScript.PowerCheck();
+            IsActive = false;
         }
+    }
+
+    public void Activate(){
+        IsActive = true;
+        anim.Play("Rise");
     }
 }

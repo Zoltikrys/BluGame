@@ -82,7 +82,7 @@ public class StateManager : MonoBehaviour
             if(currentPlayerHealth) currentPlayerHealth.b_Health = PlayerInfo.HP;
             if(currentPlayerGoggles) currentPlayerGoggles.GogglesActivated = PlayerInfo.RGB_GoggleState;
             if(currentBattery){
-                Debug.Log($"Setting batter to: {PlayerInfo.BatteryCharge}/{PlayerInfo.MaxBatteryCharge}");
+                Debug.Log($"Setting battery to: {PlayerInfo.BatteryCharge}/{PlayerInfo.MaxBatteryCharge}");
                 currentBattery.CurrentBatteryCharge = PlayerInfo.BatteryCharge;
                 currentBattery.MaxCharge = PlayerInfo.MaxBatteryCharge;
                 currentBattery.QueuedBatteryEffects = DeepCopyUtils.DeepCopyBatteryEffectList(PlayerInfo.QueuedEffects);

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.ComponentModel;
+using UnityEngine.Events;
 
 public class upgradeTubeBehaviour : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class upgradeTubeBehaviour : MonoBehaviour
 
     [SerializeField] private bool isGoggles;
     [SerializeField] private bool isMagnet;
+
+    [field: SerializeField] public List<UnityEvent> OnFinishEvents = new List<UnityEvent>();
     //etc.
 
     // Start is called before the first frame update
@@ -73,6 +77,7 @@ public class upgradeTubeBehaviour : MonoBehaviour
         anim.StopPlayback();
         anim.Play("openTube");
         player.GetComponent<PlayerController>().UnlockMovement();
+        OnFinish();
     }
 
     public void CloseDoor()
@@ -85,5 +90,11 @@ public class upgradeTubeBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         callback?.Invoke();
+    }
+
+    public void OnFinish(){
+        foreach(UnityEvent ev in OnFinishEvents){
+            ev?.Invoke();
+        }
     }
 }
