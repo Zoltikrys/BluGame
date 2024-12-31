@@ -11,7 +11,7 @@ public class CameraController2 : MonoBehaviour
     {
         if (player == null)
         {
-            Debug.LogWarning("Player not assigned to CameraFollowWithWorldBounds script!");
+            Debug.LogWarning("Player not assigned to camera controller.");
             return;
         }
 

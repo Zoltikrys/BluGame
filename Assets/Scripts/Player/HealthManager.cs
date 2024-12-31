@@ -28,7 +28,7 @@ public class HealthManager : MonoBehaviour
     {
         renderer = gameObject.GetComponentInChildren<MeshRenderer>();
         material = renderer.material;
-        originalColor = material.GetColor("_Tint");
+        //originalColor = material.GetColor("_Tint");
 
         if(transform.gameObject.name == "Player") RenderTarget = GameObject.FindGameObjectWithTag("HP");
         if(RenderTarget != null) RenderTarget.GetComponent<HPRenderer>().UpdateLife(b_Health, MaximumHP);
