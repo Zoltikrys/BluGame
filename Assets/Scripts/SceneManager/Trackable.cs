@@ -1,10 +1,10 @@
-using UnityEditor;
+using System;
 using UnityEngine;
 
 public class Trackable : MonoBehaviour
 {
     [field: SerializeField] public bool doNotTrack = false;
-    [field: SerializeField] public GUID GUID;
+    [field: SerializeField] public Guid GUID;
     [field: SerializeField] public TrackedValues TrackedValues {get; set;}
     [field: SerializeField] public string UniqueID { get; private set; }
 
@@ -34,7 +34,7 @@ public class Trackable : MonoBehaviour
 
     private void GenerateID()
     {
-        GUID = UnityEditor.GUID.Generate();
+        GUID = Guid.NewGuid();
         UniqueID = GUID.ToString();
     }
 
