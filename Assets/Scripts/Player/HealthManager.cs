@@ -6,6 +6,7 @@ public class HealthManager : MonoBehaviour
     [SerializeField]
     [field: SerializeField] public int b_Health {get; set;} = 0;
     [field: SerializeField] public int StartingHP {get; set;} = 0;
+    [field: SerializeField] public int MaximumHP {get; set;} = 10;
 
     private bool damageBool = true;
     private bool newState = false;
@@ -20,12 +21,17 @@ public class HealthManager : MonoBehaviour
     public MeshRenderer renderer;
     public Material material;
 
+    private GameObject RenderTarget {get; set;}
+
     // Start is called before the first frame update
     void Start()
     {
         renderer = gameObject.GetComponentInChildren<MeshRenderer>();
         material = renderer.material;
         originalColor = material.GetColor("_Tint");
+
+        if(transform.gameObject.name == "Player") RenderTarget = GameObject.FindGameObjectWithTag("HP");
+        if(RenderTarget != null) RenderTarget.GetComponent<HPRenderer>().UpdateLife(b_Health, MaximumHP);
     }
 
     // Update is called once per frame
@@ -35,6 +41,7 @@ public class HealthManager : MonoBehaviour
         {
             m_DamageCooldown -= Time.deltaTime;
         }
+        if(RenderTarget != null) RenderTarget.GetComponent<HPRenderer>().UpdateLife(b_Health, MaximumHP);
     }
     
     public void SetHealth(int amount){
@@ -65,6 +72,8 @@ public class HealthManager : MonoBehaviour
     {
         b_Health += 1;
         Debug.Log(b_Health);
+
+        if(b_Health > MaximumHP) b_Health = MaximumHP;
 
     }
 

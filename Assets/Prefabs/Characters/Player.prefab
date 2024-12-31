@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1739906687256751477}
   - component: {fileID: -3647002279214618310}
   - component: {fileID: 645921805136267893}
+  - component: {fileID: 183861393161317643}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -114,6 +115,7 @@ MonoBehaviour:
   bigMagnetRange: 20
   detectionRadius: 20
   isMagnetized: 0
+  isMagnetAbilityActive: 1
   <smallMagnetTarget>k__BackingField: {fileID: 0}
 --- !u!114 &1739906687256751477
 MonoBehaviour:
@@ -176,6 +178,29 @@ MonoBehaviour:
   MinCharge: 0
   AbsoluteMaximumBatteryChargeIncrease: 200
   AbsoluteMinimumBatteryChargeDecrease: 50
+--- !u!136 &183861393161317643
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464935671355033948}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &4565890587019788149
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,15 +5,7 @@ using UnityEngine.Events;
 
 public class PressurePlate : MonoBehaviour
 {
-    [SerializeField]
-    [Header("What should this pressure plate activate?")]
-    private UnityEvent triggerEventOne;
-    [SerializeField]
-    [Header("What should happen when the pressure is removed?")]
-    private UnityEvent triggerEventTwo;
-
     public BoxCollider BoxCollider;
-
     [SerializeField] private Animator anim;
 
     public void Start()
@@ -21,29 +13,22 @@ public class PressurePlate : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
+    public void Press(){
         anim.Play("Press");
 
         MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
         if (renderer != null) {
             renderer.material.color = Color.blue;
         }
-        triggerEventOne?.Invoke();
     }
 
-    private void OnTriggerExit(Collider other)
-    {
+    public void Release(){
         anim.Play("Release");
 
         MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
         if (renderer != null) {
              renderer.material.color = Color.red;
         }
-
-        triggerEventTwo?.Invoke();
-
-        //Destroy(this);
     }
 
 }

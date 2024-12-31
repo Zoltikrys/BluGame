@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class doorBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    private bool doorOpenFlag;
+    [SerializeField] private bool doorOpenFlag;
 
-    [SerializeField]
-    private GameObject leftDoor;
+    [SerializeField] private int currentDoorStatus = 0;
+    [SerializeField] private int doorStatusToOpen = 0;
+
+    [SerializeField] private GameObject leftDoor;
     [SerializeField] 
     private GameObject rightDoor;
     [SerializeField] public GameObject collider;
@@ -28,19 +29,34 @@ public class doorBehaviour : MonoBehaviour
         TryGetComponent<DoorTransition>(out doorTransition);
     }
 
-    public void OpenDoor()
+    public void IncreaseDoorStatus(){
+        currentDoorStatus += 1;
+        if(currentDoorStatus >= doorStatusToOpen && !doorOpenFlag){
+            OpenDoor();
+        }
+    }
+
+    public void DecreaseDoorStatus(){
+        currentDoorStatus -= 1;
+        if(currentDoorStatus < doorStatusToOpen && doorOpenFlag){
+            CloseDoor();
+        }
+    }
+
+    private void OpenDoor()
     {
         animator.Play("DoorOpen", 0, 0.0f);
+        Debug.Log($"{name} door opened");
         //leftDoor.SetActive(false);
         //rightDoor.SetActive(false);
         doorOpenFlag = true;
         collider.GetComponent<Collider>().enabled = true;
     }
 
-    public void CloseDoor()
+    private void CloseDoor()
     {
         animator.Play("DoorClose", 0, 0.0f);
-        Debug.Log("this door should be closed");
+        Debug.Log($"{name} door closed");
         //leftDoor.SetActive(true);
         //rightDoor.SetActive(true);
         doorOpenFlag = false;

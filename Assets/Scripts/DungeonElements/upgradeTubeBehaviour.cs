@@ -17,7 +17,6 @@ public class upgradeTubeBehaviour : MonoBehaviour
     [SerializeField] private bool isGoggles;
     [SerializeField] private bool isMagnet;
 
-    [field: SerializeField] public List<UnityEvent> OnFinishEvents = new List<UnityEvent>();
     //etc.
 
     // Start is called before the first frame update
@@ -48,11 +47,14 @@ public class upgradeTubeBehaviour : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.name == "Player") {
-            Debug.Log("Player entered tube");
-            GetComponent<CapsuleCollider>().enabled = false; // turn off collider so it triggers once per room
+    public void IncrementPower(){
+        powerSources += 1;
+        PowerCheck();
+    }
+
+    public void TryUpgrade(Collider other){
+        if(other.gameObject == player){
+            GetComponent<CapsuleCollider>().enabled = false;
             Upgrade();
         }
     }
@@ -60,7 +62,7 @@ public class upgradeTubeBehaviour : MonoBehaviour
     public void Upgrade()
     {
         if (isGoggles) {
-            Debug.Log("Updagrading");
+            Debug.Log("Upgrading");
             CloseDoor();
             player.GetComponent<PlayerController>().LockMovement();
             player.GetComponent<RgbGoggles>().GogglesActivated = true;
@@ -77,7 +79,10 @@ public class upgradeTubeBehaviour : MonoBehaviour
         anim.StopPlayback();
         anim.Play("openTube");
         player.GetComponent<PlayerController>().UnlockMovement();
-        OnFinish();
+
+        Interactable interactable;
+        TryGetComponent<Interactable>(out interactable);
+        interactable.OnFinish();
     }
 
     public void CloseDoor()
@@ -90,11 +95,5 @@ public class upgradeTubeBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         callback?.Invoke();
-    }
-
-    public void OnFinish(){
-        foreach(UnityEvent ev in OnFinishEvents){
-            ev?.Invoke();
-        }
     }
 }

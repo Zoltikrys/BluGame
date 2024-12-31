@@ -5,9 +5,7 @@ using UnityEngine;
 public class batteryCylinderBehaviour : MonoBehaviour
 {
     [SerializeField] private Animator anim;
-    [SerializeField] private GameObject battery;
-
-    [SerializeField] private GameObject powerPurpose;
+    [SerializeField] private GameObject internalBatteryModel;
 
     [field: SerializeField] public bool IsActive {get; set;} = true;
 
@@ -19,26 +17,17 @@ public class batteryCylinderBehaviour : MonoBehaviour
         else anim.Play("Sink");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void RecieveBattery(Collider other){
+        Debug.Log("Battery accepted");
+        Destroy(other.gameObject);
+        internalBatteryModel.SetActive(true);
+        anim.StopPlayback();
+        anim.Play("Sink");
+        IsActive = false;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.name == battery.name && IsActive) {
-            Debug.Log("Battery accepted");
-            Destroy(other.gameObject);
-            battery.SetActive(true);
-            anim.StopPlayback();
-            anim.Play("Sink");
-
-            upgradeTubeBehaviour powerPurposeScript = powerPurpose.GetComponent<upgradeTubeBehaviour>();
-            powerPurposeScript.powerSources += 1;
-            powerPurposeScript.PowerCheck();
-            IsActive = false;
-        }
+        Interactable interactable;
+        TryGetComponent<Interactable>(out interactable);
+        if(interactable) interactable.OnFinish();
     }
 
     public void Activate(){
