@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class menuBehaviour : MonoBehaviour
 {
-    public SceneAsset scenetoload;
+    public LEVELS scenetoload;
     public SceneManager sceneManager;
     public GameObject fadeScreen;
     public bool fadeOut = false;

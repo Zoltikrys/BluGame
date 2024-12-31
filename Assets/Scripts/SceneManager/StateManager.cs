@@ -16,23 +16,23 @@ public class StateManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void SetRoomState(Scene scene){
-        var trackedComponents = scene.GetRootGameObjects()
-                                .SelectMany(g => g.GetComponentsInChildren<Trackable>(true))
-                                .ToList();
-        if(StateTracker.ContainsKey(scene.name)){
-            SetGameObjectsState(StateTracker[scene.name], trackedComponents);
-        }
-        else{
-            StateTracker[scene.name] = BuildRoomState(trackedComponents);
-        }
+    public void SetRoomState(string scene){
+        var currentScene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(scene);
+        if(currentScene.IsValid()){
+             var trackedComponents = currentScene.GetRootGameObjects()
+                                                 .SelectMany(g => g.GetComponentsInChildren<Trackable>(true))
+                                                 .ToList();
+            if(StateTracker.ContainsKey(scene)){
+                SetGameObjectsState(StateTracker[scene], trackedComponents);
+            }
+            else{
+                StateTracker[scene] = BuildRoomState(trackedComponents);
+            }
 
-        UpdateDisplayList();
-    }
-
-    public void SetRoomState(SceneAsset scene){
-        var realScene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(scene.name);
-        SetRoomState(realScene);
+            UpdateDisplayList();
+        }
+       
+       
     }
 
     private Dictionary<string, TrackedValues> BuildRoomState(List<Trackable> trackedComponents)
@@ -60,7 +60,7 @@ public class StateManager : MonoBehaviour
         }
     }
 
-    public void SetCheckpoint(Scene scene, uint roomId, uint requestedSpawnPoint)
+    public void SetCheckpoint(LEVELS scene, uint roomId, uint requestedSpawnPoint)
     {
         CurrentCheckPoint = new Checkpoint(scene, roomId, requestedSpawnPoint, 
                                            new PlayerInfo(PlayerInfo.HP, PlayerInfo.RGB_GoggleState, PlayerInfo.MagnetState,

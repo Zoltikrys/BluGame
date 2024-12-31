@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DoorTransition : MonoBehaviour
 {
-    [field: SerializeField] public SceneAsset SceneToLoad;
+    [field: SerializeField] public LEVELS SceneToLoad;
     [field: SerializeField] public uint IndexOfSpawnPointInNextScene;
     [field: SerializeField] public uint SceneID;
 

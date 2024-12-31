@@ -61,8 +61,7 @@ public class Trackable : MonoBehaviour
             }
         }
         else if(TrackedValues.isDeathTracked){  // Pickup specific. This section's logic needs reworking, we dont need so many of these statements but it works currently.
-                if(TrackedValues.HealthStatus.isDead){
-                    Debug.Log($"Setting pick up to off");
+                if(TrackedValues.HealthStatus.isDead && !TrackedValues.HealthStatus.isRespawnable){
                     transform.gameObject.SetActive(false);
                 }
             }

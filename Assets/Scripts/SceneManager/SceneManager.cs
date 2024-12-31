@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 public class SceneManager : MonoBehaviour
 {
     [Tooltip("Scene to load first")]
-    [field: SerializeField] public SceneAsset FirstLoad;
+    [field: SerializeField] public LEVELS FirstLoad = LEVELS.NO_SCENE;
 
     [Tooltip("Current Scene loaded")]
-    [field: SerializeField] public SceneAsset CurrentScene;
+    [field: SerializeField] public LEVELS CurrentScene = LEVELS.NO_SCENE;
+    private string CurrentSceneName = "";
 
     [Tooltip("The current active camera")]
     [field: SerializeField] public Camera CurrentCamera;
@@ -28,26 +29,27 @@ public class SceneManager : MonoBehaviour
 
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
-        if(FirstLoad) {
+        if(FirstLoad != LEVELS.NO_SCENE) {
             RequestLoadScene(FirstLoad, 0, 0);
         }
         else {
             Debug.LogError("No Scene given to load first. Please add a scene to load initially.");
             Application.Quit();
         }
-  
-
     }
 
-    private void LoadScene(SceneAsset scene){
-        if(CurrentScene && IsSceneLoaded(CurrentScene)) UnityEngine.SceneManagement.SceneManager.LoadScene(CurrentScene.name);
-
-        string sceneName = scene.name;
-        CurrentScene = scene;
+    private void LoadScene(LEVELS sceneID, string sceneName){
+        if(CurrentScene != LEVELS.NO_SCENE && IsSceneLoaded(sceneName)) UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        CurrentScene = sceneID;
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
-    public void RequestLoadScene(SceneAsset scene, uint id, uint requestedSpawnpoint){
+    public void RequestLoadScene(LEVELS scene, uint id, uint requestedSpawnpoint){
+        string sceneName;
+        RoomDirectory.StoredRooms.TryGetValue(scene, out sceneName);
+        if(sceneName == ""){
+            throw new System.Exception($"Tried accessing invalid scene ({scene}). Exiting...");
+        }
         LockPlayer();
         if(Player) StateManager.StorePlayerInfo(Player);
         else {
@@ -59,12 +61,12 @@ public class SceneManager : MonoBehaviour
         }
 
 
-        if(CurrentScene != null) StateManager.SetRoomState(CurrentScene);
+        if(CurrentScene != LEVELS.NO_SCENE) StateManager.SetRoomState(sceneName);
         RequestedSpawnPoint = requestedSpawnpoint;
         RoomID = id;
 
         //if(CurrentCamera) //CurrentCamera.GetComponent<CameraController>().StartCameraTransitionEffect(CAMERA_EFFECTS.LEAVE_ROOM, () => LoadScene(scene));
-        LoadScene(scene);
+        LoadScene(scene, sceneName);
     }
 
     public void Respawn(){
@@ -84,11 +86,11 @@ public class SceneManager : MonoBehaviour
     }
 
 
-    private bool IsSceneLoaded(SceneAsset sceneToCheck){
+    private bool IsSceneLoaded(string sceneName){
         bool foundScene = false;
         for(int i = 0; i <  UnityEngine.SceneManagement.SceneManager.sceneCount; i++){
             Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneAt(i);
-            if(scene.name == sceneToCheck.name){
+            if(scene.name == sceneName){
                 foundScene = true;
                 break;
             }
@@ -102,7 +104,7 @@ public class SceneManager : MonoBehaviour
         Debug.Log($"Loaded scene: {scene.name}");
         Player = GameObject.FindGameObjectWithTag("Player");
 
-        StateManager.SetRoomState(scene);
+        StateManager.SetRoomState(scene.name);
         StateManager.SetPlayerState(Player);
 
         SetSpawn(scene);
@@ -132,7 +134,7 @@ public class SceneManager : MonoBehaviour
     {
         GameObject newSpawnPoint = new GameObject();
         newSpawnPoint.transform.position = new Vector3(0,4,0);
-        GameObject[] rootObjects = UnityEngine.SceneManagement.SceneManager.GetSceneByName(CurrentScene.name).GetRootGameObjects();
+        GameObject[] rootObjects = UnityEngine.SceneManagement.SceneManager.GetSceneByName(scene.name).GetRootGameObjects();
         GameObject SpawnPoints = null;
 
         foreach(GameObject obj in rootObjects){
@@ -152,12 +154,12 @@ public class SceneManager : MonoBehaviour
                 CheckPointable a;
                 if(newSpawnPoint.TryGetComponent<CheckPointable>(out a)) {
                     if(a.isCheckpoint){
-                        StateManager.SetCheckpoint(scene, RoomID, RequestedSpawnPoint);
+                        StateManager.SetCheckpoint(CurrentScene, RoomID, RequestedSpawnPoint);
                         StateManager.SetPlayerState(Player);
                     }
                     
-                }else if(StateManager.CurrentCheckPoint.scene == null){
-                    StateManager.SetCheckpoint(scene, RoomID, RequestedSpawnPoint);
+                }else if(StateManager.CurrentCheckPoint.scene == LEVELS.NO_SCENE){
+                    StateManager.SetCheckpoint(CurrentScene, RoomID, RequestedSpawnPoint);
                     StateManager.SetPlayerState(Player);
                 }
             }
@@ -173,7 +175,7 @@ public class SceneManager : MonoBehaviour
     }
 
     private void SetCamera(Scene scene){
-        GameObject[] rootObjects = UnityEngine.SceneManagement.SceneManager.GetSceneByName(CurrentScene.name).GetRootGameObjects();
+        GameObject[] rootObjects = UnityEngine.SceneManagement.SceneManager.GetSceneByName(scene.name).GetRootGameObjects();
         foreach(GameObject obj in rootObjects){
             if(obj.CompareTag("MainCamera")){
                 Debug.Log("Found Camera");
