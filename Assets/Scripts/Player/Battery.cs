@@ -41,7 +41,11 @@ public class Battery : MonoBehaviour
             }
             QueuedBatteryEffects.Clear();
 
-            yield return new WaitForSeconds(QueuedProcessTime);
+            while(QueuedBatteryEffects.Count < 1){
+                yield return new WaitForSeconds(QueuedProcessTime);
+            }
+
+
         }
     }
 
@@ -95,45 +99,46 @@ public class Battery : MonoBehaviour
     }
 
     public void AddBatteryEffect(BatteryEffect batteryEffect){
+        Debug.Log($"Added Battery effect: {batteryEffect.Print()}");
         QueuedBatteryEffects.Add(batteryEffect);
     }
 }
 
-
+[Serializable]
 public class BatteryEffect{
     /// <summary>
     /// Name of effect
     /// </summary>
-    public string Name {get; set;}
+    [field: SerializeField] public string Name {get; set;}
     /// <summary>
     /// Effect type
     /// </summary>
-    public BatteryEffectType EffectType {get; set;}
+    [field: SerializeField] public BatteryEffectType EffectType {get; set;}
     /// <summary>
     /// How long seconds should this effect last for
     /// </summary>
-    public float Duration {get; set;}
+    [field: SerializeField] public float Duration {get; set;}
 
     /// <summary>
     /// Multiply the strength by this value
     /// </summary>
-    public float StrengthMultiplier {get; set;}
+    [field: SerializeField] public float StrengthMultiplier {get; set;}
 
     /// <summary>
     /// How strong should this effect be
     /// </summary>
-    public float Strength {get; set; }
+    [field: SerializeField] public float Strength {get; set; }
 
     /// <summary>
     /// When should this effect fire next (in seconds)
     /// </summary>
-    public float TickRate {get; set;}
-    public float Runtime { get; set; }
+    [field: SerializeField] public float TickRate {get; set;}
+    [field: SerializeField] public float Runtime { get; set; }
 
     /// <summary>
     /// should this effect fire once
     /// </summary>
-    public bool FireOnce = false;
+    [field: SerializeField] public bool FireOnce = false;
 
     public BatteryEffect(string name, BatteryEffectType type, float duration, float strength, float strengthMultiplier, float tickRate, bool fireOnce){
         Name = name;

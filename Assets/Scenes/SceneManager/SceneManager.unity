@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024991ffe1c261e478475b96cb969c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstLoad: {fileID: 102900000, guid: 62b02cd75ee3de64ea30c95b3ba2f410, type: 3}
+  FirstLoad: {fileID: 102900000, guid: b9f73c069d1baca4eb340a592eef7cb9, type: 3}
   CurrentScene: {fileID: 0}
   CurrentCamera: {fileID: 0}
   RequestedSpawnPoint: 1
@@ -211,12 +211,16 @@ MonoBehaviour:
       MagnetState: 0
       BatteryCharge: 0
       MaxBatteryCharge: 0
+      QueuedEffects: []
+      ProcessingEffects: []
   <PlayerInfo>k__BackingField:
     HP: 0
     RGB_GoggleState: 0
     MagnetState: 0
     BatteryCharge: 0
     MaxBatteryCharge: 0
+    QueuedEffects: []
+    ProcessingEffects: []
   displayList: []
 --- !u!4 &868272233
 Transform:

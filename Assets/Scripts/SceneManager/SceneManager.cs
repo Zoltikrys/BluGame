@@ -55,7 +55,6 @@ public class SceneManager : MonoBehaviour
             bat.CurrentBatteryCharge = 0;
             bat.MaxCharge = 100.0f;
             bat.MinCharge = 0.0f;
-            bat.AddBatteryEffect(new BatteryEffect("Default", BatteryEffectType.CHARGE_INCREASE, -1.0f, 1.0f, 1.0f, 1.0f, false));
             StateManager.StorePlayerInfo(1, false, false, bat);
         }
 
@@ -70,7 +69,6 @@ public class SceneManager : MonoBehaviour
 
     public void Respawn(){
         StateManager.SetPlayerState(Player);
-        //StateManager.RestoreRoomState();
         StateManager.SetStateTracker(StateManager.CurrentCheckPoint.StateTracker);
         RequestLoadScene(StateManager.CurrentCheckPoint.scene, StateManager.CurrentCheckPoint.RoomID, StateManager.CurrentCheckPoint.SpawnPoint);
     }

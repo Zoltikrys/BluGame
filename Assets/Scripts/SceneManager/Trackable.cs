@@ -43,6 +43,8 @@ public class Trackable : MonoBehaviour
         if(doNotTrack) return;
         TrackedValues = trackedValues;
 
+        Debug.Log($"Setting state of {UniqueID}");
+
         HealthManager healthManager;
         Transform gameObjectTransform;
 
@@ -58,6 +60,14 @@ public class Trackable : MonoBehaviour
                 else if(TrackedValues.isHPTracked) healthManager.b_Health = TrackedValues.HealthStatus.HP;
             }
         }
+        else if(TrackedValues.isDeathTracked){  // Pickup specific. This section's logic needs reworking, we dont need so many of these statements but it works currently.
+                if(TrackedValues.HealthStatus.isDead){
+                    Debug.Log($"Setting pick up to off");
+                    transform.gameObject.SetActive(false);
+                }
+            }
+        
+
         if(gameObjectTransform){
             if(TrackedValues.isPositionTracked) gameObjectTransform.position = TrackedValues.Position;
             if(TrackedValues.isRotationTracked) gameObjectTransform.rotation = TrackedValues.Rotation;
@@ -73,6 +83,7 @@ public class Trackable : MonoBehaviour
 
         transform.gameObject.TryGetComponent<HealthManager>(out healthManager);
         transform.gameObject.TryGetComponent<Transform>(out gameObjectTransform);
+
 
         if(healthManager){
             if(TrackedValues.isDeathTracked){

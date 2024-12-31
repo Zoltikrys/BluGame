@@ -40,6 +40,7 @@ public class StateManager : MonoBehaviour
         Debug.Log("Building room state");
         Dictionary<string, TrackedValues> RoomState = new Dictionary<string, TrackedValues>();
         foreach(var trackedComponent in trackedComponents){
+            Debug.Log($"Tracked Item: {trackedComponent.UniqueID}");
             if(!trackedComponent.doNotTrack){
                 trackedComponent.PopulateTrackedValues();
                 RoomState.Add(trackedComponent.UniqueID, trackedComponent.TrackedValues);

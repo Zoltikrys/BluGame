@@ -8,7 +8,7 @@ public class HPRenderer : MonoBehaviour
 {
     [field: SerializeField] public TextMeshProUGUI textMesh;
     public void UpdateLife(float current, float max){
-        Debug.Log($"HP renderer recieved: {current}/{max}");
+        //Debug.Log($"HP renderer recieved: {current}/{max}");
         textMesh.text = $"HP: {current}/{max}";
     }
 }
