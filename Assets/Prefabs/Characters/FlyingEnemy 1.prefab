@@ -158,7 +158,7 @@ MonoBehaviour:
       isDead: 0
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
-  <UniqueID>k__BackingField: 0f749d1829f86a647a41563e9f18a281
+  <UniqueID>k__BackingField: 0861db10-7c12-4931-81a8-1dfd9fc38804
 --- !u!114 &4198614521401788000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,10 +173,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <b_Health>k__BackingField: 4
   <StartingHP>k__BackingField: 4
+  <MaximumHP>k__BackingField: 10
   cooldownTime: 1
   flashTime: 0
   renderer: {fileID: 0}
   material: {fileID: 0}
+  anim: {fileID: 1203633023867932607}
 --- !u!95 &1203633023867932607
 Animator:
   serializedVersion: 5
@@ -190,7 +192,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: f48633f8f294f894184f27354131fb6c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

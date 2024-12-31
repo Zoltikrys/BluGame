@@ -20,6 +20,7 @@ public class HealthManager : MonoBehaviour
     Color originalColor;
     public MeshRenderer renderer;
     public Material material;
+    public Animator anim;
 
     private GameObject RenderTarget {get; set;}
 
@@ -81,6 +82,25 @@ public class HealthManager : MonoBehaviour
     {
         Debug.Log($"{name} died");
         PlayDeathAnimation();
+
+
+    }
+
+    private void PlayDeathAnimation()
+    {
+        anim.Play("Death");
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+        StartCoroutine("HandleRespawn", stateInfo);
+    }
+
+    private IEnumerator HandleRespawn(AnimatorStateInfo stateInfo){
+        if(CompareTag("Player")) transform.gameObject.GetComponent<PlayerController>().LockMovement();
+
+        //while (!anim.GetCurrentAnimatorStateInfo(0).IsName("Death")) yield return null;
+
+        yield return new WaitForSeconds(stateInfo.length);
+    
         if(CompareTag("Player")){
             SceneManager sceneManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManager>();
             sceneManager.Respawn();
@@ -88,12 +108,6 @@ public class HealthManager : MonoBehaviour
         else{
             transform.gameObject.SetActive(false);
         }
-
-    }
-
-    private void PlayDeathAnimation()
-    {
-        Debug.LogWarning("No death animation.");
     }
 
     void FlashStart()
@@ -115,6 +129,8 @@ public class HealthManager : MonoBehaviour
     }
 
     public void Respawn(){
+        
+
         b_Health = StartingHP;
     }
 
