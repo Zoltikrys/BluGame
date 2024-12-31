@@ -9,7 +9,7 @@ public class Battery : MonoBehaviour
     [field: SerializeField] public float MaxCharge = 100.0f; // Current maximum charge of battery
     [field: SerializeField] public float MinCharge = 0.0f; // Current maximum charge of battery
     [field: SerializeField] public float AbsoluteMaximumBatteryChargeIncrease = 200.0f; // Absolute maximum we can increase the battery to.
-    [field: SerializeField] public float AbsoluteMinimumBatteryChargeDecrease = 50.0f; // Absolute minimum we can decrease the battery to.
+    [field: SerializeField] public float AbsoluteMinimumBatteryChargeDecrease = 0.0f; // Absolute minimum we can decrease the battery to.
     [field: SerializeField] public List<BatteryEffect> ProcessingBatteryEffects = new List<BatteryEffect>(); // currently processing battery effects
     [field: SerializeField] public List<BatteryEffect> QueuedBatteryEffects = new List<BatteryEffect>(); // current queued battery effects (just used to start the coroutines)
 
@@ -54,7 +54,7 @@ public class Battery : MonoBehaviour
         Debug.Log($"Start processing battery effect: {batteryEffect.Print()}");
         ProcessingBatteryEffects.Add(batteryEffect);
         
-        while(batteryEffect.Runtime < batteryEffect.Duration || batteryEffect.Duration < 0.0f){ // if duration is negative, run forever, otherwise wait for elapsed time and exit
+        while(batteryEffect.Runtime <= batteryEffect.Duration + batteryEffect.TickRate || batteryEffect.Duration < 0.0f){ // if duration is negative, run forever, otherwise wait for elapsed time and exit
             Debug.Log($"Processing: {batteryEffect.Print()}");
             switch(batteryEffect.EffectType){
                 case BatteryEffectType.CHARGE_INCREASE: HandleChargeIncease(batteryEffect);
@@ -69,9 +69,9 @@ public class Battery : MonoBehaviour
 
             if(batteryEffect.FireOnce) break; // if one time increase exit loop
             if(RenderTarget != null) RenderTarget.GetComponent<BatteryRenderer>().UpdateBatteryLife(CurrentBatteryCharge, MaxCharge); 
-
-            yield return new WaitForSeconds(batteryEffect.TickRate);
+            
             batteryEffect.Runtime += batteryEffect.TickRate;
+            yield return new WaitForSeconds(batteryEffect.TickRate);
         }
 
         Debug.Log($"Finished processing battery effect: {batteryEffect.Print()}");

@@ -996,7 +996,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -5904,6 +5904,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
       propertyPath: <PickupBatteryEffect>k__BackingField.<Name>k__BackingField
       value: InitialBatteryCharge
       objectReference: {fileID: 0}
@@ -5922,6 +5926,50 @@ PrefabInstance:
     - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
       propertyPath: <PickupBatteryEffect>k__BackingField.<StrengthMultiplier>k__BackingField
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[0].<Name>k__BackingField
+      value: Default Charge Increase
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[1].<Name>k__BackingField
+      value: SetMax
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[0].<Duration>k__BackingField
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[0].<Strength>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[0].<TickRate>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[1].<Duration>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[1].<Strength>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[1].<TickRate>k__BackingField
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[1].<EffectType>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[0].<StrengthMultiplier>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[1].<StrengthMultiplier>k__BackingField
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1914305567752810346, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
       propertyPath: m_LocalPosition.x

@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    [field: SerializeField] public BatteryEffect PickupBatteryEffect {get; set;}
+    [field: SerializeField] public List<BatteryEffect> PickupBatteryEffects {get; set;} = new List<BatteryEffect>();
 
     public void PickUp(Collider other){
         Battery battery;
         other.gameObject.TryGetComponent<Battery>(out battery);
 
-        if(battery) battery.AddBatteryEffect(PickupBatteryEffect);
+        if(battery) {
+            foreach(BatteryEffect batteryEffect in PickupBatteryEffects){
+                battery.AddBatteryEffect(batteryEffect);
+            }
+            
+        }
         else Debug.Log($"{name} Could not find battery on player");
 
         TriggerOnFinish();

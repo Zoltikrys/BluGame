@@ -55,9 +55,9 @@ public class SceneManager : MonoBehaviour
         else {
             Battery bat = new Battery();
             bat.CurrentBatteryCharge = 0;
-            bat.MaxCharge = 100.0f;
+            bat.MaxCharge = 0.0f;
             bat.MinCharge = 0.0f;
-            StateManager.StorePlayerInfo(1, false, false, bat);
+            StateManager.StorePlayerInfo(10, false, false, bat);
         }
 
 
