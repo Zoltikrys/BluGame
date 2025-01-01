@@ -80,22 +80,22 @@ public class Battery : MonoBehaviour
 
     private void HandleMaxChargeIncease(BatteryEffect batteryEffect)
     {
-        MaxCharge = Mathf.Clamp(MaxCharge + batteryEffect.Strength * batteryEffect.StrengthMultiplier, AbsoluteMinimumBatteryChargeDecrease, AbsoluteMaximumBatteryChargeIncrease);
+        MaxCharge = Mathf.Clamp(MaxCharge + (batteryEffect.Strength * batteryEffect.StrengthMultiplier), AbsoluteMinimumBatteryChargeDecrease, AbsoluteMaximumBatteryChargeIncrease);
     }
 
     private void HandleMaxChargeDecrease(BatteryEffect batteryEffect)
     {
-        MaxCharge = Mathf.Clamp(MaxCharge - batteryEffect.Strength * batteryEffect.StrengthMultiplier, AbsoluteMinimumBatteryChargeDecrease, AbsoluteMaximumBatteryChargeIncrease);
+        MaxCharge = Mathf.Clamp(MaxCharge - (batteryEffect.Strength * batteryEffect.StrengthMultiplier), AbsoluteMinimumBatteryChargeDecrease, AbsoluteMaximumBatteryChargeIncrease);
     }
 
     private void HandleChargeDecrease(BatteryEffect batteryEffect)
     {
-        CurrentBatteryCharge = Mathf.Clamp(CurrentBatteryCharge - batteryEffect.Strength * batteryEffect.StrengthMultiplier, MinCharge, MaxCharge);
+        CurrentBatteryCharge = Mathf.Clamp(CurrentBatteryCharge - (batteryEffect.Strength * batteryEffect.StrengthMultiplier), MinCharge, MaxCharge);
     }
 
     private void HandleChargeIncease(BatteryEffect batteryEffect)
     {
-        CurrentBatteryCharge = Mathf.Clamp(CurrentBatteryCharge + batteryEffect.Strength * batteryEffect.StrengthMultiplier, MinCharge, MaxCharge);
+        CurrentBatteryCharge = Mathf.Clamp(CurrentBatteryCharge + (batteryEffect.Strength * batteryEffect.StrengthMultiplier), MinCharge, MaxCharge);
     }
 
     public void AddBatteryEffect(BatteryEffect batteryEffect){

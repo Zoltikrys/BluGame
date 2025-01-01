@@ -68,6 +68,7 @@ public class StateManager : MonoBehaviour
                                                           DeepCopyUtils.DeepCopyBatteryEffectList(PlayerInfo.QueuedEffects), 
                                                           DeepCopyUtils.DeepCopyBatteryEffectList(PlayerInfo.ProcessingEffects)),
                                            DeepCopyUtils.DeepCopyStateTracker(StateTracker));
+        Debug.Log($"[BATTERY] Set checkpoint {CurrentCheckPoint.PlayerInfo.QueuedEffects.Count} queued effects, {CurrentCheckPoint.PlayerInfo.ProcessingEffects.Count} processing effects");
     }
 
     public void SetPlayerState(GameObject player, PlayerInfo playerInfo)
@@ -88,8 +89,9 @@ public class StateManager : MonoBehaviour
                 currentBattery.MaxCharge = playerInfo.MaxBatteryCharge;
                 currentBattery.QueuedBatteryEffects = DeepCopyUtils.DeepCopyBatteryEffectList(playerInfo.QueuedEffects);
                 currentBattery.QueuedBatteryEffects.AddRange(DeepCopyUtils.DeepCopyBatteryEffectList(playerInfo.ProcessingEffects));
+                currentBattery.ProcessingBatteryEffects.Clear();
 
-                Debug.Log($"Set {currentBattery.QueuedBatteryEffects.Count} queued effects, {currentBattery.ProcessingBatteryEffects.Count} processing effects");
+                Debug.Log($"[BATTERY] Set state {currentBattery.QueuedBatteryEffects.Count} queued effects, {currentBattery.ProcessingBatteryEffects.Count} processing effects");
             }
             
         }
@@ -104,7 +106,7 @@ public class StateManager : MonoBehaviour
         Debug.Log($"Battery input: {battery.CurrentBatteryCharge}/{battery.MaxCharge}");
         Debug.Log($"playerinfo input: {PlayerInfo.BatteryCharge}/{PlayerInfo.MaxBatteryCharge}");
 
-        Debug.Log($"Stored {PlayerInfo.QueuedEffects.Count} queued effects, {PlayerInfo.ProcessingEffects.Count} processing effects");
+        Debug.Log($"[BATTERY] Stored {PlayerInfo.QueuedEffects.Count} queued effects, {PlayerInfo.ProcessingEffects.Count} processing effects");
     }
 
     public void StorePlayerInfo(GameObject player)
@@ -116,7 +118,7 @@ public class StateManager : MonoBehaviour
                                     player.GetComponent<Battery>().MaxCharge,
                                     DeepCopyUtils.DeepCopyBatteryEffectList(player.GetComponent<Battery>().QueuedBatteryEffects),
                                     DeepCopyUtils.DeepCopyBatteryEffectList(player.GetComponent<Battery>().ProcessingBatteryEffects));
-        Debug.Log($"Stored {PlayerInfo.QueuedEffects.Count} queued effects, {PlayerInfo.ProcessingEffects.Count} processing effects");
+        Debug.Log($"[BATTERY]Stored {PlayerInfo.QueuedEffects.Count} queued effects, {PlayerInfo.ProcessingEffects.Count} processing effects");
     }
 
 
