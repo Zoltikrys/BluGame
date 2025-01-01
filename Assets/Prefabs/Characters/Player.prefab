@@ -164,6 +164,43 @@ MonoBehaviour:
   <PrevGoggleState>k__BackingField: 7
   DebugText: {fileID: 0}
   FilterObjects: []
+  RgbGoggleCosts:
+  - <Name>k__BackingField: Initial RGB cost
+    <EffectType>k__BackingField: 1
+    <Duration>k__BackingField: -1
+    <StrengthMultiplier>k__BackingField: 1
+    <Strength>k__BackingField: 5
+    <TickRate>k__BackingField: 1
+    <Runtime>k__BackingField: 0
+    <TurnsOffWhenEmpty>k__BackingField: 1
+    FireOnce: 1
+    <FinishEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+  - <Name>k__BackingField: ContinuousRGBCost
+    <EffectType>k__BackingField: 1
+    <Duration>k__BackingField: -1
+    <StrengthMultiplier>k__BackingField: 1
+    <Strength>k__BackingField: 2
+    <TickRate>k__BackingField: 1
+    <Runtime>k__BackingField: 0
+    <TurnsOffWhenEmpty>k__BackingField: 1
+    FireOnce: 0
+    <FinishEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -3647002279214618310}
+          m_TargetAssemblyTypeName: RgbGoggles, Assembly-CSharp
+          m_MethodName: TurnGogglesOff
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &645921805136267893
 MonoBehaviour:
   m_ObjectHideFlags: 0

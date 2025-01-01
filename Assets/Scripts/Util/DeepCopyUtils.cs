@@ -36,7 +36,9 @@ public static class DeepCopyUtils
             effect.Strength,
             effect.StrengthMultiplier,
             effect.TickRate,
-            effect.FireOnce
+            effect.FireOnce,
+            effect.TurnsOffWhenEmpty,
+            effect.FinishEvent
         )).ToList();
     }
 }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Battery : MonoBehaviour
 {
@@ -21,6 +23,10 @@ public class Battery : MonoBehaviour
         StartCoroutine("ProcessQueuedBatteryEffects");
         RenderTarget = GameObject.FindGameObjectWithTag("BatteryLife");
         if(RenderTarget != null) RenderTarget.GetComponent<BatteryRenderer>().UpdateBatteryLife(CurrentBatteryCharge, MaxCharge);
+    }
+
+    void Update(){
+        if(RenderTarget != null) RenderTarget.GetComponent<BatteryRenderer>().UpdateBatteryLife(CurrentBatteryCharge, MaxCharge); 
     }
 
     public void SetBatteryState(float desiredBatteryCharge, float desiredMaxBatteryCharge, List<BatteryEffect> queuedEffects, List<BatteryEffect> processingEffects){
@@ -56,6 +62,7 @@ public class Battery : MonoBehaviour
         
         while(batteryEffect.Runtime <= batteryEffect.Duration + batteryEffect.TickRate || batteryEffect.Duration < 0.0f){ // if duration is negative, run forever, otherwise wait for elapsed time and exit
             Debug.Log($"Processing: {batteryEffect.Print()}");
+            if(!ProcessingBatteryEffects.Contains(batteryEffect)) break;
             switch(batteryEffect.EffectType){
                 case BatteryEffectType.CHARGE_INCREASE: HandleChargeIncease(batteryEffect);
                                                              break;
@@ -68,14 +75,60 @@ public class Battery : MonoBehaviour
             }
 
             if(batteryEffect.FireOnce) break; // if one time increase exit loop
-            if(RenderTarget != null) RenderTarget.GetComponent<BatteryRenderer>().UpdateBatteryLife(CurrentBatteryCharge, MaxCharge); 
+            if(batteryEffect.TurnsOffWhenEmpty && CurrentBatteryCharge <= 0) break; // Turn effect off when battery charge empty
+
             
             batteryEffect.Runtime += batteryEffect.TickRate;
             yield return new WaitForSeconds(batteryEffect.TickRate);
         }
-
+        if(ProcessingBatteryEffects.Contains(batteryEffect)) batteryEffect.FinishEvent?.Invoke();
         Debug.Log($"Finished processing battery effect: {batteryEffect.Print()}");
+
         ProcessingBatteryEffects.Remove(batteryEffect);
+    }
+
+    public bool AttemptAddBatteryEffects(List<BatteryEffect> newBatteryEffects, bool disallowDuplicates){
+        bool added = true;
+        List<BatteryEffect> batteryEffectsToAdd = new List<BatteryEffect>();
+
+        foreach(BatteryEffect newBatteryEffect in newBatteryEffects){
+            if(disallowDuplicates) RemoveBatteryEffect(newBatteryEffect);
+        }
+
+        foreach(BatteryEffect newBatteryEffect in newBatteryEffects){
+        
+            if(CurrentBatteryCharge >= newBatteryEffect.Strength * newBatteryEffect.StrengthMultiplier && newBatteryEffect.EffectType == BatteryEffectType.CHARGE_DECREASE){
+                batteryEffectsToAdd.Add(newBatteryEffect);
+            }
+            else if(newBatteryEffect.EffectType != BatteryEffectType.CHARGE_DECREASE){
+                batteryEffectsToAdd.Add(newBatteryEffect);
+            }
+            else added = false;
+        }
+       
+
+        if(added) QueuedBatteryEffects.AddRange(batteryEffectsToAdd);
+        else Debug.Log($"Failed to add battery effects");
+        return added;
+    }
+
+    private void RemoveBatteryEffect(BatteryEffect newBatteryEffect)
+    {   
+        // This needs changing from something other than string name because its going to cause issues later. Switch to GUID
+        var battery = ProcessingBatteryEffects.Find(effect => newBatteryEffect.Name == effect.Name);
+        if(battery != null){
+            ProcessingBatteryEffects.Remove(battery);
+        }
+
+        battery = QueuedBatteryEffects.Find(effect => newBatteryEffect.Name == effect.Name);
+        if(battery != null){
+            QueuedBatteryEffects.Remove(battery);
+        }
+    }
+
+    public void AddBatteryEffect(BatteryEffect batteryEffect){
+        Debug.Log($"Added Battery effect: {batteryEffect.Print()}");
+        QueuedBatteryEffects.Add(batteryEffect);
     }
 
     private void HandleMaxChargeIncease(BatteryEffect batteryEffect)
@@ -98,9 +151,11 @@ public class Battery : MonoBehaviour
         CurrentBatteryCharge = Mathf.Clamp(CurrentBatteryCharge + (batteryEffect.Strength * batteryEffect.StrengthMultiplier), MinCharge, MaxCharge);
     }
 
-    public void AddBatteryEffect(BatteryEffect batteryEffect){
-        Debug.Log($"Added Battery effect: {batteryEffect.Print()}");
-        QueuedBatteryEffects.Add(batteryEffect);
+    public void RemoveBatteryEffects(List<BatteryEffect> rgbGoggleCosts)
+    {
+        foreach(BatteryEffect batteryEffect in rgbGoggleCosts){
+            RemoveBatteryEffect(batteryEffect);
+        }
     }
 }
 
@@ -133,14 +188,30 @@ public class BatteryEffect{
     /// When should this effect fire next (in seconds)
     /// </summary>
     [field: SerializeField] public float TickRate {get; set;}
+
+    /// <summary>
+    /// Time in seconds this battery effect has been running
+    /// </summary>
     [field: SerializeField] public float Runtime { get; set; }
+
+    /// <summary>
+    /// Should this effect end when the battery is depleted?
+    /// </summary>
+    [field: SerializeField] public bool TurnsOffWhenEmpty {get; set;}
 
     /// <summary>
     /// should this effect fire once
     /// </summary>
     [field: SerializeField] public bool FireOnce = false;
 
-    public BatteryEffect(string name, BatteryEffectType type, float duration, float strength, float strengthMultiplier, float tickRate, bool fireOnce){
+    /// <summary>
+    /// Event to trigger after the battery effect is finished
+    /// </summary>
+    [field: SerializeField] public UnityEvent FinishEvent {get; set;}
+
+    public BatteryEffect(string name, BatteryEffectType type, float duration, float strength, 
+                        float strengthMultiplier, float tickRate, bool fireOnce, bool turnsOffWhenEmpty,
+                        UnityEvent unityEvent){
         Name = name;
         EffectType = type;
         Duration = duration;
@@ -148,6 +219,8 @@ public class BatteryEffect{
         StrengthMultiplier = strengthMultiplier;
         TickRate = tickRate;
         FireOnce = fireOnce;
+        TurnsOffWhenEmpty = turnsOffWhenEmpty;
+        FinishEvent = unityEvent;
     }
 
     public BatteryEffect Clone(){

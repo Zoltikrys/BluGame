@@ -53,6 +53,7 @@ public class SceneManager : MonoBehaviour
             throw new System.Exception($"Tried accessing invalid scene ({scene}). Exiting...");
         }
         LockPlayer();
+        if(Player) Player.GetComponent<RgbGoggles>().TurnGogglesOff();
         if(Player) StateManager.StorePlayerInfo(Player);
         else {
             Battery bat = new Battery();
@@ -73,6 +74,7 @@ public class SceneManager : MonoBehaviour
 
     public void Respawn(){
         respawning = true;
+        Player.GetComponent<RgbGoggles>().TurnGogglesOff();
         StateManager.SetPlayerState(Player, StateManager.CurrentCheckPoint.PlayerInfo);
         StateManager.SetStateTracker(StateManager.CurrentCheckPoint.StateTracker);
         RequestLoadScene(StateManager.CurrentCheckPoint.scene, StateManager.CurrentCheckPoint.RoomID, StateManager.CurrentCheckPoint.SpawnPoint);
