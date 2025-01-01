@@ -70,7 +70,7 @@ public class StateManager : MonoBehaviour
                                            DeepCopyUtils.DeepCopyStateTracker(StateTracker));
     }
 
-    public void SetPlayerState(GameObject player)
+    public void SetPlayerState(GameObject player, PlayerInfo playerInfo)
     {
         if(PlayerInfo != null && player){
             HealthManager currentPlayerHealth;
@@ -80,14 +80,14 @@ public class StateManager : MonoBehaviour
             player.TryGetComponent<RgbGoggles>(out currentPlayerGoggles);
             player.TryGetComponent<Battery>(out currentBattery);
 
-            if(currentPlayerHealth) currentPlayerHealth.b_Health = PlayerInfo.HP;
-            if(currentPlayerGoggles) currentPlayerGoggles.GogglesActivated = PlayerInfo.RGB_GoggleState;
+            if(currentPlayerHealth) currentPlayerHealth.b_Health = playerInfo.HP;
+            if(currentPlayerGoggles) currentPlayerGoggles.GogglesActivated = playerInfo.RGB_GoggleState;
             if(currentBattery){
-                Debug.Log($"Setting battery to: {PlayerInfo.BatteryCharge}/{PlayerInfo.MaxBatteryCharge}");
-                currentBattery.CurrentBatteryCharge = PlayerInfo.BatteryCharge;
-                currentBattery.MaxCharge = PlayerInfo.MaxBatteryCharge;
-                currentBattery.QueuedBatteryEffects = DeepCopyUtils.DeepCopyBatteryEffectList(PlayerInfo.QueuedEffects);
-                currentBattery.QueuedBatteryEffects.AddRange(DeepCopyUtils.DeepCopyBatteryEffectList(PlayerInfo.ProcessingEffects));
+                Debug.Log($"Setting battery to: {playerInfo.BatteryCharge}/{playerInfo.MaxBatteryCharge}");
+                currentBattery.CurrentBatteryCharge = playerInfo.BatteryCharge;
+                currentBattery.MaxCharge = playerInfo.MaxBatteryCharge;
+                currentBattery.QueuedBatteryEffects = DeepCopyUtils.DeepCopyBatteryEffectList(playerInfo.QueuedEffects);
+                currentBattery.QueuedBatteryEffects.AddRange(DeepCopyUtils.DeepCopyBatteryEffectList(playerInfo.ProcessingEffects));
 
                 Debug.Log($"Set {currentBattery.QueuedBatteryEffects.Count} queued effects, {currentBattery.ProcessingBatteryEffects.Count} processing effects");
             }

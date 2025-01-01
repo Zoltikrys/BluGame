@@ -20,6 +20,8 @@ public class SceneManager : MonoBehaviour
 
     [field: SerializeField] public GameObject Player;
 
+    private bool respawning = false;
+
     //room ID
 
 
@@ -70,7 +72,8 @@ public class SceneManager : MonoBehaviour
     }
 
     public void Respawn(){
-        StateManager.SetPlayerState(Player);
+        respawning = true;
+        StateManager.SetPlayerState(Player, StateManager.CurrentCheckPoint.PlayerInfo);
         StateManager.SetStateTracker(StateManager.CurrentCheckPoint.StateTracker);
         RequestLoadScene(StateManager.CurrentCheckPoint.scene, StateManager.CurrentCheckPoint.RoomID, StateManager.CurrentCheckPoint.SpawnPoint);
     }
@@ -105,12 +108,13 @@ public class SceneManager : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
 
         StateManager.SetRoomState(scene.name);
-        StateManager.SetPlayerState(Player);
+        StateManager.SetPlayerState(Player, StateManager.PlayerInfo);
 
         SetSpawn(scene);
         SetCamera(scene);
 
         UnlockPlayer();
+        respawning = false;
     }
 
     void OnDestroy(){
@@ -153,14 +157,14 @@ public class SceneManager : MonoBehaviour
                 newSpawnPoint = SpawnPoints.transform.GetChild((int)RequestedSpawnPoint).transform.gameObject;
                 CheckPointable a;
                 if(newSpawnPoint.TryGetComponent<CheckPointable>(out a)) {
-                    if(a.isCheckpoint){
+                    if(a.isCheckpoint && !respawning){
                         StateManager.SetCheckpoint(CurrentScene, RoomID, RequestedSpawnPoint);
-                        StateManager.SetPlayerState(Player);
+                        //StateManager.SetPlayerState(Player, StateManager.PlayerInfo);
                     }
                     
                 }else if(StateManager.CurrentCheckPoint.scene == LEVELS.NO_SCENE){
                     StateManager.SetCheckpoint(CurrentScene, RoomID, RequestedSpawnPoint);
-                    StateManager.SetPlayerState(Player);
+                    //StateManager.SetPlayerState(Player, StateManager.PlayerInfo);
                 }
             }
             else Debug.LogWarning($"Could not find spawn point {RequestedSpawnPoint}. Setting Player to {new Vector3()}");
