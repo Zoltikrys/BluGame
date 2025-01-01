@@ -42,7 +42,7 @@ public class Battery : MonoBehaviour
 
     private IEnumerator ProcessQueuedBatteryEffects(){
         while(true){
-            foreach(BatteryEffect batteryEffect in QueuedBatteryEffects){
+            foreach(BatteryEffect batteryEffect in new List<BatteryEffect>(QueuedBatteryEffects)){
                 StartCoroutine("BatteryTick", batteryEffect);
             }
             QueuedBatteryEffects.Clear();

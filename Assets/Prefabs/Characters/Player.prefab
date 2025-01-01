@@ -112,12 +112,49 @@ MonoBehaviour:
   smallMagnetPullSpeed: 10
   smallMagnetStopDistance: 1.5
   bigMagnetTag: BigMagnet
-  bigMagnetPullSpeed: 5
+  bigMagnetPullSpeed: 7
   bigMagnetRange: 20
   detectionRadius: 20
   isMagnetized: 0
   isMagnetAbilityActive: 1
   <smallMagnetTarget>k__BackingField: {fileID: 0}
+  <MagnetBatteryCost>k__BackingField:
+  - <Name>k__BackingField: MagnetInitialCost
+    <EffectType>k__BackingField: 1
+    <Duration>k__BackingField: -1
+    <StrengthMultiplier>k__BackingField: 1
+    <Strength>k__BackingField: 5
+    <TickRate>k__BackingField: 1
+    <Runtime>k__BackingField: 0
+    <TurnsOffWhenEmpty>k__BackingField: 1
+    FireOnce: 1
+    <FinishEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+  - <Name>k__BackingField: MagnetOnCost
+    <EffectType>k__BackingField: 1
+    <Duration>k__BackingField: -1
+    <StrengthMultiplier>k__BackingField: 1
+    <Strength>k__BackingField: 5
+    <TickRate>k__BackingField: 1
+    <Runtime>k__BackingField: 0
+    <TurnsOffWhenEmpty>k__BackingField: 1
+    FireOnce: 0
+    <FinishEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3395225010870587025}
+          m_TargetAssemblyTypeName: MagnetAbility, Assembly-CSharp
+          m_MethodName: TurnOffMagnet
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1739906687256751477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,8 +255,32 @@ MonoBehaviour:
   MinCharge: 0
   AbsoluteMaximumBatteryChargeIncrease: 200
   AbsoluteMinimumBatteryChargeDecrease: 50
-  ProcessingBatteryEffects: []
-  QueuedBatteryEffects: []
+  ProcessingBatteryEffects:
+  - <Name>k__BackingField: 
+    <EffectType>k__BackingField: 0
+    <Duration>k__BackingField: -1
+    <StrengthMultiplier>k__BackingField: 1
+    <Strength>k__BackingField: 1
+    <TickRate>k__BackingField: 0
+    <Runtime>k__BackingField: 0
+    <TurnsOffWhenEmpty>k__BackingField: 0
+    FireOnce: 0
+    <FinishEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+  QueuedBatteryEffects:
+  - <Name>k__BackingField: asdasd
+    <EffectType>k__BackingField: 0
+    <Duration>k__BackingField: -1
+    <StrengthMultiplier>k__BackingField: 1
+    <Strength>k__BackingField: 1
+    <TickRate>k__BackingField: 0
+    <Runtime>k__BackingField: 0
+    <TurnsOffWhenEmpty>k__BackingField: 0
+    FireOnce: 0
+    <FinishEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!136 &183861393161317643
 CapsuleCollider:
   m_ObjectHideFlags: 0

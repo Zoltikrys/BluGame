@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -25,6 +26,8 @@ public class MagnetAbility : MonoBehaviour
     private CharacterController characterController; // Reference to player movement
     private GameObject controllerScript;
 
+    [field: SerializeField] public List<BatteryEffect> MagnetBatteryCost {get; set;}
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -34,9 +37,18 @@ public class MagnetAbility : MonoBehaviour
     void Update()
     {
         // Toggle magnet ability
+   
         if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Fire2")) // Change "M" to your preferred key
         {
-            isMagnetActive = !isMagnetActive;
+            if(!isMagnetActive){
+                if(GetComponent<Battery>().AttemptAddBatteryEffects(MagnetBatteryCost, true)){
+                    isMagnetActive = true;
+                }
+            }
+            else {
+                isMagnetActive = false;
+                GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
+            }
 
             if (!isMagnetActive) // Release any active magnet
             {
@@ -104,6 +116,7 @@ public class MagnetAbility : MonoBehaviour
         {
             if (obj.CompareTag(bigMagnetTag))
             {
+                
                 Vector3 directionToMagnet = (obj.transform.position - transform.position).normalized;
                 float distanceToMagnet = Vector3.Distance(transform.position, obj.transform.position);
 
@@ -133,5 +146,12 @@ public class MagnetAbility : MonoBehaviour
             }
             smallMagnetTarget = null; // Clear the reference
         }
+    }
+
+    public void TurnOffMagnet(){
+        ReleaseSmallMagnet();
+        isMagnetized = false;
+        isMagnetActive = false;
+        GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
     }
 }

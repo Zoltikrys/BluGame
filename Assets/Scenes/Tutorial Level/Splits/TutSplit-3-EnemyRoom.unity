@@ -10461,6 +10461,10 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 645921805136267893, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: AbsoluteMinimumBatteryChargeDecrease
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1464935671355033948, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -10504,6 +10508,110 @@ PrefabInstance:
     - target: {fileID: 2613230712092152565, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[0].FireOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].FireOnce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[0].<Name>k__BackingField
+      value: MagnetInitialCost
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<Name>k__BackingField
+      value: MagnetOnCost
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[0].<Duration>k__BackingField
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[0].<Strength>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[0].<TickRate>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<Duration>k__BackingField
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<Strength>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<TickRate>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[0].<EffectType>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<EffectType>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[0].<TurnsOffWhenEmpty>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<TurnsOffWhenEmpty>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[0].<StrengthMultiplier>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<StrengthMultiplier>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[0].<FinishEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<FinishEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<FinishEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<FinishEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2008904034}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[0].<FinishEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<FinishEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<FinishEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TurnOffMagnet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<FinishEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MagnetAbility, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <MagnetBatteryCost>k__BackingField.Array.data[1].<FinishEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7918446809395273470, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_IsActive
@@ -16338,6 +16446,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2613230712092152565, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
   m_PrefabInstance: {fileID: 1119673341}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2008904034 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3395225010870587025, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+  m_PrefabInstance: {fileID: 1119673341}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae94dfe37fa99c0428c367c95010bfef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2020998664
 PrefabInstance:
   m_ObjectHideFlags: 0
