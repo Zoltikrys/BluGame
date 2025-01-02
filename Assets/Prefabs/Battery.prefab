@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1914305567752810346}
-  - component: {fileID: 3540143481040334669}
   - component: {fileID: 9021997856473383445}
   - component: {fileID: 933736018380138738}
   - component: {fileID: 5949842558465047251}
@@ -36,39 +35,6 @@ Transform:
   - {fileID: 1324165920289271029}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3540143481040334669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3696161809180337667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000af5f2891cbdd44946033a9a7077db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <FilterLayer>k__BackingField: 0
-  CollisionWhenHidden: 0
-  ActiveOnColour: 1
-  FadeInStyle:
-    Style: 0
-    FadeDuration: 0
-    StartDelay: 0
-    CollisionThresholdPercentage: 0.9
-    RevealStyle:
-      Style: 0
-      DestroyDelay: 0
-  FadeOutStyle:
-    Style: 0
-    FadeDuration: 0
-    StartDelay: 0
-    CollisionThresholdPercentage: 0.1
-    RevealStyle:
-      Style: 0
-      DestroyDelay: 0
-  IsDisplayed: 0
-  Filterable: 1
 --- !u!54 &9021997856473383445
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -200,10 +166,51 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7425db411a6ab3043b07215e5744b58e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2193906305842269676}
   m_SourcePrefab: {fileID: 100100000, guid: 7425db411a6ab3043b07215e5744b58e, type: 3}
 --- !u!4 &1324165920289271029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7425db411a6ab3043b07215e5744b58e, type: 3}
   m_PrefabInstance: {fileID: 1579312796627651358}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1813738228280555087 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7425db411a6ab3043b07215e5744b58e, type: 3}
+  m_PrefabInstance: {fileID: 1579312796627651358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2193906305842269676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813738228280555087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000af5f2891cbdd44946033a9a7077db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <FilterLayer>k__BackingField: 0
+  CollisionWhenHidden: 0
+  ActiveOnColour: 1
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0.9
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0.1
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
+  IsDisplayed: 0
+  Filterable: 0

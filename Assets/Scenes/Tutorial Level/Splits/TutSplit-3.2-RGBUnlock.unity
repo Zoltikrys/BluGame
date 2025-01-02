@@ -3468,6 +3468,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2193906305842269676, guid: c4c994776ea6a914996cc5e26a899c57, type: 3}
+      propertyPath: Filterable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2193906305842269676, guid: c4c994776ea6a914996cc5e26a899c57, type: 3}
+      propertyPath: <FilterLayer>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3696161809180337667, guid: c4c994776ea6a914996cc5e26a899c57, type: 3}
       propertyPath: m_Name
       value: Battery
@@ -3476,7 +3484,8 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3540143481040334669, guid: c4c994776ea6a914996cc5e26a899c57, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -8135,6 +8144,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3540143481040334669, guid: c4c994776ea6a914996cc5e26a899c57, type: 3}
+      propertyPath: FadeInStyle.Style
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540143481040334669, guid: c4c994776ea6a914996cc5e26a899c57, type: 3}
+      propertyPath: FadeOutStyle.Style
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3696161809180337667, guid: c4c994776ea6a914996cc5e26a899c57, type: 3}
       propertyPath: m_Name
       value: Battery
@@ -8143,7 +8160,8 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3540143481040334669, guid: c4c994776ea6a914996cc5e26a899c57, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
