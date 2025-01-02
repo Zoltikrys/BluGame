@@ -18,6 +18,7 @@ public class batteryCylinderBehaviour : MonoBehaviour
     }
 
     public void RecieveBattery(Collider other){
+        if(other == null) return;
         Debug.Log("Battery accepted");
         Destroy(other.gameObject);
         internalBatteryModel.SetActive(true);

@@ -7,6 +7,8 @@ public class Pickup : MonoBehaviour
     [field: SerializeField] public List<BatteryEffect> PickupBatteryEffects {get; set;} = new List<BatteryEffect>();
 
     public void PickUp(Collider other){
+        if(other == null) return;
+        
         Battery battery;
         other.gameObject.TryGetComponent<Battery>(out battery);
 

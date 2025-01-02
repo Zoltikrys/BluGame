@@ -9,7 +9,6 @@ public class SceneManager : MonoBehaviour
 
     [Tooltip("Current Scene loaded")]
     [field: SerializeField] public LEVELS CurrentScene = LEVELS.NO_SCENE;
-    private string CurrentSceneName = "";
 
     [Tooltip("The current active camera")]
     [field: SerializeField] public Camera CurrentCamera;

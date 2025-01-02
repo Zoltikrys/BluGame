@@ -8,6 +8,21 @@ public class Interactable : MonoBehaviour
     public UnityEvent<Collider> OnStayEvents = new UnityEvent<Collider>();
     public UnityEvent OnFinishEvents = new UnityEvent();
     public GameObject RequiredGameObjectToTrigger;
+    private Collider cachedRequiredCollider;
+
+    private void Awake() {
+        if (RequiredGameObjectToTrigger != null) {
+            cachedRequiredCollider = RequiredGameObjectToTrigger.GetComponent<Collider>();
+        }
+        ForceEventCompilation();
+    }
+
+    private void ForceEventCompilation()
+    {
+        OnEnterEvents?.Invoke(null);
+        OnStayEvents?.Invoke(null);
+        OnExitEvents?.Invoke(null);
+    }
 
     private void OnTriggerEnter(Collider collider){
         if(IsCorrectCollider(collider)) OnEnterEvents?.Invoke(collider);
@@ -26,15 +41,7 @@ public class Interactable : MonoBehaviour
     }
 
     private bool IsCorrectCollider(Collider collider){
-        bool IsCorrectCollider = false;
-        Collider requiredCollider = null;
-        if(RequiredGameObjectToTrigger != null) RequiredGameObjectToTrigger.TryGetComponent<Collider>(out requiredCollider);
-        else IsCorrectCollider = true;
-
-        if(requiredCollider){
-            if(requiredCollider == collider) IsCorrectCollider = true;
-        }
-        return IsCorrectCollider;
+        return cachedRequiredCollider == null || cachedRequiredCollider == collider;
     }
 
 

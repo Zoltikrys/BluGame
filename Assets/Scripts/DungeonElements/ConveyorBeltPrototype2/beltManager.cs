@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class beltManager : MonoBehaviour
 {
-    [SerializeField]
-    private float speed = 2;
+    //[SerializeField] private float speed = 2;
 }

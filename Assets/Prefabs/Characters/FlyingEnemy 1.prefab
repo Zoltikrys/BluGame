@@ -62,7 +62,7 @@ MonoBehaviour:
   TargettingColour: {r: 0.8018868, g: 0.61777973, b: 0.23829654, a: 0}
   PatrollingColour: {r: 0.29428852, g: 0.8301887, b: 0.21537916, a: 0}
   AttackingColour: {r: 0.7830189, g: 0.003693494, b: 0.003693494, a: 0}
-  light: {fileID: 8025767756965549514}
+  spotlight: {fileID: 8025767756965549514}
   anim: {fileID: 1203633023867932607}
 --- !u!54 &1479766441217421866
 Rigidbody:
@@ -158,7 +158,7 @@ MonoBehaviour:
       isDead: 0
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
-  <UniqueID>k__BackingField: 0861db10-7c12-4931-81a8-1dfd9fc38804
+  <UniqueID>k__BackingField: 8d6b3889-7172-46f2-84b1-4a50922ba692
 --- !u!114 &4198614521401788000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   <MaximumHP>k__BackingField: 10
   cooldownTime: 1
   flashTime: 0
-  renderer: {fileID: 0}
+  meshRenderer: {fileID: 0}
   material: {fileID: 0}
   anim: {fileID: 1203633023867932607}
 --- !u!95 &1203633023867932607

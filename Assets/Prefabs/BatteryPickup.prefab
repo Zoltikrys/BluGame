@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3157743689616002113}
   - component: {fileID: 8831185494474641502}
   - component: {fileID: 1710043786102787405}
+  - component: {fileID: 4869598134609057828}
   m_Layer: 3
   m_Name: BatteryPickup
   m_TagString: Untagged
@@ -117,7 +118,7 @@ MonoBehaviour:
       isDead: 0
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
-  <UniqueID>k__BackingField: b32030f7e3da3c44ead4e4e338d8ba38
+  <UniqueID>k__BackingField: a6aa0a62-5a3f-4129-9662-5b97e8a420b5
 --- !u!114 &8831185494474641502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,15 +180,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1d1366fd7af2a4ca3dffb21d239b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <PickupBatteryEffect>k__BackingField:
-    <Name>k__BackingField: 
-    <EffectType>k__BackingField: 0
-    <Duration>k__BackingField: 0
-    <StrengthMultiplier>k__BackingField: 0
-    <Strength>k__BackingField: 0
-    <TickRate>k__BackingField: 0
-    <Runtime>k__BackingField: 0
-    FireOnce: 0
+  <PickupBatteryEffects>k__BackingField: []
+--- !u!95 &4869598134609057828
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3696161809180337667}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d1f753eb36a90134a8a641d4880911e1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1579312796627651358
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -53,6 +53,8 @@ public class upgradeTubeBehaviour : MonoBehaviour
     }
 
     public void TryUpgrade(Collider other){
+        if(other == null) return;
+        
         if(other.gameObject == player){
             GetComponent<CapsuleCollider>().enabled = false;
             Upgrade();

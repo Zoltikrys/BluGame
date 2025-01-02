@@ -8,9 +8,6 @@ public class HealthManager : MonoBehaviour
     [field: SerializeField] public int StartingHP {get; set;} = 0;
     [field: SerializeField] public int MaximumHP {get; set;} = 10;
 
-    private bool damageBool = true;
-    private bool newState = false;
-
     [SerializeField]
     private float cooldownTime = 1.0f;
 
@@ -58,7 +55,6 @@ public class HealthManager : MonoBehaviour
         m_DamageCooldown = cooldownTime;
         b_Health -= 1;
         Debug.Log(b_Health);
-        damageBool = false;
 
         StartCoroutine(EFlash());
 
