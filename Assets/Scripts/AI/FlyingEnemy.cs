@@ -11,7 +11,7 @@ public class FlyingEnemy : Enemy
     [field: SerializeField] public Color TargettingColour;
     [field: SerializeField] public Color PatrollingColour;
     [field: SerializeField] public Color AttackingColour;
-    [field: SerializeField] public GameObject light;
+    [field: SerializeField] public GameObject spotlight;
     [field: SerializeField] public Animator anim;
 
     protected override void Start()
@@ -30,7 +30,7 @@ public class FlyingEnemy : Enemy
     protected override void PatrollingState()
     {
         anim.Play("NormalFlying");
-        light.GetComponent<Light>().color = PatrollingColour;
+        spotlight.GetComponent<Light>().color = PatrollingColour;
         base.PatrollingState();
     }
 
@@ -40,7 +40,7 @@ public class FlyingEnemy : Enemy
     }
     protected override void TargetingState()
     {
-        light.GetComponent<Light>().color = TargettingColour;
+        spotlight.GetComponent<Light>().color = TargettingColour;
 
         playerSeen = false; // Reset playerSeen
         hasHit = false; // Reset hasHit
@@ -65,7 +65,7 @@ public class FlyingEnemy : Enemy
 
     protected override void AttackState()
     {
-        light.GetComponent<Light>().color = AttackingColour;
+        spotlight.GetComponent<Light>().color = AttackingColour;
         anim.Play("AngryFlying");
         // Reset timeRemaining
         timeRemaining = timeToTarget;

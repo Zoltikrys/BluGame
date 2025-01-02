@@ -18,7 +18,7 @@ public class HealthManager : MonoBehaviour
 
     public float flashTime;
     Color originalColor;
-    public MeshRenderer renderer;
+    public MeshRenderer meshRenderer;
     public Material material;
     public Animator anim;
 
@@ -27,8 +27,8 @@ public class HealthManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        renderer = gameObject.GetComponentInChildren<MeshRenderer>();
-        material = renderer.material;
+        meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
+        material = meshRenderer.material;
         //originalColor = material.GetColor("_Tint");
 
         if(transform.gameObject.name == "Player") RenderTarget = GameObject.FindGameObjectWithTag("HP");

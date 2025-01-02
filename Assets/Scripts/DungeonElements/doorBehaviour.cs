@@ -12,7 +12,7 @@ public class doorBehaviour : MonoBehaviour
     [SerializeField] private GameObject leftDoor;
     [SerializeField] 
     private GameObject rightDoor;
-    [SerializeField] public GameObject collider;
+    [SerializeField] public GameObject doorCollider;
 
     [SerializeField]
     private Animator animator = null;
@@ -50,7 +50,7 @@ public class doorBehaviour : MonoBehaviour
         //leftDoor.SetActive(false);
         //rightDoor.SetActive(false);
         doorOpenFlag = true;
-        collider.GetComponent<Collider>().enabled = true;
+        doorCollider.GetComponent<Collider>().enabled = true;
     }
 
     private void CloseDoor()
@@ -60,6 +60,6 @@ public class doorBehaviour : MonoBehaviour
         //leftDoor.SetActive(true);
         //rightDoor.SetActive(true);
         doorOpenFlag = false;
-        collider.GetComponent<Collider>().enabled = false;
+        doorCollider.GetComponent<Collider>().enabled = false;
     }
 }
