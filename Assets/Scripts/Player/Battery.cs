@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -62,7 +61,8 @@ public class Battery : MonoBehaviour
         
         while(batteryEffect.Runtime <= batteryEffect.Duration + batteryEffect.TickRate || batteryEffect.Duration < 0.0f){ // if duration is negative, run forever, otherwise wait for elapsed time and exit
             Debug.Log($"Processing: {batteryEffect.Print()}");
-            if(!ProcessingBatteryEffects.Contains(batteryEffect)) break;
+            if(!ProcessingBatteryEffects.Contains(batteryEffect)) break; 
+
             switch(batteryEffect.EffectType){
                 case BatteryEffectType.CHARGE_INCREASE: HandleChargeIncease(batteryEffect);
                                                              break;
@@ -77,11 +77,10 @@ public class Battery : MonoBehaviour
             if(batteryEffect.FireOnce) break; // if one time increase exit loop
             if(batteryEffect.TurnsOffWhenEmpty && CurrentBatteryCharge <= 0) break; // Turn effect off when battery charge empty
 
-            
             batteryEffect.Runtime += batteryEffect.TickRate;
             yield return new WaitForSeconds(batteryEffect.TickRate);
         }
-        if(ProcessingBatteryEffects.Contains(batteryEffect)) batteryEffect.FinishEvent?.Invoke();
+        if(ProcessingBatteryEffects.Contains(batteryEffect)) batteryEffect.FinishEvent?.Invoke(); // if battery effect removed early do not fire end event
         Debug.Log($"Finished processing battery effect: {batteryEffect.Print()}");
 
         ProcessingBatteryEffects.Remove(batteryEffect);

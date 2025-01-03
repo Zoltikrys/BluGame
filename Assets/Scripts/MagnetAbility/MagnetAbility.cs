@@ -21,8 +21,8 @@ public class MagnetAbility : MonoBehaviour
     public bool isMagnetized;
     public bool isMagnetAbilityActive = true;
 
-    [field: SerializeField] public GameObject smallMagnetTarget
-    { get; private set; }// Currently tracked small magnet
+    [field: SerializeField] public GameObject smallMagnetTarget { get; private set; }// Currently tracked small magnet
+    private bool smallMagnetTargetMagnetised = false;
     private CharacterController characterController; // Reference to player movement
     private GameObject controllerScript;
 
@@ -37,6 +37,7 @@ public class MagnetAbility : MonoBehaviour
     void Update()
     {
         // Toggle magnet ability
+        if(smallMagnetTargetMagnetised && smallMagnetTarget == null) TurnOffMagnet(); // fires when our gameobject is consumed or deleted out of the scene.
    
         if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Fire2")) // Change "M" to your preferred key
         {
@@ -82,6 +83,7 @@ public class MagnetAbility : MonoBehaviour
 
         if (smallMagnetTarget != null)
         {
+            smallMagnetTargetMagnetised = true;
             // Calculate stop position in front of the player
             Vector3 stopPosition = transform.position + transform.forward * smallMagnetStopDistance;
 
@@ -106,6 +108,8 @@ public class MagnetAbility : MonoBehaviour
                 }
             }
         }
+
+
     }
 
     void HandleBigMagnets()
@@ -152,6 +156,7 @@ public class MagnetAbility : MonoBehaviour
         ReleaseSmallMagnet();
         isMagnetized = false;
         isMagnetActive = false;
+        smallMagnetTargetMagnetised = false;
         GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
     }
 }
