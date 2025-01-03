@@ -17,6 +17,9 @@ public class MagnetAbility : MonoBehaviour
 
     [Header("General Settings")]
     public float detectionRadius = 20f; // Radius for detecting magnets
+    public float FrontConeAngle = 60f;
+    public Color DebugSphereColour = Color.cyan;
+    public Color DebugConeColour = Color.yellow;
     private bool isMagnetActive = false;
     public bool isMagnetized;
     public bool isMagnetAbilityActive = true;
@@ -71,12 +74,22 @@ public class MagnetAbility : MonoBehaviour
         {
             Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, detectionRadius);
 
+            float MinDistance = Mathf.Infinity;
+
             foreach (Collider obj in nearbyObjects)
             {
                 if (obj.CompareTag(smallMagnetTag))
                 {
-                    smallMagnetTarget = obj.gameObject;
-                    break; // Stop searching after finding one
+                    Vector3 toObject = (obj.transform.position - transform.position).normalized;
+                    float angle = Vector3.Angle(transform.forward, toObject);
+
+                    if (angle <= FrontConeAngle / 2) // angle detection to make sure the magnet is magnetising from the front
+                    {
+                        if(Vector3.Distance(transform.position, obj.transform.position) <= MinDistance){
+                            MinDistance = Vector3.Distance(transform.position, obj.transform.position);
+                            smallMagnetTarget = obj.gameObject;
+                        }
+                    }
                 }
             }
         }
@@ -159,4 +172,36 @@ public class MagnetAbility : MonoBehaviour
         smallMagnetTargetMagnetised = false;
         GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
     }
+
+    private void OnDrawGizmos()
+{
+    // Draw the OverlapSphere
+    Gizmos.color = DebugSphereColour;
+    Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+    // Draw the cone
+    Gizmos.color = DebugConeColour;
+
+    // Calculate the cone edges
+    Vector3 forward = transform.forward * detectionRadius;
+    Quaternion leftRotation = Quaternion.Euler(0, -FrontConeAngle / 2, 0);
+    Quaternion rightRotation = Quaternion.Euler(0, FrontConeAngle / 2, 0);
+
+    Vector3 leftEdge = leftRotation * forward;
+    Vector3 rightEdge = rightRotation * forward;
+
+    // Draw cone lines
+    Gizmos.DrawLine(transform.position, transform.position + leftEdge);
+    Gizmos.DrawLine(transform.position, transform.position + rightEdge);
+
+    // Optional: Draw a wire arc for the cone
+    int segments = 20; // Number of segments for the arc
+    for (int i = 0; i <= segments; i++)
+    {
+        float angle = -FrontConeAngle / 2 + (FrontConeAngle * i / segments);
+        Quaternion rotation = Quaternion.Euler(0, angle, 0);
+        Vector3 point = transform.position + rotation * forward;
+        Gizmos.DrawLine(transform.position + rotation * forward, point);
+    }
+}
 }
