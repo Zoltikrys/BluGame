@@ -82,6 +82,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2d0f9ac8dfba4554badb8cc7aba1114a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 266036604342426530}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2d0f9ac8dfba4554badb8cc7aba1114a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6303776915066011921}
   m_SourcePrefab: {fileID: 100100000, guid: 2d0f9ac8dfba4554badb8cc7aba1114a, type: 3}
 --- !u!1 &181054880773170540 stripped
 GameObject:
@@ -136,3 +139,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6303776915066011921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181054880773170540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000af5f2891cbdd44946033a9a7077db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <FilterLayer>k__BackingField: 0
+  CollisionWhenHidden: 0
+  ActiveOnColour: 1
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0.9
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0.1
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
+  IsDisplayed: 0
+  Filterable: 0

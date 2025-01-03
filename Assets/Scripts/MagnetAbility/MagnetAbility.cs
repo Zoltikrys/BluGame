@@ -174,34 +174,34 @@ public class MagnetAbility : MonoBehaviour
     }
 
     private void OnDrawGizmos()
-{
-    // Draw the OverlapSphere
-    Gizmos.color = DebugSphereColour;
-    Gizmos.DrawWireSphere(transform.position, detectionRadius);
-
-    // Draw the cone
-    Gizmos.color = DebugConeColour;
-
-    // Calculate the cone edges
-    Vector3 forward = transform.forward * detectionRadius;
-    Quaternion leftRotation = Quaternion.Euler(0, -FrontConeAngle / 2, 0);
-    Quaternion rightRotation = Quaternion.Euler(0, FrontConeAngle / 2, 0);
-
-    Vector3 leftEdge = leftRotation * forward;
-    Vector3 rightEdge = rightRotation * forward;
-
-    // Draw cone lines
-    Gizmos.DrawLine(transform.position, transform.position + leftEdge);
-    Gizmos.DrawLine(transform.position, transform.position + rightEdge);
-
-    // Optional: Draw a wire arc for the cone
-    int segments = 20; // Number of segments for the arc
-    for (int i = 0; i <= segments; i++)
     {
-        float angle = -FrontConeAngle / 2 + (FrontConeAngle * i / segments);
-        Quaternion rotation = Quaternion.Euler(0, angle, 0);
-        Vector3 point = transform.position + rotation * forward;
-        Gizmos.DrawLine(transform.position + rotation * forward, point);
+        // Draw the OverlapSphere
+        Gizmos.color = DebugSphereColour;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+        // Draw the cone
+        Gizmos.color = DebugConeColour;
+
+        // Calculate the cone edges
+        Vector3 forward = transform.forward * detectionRadius;
+        Quaternion leftRotation = Quaternion.Euler(0, -FrontConeAngle / 2, 0);
+        Quaternion rightRotation = Quaternion.Euler(0, FrontConeAngle / 2, 0);
+
+        Vector3 leftEdge = leftRotation * forward;
+        Vector3 rightEdge = rightRotation * forward;
+
+        // Draw cone lines
+        Gizmos.DrawLine(transform.position, transform.position + leftEdge);
+        Gizmos.DrawLine(transform.position, transform.position + rightEdge);
+
+        // Optional: Draw a wire arc for the cone
+        int segments = 20; // Number of segments for the arc
+        for (int i = 0; i <= segments; i++)
+        {
+            float angle = -FrontConeAngle / 2 + (FrontConeAngle * i / segments);
+            Quaternion rotation = Quaternion.Euler(0, angle, 0);
+            Vector3 point = transform.position + rotation * forward;
+            Gizmos.DrawLine(transform.position + rotation * forward, point);
+        }
     }
-}
 }
