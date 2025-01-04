@@ -14,10 +14,12 @@ public class PlayerController : MonoBehaviour
     private bool canMove = true;
 
     public float playerSpeed = 2.0f;
+    public float rotationSpeed = 5.0f;
     public float jumpHeight = 1.0f;
     public float gravity = -9.81f;
 
     private PlayerLocomotionInput locomotionInput;
+    
 
     private void Awake()
     {
@@ -49,26 +51,48 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if(canMove){ // Block input if player cannot move
-            Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            Vector3 movementDirection = new Vector3(locomotionInput.MovementInput.x, 0f, locomotionInput.MovementInput.y).normalized;
-            controller.Move(move * Time.deltaTime * playerSpeed);
+        if (canMove) // Block input if player cannot move
+        {
+            // Get input
+            Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-            if (move != Vector3.zero)
+            // Normalize input
+            Vector3 movementDirection = inputDirection.normalized;
+
+            // Get camera's forward and right directions
+            Vector3 cameraForward = Camera.main.transform.forward;
+            Vector3 cameraRight = Camera.main.transform.right;
+
+            // Ignore the camera's vertical tilt
+            cameraForward.y = 0f;
+            cameraRight.y = 0f;
+
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+
+            // Combine input with camera's forward and right
+            Vector3 relativeDirection = (cameraForward * movementDirection.z) + (cameraRight * movementDirection.x);
+
+            // Move the character
+            if (movementDirection.magnitude > 0.1f) // Check if input is significant
             {
-                gameObject.transform.forward = move;
+                controller.Move(relativeDirection * Time.deltaTime * playerSpeed);
+
+                // Rotate the character and its model to face the movement direction
+                Quaternion targetRotation = Quaternion.LookRotation(relativeDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             }
-
-            // Makes the player jump
-            if ((locomotionInput.JumpPressed || Input.GetButtonDown("Fire1")) && groundedPlayer)
+            else
             {
-                playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+                // Stop character movement
+                controller.Move(Vector3.zero);
             }
         }
 
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
-    }
+
+}
 
 
     void OnCollisionEnter(Collision collision)
