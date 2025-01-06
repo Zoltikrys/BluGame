@@ -87,6 +87,10 @@ public class PlayerController : MonoBehaviour
                 // Stop character movement
                 controller.Move(Vector3.zero);
             }
+            if (groundedPlayer && Input.GetButtonDown("Jump")) // Default Unity input for jump is "Jump"
+            {
+                playerVelocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
         }
 
         playerVelocity.y += gravity * Time.deltaTime;

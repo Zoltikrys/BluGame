@@ -7,11 +7,15 @@ public class TweenedObject : MonoBehaviour{
     [field:SerializeField] public List<TweenDestination> tweenPositions = new List<TweenDestination>();
     public TweenDestination prevPosition;
     public TweenType type;
+    public TweenTrigger triggerType;
     public float DelayBeforeStarting = 1.0f;
     public int tweenIndex = 0;
     public bool paused = false;
 
     public bool ForwardsAndBackwards = false;
+    private bool nextTweenRequested = false;
+    private bool isDestinationHit = false;
+    private bool forward = true;
 
 
     void Start(){
@@ -50,7 +54,6 @@ public class TweenedObject : MonoBehaviour{
     IEnumerator StartTweeningList(){
         yield return new WaitForSeconds(DelayBeforeStarting);
 
-        bool forward = true;
         while(true){
             if(tweenPositions.Count <= 1) yield break; // no elements or no tween
 
@@ -58,37 +61,53 @@ public class TweenedObject : MonoBehaviour{
 
             TweenDestination target =  tweenPositions[tweenIndex];
 
-            yield return StartCoroutine(TweenToTarget(target));
+            if(!isDestinationHit) yield return StartCoroutine(TweenToTarget(target));
 
             prevPosition = target;
-            
-            if(type == TweenType.FORWARDS_ONLY){
+
+            if(triggerType == TweenTrigger.NONE) GoToNextTween();
+            else if(triggerType == TweenTrigger.ONEVENT && nextTweenRequested){
+                GoToNextTween();
+                nextTweenRequested = false;
+            }
+        }
+    }
+
+    public void RequestNextTween(Collider other){
+        if(other == null) return;
+
+        Debug.Log("Next Tween requested");
+        nextTweenRequested = true;
+    }
+
+    private void GoToNextTween(){
+        if(type == TweenType.FORWARDS_ONLY){
                 tweenIndex += 1;
                 if(tweenIndex >= tweenPositions.Count) tweenIndex = 0;
             }
 
-            if(type == TweenType.BACKWARDS_ONLY){
-                 tweenIndex -= 1;
-                if(tweenIndex < 0) tweenIndex = tweenPositions.Count - 1;
-            }
-            if(type == TweenType.FORWARDS_AND_BACKWARDS){
-                if(forward){
-                    tweenIndex += 1;
-                    if(tweenIndex >= tweenPositions.Count){
-                        forward = false;
-                        tweenIndex -= 1;
-                    }
-                }
-                else{
-                    tweenIndex -= 1;
-                    if(tweenIndex < 0) {
-                        tweenIndex += 1;
-                        forward = true;
-                    }
-                }
-            }
-
+        if(type == TweenType.BACKWARDS_ONLY){
+                tweenIndex -= 1;
+            if(tweenIndex < 0) tweenIndex = tweenPositions.Count - 1;
         }
+        if(type == TweenType.FORWARDS_AND_BACKWARDS){
+            if(forward){
+                tweenIndex += 1;
+                if(tweenIndex >= tweenPositions.Count){
+                    forward = false;
+                    tweenIndex -= 1;
+                }
+            }
+            else{
+                tweenIndex -= 1;
+                if(tweenIndex < 0) {
+                    tweenIndex += 1;
+                    forward = true;
+                }
+            }
+        }
+
+        isDestinationHit = false;
     }
 }
 

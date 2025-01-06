@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 1739906687256751477}
   - component: {fileID: -3647002279214618310}
   - component: {fileID: 645921805136267893}
-  - component: {fileID: 183861393161317643}
   - component: {fileID: 248206118749007324}
+  - component: {fileID: 6875722939435530671}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -51,7 +51,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -81,7 +81,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 107750649550718847}
   isMagnetized: 0
-  playerSpeed: 2
+  playerSpeed: 3
+  rotationSpeed: 5
   jumpHeight: 1
   gravity: -9.81
 --- !u!114 &8461529179585224728
@@ -115,6 +116,9 @@ MonoBehaviour:
   bigMagnetPullSpeed: 7
   bigMagnetRange: 20
   detectionRadius: 20
+  FrontConeAngle: 60
+  DebugSphereColour: {r: 0, g: 1, b: 1, a: 1}
+  DebugConeColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   isMagnetized: 0
   isMagnetAbilityActive: 1
   <smallMagnetTarget>k__BackingField: {fileID: 0}
@@ -281,29 +285,6 @@ MonoBehaviour:
     <FinishEvent>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
---- !u!136 &183861393161317643
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1464935671355033948}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.25
-  m_Height: 1.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!95 &248206118749007324
 Animator:
   serializedVersion: 5
@@ -325,6 +306,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &6875722939435530671
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464935671355033948}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &4565890587019788149
 PrefabInstance:
   m_ObjectHideFlags: 0

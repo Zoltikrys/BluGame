@@ -46,7 +46,7 @@ public class Laser : MonoBehaviour
 
             for(int i = 0; i < objectCount; i++){
                 if (collidedObjects[i].collider.gameObject != gameObject){ // Dont detect self
-                    Debug.Log($"Collided with: {collidedObjects[i].collider.gameObject.name}");
+                    //Debug.Log($"Collided with: {collidedObjects[i].collider.gameObject.name}");
                     HealthManager health;
                     if(collidedObjects[i].collider.gameObject.TryGetComponent<HealthManager>(out health)){
                         if(isActive){

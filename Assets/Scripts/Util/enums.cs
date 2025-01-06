@@ -23,6 +23,11 @@ public enum TweenType{
     FORWARDS_AND_BACKWARDS
 }
 
+public enum TweenTrigger{
+    NONE,
+    ONEVENT
+}
+
 public enum BatteryEffectType{
     CHARGE_INCREASE,
     CHARGE_DECREASE,
