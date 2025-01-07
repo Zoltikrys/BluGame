@@ -6,11 +6,13 @@ public class HealthManager : MonoBehaviour
 {
     [SerializeField]
     [field: SerializeField] public int b_Health {get; set;} = 0;
-    [field: SerializeField] public int StartingHP {get; set;} = 0;
+    [field: SerializeField] public int StartingHP {get; set;} = 10;
     [field: SerializeField] public int MaximumHP {get; set;} = 10;
+    [field: SerializeField] public int Lives{get; set;} = 3;
 
     [SerializeField]
     private float cooldownTime = 1.0f;
+    private bool damageLock = false;
 
     float m_DamageCooldown = 0;
 
@@ -49,6 +51,8 @@ public class HealthManager : MonoBehaviour
     }
     public void Damage()
     {
+        if(damageLock) return;
+
         if(m_DamageCooldown > 0)
         {
             return;
@@ -79,6 +83,7 @@ public class HealthManager : MonoBehaviour
     public void Death()
     {
         Debug.Log($"{name} died");
+        damageLock = true;
         PlayDeathAnimation();
 
 
@@ -101,7 +106,10 @@ public class HealthManager : MonoBehaviour
     
         if(CompareTag("Player")){
             SceneManager sceneManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManager>();
-            sceneManager.Respawn();
+            if(Lives - 1 > 0){
+                sceneManager.LifeLostRespawn();
+            }
+            else sceneManager.GameOver();
         }
         else{
             transform.gameObject.SetActive(false);
@@ -127,6 +135,6 @@ public class HealthManager : MonoBehaviour
     }
 
     public void Respawn(){
-        b_Health = StartingHP;
+        b_Health = MaximumHP;
     }
 }

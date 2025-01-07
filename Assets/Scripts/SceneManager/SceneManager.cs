@@ -1,4 +1,6 @@
-using UnityEditor;
+using System;
+using System.Collections;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,18 +18,13 @@ public class SceneManager : MonoBehaviour
     [field: SerializeField] public StateManager StateManager {get; set;}
 
     public uint RoomID { get; set; }
-
     [field: SerializeField] public GameObject Player;
-
     private bool respawning = false;
-
-    //room ID
 
 
     void Start()
     {
         DontDestroyOnLoad(this);
-
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
         if(FirstLoad != LEVELS.NO_SCENE) {
@@ -46,11 +43,13 @@ public class SceneManager : MonoBehaviour
     }
 
     public void RequestLoadScene(LEVELS scene, uint id, uint requestedSpawnpoint){
+        Debug.Log($"Request load scene from: {System.Environment.StackTrace}");
         string sceneName;
         RoomDirectory.StoredRooms.TryGetValue(scene, out sceneName);
         if(sceneName == ""){
             throw new System.Exception($"Tried accessing invalid scene ({scene}). Exiting...");
         }
+
         LockPlayer();
         if(Player) Player.GetComponent<RgbGoggles>().TurnGogglesOff();
         if(Player) StateManager.StorePlayerInfo(Player);
@@ -59,8 +58,9 @@ public class SceneManager : MonoBehaviour
             bat.CurrentBatteryCharge = 0;
             bat.MaxCharge = 0.0f;
             bat.MinCharge = 0.0f;
-            StateManager.StorePlayerInfo(10, false, false, bat);
+            StateManager.StorePlayerInfo(10, false, false, 3, bat);
         }
+
 
 
         if(CurrentScene != LEVELS.NO_SCENE) StateManager.SetRoomState(sceneName);
@@ -71,10 +71,18 @@ public class SceneManager : MonoBehaviour
         LoadScene(scene, sceneName);
     }
 
-    public void Respawn(){
+    public void LifeLostRespawn(){
+        StateManager.CurrentCheckPoint.PlayerInfo.Lives = Math.Max(0, StateManager.CurrentCheckPoint.PlayerInfo.Lives - 1);
+        Respawn();
+    }
+
+    public void Respawn()
+    {
         respawning = true;
-        Player.GetComponent<RgbGoggles>().TurnGogglesOff();
+        if(Player) Player.GetComponent<RgbGoggles>().TurnGogglesOff();
+        if(Player) Player.GetComponent<HealthManager>().Respawn();
         StateManager.SetPlayerState(Player, StateManager.CurrentCheckPoint.PlayerInfo);
+
         StateManager.SetStateTracker(StateManager.CurrentCheckPoint.StateTracker);
         RequestLoadScene(StateManager.CurrentCheckPoint.scene, StateManager.CurrentCheckPoint.RoomID, StateManager.CurrentCheckPoint.SpawnPoint);
     }
@@ -105,17 +113,48 @@ public class SceneManager : MonoBehaviour
 
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
-        Debug.Log($"Loaded scene: {scene.name}");
-        Player = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(WaitForSceneInitialization());
+        StartCoroutine(WaitForPlayer());
 
+        Debug.Log($"OnSceneLoaded called for {scene.name} in mode {mode}. Stack Trace: {System.Environment.StackTrace}");
+        Player = GameObject.FindGameObjectWithTag("Player");
         StateManager.SetRoomState(scene.name);
-        StateManager.SetPlayerState(Player, StateManager.PlayerInfo);
+        
 
         SetSpawn(scene);
         SetCamera(scene);
 
         UnlockPlayer();
+        if(respawning) {
+            Debug.Log("Respawning");
+            Player.GetComponent<HealthManager>().Respawn();
+            StateManager.SetPlayerState(Player, StateManager.CurrentCheckPoint.PlayerInfo);
+        }
+        else{
+            StateManager.SetPlayerState(Player, StateManager.PlayerInfo);
+        }
         respawning = false;
+
+    }
+
+    private IEnumerator WaitForSceneInitialization()
+    {
+        // Wait for one frame to ensure that objects have finished initialization
+        yield return new WaitForEndOfFrame(); // Wait for one frame
+
+    }
+
+    private IEnumerator WaitForPlayer()
+    {
+        Player = GameObject.Find("Player");
+
+        // Wait until the object is available
+        while (Player == null)
+        {
+            yield return null; // Wait for the object to appear in the scene
+            Player = GameObject.Find("Player");
+        }
+
     }
 
     void OnDestroy(){
@@ -159,6 +198,7 @@ public class SceneManager : MonoBehaviour
                 CheckPointable a;
                 if(newSpawnPoint.TryGetComponent<CheckPointable>(out a)) {
                     if( (StateManager.CurrentCheckPoint.scene == LEVELS.NO_SCENE || a.isCheckpoint) && !respawning){
+                        Debug.Log($"Setting checkpoint   {StateManager.CurrentCheckPoint.scene == LEVELS.NO_SCENE} {a.isCheckpoint} {!respawning}");
                         StateManager.SetCheckpoint(CurrentScene, RoomID, RequestedSpawnPoint);
                     }   
                 }
@@ -186,5 +226,22 @@ public class SceneManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void GameOver()
+    {
+        RequestLoadScene(LEVELS.GAMEOVER, 0, 0);
+        
+    }
+
+    public void LoadGame()
+    {
+        Debug.LogWarning("Load Game called. No implementation");
+    }
+
+    public void GameOverRespawn()
+    {
+        StateManager.CurrentCheckPoint.PlayerInfo.Lives = 3;
+        Respawn();
     }
 }
