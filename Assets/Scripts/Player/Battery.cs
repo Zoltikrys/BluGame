@@ -21,11 +21,11 @@ public class Battery : MonoBehaviour
     void Start(){
         StartCoroutine("ProcessQueuedBatteryEffects");
         RenderTarget = GameObject.FindGameObjectWithTag("BatteryLife");
-        if(RenderTarget != null) RenderTarget.GetComponent<BatteryRenderer>().UpdateBatteryLife(CurrentBatteryCharge, MaxCharge);
+        if(RenderTarget != null) RenderTarget.GetComponent<BaseStatRenderer>().UpdateValues(CurrentBatteryCharge, MaxCharge);
     }
 
     void Update(){
-        if(RenderTarget != null) RenderTarget.GetComponent<BatteryRenderer>().UpdateBatteryLife(CurrentBatteryCharge, MaxCharge); 
+        if(RenderTarget != null) RenderTarget.GetComponent<BaseStatRenderer>().UpdateValues(CurrentBatteryCharge, MaxCharge); 
     }
 
     public void SetBatteryState(float desiredBatteryCharge, float desiredMaxBatteryCharge, List<BatteryEffect> queuedEffects, List<BatteryEffect> processingEffects){
@@ -36,7 +36,7 @@ public class Battery : MonoBehaviour
         ProcessingBatteryEffects.AddRange(processingEffects);
 
 
-        if(RenderTarget != null) RenderTarget.GetComponent<BatteryRenderer>().UpdateBatteryLife(CurrentBatteryCharge, MaxCharge);
+        if(RenderTarget != null) RenderTarget.GetComponent<BaseStatRenderer>().UpdateValues(CurrentBatteryCharge, MaxCharge);
     }
 
     private IEnumerator ProcessQueuedBatteryEffects(){

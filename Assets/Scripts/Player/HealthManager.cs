@@ -19,21 +19,19 @@ public class HealthManager : MonoBehaviour
     public Material material;
     public Animator anim;
 
-    private GameObject RenderTarget {get; set;}
-
-    [SerializeField] private GameObject[] healthBars;
+    [field: SerializeField] public GameObject RenderTarget {get; set;}
+    private BaseStatRenderer HPRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (gameObject.CompareTag("Player")) {
-            UpdateUI();
-        }
+
         meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
         material = meshRenderer.material;
 
         if(transform.gameObject.name == "Player") RenderTarget = GameObject.FindGameObjectWithTag("HP");
-        if(RenderTarget != null) RenderTarget.GetComponent<HPRenderer>().UpdateLife(b_Health, MaximumHP);
+        if(RenderTarget) RenderTarget.TryGetComponent<BaseStatRenderer>(out HPRenderer);
+        if(HPRenderer) HPRenderer.UpdateValues(b_Health, MaximumHP);
     }
 
     // Update is called once per frame
@@ -43,7 +41,7 @@ public class HealthManager : MonoBehaviour
         {
             m_DamageCooldown -= Time.deltaTime;
         }
-        if(RenderTarget != null) RenderTarget.GetComponent<HPRenderer>().UpdateLife(b_Health, MaximumHP);
+        if(HPRenderer) HPRenderer.UpdateValues(b_Health, MaximumHP);
     }
     
     public void SetHealth(int amount){
@@ -59,10 +57,6 @@ public class HealthManager : MonoBehaviour
         m_DamageCooldown = cooldownTime;
         b_Health -= 1;
         Debug.Log(b_Health);
-
-        if (gameObject.CompareTag("Player")) {
-            UpdateUI();
-        }
 
         StartCoroutine(EFlash());
 
@@ -133,21 +127,6 @@ public class HealthManager : MonoBehaviour
     }
 
     public void Respawn(){
-        
-
         b_Health = StartingHP;
-    }
-
-    public void UpdateUI()
-    {
-        for (int i = 0; i < 10; i++) 
-        {
-            if(b_Health >= (i+1)) {
-                healthBars[i].SetActive(true);
-            }
-            else {
-                healthBars[i].SetActive(false);
-            }
-        }
     }
 }

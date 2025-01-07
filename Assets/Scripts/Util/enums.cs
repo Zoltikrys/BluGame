@@ -39,3 +39,8 @@ public enum DungeonElementType{
     NONE,
     BATTERY
 }
+
+public enum TextRenderType{
+    RAW_VALUE,
+    AS_PERCENT
+}
