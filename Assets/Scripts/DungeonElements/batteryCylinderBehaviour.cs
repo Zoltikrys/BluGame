@@ -19,6 +19,11 @@ public class batteryCylinderBehaviour : MonoBehaviour
 
     public void RecieveBattery(Collider other){
         if(other == null) return;
+        
+        DungeonElement element;
+        if(!other.gameObject.TryGetComponent<DungeonElement>(out element)) return; // if not a dungeon element return
+        if(element.type != DungeonElementType.BATTERY) return;  // if not battery, return
+
         Debug.Log("Battery accepted");
         Destroy(other.gameObject);
         internalBatteryModel.SetActive(true);
