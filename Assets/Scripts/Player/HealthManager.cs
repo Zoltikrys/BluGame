@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
@@ -14,19 +15,22 @@ public class HealthManager : MonoBehaviour
     float m_DamageCooldown = 0;
 
     public float flashTime;
-    Color originalColor;
     public MeshRenderer meshRenderer;
     public Material material;
     public Animator anim;
 
     private GameObject RenderTarget {get; set;}
 
+    [SerializeField] private GameObject[] healthBars;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (gameObject.CompareTag("Player")) {
+            UpdateUI();
+        }
         meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
         material = meshRenderer.material;
-        //originalColor = material.GetColor("_Tint");
 
         if(transform.gameObject.name == "Player") RenderTarget = GameObject.FindGameObjectWithTag("HP");
         if(RenderTarget != null) RenderTarget.GetComponent<HPRenderer>().UpdateLife(b_Health, MaximumHP);
@@ -55,6 +59,10 @@ public class HealthManager : MonoBehaviour
         m_DamageCooldown = cooldownTime;
         b_Health -= 1;
         Debug.Log(b_Health);
+
+        if (gameObject.CompareTag("Player")) {
+            UpdateUI();
+        }
 
         StartCoroutine(EFlash());
 
@@ -121,7 +129,7 @@ public class HealthManager : MonoBehaviour
     {
         material.SetColor("_Tint", Color.red);
         yield return new WaitForSeconds(flashTime);
-        material.SetColor("_Tint", originalColor);
+        material.SetColor("_Tint", Color.white);
     }
 
     public void Respawn(){
@@ -130,5 +138,16 @@ public class HealthManager : MonoBehaviour
         b_Health = StartingHP;
     }
 
-
+    public void UpdateUI()
+    {
+        for (int i = 0; i < 10; i++) 
+        {
+            if(b_Health >= (i+1)) {
+                healthBars[i].SetActive(true);
+            }
+            else {
+                healthBars[i].SetActive(false);
+            }
+        }
+    }
 }
