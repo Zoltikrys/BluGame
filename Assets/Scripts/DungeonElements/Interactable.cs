@@ -9,6 +9,7 @@ public class Interactable : MonoBehaviour
     public UnityEvent OnFinishEvents = new UnityEvent();
     public GameObject RequiredGameObjectToTrigger;
     private Collider cachedRequiredCollider;
+    private bool isActive = true;
 
     private void Awake() {
         if (RequiredGameObjectToTrigger != null) {
@@ -25,18 +26,19 @@ public class Interactable : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider collider){
-        if(IsCorrectCollider(collider)) OnEnterEvents?.Invoke(collider);
+        if(IsCorrectCollider(collider) && isActive) OnEnterEvents?.Invoke(collider);
     }
 
     private void OnTriggerExit(Collider collider){
-        if(IsCorrectCollider(collider)) OnExitEvents?.Invoke(collider);
+        if(IsCorrectCollider(collider) && isActive) OnExitEvents?.Invoke(collider);
     }
 
     private void OnTriggerStay(Collider collider){
-        if(IsCorrectCollider(collider)) OnStayEvents?.Invoke(collider);
+        if(IsCorrectCollider(collider) && isActive) OnStayEvents?.Invoke(collider);
     }
 
     public void OnFinish(){
+        isActive = false;
         OnFinishEvents?.Invoke();
     }
 

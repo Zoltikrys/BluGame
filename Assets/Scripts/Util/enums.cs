@@ -34,3 +34,8 @@ public enum BatteryEffectType{
     MAX_CHARGE_INCREASE,
     MAX_CHARGE_DECREASE
 }
+
+public enum DungeonElementType{
+    NONE,
+    BATTERY
+}
