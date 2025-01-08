@@ -13,6 +13,15 @@ public class StationaryAI : MonoBehaviour
     public float rotateSpeed = 0.1f;
     [SerializeField] protected Transform target;
 
+    //for shooting
+    public GameObject projectilePrefab;
+    public Transform firePoint; // Point from where the projectile will be shot
+
+    public float shootInterval = 2f;
+
+    private float shootTimer;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +35,8 @@ public class StationaryAI : MonoBehaviour
     void Update()
     {
         playerSeen = FOV.canSeePlayer;
+
+        
 
         switch (currentState)
         {
@@ -47,13 +58,7 @@ public class StationaryAI : MonoBehaviour
         transform.Rotate(Vector3.up, 1*rotateSpeed);
         if (playerSeen)
         {
-            Quaternion OriginalRot = transform.rotation;
-            transform.LookAt(new Vector3(target.position.x,
-                                         transform.position.y,
-                                         target.transform.position.z));
-            Quaternion NewRot = transform.rotation;
-            transform.rotation = OriginalRot;
-            transform.rotation = Quaternion.Lerp(transform.rotation, NewRot, 5f * Time.deltaTime);
+            currentState = CurrentState.Targeting;
         }
     }
 
@@ -61,14 +66,47 @@ public class StationaryAI : MonoBehaviour
     private void TargetingState()
     {
         Debug.Log("Targeting...");
-        transform.LookAt(new Vector3(0, target.transform.position.y, 0));
-        //transform.Rotate(Vector3.up, )
-        //transform.LookAt(new Vector3 (0, target.transform.position.y, target.transform.position.z));
+
+        Quaternion OriginalRot = transform.rotation;
+        transform.LookAt(new Vector3(target.position.x,
+                                     transform.position.y,
+                                     target.transform.position.z));
+        Quaternion NewRot = transform.rotation;
+        transform.rotation = OriginalRot;
+        transform.rotation = Quaternion.Lerp(transform.rotation, NewRot, 5f * Time.deltaTime);
+
+        shootTimer += Time.deltaTime;
+        if (shootTimer >= shootInterval)
+        {
+            Attack();
+            shootTimer = 0;
+        }
+
+        //wait for x amount of time idk
+
     }
 
     private void AttackState()
     {
         Debug.Log("Attacking...");
+        //attack code
+        //shoot projectile at player ig
+        //losing my mIIIIIIND
+
+    }
+
+    private void Attack()
+    {
+        Vector3 direction = (target.position - firePoint.position).normalized;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, rotation);
+        // Optional: Add initial velocity
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = direction * projectile.GetComponent<Projectile>().speed;
+        }
     }
 
 }
