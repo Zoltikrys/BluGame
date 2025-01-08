@@ -24,6 +24,8 @@ public class HealthManager : MonoBehaviour
     [field: SerializeField] public GameObject RenderTarget {get; set;}
     private BaseStatRenderer HPRenderer;
 
+    [SerializeField] private AudioClip[] damageSoundClips;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +59,8 @@ public class HealthManager : MonoBehaviour
         {
             return;
         }
+
+        SoundFXManager.instance.PlayRandomSoundFXClip(damageSoundClips, transform, 1f);
 
         m_DamageCooldown = cooldownTime;
         b_Health -= 1;
