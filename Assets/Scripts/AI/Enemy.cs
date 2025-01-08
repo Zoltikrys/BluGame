@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour {
-    public NpcState CurrentState;
+    public State CurrentState;
     public bool playerSeen; // public for testing purposes, change to private when implementation finished
     protected bool isTargeting;
     protected bool isPatrolling;
@@ -29,19 +29,19 @@ public abstract class Enemy : MonoBehaviour {
     {
         switch (CurrentState)
         {
-            case NpcState.Idle:
+            case State.Idle:
                 IdleState();
                 break;
-            case NpcState.Patrolling:
+            case State.Patrolling:
                 PatrollingState();
                 break;
-            case NpcState.Targeting:
+            case State.Targeting:
                 TargetingState();
                 break;
-            case NpcState.Attack:
+            case State.Attack:
                 AttackState();
                 break;
-            case NpcState.Searching:
+            case State.Searching:
                 SearchingState();
                 break;
         }
@@ -54,7 +54,7 @@ public abstract class Enemy : MonoBehaviour {
         // If the player is seen, switch to Targeting state
         if (playerSeen)
         {
-            CurrentState = NpcState.Targeting;
+            CurrentState = State.Targeting;
         }
     }
 
@@ -89,7 +89,7 @@ public abstract class Enemy : MonoBehaviour {
         // If the player is seen, switch to the Targeting state
         if (playerSeen)
         {
-            CurrentState = NpcState.Targeting;
+            CurrentState = State.Targeting;
         }
     }
 

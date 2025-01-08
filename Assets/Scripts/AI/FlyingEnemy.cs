@@ -17,7 +17,7 @@ public class FlyingEnemy : Enemy
     protected override void Start()
     {
         base.Start();
-        CurrentState = NpcState.Patrolling;
+        CurrentState = State.Patrolling;
         FOV = GetComponent<FieldOfView>();
         anim.Play("NormalFlying");
     }
@@ -59,7 +59,7 @@ public class FlyingEnemy : Enemy
         else
         {
             playerPos = target.position;
-            CurrentState = NpcState.Attack;
+            CurrentState = State.Attack;
         }
     }
 
@@ -77,7 +77,7 @@ public class FlyingEnemy : Enemy
         // If the enemy reaches the target, switch to searching
         if (transform.localPosition == targetPos)
         {
-            CurrentState = NpcState.Patrolling;
+            CurrentState = State.Patrolling;
             //currentState = State.Searching; implement for vertical slice - stays stationary but rotates to look around for player
         }
     }
@@ -101,11 +101,11 @@ public class FlyingEnemy : Enemy
         // Handle state transitions based on collisions
         if (hasHit)
         {
-            CurrentState = NpcState.Targeting;
+            CurrentState = State.Targeting;
         }
         else
         {
-            CurrentState = NpcState.Patrolling;
+            CurrentState = State.Patrolling;
             //currentState = State.Searching; implement for vertical slice - stays stationary but rotates to look around for player
         }
     }

@@ -5,8 +5,10 @@ public class StationaryBehaviour : Enemy
 {
     IEnumerator IdleMovement()
     {
-        while (CurrentState == NpcState.Idle)
+        while (CurrentState == State.Idle)
         {
+            Debug.Log("Idling...");
+
             transform.Rotate(Vector3.forward, 10);
             yield return new WaitForSeconds(0.01f);
         }
@@ -36,7 +38,7 @@ public class StationaryBehaviour : Enemy
     {
         if (other.gameObject.tag == "Player")
         {
-            CurrentState = NpcState.Targeting;
+            CurrentState = State.Targeting;
         }
     }
 
@@ -45,7 +47,7 @@ public class StationaryBehaviour : Enemy
     {
         if (other.gameObject.tag == "Player")
         {
-            CurrentState = NpcState.Targeting;
+            CurrentState = State.Targeting;
         }
     }
 
@@ -53,7 +55,7 @@ public class StationaryBehaviour : Enemy
     {
         if (other.gameObject.tag == "Player")
         {
-            CurrentState = NpcState.Idle;
+            CurrentState = State.Idle;
         }
     }
 

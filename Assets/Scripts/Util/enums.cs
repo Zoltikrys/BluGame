@@ -15,7 +15,7 @@ public enum CAMERA_EFFECTS{
 }
 
 [System.Serializable]
-public enum NpcState { Idle, Patrolling, Targeting, Attack, Searching }
+public enum State { Idle, Patrolling, Targeting, Attack, Searching }
 
 public enum TweenType{
     FORWARDS_ONLY,
