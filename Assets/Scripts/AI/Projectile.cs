@@ -22,9 +22,14 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Player")) // Assumes player is tagged as "Player"
         {
-            // Apply damage logic here
-            Debug.Log("Hit Player for " + damage + " damage.");
+            Debug.Log("Hit BLU");
+            //hasHit = true;
+            HealthManager healthMan = other.gameObject.GetComponent<HealthManager>(); // damage player
+            healthMan.Damage();
+            GetComponent<HealthManager>().Damage();
             Destroy(gameObject); // Destroy on collision
+            return;
+            //Destroy(gameObject); // Destroy on collision
         }
 
         Debug.Log("Collided with " + other.gameObject.name); //for debugging
