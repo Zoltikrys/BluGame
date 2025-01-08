@@ -13,12 +13,11 @@ public class powerSource : MonoBehaviour
     [SerializeField]
     private GameObject bossShield;
 
+    [SerializeField] private GameObject batteryMesh;
+
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    TakeDamage();
-        //}
+
     }
 
     public void TakeDamage()
@@ -38,8 +37,11 @@ public class powerSource : MonoBehaviour
         {
             bossShield.GetComponent<bossShield>().OpenSequence();
         }
-        
+
+        batteryMesh.GetComponent<MeshFilter>().mesh = null;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+
         Debug.Log("yeowch! you just destroyed a power cell!");
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
