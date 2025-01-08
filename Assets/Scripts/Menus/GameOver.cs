@@ -20,6 +20,6 @@ public class GameOver : MonoBehaviour
     }
     public void Quit(){
         Debug.Log("Gameover Quit Presed");
-        sceneManager.RequestLoadScene(LEVELS.MainMenu, 0, 0);
+        sceneManager.RequestLoadScene(LEVELS.MainMenu, 0, 0, CAMERA_TRANSITION_TYPE.FADE_TO_BLACK, CAMERA_TRANSITION_TYPE.FADE_TO_BLACK);
     }
 }
