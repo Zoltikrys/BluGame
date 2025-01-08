@@ -20,11 +20,11 @@ public class menuBehaviour : MonoBehaviour
     public void LoadLevel()
     {
         fadeScreen.SetActive(true);
-        //StartCoroutine(Fade(fadeScreen.GetComponent<Image>(), 1f));
-        //if(fadeOut == true) {
-        //    sceneManager.RequestLoadScene(scenetoload, 0, 0);
+        StartCoroutine(Fade(fadeScreen.GetComponent<Image>(), 1f));
+        if (fadeOut == true) {
+            sceneManager.RequestLoadScene(scenetoload, 0, 0);
 
-        //}
+        }
 
         StartCoroutine(LoadSceneAfterFade());
     }

@@ -15,10 +15,10 @@ public class powerSource : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    TakeDamage();
+        //}
     }
 
     public void TakeDamage()
