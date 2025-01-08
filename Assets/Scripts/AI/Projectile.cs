@@ -24,6 +24,7 @@ public class Projectile : MonoBehaviour
         {
             // Apply damage logic here
             Debug.Log("Hit Player for " + damage + " damage.");
+            Destroy(gameObject); // Destroy on collision
         }
 
         Debug.Log("Collided with " + other.gameObject.name); //for debugging

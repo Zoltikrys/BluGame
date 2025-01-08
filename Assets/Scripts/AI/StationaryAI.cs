@@ -82,6 +82,12 @@ public class StationaryAI : MonoBehaviour
             shootTimer = 0;
         }
 
+
+        if (!playerSeen && shootTimer == 0)
+        {
+            Debug.Log("Returning to idle state");
+            currentState = CurrentState.Idle;
+        }
         //wait for x amount of time idk
 
     }
