@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
@@ -72,7 +73,6 @@ public class HealthManager : MonoBehaviour
         {
             Death();
         }
-
     }
 
     public void Heal()
@@ -89,8 +89,6 @@ public class HealthManager : MonoBehaviour
         Debug.Log($"{name} died");
         damageLock = true;
         PlayDeathAnimation();
-
-
     }
 
     private void PlayDeathAnimation()
@@ -118,17 +116,6 @@ public class HealthManager : MonoBehaviour
         else{
             transform.gameObject.SetActive(false);
         }
-    }
-
-    void FlashStart()
-    {
-        material.SetColor("_Tint", Color.red);
-        Invoke("FlashStop", flashTime);
-    }
-
-    void FlashStop()
-    {
-        material.SetColor("_Tint", Color.white);
     }
 
     IEnumerator EFlash()
