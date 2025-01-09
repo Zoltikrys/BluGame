@@ -18,6 +18,10 @@ public enum CAMERA_TRANSITION_TYPE{
     NONE,
     FADE_TO_BLACK,
     FADE_TO_CIRCLE,
+    SHIFT_LEFT,
+    SHIFT_RIGHT,
+    SHIFT_UP,
+    SHIFT_DOWN,
 }
 
 [System.Serializable]
