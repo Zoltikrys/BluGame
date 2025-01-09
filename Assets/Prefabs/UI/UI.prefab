@@ -625,9 +625,10 @@ GameObject:
   - component: {fileID: 2609676089790890733}
   - component: {fileID: 8346654962653542246}
   - component: {fileID: 5830908028791237999}
+  - component: {fileID: 597920524124790046}
   m_Layer: 5
   m_Name: BatteryCharge
-  m_TagString: Untagged
+  m_TagString: BatteryLife
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -689,6 +690,19 @@ MonoBehaviour:
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &597920524124790046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4440280761158103370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29170406dfbb2704fbd9570742502227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  batteryFill: {fileID: 5830908028791237999}
 --- !u!1 &4466830632519091043
 GameObject:
   m_ObjectHideFlags: 0

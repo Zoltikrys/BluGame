@@ -121,6 +121,8 @@ MonoBehaviour:
   DebugConeColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   isMagnetized: 0
   isMagnetAbilityActive: 1
+  magnetBack: {fileID: 0}
+  magnetFront: {fileID: 0}
   <smallMagnetTarget>k__BackingField: {fileID: 0}
   <MagnetBatteryCost>k__BackingField:
   - <Name>k__BackingField: MagnetInitialCost
@@ -174,22 +176,15 @@ MonoBehaviour:
   <b_Health>k__BackingField: 5
   <StartingHP>k__BackingField: 10
   <MaximumHP>k__BackingField: 10
+  <Lives>k__BackingField: 3
   cooldownTime: 1
   flashTime: 0.2
   meshRenderer: {fileID: 0}
   material: {fileID: 0}
   anim: {fileID: 248206118749007324}
-  healthBars:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  <RenderTarget>k__BackingField: {fileID: 0}
+  damageSoundClips:
+  - {fileID: 8300000, guid: ea3f799eb23b9ce45ad1d369d6451ec3, type: 3}
 --- !u!114 &-3647002279214618310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorFilter: {fileID: 0}
+  colorFilterScanlines: {fileID: 0}
   colorFlags:
     r: 0
     g: 0
@@ -296,6 +292,7 @@ MonoBehaviour:
     <FinishEvent>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
+  batteryFill: {fileID: 0}
 --- !u!95 &248206118749007324
 Animator:
   serializedVersion: 5

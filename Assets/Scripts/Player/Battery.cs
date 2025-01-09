@@ -24,7 +24,6 @@ public class Battery : MonoBehaviour
         StartCoroutine("ProcessQueuedBatteryEffects");
         RenderTarget = GameObject.FindGameObjectWithTag("BatteryLife");
         if(RenderTarget != null) RenderTarget.GetComponent<BaseStatRenderer>().UpdateValues(CurrentBatteryCharge, MaxCharge);
-
     }
 
     void Update(){
