@@ -40,7 +40,7 @@ public class menuBehaviour : MonoBehaviour
 
     IEnumerator LoadSceneAfterFade()
     {
-        yield return null; //Fade(fadeScreen.GetComponent<Image>(), 1f);
+        yield return Fade(fadeScreen.GetComponent<Image>(), 1f);
         sceneManager.RequestLoadScene(scenetoload, 0, 0, CAMERA_TRANSITION_TYPE.FADE_TO_BLACK, CAMERA_TRANSITION_TYPE.FADE_TO_BLACK);
     }
 

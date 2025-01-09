@@ -26,7 +26,7 @@ public class TransitionEffect : MonoBehaviour{
     public void RoomTransition(CAMERA_TRANSITION_TYPE type, float targetValue, float duration, Action callback){
 
         switch(type){
-            case CAMERA_TRANSITION_TYPE.NONE: StartCoroutine(Instant(targetValue, duration, callback));
+            case CAMERA_TRANSITION_TYPE.NONE: StartCoroutine(Instant(targetValue, callback));
                                               break;
             case CAMERA_TRANSITION_TYPE.FADE_TO_BLACK: StartCoroutine(FadeToBlackTransition(targetValue, duration, callback));
                                               break;
@@ -129,7 +129,7 @@ public class TransitionEffect : MonoBehaviour{
         callback?.Invoke();
     }
 
-    public IEnumerator Instant(float targetValue, float duration, Action callback){
+    public IEnumerator Instant(float targetValue, Action callback){
         image.rectTransform.anchoredPosition = Vector3.zero;  //recenter image
         Color oldColor = image.material.color;
         oldColor.a = targetValue;
