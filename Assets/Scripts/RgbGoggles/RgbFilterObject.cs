@@ -23,11 +23,6 @@ public class RgbFilterObject : MonoBehaviour
         meshRenderer = transform.gameObject.GetComponent<MeshRenderer>();
         textMesh = transform.gameObject.GetComponent<TextMeshPro>();
         laser = transform.gameObject.GetComponent<Laser>();
-
-        if(meshRenderer) Debug.Log("Found MeshRenderer on FilterObject");
-        if(textMesh) Debug.Log("Found Textmesh on Filterobject");
-        if(laser) Debug.Log("Found laser on FilterObject");
-
     }
 
     public void Hide()
@@ -86,7 +81,6 @@ public class RgbFilterObject : MonoBehaviour
             }
 
             if(laser != null){
-                Debug.Log("Line renderer hide");
                 laser.SetLaserWidth(0.0f, 0.0f);
                 if(CollisionWhenHidden) laser.isActive = true;
                 else laser.isActive = false;
@@ -115,7 +109,6 @@ public class RgbFilterObject : MonoBehaviour
             if (collider) collider.enabled = true;
 
             if(laser != null){
-                Debug.Log("Line renderer show");
                 laser.SetLaserWidth(laser.WidthWhenLaserOn, laser.WidthWhenLaserOn);
                 laser.isActive = true;
                 
@@ -194,7 +187,6 @@ public class RgbFilterObject : MonoBehaviour
             yield return null;
         }
         HandleFadeExit(fadeStyle.RevealStyle);
-        Debug.Log("SlowFade finished");
     }
 
     private void HandleFadeExit(RevealStyle revealStyle)
@@ -246,18 +238,4 @@ public struct RevealStyle
         DestroyDelay = requiredDestroyDelay;
     }
 
-}
-
-public enum RGB_FILTER_REVEAL_STYLE
-{
-    CONTINUAL,
-    DESTROY_AFTER,
-    ONE_SHOT,
-
-}
-
-public enum RGB_FILTER_FADE_STYLE
-{
-    INSTANT_FADE,
-    SLOW_FADE
 }

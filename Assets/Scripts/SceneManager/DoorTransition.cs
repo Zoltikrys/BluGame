@@ -6,6 +6,8 @@ public class DoorTransition : MonoBehaviour
     [field: SerializeField] public LEVELS SceneToLoad;
     [field: SerializeField] public uint IndexOfSpawnPointInNextScene;
     [field: SerializeField] public uint SceneID;
+    [field: SerializeField] public CAMERA_TRANSITION_TYPE ExitTransition {get; set;}
+    [field: SerializeField] public CAMERA_TRANSITION_TYPE EnterTransition {get; set;}
 
     private SceneManager SceneManager;
 
@@ -17,7 +19,7 @@ public class DoorTransition : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player")){
-            if(SceneManager) SceneManager.RequestLoadScene(SceneToLoad, SceneID, IndexOfSpawnPointInNextScene);
+            if(SceneManager) SceneManager.RequestLoadScene(SceneToLoad, SceneID, IndexOfSpawnPointInNextScene, ExitTransition, EnterTransition);
         }
     }
 }

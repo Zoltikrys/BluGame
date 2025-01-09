@@ -85,6 +85,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2d0f9ac8dfba4554badb8cc7aba1114a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6303776915066011921}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2d0f9ac8dfba4554badb8cc7aba1114a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7993614243833321661}
   m_SourcePrefab: {fileID: 100100000, guid: 2d0f9ac8dfba4554badb8cc7aba1114a, type: 3}
 --- !u!1 &181054880773170540 stripped
 GameObject:
@@ -172,3 +175,28 @@ MonoBehaviour:
       DestroyDelay: 0
   IsDisplayed: 0
   Filterable: 0
+--- !u!114 &7993614243833321661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181054880773170540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b42b45d3af26e4ea9f1700ddece2a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doNotTrack: 0
+  <TrackedValues>k__BackingField:
+    isDeathTracked: 0
+    isPositionTracked: 0
+    isRotationTracked: 0
+    isHPTracked: 0
+    HealthStatus:
+      HP: 0
+      isRespawnable: 0
+      isDead: 0
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+  <UniqueID>k__BackingField: 1814f211-457f-444c-8449-ce93de51bae7

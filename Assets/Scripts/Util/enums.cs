@@ -14,6 +14,16 @@ public enum CAMERA_EFFECTS{
     LEAVE_ROOM
 }
 
+public enum CAMERA_TRANSITION_TYPE{
+    NONE,
+    FADE_TO_BLACK,
+    FADE_TO_CIRCLE,
+    SHIFT_LEFT,
+    SHIFT_RIGHT,
+    SHIFT_UP,
+    SHIFT_DOWN,
+}
+
 [System.Serializable]
 public enum NpcState { Idle, Patrolling, Targeting, Attack, Searching }
 
@@ -43,4 +53,18 @@ public enum DungeonElementType{
 public enum TextRenderType{
     RAW_VALUE,
     AS_PERCENT
+}
+
+public enum RGB_FILTER_REVEAL_STYLE
+{
+    CONTINUAL,
+    DESTROY_AFTER,
+    ONE_SHOT,
+
+}
+
+public enum RGB_FILTER_FADE_STYLE
+{
+    INSTANT_FADE,
+    SLOW_FADE
 }

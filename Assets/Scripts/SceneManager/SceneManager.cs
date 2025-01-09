@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class SceneManager : MonoBehaviour
     public uint RoomID { get; set; }
     [field: SerializeField] public GameObject Player;
     private bool respawning = false;
+    [field: SerializeField] public CAMERA_TRANSITION_TYPE EnterTransition {get; set;}
+    [field: SerializeField] public CAMERA_TRANSITION_TYPE ExitTransition {get; set;}
 
 
     void Start()
@@ -27,7 +30,7 @@ public class SceneManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
         if(FirstLoad != LEVELS.NO_SCENE) {
-            RequestLoadScene(FirstLoad, 0, 0);
+            RequestLoadScene(FirstLoad, 0, 0, EnterTransition, ExitTransition);
         }
         else {
             Debug.LogError("No Scene given to load first. Please add a scene to load initially.");
@@ -35,14 +38,15 @@ public class SceneManager : MonoBehaviour
         }
     }
 
-    private void LoadScene(LEVELS sceneID, string sceneName){
-        if(CurrentScene != LEVELS.NO_SCENE && IsSceneLoaded(sceneName)) UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-        CurrentScene = sceneID;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    
+    public void RequestLoadScene(LEVELS sceneToLoad, uint sceneID, uint indexOfSpawnPointInNextScene, CAMERA_TRANSITION_TYPE exitTransition, CAMERA_TRANSITION_TYPE enterTransition)
+    {
+        EnterTransition = enterTransition;
+        ExitTransition = exitTransition;
+        BeginLoadScene(sceneToLoad, sceneID, indexOfSpawnPointInNextScene);
     }
 
-    public void RequestLoadScene(LEVELS scene, uint id, uint requestedSpawnpoint){
-        Debug.Log($"Request load scene from: {System.Environment.StackTrace}");
+    public void BeginLoadScene(LEVELS scene, uint id, uint requestedSpawnpoint){
         string sceneName;
         RoomDirectory.StoredRooms.TryGetValue(scene, out sceneName);
         if(sceneName == ""){
@@ -60,14 +64,63 @@ public class SceneManager : MonoBehaviour
             StateManager.StorePlayerInfo(10, false, false, 3, bat);
         }
 
-
-
         if(CurrentScene != LEVELS.NO_SCENE) StateManager.SetRoomState(sceneName);
         RequestedSpawnPoint = requestedSpawnpoint;
         RoomID = id;
+        
+        Debug.Log($"Loading scene {scene} {sceneName} {CAMERA_EFFECTS.LEAVE_ROOM} {ExitTransition}");
+        StartScreenTransition(CAMERA_EFFECTS.LEAVE_ROOM, ExitTransition, () => {LoadScene(scene, sceneName);});
+    }
 
-        //if(CurrentCamera) //CurrentCamera.GetComponent<CameraController>().StartCameraTransitionEffect(CAMERA_EFFECTS.LEAVE_ROOM, () => LoadScene(scene));
-        LoadScene(scene, sceneName);
+    private void LoadScene(LEVELS sceneID, string sceneName){
+        if(CurrentScene != LEVELS.NO_SCENE && IsSceneLoaded(sceneName)) UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        CurrentScene = sceneID;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    }
+
+        private bool IsSceneLoaded(string sceneName){
+        bool foundScene = false;
+        for(int i = 0; i <  UnityEngine.SceneManagement.SceneManager.sceneCount; i++){
+            Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneAt(i);
+            if(scene.name == sceneName){
+                foundScene = true;
+                break;
+            }
+        }
+
+        return foundScene;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+        StartCoroutine(WaitForSceneInitialization());
+        StartCoroutine(WaitForPlayer());
+
+        Debug.Log($"OnSceneLoaded called for {scene.name} in mode {mode}. Stack Trace: {System.Environment.StackTrace}");
+        Player = GameObject.FindGameObjectWithTag("Player");
+        StateManager.SetRoomState(scene.name);
+    
+        SetSpawn(scene);
+        SetCamera(scene);
+
+        if(respawning) {
+            Debug.Log("Respawning");
+            Player.GetComponent<HealthManager>().Respawn();
+            StateManager.SetPlayerState(Player, StateManager.CurrentCheckPoint.PlayerInfo);
+        }
+        else{
+            StateManager.SetPlayerState(Player, StateManager.PlayerInfo);
+        }
+        respawning = false;
+        
+        Debug.Log($"Loaded scene {scene} {CAMERA_EFFECTS.ENTER_ROOM} {EnterTransition}");
+        StartScreenTransition(CAMERA_EFFECTS.ENTER_ROOM, EnterTransition, () => {UnlockPlayer();});
+    }
+
+    private void StartScreenTransition(CAMERA_EFFECTS effect, CAMERA_TRANSITION_TYPE type, Action callback)
+    {
+        var screenTransition = GameObject.FindGameObjectWithTag("CameraTransitionOverlay");
+        if(screenTransition) screenTransition.GetComponent<TransitionEffect>().StartCameraTransitionEffect(effect, type, callback);
+        else callback?.Invoke();
     }
 
     public void LifeLostRespawn(){
@@ -83,7 +136,7 @@ public class SceneManager : MonoBehaviour
         StateManager.SetPlayerState(Player, StateManager.CurrentCheckPoint.PlayerInfo);
 
         StateManager.SetStateTracker(StateManager.CurrentCheckPoint.StateTracker);
-        RequestLoadScene(StateManager.CurrentCheckPoint.scene, StateManager.CurrentCheckPoint.RoomID, StateManager.CurrentCheckPoint.SpawnPoint);
+        RequestLoadScene(StateManager.CurrentCheckPoint.scene, StateManager.CurrentCheckPoint.RoomID, StateManager.CurrentCheckPoint.SpawnPoint, CAMERA_TRANSITION_TYPE.FADE_TO_BLACK, CAMERA_TRANSITION_TYPE.FADE_TO_BLACK);
     }
 
     private void LockPlayer()
@@ -94,46 +147,6 @@ public class SceneManager : MonoBehaviour
     private void UnlockPlayer()
     {
         if(Player) Player.GetComponent<PlayerController>().UnlockMovement();
-    }
-
-
-    private bool IsSceneLoaded(string sceneName){
-        bool foundScene = false;
-        for(int i = 0; i <  UnityEngine.SceneManagement.SceneManager.sceneCount; i++){
-            Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneAt(i);
-            if(scene.name == sceneName){
-                foundScene = true;
-                break;
-            }
-        }
-
-        return foundScene;
-    }
-
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
-        StartCoroutine(WaitForSceneInitialization());
-        StartCoroutine(WaitForPlayer());
-
-        Debug.Log($"OnSceneLoaded called for {scene.name} in mode {mode}. Stack Trace: {System.Environment.StackTrace}");
-        Player = GameObject.FindGameObjectWithTag("Player");
-        StateManager.SetRoomState(scene.name);
-        
-
-        SetSpawn(scene);
-        SetCamera(scene);
-
-        UnlockPlayer();
-        if(respawning) {
-            Debug.Log("Respawning");
-            Player.GetComponent<HealthManager>().Respawn();
-            StateManager.SetPlayerState(Player, StateManager.CurrentCheckPoint.PlayerInfo);
-        }
-        else{
-            StateManager.SetPlayerState(Player, StateManager.PlayerInfo);
-        }
-        respawning = false;
-
     }
 
     private IEnumerator WaitForSceneInitialization()
@@ -219,9 +232,6 @@ public class SceneManager : MonoBehaviour
             if(obj.CompareTag("MainCamera")){
                 Debug.Log("Found Camera");
                 CurrentCamera = obj.GetComponent<Camera>();
-                // CameraController camController = CurrentCamera.GetComponent<CameraController>();
-                // camController.WeightedFocalPoints.Add(new WeightedFocalPoint(Player, 1.0f));
-                // camController.StartCameraTransitionEffect(CAMERA_EFFECTS.ENTER_ROOM, () => {});
                 break;
             }
         }
@@ -229,7 +239,7 @@ public class SceneManager : MonoBehaviour
 
     public void GameOver()
     {
-        RequestLoadScene(LEVELS.GAMEOVER, 0, 0);
+        RequestLoadScene(LEVELS.GAMEOVER, 0, 0, CAMERA_TRANSITION_TYPE.FADE_TO_BLACK, CAMERA_TRANSITION_TYPE.FADE_TO_BLACK);
         
     }
 
@@ -243,4 +253,5 @@ public class SceneManager : MonoBehaviour
         StateManager.CurrentCheckPoint.PlayerInfo.Lives = 3;
         Respawn();
     }
+
 }

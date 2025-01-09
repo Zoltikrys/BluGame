@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 
 public static class RoomDirectory{
+    
+    /// <summary>
+    /// Maps LEVELS to their scene filename. The order of this is very important, when adding more add it to
+    /// the end of the dictionary (and the same for the enum)
+    /// </summary>
     public static Dictionary<LEVELS, string> StoredRooms = new Dictionary<LEVELS, string>
     {
         { LEVELS.MainMenu,                         "MainMenu"},
@@ -18,7 +23,9 @@ public static class RoomDirectory{
     };
 }
 
-
+/// <summary>
+/// Level numbers, maintain this order. When adding more add it to the end of the list.
+/// </summary>
 public enum LEVELS{
     NO_SCENE,
     MainMenu,
