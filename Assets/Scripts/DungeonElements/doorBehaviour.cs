@@ -30,10 +30,11 @@ public class doorBehaviour : MonoBehaviour
         }
 
         TryGetComponent<DoorTransition>(out doorTransition);
+        Debug.Log($"Door status: {currentDoorStatus}");
     }
 
     public void IncreaseDoorStatus(Trackable trackedValues){
-        if(!trackedValues) return;
+        if(trackedValues == null) return;
         if(!IsTracked(trackedValues.UniqueID)){
             triggeredElements.Add(trackedValues.UniqueID);
             currentDoorStatus = triggeredElements.Count;
@@ -46,7 +47,7 @@ public class doorBehaviour : MonoBehaviour
        
 
     public void DecreaseDoorStatus(Trackable trackedValues){
-        if(!trackedValues) return;
+        if(trackedValues == null) return;
         if(IsTracked(trackedValues.UniqueID)){
             triggeredElements.Remove(trackedValues.UniqueID);
             currentDoorStatus = triggeredElements.Count;
