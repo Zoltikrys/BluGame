@@ -91,6 +91,10 @@ public class FlyingEnemy : Enemy
             HealthManager healthMan = collision.gameObject.GetComponent<HealthManager>(); // damage player
             healthMan.Damage();
             GetComponent<HealthManager>().Damage();
+            if(KnockbackEffect != null){
+                KnockbackEffect.ApplyKnockback(collision.gameObject.GetComponent<CharacterController>(), transform.forward);
+                KnockbackEffect.ApplyKnockback(GetComponent<Rigidbody>(), -transform.forward);
+            }
         }
         if (collision.gameObject.GetComponent<powerSource>())
         {

@@ -22,7 +22,7 @@ public class menuBehaviour : MonoBehaviour
         fadeScreen.SetActive(true);
         StartCoroutine(Fade(fadeScreen.GetComponent<Image>(), 1f));
         if (fadeOut == true) {
-            sceneManager.RequestLoadScene(scenetoload, 0, 0);
+            sceneManager.RequestLoadScene(scenetoload, 0, 0, CAMERA_TRANSITION_TYPE.FADE_TO_BLACK, CAMERA_TRANSITION_TYPE.FADE_TO_BLACK);
 
         }
 
