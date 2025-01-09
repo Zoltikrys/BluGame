@@ -15,21 +15,21 @@ public class PressurePlate : MonoBehaviour
     public void Press(Collider other){
         if(other == null) return;
         Debug.Log($"Pressed {other.name}");
-        //if(!pressed){
+        if(!pressed){
             anim.Play("Press");
             MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
             if (renderer != null) {
                 renderer.material.color = Color.blue;
             }
             pressed = true;
-        //}
+        }
     }
         
 
     public void Release(Collider other){
         if(other == null) return;
         Debug.Log($"release {other.name}");
-        //if(pressed){
+        if(pressed){
             anim.Play("Release");
 
             MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
@@ -37,7 +37,7 @@ public class PressurePlate : MonoBehaviour
                 renderer.material.color = Color.red;
             }
             pressed = false;
-        //}
+        }
         
     }
 
