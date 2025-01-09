@@ -105,9 +105,7 @@ public class StationaryAI : MonoBehaviour
     {
         Vector3 direction = (target.position - firePoint.position).normalized;
         Quaternion rotation = Quaternion.LookRotation(direction);
-
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, rotation);
-        // Optional: Add initial velocity
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         if (rb != null)
         {

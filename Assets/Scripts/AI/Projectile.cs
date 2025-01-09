@@ -23,10 +23,9 @@ public class Projectile : MonoBehaviour
         if (other.CompareTag("Player")) // Assumes player is tagged as "Player"
         {
             Debug.Log("Hit BLU");
+            //Code is breaking here because of the sound issue
             HealthManager healthMan = other.gameObject.GetComponent<HealthManager>(); // damage player
             healthMan.Damage();
-            //GetComponent<HealthManager>().Damage();
-            //Destroy(gameObject); // Destroy on collision
         }
 
         Debug.Log("Collided with " + other.gameObject.name); //for debugging
