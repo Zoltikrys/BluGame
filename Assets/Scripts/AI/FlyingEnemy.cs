@@ -19,7 +19,7 @@ public class FlyingEnemy : Enemy
         base.Start();
         CurrentState = NpcState.Patrolling;
         FOV = GetComponent<FieldOfView>();
-        anim.Play("NormalFlying");
+        anim.Play("AngryFlying");
     }
 
     protected override void Update(){
@@ -29,7 +29,7 @@ public class FlyingEnemy : Enemy
 
     protected override void PatrollingState()
     {
-        anim.Play("NormalFlying");
+        //anim.Play("NormalFlying");
         spotlight.GetComponent<Light>().color = PatrollingColour;
         base.PatrollingState();
     }
@@ -66,7 +66,7 @@ public class FlyingEnemy : Enemy
     protected override void AttackState()
     {
         spotlight.GetComponent<Light>().color = AttackingColour;
-        anim.Play("AngryFlying");
+        //anim.Play("AngryFlying");
         // Reset timeRemaining
         timeRemaining = timeToTarget;
 
