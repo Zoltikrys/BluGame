@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class RgbGoggles : MonoBehaviour
 {
     [field: SerializeField] public Image colorFilter;
+    [field: SerializeField] public Image colorFilterScanlines;
+
     [field: SerializeField] public ColorFlags colorFlags;
     [field: SerializeField] public Color CurrentColor {get; set;}
     [field: SerializeField] public float CurrentAlpha {get; set;} = 0.0f;
@@ -28,6 +30,8 @@ public class RgbGoggles : MonoBehaviour
         colorFlags.b = false;
         GetFilterObjects();
         SetFilterObjects();
+        
+
     }
 
     void Activate(){
@@ -43,6 +47,13 @@ public class RgbGoggles : MonoBehaviour
         if(colorFilter == null) {
             var canvasLayer = GameObject.FindGameObjectWithTag("UI_FILTER");
             if(canvasLayer != null) canvasLayer.TryGetComponent<Image>(out colorFilter);
+        }
+        if (colorFilterScanlines == null){
+            var canvasScanlines = GameObject.FindGameObjectWithTag("UI_FILTERSCANLINES");
+            if (canvasScanlines != null) canvasScanlines.TryGetComponent<Image>(out colorFilterScanlines);
+        }
+        {
+            
         }
         prevColorFlagState = colorFlags;
 
@@ -115,9 +126,9 @@ public class RgbGoggles : MonoBehaviour
     bool HandleKeypress(){
         bool wasKeyPressed = false;
         if(!GogglesActivated) return wasKeyPressed;
-        
+
         // THESE KEYBINDS MUST CHANGE FOR SWITCH
-        if(Input.GetKeyUp(KeyCode.R)){ 
+        if (Input.GetKeyUp(KeyCode.R)){ 
             colorFlags.r = !colorFlags.r;
             if(colorFlags.r){
                 colorFlags.g = false;
@@ -167,12 +178,18 @@ public class RgbGoggles : MonoBehaviour
         if (colorFlags.r) CurrentColor = new Color(1.0f, CurrentColor.g, CurrentColor.g);
         if (colorFlags.g) CurrentColor = new Color(CurrentColor.r, 1.0f, CurrentColor.g);
         if (colorFlags.b) CurrentColor = new Color(CurrentColor.r, CurrentColor.g, 1.0f);
-        
-        // If RGB goggles turned off, set screen dark else set set specific color or normal vision when all RGB on
-        if(!colorFlags.r && !colorFlags.g && !colorFlags.b) CurrentColor = new Color(RgbDeactivatedColor.r, RgbDeactivatedColor.g, RgbDeactivatedColor.b, RgbDeactivatedColor.a);
-        else if(colorFlags.r && colorFlags.g && colorFlags.b) CurrentColor = new Color(CurrentColor.r, CurrentColor.g, CurrentColor.b, 0.0f);
-        else CurrentColor = new Color(CurrentColor.r, CurrentColor.g, CurrentColor.b, RgbActivatedAlpha);
 
-        if(GogglesActivated && colorFilter != null) colorFilter.color = CurrentColor;
+        // If RGB goggles turned off, set screen dark else set set specific color or normal vision when all RGB on
+        if (!colorFlags.r && !colorFlags.g && !colorFlags.b) {
+            CurrentColor = new Color(RgbDeactivatedColor.r, RgbDeactivatedColor.g, RgbDeactivatedColor.b, RgbDeactivatedColor.a);
+            colorFilterScanlines.color = (Color.clear);
+        }
+        else if (colorFlags.r && colorFlags.g && colorFlags.b) CurrentColor = new Color(CurrentColor.r, CurrentColor.g, CurrentColor.b, 0.0f);
+        else {
+            CurrentColor = new Color(CurrentColor.r, CurrentColor.g, CurrentColor.b, RgbActivatedAlpha);
+            colorFilterScanlines.color = (Color.white);
+        }
+
+        if (GogglesActivated && colorFilter != null) colorFilter.color = CurrentColor;
     }
 }

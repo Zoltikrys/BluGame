@@ -24,6 +24,10 @@ public class MagnetAbility : MonoBehaviour
     public bool isMagnetized;
     public bool isMagnetAbilityActive = true;
 
+    [Header("Magnet UI")]
+    [SerializeField] private Image magnetBack;
+    [SerializeField] private Image magnetFront;
+
     [field: SerializeField] public GameObject smallMagnetTarget { get; private set; }// Currently tracked small magnet
     private bool smallMagnetTargetMagnetised = false;
     private CharacterController characterController; // Reference to player movement
@@ -35,6 +39,15 @@ public class MagnetAbility : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         //controllerScript = GetComponent<PlayerController>();
+
+        if (magnetBack == null) {
+            var canvasLayer = GameObject.FindGameObjectWithTag("UI_MAGBACK");
+            if (canvasLayer != null) canvasLayer.TryGetComponent<Image>(out magnetBack);
+        }
+        if (magnetFront == null) {
+            var canvasScanlines = GameObject.FindGameObjectWithTag("UI_MAGFRONT");
+            if (canvasScanlines != null) canvasScanlines.TryGetComponent<Image>(out magnetFront);
+        }
     }
 
     void Update()
@@ -47,10 +60,12 @@ public class MagnetAbility : MonoBehaviour
             if(!isMagnetActive){
                 if(GetComponent<Battery>().AttemptAddBatteryEffects(MagnetBatteryCost, true)){
                     isMagnetActive = true;
+                    magnetFront.color = Color.white;
                 }
             }
             else {
                 isMagnetActive = false;
+                magnetFront.color = Color.clear;
                 GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
             }
 
@@ -170,6 +185,7 @@ public class MagnetAbility : MonoBehaviour
         isMagnetized = false;
         isMagnetActive = false;
         smallMagnetTargetMagnetised = false;
+        magnetFront.color = Color.clear;
         GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
     }
 

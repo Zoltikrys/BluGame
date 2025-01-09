@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Battery : MonoBehaviour
 {
@@ -17,15 +18,18 @@ public class Battery : MonoBehaviour
     private float QueuedProcessTime = 1.0f;
     private GameObject RenderTarget;
 
+    [SerializeField] private Image batteryFill;
 
     void Start(){
         StartCoroutine("ProcessQueuedBatteryEffects");
         RenderTarget = GameObject.FindGameObjectWithTag("BatteryLife");
         if(RenderTarget != null) RenderTarget.GetComponent<BaseStatRenderer>().UpdateValues(CurrentBatteryCharge, MaxCharge);
+
     }
 
     void Update(){
-        if(RenderTarget != null) RenderTarget.GetComponent<BaseStatRenderer>().UpdateValues(CurrentBatteryCharge, MaxCharge); 
+        if (RenderTarget != null) RenderTarget.GetComponent<BaseStatRenderer>().UpdateValues(CurrentBatteryCharge, MaxCharge);
+        
     }
 
     public void SetBatteryState(float desiredBatteryCharge, float desiredMaxBatteryCharge, List<BatteryEffect> queuedEffects, List<BatteryEffect> processingEffects){

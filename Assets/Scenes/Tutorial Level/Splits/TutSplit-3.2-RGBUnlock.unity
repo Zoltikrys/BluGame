@@ -3038,6 +3038,35 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &595860977 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4440280761158103370, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
+  m_PrefabInstance: {fileID: 883610491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &595860978 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5830908028791237999, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
+  m_PrefabInstance: {fileID: 883610491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595860977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &595860981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595860977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29170406dfbb2704fbd9570742502227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  batteryFill: {fileID: 595860978}
 --- !u!1 &616202287
 GameObject:
   m_ObjectHideFlags: 0
@@ -5276,6 +5305,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4440280761158103370, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440280761158103370, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
+      propertyPath: m_TagString
+      value: BatteryLife
+      objectReference: {fileID: 0}
+    - target: {fileID: 5132089370594264247, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830908028791237999, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5949221298068107372, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5323,7 +5368,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4440280761158103370, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 595860981}
   m_SourcePrefab: {fileID: 100100000, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
 --- !u!1 &960786358 stripped
 GameObject:
@@ -5829,8 +5877,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3647002279214618310, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: colorFilterScanlines
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -3647002279214618310, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: <GogglesActivated>k__BackingField
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 183861393161317643, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_IsTrigger
@@ -5839,6 +5891,22 @@ PrefabInstance:
     - target: {fileID: 183861393161317643, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_ProvidesContacts
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 645921805136267893, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: batteryFill
+      value: 
+      objectReference: {fileID: 595860978}
+    - target: {fileID: 645921805136267893, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: CurrentBatteryCharge
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 645921805136267893, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: QueuedBatteryEffects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 645921805136267893, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: ProcessingBatteryEffects.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1464935671355033948, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_Name
@@ -7908,6 +7976,83 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &1554274549
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[0].<Duration>k__BackingField
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[0].<Strength>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[0].<TickRate>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710043786102787405, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: <PickupBatteryEffects>k__BackingField.Array.data[0].<StrengthMultiplier>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914305567752810346, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.4488628
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914305567752810346, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914305567752810346, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.7237049
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914305567752810346, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914305567752810346, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914305567752810346, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914305567752810346, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914305567752810346, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914305567752810346, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914305567752810346, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3696161809180337667, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      propertyPath: m_Name
+      value: BatteryPickup
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
 --- !u!43 &1619595624
 Mesh:
   m_ObjectHideFlags: 0
@@ -9983,3 +10128,4 @@ SceneRoots:
   - {fileID: 1897904502}
   - {fileID: 5210940707426296458}
   - {fileID: 1055996629}
+  - {fileID: 1554274549}
