@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2269962996790488932}
   - component: {fileID: 5815112477307389719}
+  - component: {fileID: 3936322520663063094}
+  - component: {fileID: 7334833969615046904}
   - component: {fileID: 1871511807889649414}
   - component: {fileID: 2987715966282467166}
-  - component: {fileID: 3936322520663063094}
   m_Layer: 11
   m_Name: PressurePlatePrototype
   m_TagString: Untagged
@@ -50,6 +51,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoxCollider: {fileID: 0}
   anim: {fileID: 0}
+--- !u!114 &3936322520663063094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6928088814824663156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdbf3e9bfaadf5a45a12e4bbb9c228ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnterEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExitEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStayEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFinishEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  RequiredGameObjectToTrigger: {fileID: 0}
+--- !u!114 &7334833969615046904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6928088814824663156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b42b45d3af26e4ea9f1700ddece2a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doNotTrack: 0
+  <TrackedValues>k__BackingField:
+    isDeathTracked: 0
+    isPositionTracked: 0
+    isRotationTracked: 0
+    isHPTracked: 0
+    HealthStatus:
+      HP: 0
+      isRespawnable: 0
+      isDead: 0
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+  <UniqueID>k__BackingField: 56bc6070-d9f1-442f-b4d8-c475619f3ff2
 --- !u!65 &1871511807889649414
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -92,31 +143,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3936322520663063094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6928088814824663156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdbf3e9bfaadf5a45a12e4bbb9c228ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnEnterEvents:
-    m_PersistentCalls:
-      m_Calls: []
-  OnExitEvents:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStayEvents:
-    m_PersistentCalls:
-      m_Calls: []
-  OnFinishEvents:
-    m_PersistentCalls:
-      m_Calls: []
-  RequiredGameObjectToTrigger: {fileID: 0}
 --- !u!1001 &2260920425188541350
 PrefabInstance:
   m_ObjectHideFlags: 0

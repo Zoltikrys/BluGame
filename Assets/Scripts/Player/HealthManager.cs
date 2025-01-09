@@ -1,35 +1,41 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
     [SerializeField]
     [field: SerializeField] public int b_Health {get; set;} = 0;
-    [field: SerializeField] public int StartingHP {get; set;} = 0;
+    [field: SerializeField] public int StartingHP {get; set;} = 10;
     [field: SerializeField] public int MaximumHP {get; set;} = 10;
+    [field: SerializeField] public int Lives{get; set;} = 3;
 
     [SerializeField]
     private float cooldownTime = 1.0f;
+    private bool damageLock = false;
 
     float m_DamageCooldown = 0;
 
     public float flashTime;
-    Color originalColor;
     public MeshRenderer meshRenderer;
     public Material material;
     public Animator anim;
 
-    private GameObject RenderTarget {get; set;}
+    [field: SerializeField] public GameObject RenderTarget {get; set;}
+    private BaseStatRenderer HPRenderer;
+
+    [SerializeField] private AudioClip[] damageSoundClips;
 
     // Start is called before the first frame update
     void Start()
     {
+
         meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
         material = meshRenderer.material;
-        //originalColor = material.GetColor("_Tint");
 
         if(transform.gameObject.name == "Player") RenderTarget = GameObject.FindGameObjectWithTag("HP");
-        if(RenderTarget != null) RenderTarget.GetComponent<HPRenderer>().UpdateLife(b_Health, MaximumHP);
+        if(RenderTarget) RenderTarget.TryGetComponent<BaseStatRenderer>(out HPRenderer);
+        if(HPRenderer) HPRenderer.UpdateValues(b_Health, MaximumHP);
     }
 
     // Update is called once per frame
@@ -39,7 +45,7 @@ public class HealthManager : MonoBehaviour
         {
             m_DamageCooldown -= Time.deltaTime;
         }
-        if(RenderTarget != null) RenderTarget.GetComponent<HPRenderer>().UpdateLife(b_Health, MaximumHP);
+        if(HPRenderer) HPRenderer.UpdateValues(b_Health, MaximumHP);
     }
     
     public void SetHealth(int amount){
@@ -47,10 +53,14 @@ public class HealthManager : MonoBehaviour
     }
     public void Damage()
     {
+        if(damageLock) return;
+
         if(m_DamageCooldown > 0)
         {
             return;
         }
+
+        SoundFXManager.instance.PlayRandomSoundFXClip(damageSoundClips, transform, 1f);
 
         m_DamageCooldown = cooldownTime;
         b_Health -= 1;
@@ -77,6 +87,7 @@ public class HealthManager : MonoBehaviour
     public void Death()
     {
         Debug.Log($"{name} died");
+        damageLock = true;
         PlayDeathAnimation();
 
 
@@ -99,7 +110,10 @@ public class HealthManager : MonoBehaviour
     
         if(CompareTag("Player")){
             SceneManager sceneManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManager>();
-            sceneManager.Respawn();
+            if(Lives - 1 > 0){
+                sceneManager.LifeLostRespawn();
+            }
+            else sceneManager.GameOver();
         }
         else{
             transform.gameObject.SetActive(false);
@@ -121,14 +135,10 @@ public class HealthManager : MonoBehaviour
     {
         material.SetColor("_Tint", Color.red);
         yield return new WaitForSeconds(flashTime);
-        material.SetColor("_Tint", originalColor);
+        material.SetColor("_Tint", Color.white);
     }
 
     public void Respawn(){
-        
-
-        b_Health = StartingHP;
+        b_Health = MaximumHP;
     }
-
-
 }
