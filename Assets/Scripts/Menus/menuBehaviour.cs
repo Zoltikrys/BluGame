@@ -29,6 +29,17 @@ public class menuBehaviour : MonoBehaviour
         StartCoroutine(LoadSceneAfterFade());
     }
 
+    public void ShowSettings()
+    {
+
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("You have tried to QUIT the game :(");
+        Application.Quit();
+    }
+
     IEnumerator Fade(Image img, float targetAlpha)
     {
         while (img.color.a != targetAlpha) {

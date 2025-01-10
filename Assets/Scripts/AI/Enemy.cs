@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour {
@@ -13,6 +14,7 @@ public abstract class Enemy : MonoBehaviour {
     public float speed = 10f;
     public float attackCooldown = 3f;
     protected Vector3 playerPos;
+    public KnockbackEffect KnockbackEffect;
     [SerializeField] protected Transform target;
     [SerializeField] protected Transform[] patrolPoints;  // Array of patrol points
 
@@ -23,6 +25,7 @@ public abstract class Enemy : MonoBehaviour {
     protected virtual void Start(){
         target = GameObject.Find("Player").transform;
         playerPos = target.position;
+        TryGetComponent<KnockbackEffect>(out KnockbackEffect);
     }
 
     protected virtual void Update()
@@ -95,3 +98,4 @@ public abstract class Enemy : MonoBehaviour {
 
 
 }
+
