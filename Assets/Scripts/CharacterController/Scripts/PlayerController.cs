@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private bool groundedPlayer;
     public bool isMagnetized;
     private bool canMove = true;
+    public Animator animator;
 
     public float playerSpeed = 2.0f;
     public float rotationSpeed = 5.0f;
@@ -33,7 +34,11 @@ public class PlayerController : MonoBehaviour
     public void UnlockMovement(){
         canMove = true;
     }
-
+    
+    void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
 
     void Update()
     {   
@@ -50,7 +55,7 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-
+        
         if (canMove) // Block input if player cannot move
         {
             // Get input
@@ -78,6 +83,8 @@ public class PlayerController : MonoBehaviour
             {
                 controller.Move(relativeDirection * Time.deltaTime * playerSpeed);
 
+                animator.SetBool("IsMoving", true);
+
                 // Rotate the character and its model to face the movement direction
                 Quaternion targetRotation = Quaternion.LookRotation(relativeDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
@@ -86,6 +93,8 @@ public class PlayerController : MonoBehaviour
             {
                 // Stop character movement
                 controller.Move(Vector3.zero);
+
+                animator.SetBool("IsMoving", false);
             }
             if (groundedPlayer && Input.GetButtonDown("Jump")) // Default Unity input for jump is "Jump"
             {

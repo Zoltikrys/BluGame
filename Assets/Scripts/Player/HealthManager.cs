@@ -20,7 +20,7 @@ public class HealthManager : MonoBehaviour
     public float flashTime;
     public MeshRenderer meshRenderer;
     public Material material;
-    public Animator anim;
+    public Animator animator;
 
     [field: SerializeField] public GameObject RenderTarget {get; set;}
     private BaseStatRenderer HPRenderer;
@@ -37,6 +37,8 @@ public class HealthManager : MonoBehaviour
         if(transform.gameObject.name == "Player") RenderTarget = GameObject.FindGameObjectWithTag("HP");
         if(RenderTarget) RenderTarget.TryGetComponent<BaseStatRenderer>(out HPRenderer);
         if(HPRenderer) HPRenderer.UpdateValues(b_Health, MaximumHP);
+        
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -93,8 +95,8 @@ public class HealthManager : MonoBehaviour
 
     private void PlayDeathAnimation()
     {
-        anim.Play("Death");
-        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        animator.SetBool("Dead", true);
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         StartCoroutine("HandleRespawn", stateInfo);
     }
