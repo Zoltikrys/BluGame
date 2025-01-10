@@ -18,11 +18,6 @@ public class doorBehaviour : MonoBehaviour
 
     [field: SerializeField] public List<string> triggeredElements = new List<string>();
 
-    public bool openFinished = true;
-    public bool openingDoor = false;
-    public bool closedFinished = true;
-    public bool closingDoor = false;
-
 
     private void Start()
     {
@@ -34,38 +29,14 @@ public class doorBehaviour : MonoBehaviour
         Debug.Log($"Door status: {currentDoorStatus}");
     }
 
-    void Update(){
-        if(prevDoorOpenFlag != doorOpenFlag){
-            prevDoorOpenFlag = doorOpenFlag;
-            if(doorOpenFlag && openFinished && !openingDoor && closedFinished && !closingDoor){
-                OpenDoor();
-            }
-            else if(!doorOpenFlag && openFinished && !openingDoor && closedFinished && !closingDoor){
-                CloseDoor();
-            }
-        }
-        
-        if(IsAnimationComplete("DoorOpen")) {
-            openFinished = true;
-            openingDoor = false;
-        }
-        if(IsAnimationComplete("DoorClose")){
-            closedFinished = true;
-            closingDoor = false;
-        }
-
-        if(currentDoorStatus >= doorStatusToOpen && !doorOpenFlag) doorOpenFlag = true;
-        if(currentDoorStatus < doorStatusToOpen && doorOpenFlag)doorOpenFlag = false;
-
-        
-    }
-
     public void IncreaseDoorStatus(Trackable trackedValues){
         if(trackedValues == null) return;
         if(!IsTracked(trackedValues.UniqueID)){
             triggeredElements.Add(trackedValues.UniqueID);
             currentDoorStatus = triggeredElements.Count;
-            
+            if (currentDoorStatus >= doorStatusToOpen && !doorOpenFlag) {
+                OpenDoor();
+            }
 
         }
     }
@@ -75,8 +46,10 @@ public class doorBehaviour : MonoBehaviour
         if(IsTracked(trackedValues.UniqueID)){
             triggeredElements.Remove(trackedValues.UniqueID);
             currentDoorStatus = triggeredElements.Count;
-            
-            
+            if (currentDoorStatus < doorStatusToOpen && doorOpenFlag) {
+                CloseDoor();
+            }
+
         }
     }
 
@@ -99,20 +72,18 @@ public class doorBehaviour : MonoBehaviour
 
     private void OpenDoor()
     {
-        animator.Play("DoorOpen", 0, 0.0f);
+        animator.SetBool("DoorOpen", true);
         Debug.Log($"{name} door opened");
-        openingDoor = true;
-        openFinished = false;
+
         doorOpenFlag = true;
         doorCollider.GetComponent<Collider>().enabled = true;
     }
 
     private void CloseDoor()
     {
-        animator.Play("DoorClose", 0, 0.0f);
+        animator.SetBool("DoorOpen", false);
         Debug.Log($"{name} door closed");
-        closingDoor = true;
-        closedFinished = false;
+
         doorOpenFlag = false;
         doorCollider.GetComponent<Collider>().enabled = false;
     }

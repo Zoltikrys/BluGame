@@ -254,4 +254,9 @@ public class SceneManager : MonoBehaviour
         Respawn();
     }
 
+    public void RestartGame()
+    {
+
+    }
+
 }
