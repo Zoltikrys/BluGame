@@ -1917,8 +1917,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1938962624}
-        m_TargetAssemblyTypeName: menuBehaviour, Assembly-CSharp
+      - m_Target: {fileID: 1938962625}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetResolution
         m_Mode: 0
         m_Arguments:
@@ -3738,8 +3738,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1938962624}
-        m_TargetAssemblyTypeName: menuBehaviour, Assembly-CSharp
+      - m_Target: {fileID: 1938962625}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetFullscreen
         m_Mode: 0
         m_Arguments:
@@ -4549,8 +4549,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1938962624}
-        m_TargetAssemblyTypeName: menuBehaviour, Assembly-CSharp
+      - m_Target: {fileID: 1938962625}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 0
         m_Arguments:
@@ -7338,8 +7338,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1938962624}
-        m_TargetAssemblyTypeName: menuBehaviour, Assembly-CSharp
+      - m_Target: {fileID: 1938962625}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SFXVolume
         m_Mode: 0
         m_Arguments:
@@ -7699,8 +7699,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1938962624}
-        m_TargetAssemblyTypeName: menuBehaviour, Assembly-CSharp
+      - m_Target: {fileID: 1938962625}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetQuality
         m_Mode: 0
         m_Arguments:
@@ -7760,6 +7760,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1938962623}
   - component: {fileID: 1938962624}
+  - component: {fileID: 1938962625}
   m_Layer: 5
   m_Name: MenuBehaviour
   m_TagString: Untagged
@@ -7809,6 +7810,18 @@ MonoBehaviour:
   sceneManager: {fileID: 0}
   fadeScreen: {fileID: 1065272379}
   fadeOut: 0
+--- !u!114 &1938962625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938962622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe6c38689cb6544d90ec97cf20c0dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   mainMixer: {fileID: 24100000, guid: d101e8911ecb717469a29755f0f75163, type: 2}
   resolutionDropdown: {fileID: 484262120}
 --- !u!1 &1940958151
@@ -8111,8 +8124,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1938962624}
-        m_TargetAssemblyTypeName: menuBehaviour, Assembly-CSharp
+      - m_Target: {fileID: 1938962625}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
         m_Arguments:
