@@ -64,8 +64,6 @@ public class SettingsMenu : MonoBehaviour
         mainMixer.SetFloat("soundFXVolume", soundFXVolume);
     }
 
-    //I'm doing sound later cause I really don't wanna do it
-
     //graphics quality
     public void SetQuality(int qualityIndex)
     {
