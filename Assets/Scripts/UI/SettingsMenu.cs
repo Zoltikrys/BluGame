@@ -8,14 +8,13 @@ using UnityEngine.UI;
 public class SettingsMenu : MonoBehaviour
 {
     //audio mixers for sound
-    /*public AudioMixer masterMixer;
-    public AudioMixer musicMixer;
-    public AudioMixer sfxMixer;*/
+    public AudioMixer mainMixer;
 
     public TMPro.TMP_Dropdown resolutionDropdown;
 
     Resolution[] resolutions;
 
+    //resolution
     private void Start()
     {
         resolutions = Screen.resolutions;
@@ -49,29 +48,32 @@ public class SettingsMenu : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-    public void SetMasterVolume(float MasterVolume)
+    //volume
+    public void SetMasterVolume(float masterVolume)
     {
-        throw new NotImplementedException();
+        mainMixer.SetFloat("masterVolume", masterVolume);
     }
 
-    public void SetMusicVolume(float MusicVolume)
+    public void SetMusicVolume(float musicVolume)
     {
-        throw new NotImplementedException();
+        mainMixer.SetFloat("musicVolume", musicVolume);
     }
 
-    public void SFXVolume(float SFXVolume)
+    public void SFXVolume(float soundFXVolume)
     {
-        throw new NotImplementedException();
+        mainMixer.SetFloat("soundFXVolume", soundFXVolume);
     }
 
     //I'm doing sound later cause I really don't wanna do it
 
+    //graphics quality
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
 
     }
 
+    //fullscreen
     public void SetFullscreen(bool isFullscreen)
     {
         Debug.Log("Toggle fullscreen");
