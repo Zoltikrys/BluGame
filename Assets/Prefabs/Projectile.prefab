@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4174864682473450998}
   - component: {fileID: 5636776330660691593}
   - component: {fileID: 783454590184777660}
+  - component: {fileID: 8526051020240220401}
   - component: {fileID: 140858197665559305}
   m_Layer: 0
   m_Name: Projectile
@@ -124,6 +125,21 @@ MonoBehaviour:
   speed: 10
   damage: 1
   lifeTime: 5000
+  knockback: {fileID: 8526051020240220401}
+--- !u!114 &8526051020240220401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9427921330711406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a443169c157854d9de7677cd66d992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 10
+  duration: 500
 --- !u!54 &140858197665559305
 Rigidbody:
   m_ObjectHideFlags: 0

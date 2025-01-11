@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     public float speed = 1f;
     public float damage = 10f;
     public float lifeTime = 5000f;
+    public KnockbackEffect knockback;
 
     void Start()
     {
@@ -18,6 +19,9 @@ public class Projectile : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
+
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) // Assumes player is tagged as "Player"
@@ -26,7 +30,11 @@ public class Projectile : MonoBehaviour
             //Code is breaking here because of the sound issue
             HealthManager healthMan = other.gameObject.GetComponent<HealthManager>(); // damage player
             healthMan.Damage();
+            knockback.ApplyKnockback(other.gameObject.GetComponent<CharacterController>(), transform.forward);
         }
+
+
+
 
         Debug.Log("Collided with " + other.gameObject.name); //for debugging
 
