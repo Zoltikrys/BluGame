@@ -15,8 +15,8 @@ public class RgbGoggles : MonoBehaviour
     [field: SerializeField] public float RgbActivatedAlpha {get; set;} = 0.5f;
     [field: SerializeField] public Color RgbDeactivatedColor {get; set;} = new Color(0f, 0f, 0f, 0f);
     [field: SerializeField] public bool GogglesActivated {get; set;} = true;
-    [field: SerializeField] public RGBSTATE CurrentGoggleState{get; set;} = RGBSTATE.R;
-    [field: SerializeField] public RGBSTATE PrevGoggleState{get; set;} = RGBSTATE.RGB;
+    [field: SerializeField] public RGBSTATE CurrentGoggleState{get; set;} = RGBSTATE.ALL_OFF;
+    [field: SerializeField] public RGBSTATE PrevGoggleState{get; set;} = RGBSTATE.ALL_OFF;
     [field: SerializeField] public TextMeshProUGUI DebugText;
     [field: SerializeField] public List<GameObject> FilterObjects = new List<GameObject>();
     [field: SerializeField] public List<BatteryEffect> RgbGoggleCosts = new List<BatteryEffect>();
@@ -57,16 +57,10 @@ public class RgbGoggles : MonoBehaviour
 
         HandleKeypress();
 
-        if(!GogglesOn){
-            ProcessColorChange(); 
-            UpdateGoggleState();
-            UpdateWorldObjects();
-            GetComponent<Battery>().RemoveBatteryEffects(RgbGoggleCosts);
-        }
-        else if(colorFlags != prevColorFlagState){
+        if(colorFlags != prevColorFlagState){
             if(GetComponent<Battery>().AttemptAddBatteryEffects(RgbGoggleCosts, true)){
-                ProcessColorChange();
                 UpdateGoggleState();
+                ProcessColorChange();
                 UpdateWorldObjects();
             }
         }
@@ -118,7 +112,11 @@ public class RgbGoggles : MonoBehaviour
         colorFlags.r = false;
         colorFlags.g = false;
         colorFlags.b = false;
+        CurrentGoggleState = RGBSTATE.ALL_OFF;
         GogglesOn = false;
+        ProcessColorChange(); 
+        UpdateGoggleState();
+        UpdateWorldObjects();
         GetComponent<Battery>().RemoveBatteryEffects(RgbGoggleCosts);
     }
 
@@ -137,19 +135,21 @@ public class RgbGoggles : MonoBehaviour
 
             }
         }
+        if(GogglesOn){
+            if(Input.GetAxis("Mouse ScrollWheel") > 0 || Input.GetKeyUp(KeyCode.RightArrow)){
+                rgbNum <<= 1;
+                if(rgbNum > (int)RGBSTATE.B) rgbNum = (int)RGBSTATE.R; 
+                wasKeyPressed = true;
+                Debug.Log($"RGB UP: {rgbNum}");
+            }
+            if(Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyUp(KeyCode.LeftArrow)){
+                rgbNum >>= 1;
+                if(rgbNum < 1) rgbNum = (int)RGBSTATE.B;
+                wasKeyPressed = true;
+                Debug.Log($"RGB DOWN: {rgbNum}");
+            }
+        }
 
-        if(Input.GetAxis("Mouse ScrollWheel") > 0 || Input.GetKeyUp(KeyCode.RightArrow)){
-            rgbNum <<= 1;
-            if(rgbNum > (int)RGBSTATE.B) rgbNum = (int)RGBSTATE.R; 
-            wasKeyPressed = true;
-            Debug.Log($"RGB UP: {rgbNum}");
-        }
-        if(Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyUp(KeyCode.LeftArrow)){
-            rgbNum >>= 1;
-            if(rgbNum < 1) rgbNum = (int)RGBSTATE.B;
-            wasKeyPressed = true;
-            Debug.Log($"RGB DOWN: {rgbNum}");
-        }
         UpdateColorFlags((RGBSTATE) rgbNum);
 
 
