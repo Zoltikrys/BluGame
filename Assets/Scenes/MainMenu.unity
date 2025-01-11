@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 0
+    m_Mode: 3
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -252,6 +252,42 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1938962625}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: LeavingMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1938962622}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1938962624}
+        m_TargetAssemblyTypeName: menuBehaviour, Assembly-CSharp
+        m_MethodName: SetSelectedButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &49019323
 MonoBehaviour:
@@ -1741,6 +1777,42 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1938962624}
+        m_TargetAssemblyTypeName: menuBehaviour, Assembly-CSharp
+        m_MethodName: LeavingMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1938962625}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: EnteringMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1938962622}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &456417470
 MonoBehaviour:
@@ -5992,6 +6064,7 @@ RectTransform:
   - {fileID: 1861469577}
   - {fileID: 1938962623}
   - {fileID: 1065272380}
+  - {fileID: 1601524359}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6101,7 +6174,7 @@ RectTransform:
   m_GameObject: {fileID: 1601524358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 11.355765, y: 11.355765, z: 11.355765}
+  m_LocalScale: {x: 1.7936598, y: 1.7936598, z: 1.7936598}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 49019321}
@@ -6112,12 +6185,12 @@ RectTransform:
   - {fileID: 484262119}
   - {fileID: 1921704238}
   - {fileID: 923908427}
-  m_Father: {fileID: 1938962623}
+  m_Father: {fileID: 1549508408}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50.64856, y: 44.317535}
-  m_SizeDelta: {x: 970.4347, y: 500}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_SizeDelta: {x: -849.5652, y: -476.6355}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1601524360
 MonoBehaviour:
@@ -7786,7 +7859,6 @@ RectTransform:
   - {fileID: 456417468}
   - {fileID: 2109409166}
   - {fileID: 337800408}
-  - {fileID: 1601524359}
   m_Father: {fileID: 1549508408}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -7806,6 +7878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bcffd6b5a85ee489af69271e8dfdde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuFirst: {fileID: 1143656134}
   scenetoload: 3
   sceneManager: {fileID: 0}
   fadeScreen: {fileID: 1065272379}
@@ -7822,6 +7895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe6c38689cb6544d90ec97cf20c0dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsMenuFirst: {fileID: 49019320}
   mainMixer: {fileID: 24100000, guid: d101e8911ecb717469a29755f0f75163, type: 2}
   resolutionDropdown: {fileID: 484262120}
 --- !u!1 &1940958151

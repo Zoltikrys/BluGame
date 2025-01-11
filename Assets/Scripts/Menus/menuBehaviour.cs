@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class menuBehaviour : MonoBehaviour
 {
+    [SerializeField] private GameObject mainMenuFirst;
+
     public LEVELS scenetoload;
     public SceneManager sceneManager;
     public GameObject fadeScreen;
@@ -33,6 +36,16 @@ public class menuBehaviour : MonoBehaviour
     {
         Debug.Log("You have tried to QUIT the game :(");
         Application.Quit();
+    }
+
+    public void SetSelectedButton()
+    {
+        EventSystem.current.SetSelectedGameObject(mainMenuFirst);
+    }
+
+    public void LeavingMenu()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     IEnumerator Fade(Image img, float targetAlpha)
