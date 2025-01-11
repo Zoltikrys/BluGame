@@ -4,9 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SettingsMenu : MonoBehaviour
 {
+    [SerializeField] private GameObject settingsMenuFirst;
+
+
+
     //audio mixers for sound
     public AudioMixer mainMixer;
 
@@ -76,5 +81,15 @@ public class SettingsMenu : MonoBehaviour
     {
         Debug.Log("Toggle fullscreen");
         Screen.fullScreen = isFullscreen; //won't work outside of a build
+    }
+
+    public void EnteringMenu()
+    {
+        EventSystem.current.SetSelectedGameObject(settingsMenuFirst);
+    }
+
+    public void LeavingMenu()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

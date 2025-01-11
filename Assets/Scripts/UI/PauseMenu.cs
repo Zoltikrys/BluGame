@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PauseMenu : MonoBehaviour
     public static bool settingsMenuActive = false;
 
     public GameObject PauseMenuUI;
+
+    [SerializeField] private GameObject pauseMenuFirst;
 
     private void Start()
     {
@@ -44,6 +47,9 @@ public class PauseMenu : MonoBehaviour
         PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
+
+        EventSystem.current.SetSelectedGameObject(pauseMenuFirst);
+
     }
 
     public void Resume()
@@ -51,11 +57,14 @@ public class PauseMenu : MonoBehaviour
         PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void LoadMenu()
     {
         Debug.Log("Loading menu...");
+        EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(0); //0 is the SceneManager, may need to change if that changes idk
     }
@@ -68,6 +77,11 @@ public class PauseMenu : MonoBehaviour
     public void DeactivateSettings()
     {
         settingsMenuActive = false;
+    }
+
+    public void ReturnToMenu()
+    {
+        EventSystem.current.SetSelectedGameObject(pauseMenuFirst);
     }
 
     public void QuitGame()
