@@ -7,8 +7,13 @@ public class killZone : MonoBehaviour
     [SerializeField] private Material mat;
     [SerializeField] private float offset;
 
+    [SerializeField] private float scrollSpeed = 0.5f;
+    Renderer rend;
+
     private void OnTriggerEnter(Collider other)
     {
+        rend = GetComponent<Renderer>();
+
         if(other.gameObject.name == "Player") {
             HealthManager healthMan = other.GetComponent<HealthManager>();
             healthMan.Death();
@@ -17,7 +22,7 @@ public class killZone : MonoBehaviour
 
     void Update()
     {
-        offset += Time.deltaTime * -0.1f;
+        offset += (scrollSpeed * Time.deltaTime);
 
         if (offset < 1f) {
             offset -= 1f;
@@ -26,6 +31,6 @@ public class killZone : MonoBehaviour
             offset += 1f;
         }
 
-        mat.mainTextureOffset = new Vector2(0, offset);
+        mat.mainTextureOffset = new Vector2(offset, 0);
     }
 }

@@ -27,7 +27,9 @@ public class FlyingEnemyHunter : MonoBehaviour
     public void Start()
     {
         TryGetComponent<KnockbackEffect>(out KnockbackEffect);
-        spotlight.GetComponent<Light>().color = AttackingColour;
+        if(spotlight != null) {
+            spotlight.GetComponent<Light>().color = AttackingColour;
+        }
         target = GameObject.Find("Player").transform;
         anim.Play("NormalFlying");
     }
@@ -58,6 +60,15 @@ public class FlyingEnemyHunter : MonoBehaviour
             hasHit = true;
             powerSource powerSource = collision.gameObject.GetComponent<powerSource>();
             powerSource.TakeDamage();
+            if (KnockbackEffect != null) {
+                KnockbackEffect.ApplyKnockback(GetComponent<Rigidbody>(), -transform.forward);
+            }
+        }
+        if (collision.gameObject.GetComponent<bossShield>()) {
+            Debug.Log("Hit Boss Shield");
+            hasHit = true;
+            bossShield bossShield = collision.gameObject.GetComponent<bossShield>();
+            bossShield.TakeDamage();
             if (KnockbackEffect != null) {
                 KnockbackEffect.ApplyKnockback(GetComponent<Rigidbody>(), -transform.forward);
             }
