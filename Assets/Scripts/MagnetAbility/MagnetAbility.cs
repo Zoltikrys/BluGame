@@ -55,7 +55,7 @@ public class MagnetAbility : MonoBehaviour
         // Toggle magnet ability
         if(smallMagnetTargetMagnetised && smallMagnetTarget == null) TurnOffMagnet(); // fires when our gameobject is consumed or deleted out of the scene.
    
-        if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Fire2")) // Change "M" to your preferred key
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Fire2"))
         {
             if(!isMagnetActive){
                 if(GetComponent<Battery>().AttemptAddBatteryEffects(MagnetBatteryCost, true)){
