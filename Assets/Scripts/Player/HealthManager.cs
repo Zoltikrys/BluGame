@@ -32,7 +32,8 @@ public class HealthManager : MonoBehaviour
     {
 
         meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
-        material = meshRenderer.material;
+        //Needs to be sorted, doesnt tint the model when hit because of a new model and materials being used
+        // material = meshRenderer.material;
 
         if(transform.gameObject.name == "Player") RenderTarget = GameObject.FindGameObjectWithTag("HP");
         if(RenderTarget) RenderTarget.TryGetComponent<BaseStatRenderer>(out HPRenderer);

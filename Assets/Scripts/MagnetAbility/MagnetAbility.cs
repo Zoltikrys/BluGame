@@ -35,6 +35,8 @@ public class MagnetAbility : MonoBehaviour
 
     [field: SerializeField] public List<BatteryEffect> MagnetBatteryCost {get; set;}
 
+    public Animator animator;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -48,6 +50,8 @@ public class MagnetAbility : MonoBehaviour
             var canvasScanlines = GameObject.FindGameObjectWithTag("UI_MAGFRONT");
             if (canvasScanlines != null) canvasScanlines.TryGetComponent<Image>(out magnetFront);
         }
+
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -61,12 +65,15 @@ public class MagnetAbility : MonoBehaviour
                 if(GetComponent<Battery>().AttemptAddBatteryEffects(MagnetBatteryCost, true)){
                     isMagnetActive = true;
                     magnetFront.color = Color.white;
+
+                    animator.SetBool("Magnet?", true);
                 }
             }
             else {
                 isMagnetActive = false;
                 magnetFront.color = Color.clear;
                 GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
+                animator.SetBool("Magnet?", false);
             }
 
             if (!isMagnetActive) // Release any active magnet
