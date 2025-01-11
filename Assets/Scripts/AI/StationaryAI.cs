@@ -11,6 +11,7 @@ public class StationaryAI : MonoBehaviour
     public CurrentState currentState;
     public bool playerSeen; // public for testing purposes, change to private when implementation finished
     public float rotateSpeed = 0.1f;
+
     [SerializeField] protected Transform target;
 
     //for shooting
@@ -20,7 +21,6 @@ public class StationaryAI : MonoBehaviour
     public float shootInterval = 2f;
 
     private float shootTimer;
-
 
 
     // Start is called before the first frame update
@@ -36,7 +36,6 @@ public class StationaryAI : MonoBehaviour
     {
         playerSeen = FOV.canSeePlayer;
 
-        
 
         switch (currentState)
         {
@@ -55,7 +54,7 @@ public class StationaryAI : MonoBehaviour
     private void IdleState()
     {
         Debug.Log("Idling...");
-        transform.Rotate(Vector3.up, 1*rotateSpeed);
+        transform.Rotate(Vector3.up, Time.timeScale * rotateSpeed);
         if (playerSeen)
         {
             currentState = CurrentState.Targeting;
