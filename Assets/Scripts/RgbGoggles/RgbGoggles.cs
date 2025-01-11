@@ -15,13 +15,15 @@ public class RgbGoggles : MonoBehaviour
     [field: SerializeField] public float RgbActivatedAlpha {get; set;} = 0.5f;
     [field: SerializeField] public Color RgbDeactivatedColor {get; set;} = new Color(0f, 0f, 0f, 0f);
     [field: SerializeField] public bool GogglesActivated {get; set;} = true;
-    [field: SerializeField] public RGBSTATE CurrentGoggleState{get; set;} = RGBSTATE.ALL_OFF;
+    [field: SerializeField] public RGBSTATE CurrentGoggleState{get; set;} = RGBSTATE.R;
     [field: SerializeField] public RGBSTATE PrevGoggleState{get; set;} = RGBSTATE.RGB;
     [field: SerializeField] public TextMeshProUGUI DebugText;
     [field: SerializeField] public List<GameObject> FilterObjects = new List<GameObject>();
     [field: SerializeField] public List<BatteryEffect> RgbGoggleCosts = new List<BatteryEffect>();
 
     private ColorFlags prevColorFlagState;
+    private bool GogglesOn = false;
+    private int rgbNum = (int)RGBSTATE.R;
 
     void Start(){
         colorFlags.r = false;
@@ -51,14 +53,11 @@ public class RgbGoggles : MonoBehaviour
             var canvasScanlines = GameObject.FindGameObjectWithTag("UI_FILTERSCANLINES");
             if (canvasScanlines != null) canvasScanlines.TryGetComponent<Image>(out colorFilterScanlines);
         }
-        {
-            
-        }
         prevColorFlagState = colorFlags;
 
         HandleKeypress();
 
-        if(!colorFlags.r && !colorFlags.g && !colorFlags.b){
+        if(!GogglesOn){
             ProcessColorChange(); 
             UpdateGoggleState();
             UpdateWorldObjects();
@@ -119,6 +118,7 @@ public class RgbGoggles : MonoBehaviour
         colorFlags.r = false;
         colorFlags.g = false;
         colorFlags.b = false;
+        GogglesOn = false;
         GetComponent<Battery>().RemoveBatteryEffects(RgbGoggleCosts);
     }
 
@@ -126,31 +126,32 @@ public class RgbGoggles : MonoBehaviour
         bool wasKeyPressed = false;
         if(!GogglesActivated) return wasKeyPressed;
 
-        // THESE KEYBINDS MUST CHANGE FOR SWITCH
-        if (Input.GetKeyUp(KeyCode.R)){ 
-            colorFlags.r = !colorFlags.r;
-            if(colorFlags.r){
-                colorFlags.g = false;
-                colorFlags.b = false;
-            }
+        if(Input.GetKeyUp(KeyCode.E)){
+            GogglesOn = !GogglesOn;
             wasKeyPressed = true;
-        }
-        if(Input.GetKeyUp(KeyCode.G)) {
-            colorFlags.g = !colorFlags.g;
-            if(colorFlags.g){
-                colorFlags.r = false;
-                colorFlags.b = false;
+            if(!GogglesOn) TurnGogglesOff();
+            else{
+                prevColorFlagState.r = false;
+                prevColorFlagState.b = false;
+                prevColorFlagState.g = false;
+
             }
-            wasKeyPressed = true;
         }
-        if(Input.GetKeyUp(KeyCode.B)) {
-            colorFlags.b = !colorFlags.b;
-            if(colorFlags.b){
-                colorFlags.g = false;
-                colorFlags.r = false;
-            }
+
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 || Input.GetKeyUp(KeyCode.RightArrow)){
+            rgbNum <<= 1;
+            if(rgbNum > (int)RGBSTATE.B) rgbNum = (int)RGBSTATE.R; 
             wasKeyPressed = true;
+            Debug.Log($"RGB UP: {rgbNum}");
         }
+        if(Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyUp(KeyCode.LeftArrow)){
+            rgbNum >>= 1;
+            if(rgbNum < 1) rgbNum = (int)RGBSTATE.B;
+            wasKeyPressed = true;
+            Debug.Log($"RGB DOWN: {rgbNum}");
+        }
+        UpdateColorFlags((RGBSTATE) rgbNum);
+
 
         return wasKeyPressed;
     }
@@ -165,10 +166,30 @@ public class RgbGoggles : MonoBehaviour
 
         CurrentGoggleState = (RGBSTATE)flag_state;
 
-        if(DebugText != null) DebugText.text = "GOGGLE_STATE: " + CurrentGoggleState.ToString();
 
+        if(DebugText != null) DebugText.text = "GOGGLE_STATE: " + CurrentGoggleState.ToString();
     }
 
+    private void UpdateColorFlags(RGBSTATE state){
+        switch(state){
+            case RGBSTATE.R: colorFlags.r = true;
+                             colorFlags.g = false;
+                             colorFlags.b = false;
+                             break;
+            case RGBSTATE.G: colorFlags.r = false;
+                             colorFlags.g = true;
+                             colorFlags.b = false;
+                             break;
+            case RGBSTATE.B: colorFlags.r = false;
+                             colorFlags.g = false;
+                             colorFlags.b = true;
+                             break;
+            default: colorFlags.r = false;
+                     colorFlags.g = false;
+                     colorFlags.b = false;
+                     break;
+        }
+    }
 
 
     private void ProcessColorChange(){
@@ -179,16 +200,15 @@ public class RgbGoggles : MonoBehaviour
         if (colorFlags.b) CurrentColor = new Color(CurrentColor.r, CurrentColor.g, 1.0f);
 
         // If RGB goggles turned off, set screen dark else set set specific color or normal vision when all RGB on
-        if (!colorFlags.r && !colorFlags.g && !colorFlags.b) {
+        if (!GogglesOn) {
             CurrentColor = new Color(RgbDeactivatedColor.r, RgbDeactivatedColor.g, RgbDeactivatedColor.b, RgbDeactivatedColor.a);
             colorFilterScanlines.color = (Color.clear);
+            colorFilter.color = CurrentColor;
         }
-        else if (colorFlags.r && colorFlags.g && colorFlags.b) CurrentColor = new Color(CurrentColor.r, CurrentColor.g, CurrentColor.b, 0.0f);
-        else {
+        if (GogglesActivated && GogglesOn && colorFilter != null){
+            colorFilter.color = CurrentColor;
             CurrentColor = new Color(CurrentColor.r, CurrentColor.g, CurrentColor.b, RgbActivatedAlpha);
             colorFilterScanlines.color = (Color.white);
         }
-
-        if (GogglesActivated && colorFilter != null) colorFilter.color = CurrentColor;
     }
 }
