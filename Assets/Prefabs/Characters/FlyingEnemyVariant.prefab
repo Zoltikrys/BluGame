@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2221345753479753870}
   - component: {fileID: 3204070617029705298}
   - component: {fileID: 3770924936912661132}
+  - component: {fileID: 3263610238186869357}
   m_Layer: 0
   m_Name: FlyingEnemyVariant
   m_TagString: Untagged
@@ -111,7 +112,7 @@ MonoBehaviour:
       isDead: 0
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
-  <UniqueID>k__BackingField: 20e45f32-1e9c-4220-83bd-001d1c7c2239
+  <UniqueID>k__BackingField: 121c5319-8e03-4109-a049-779a676e5fe9
 --- !u!114 &2221345753479753870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +159,7 @@ MonoBehaviour:
   target: {fileID: 0}
   damageSoundClip: {fileID: 8300000, guid: ea3f799eb23b9ce45ad1d369d6451ec3, type: 3}
   destroyParticle: {fileID: 7892231814481511242, guid: 22e337ad552f0ba409b4574fa403571c, type: 3}
+  KnockbackEffect: {fileID: 0}
 --- !u!95 &3770924936912661132
 Animator:
   serializedVersion: 5
@@ -179,6 +181,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3263610238186869357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364290722249141905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a443169c157854d9de7677cd66d992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 20
+  duration: 0.2
 --- !u!1 &7624270989056626100
 GameObject:
   m_ObjectHideFlags: 0

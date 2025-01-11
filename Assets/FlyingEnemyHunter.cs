@@ -21,8 +21,12 @@ public class FlyingEnemyHunter : MonoBehaviour
     [SerializeField] private AudioClip damageSoundClip;
     [SerializeField] private ParticleSystem destroyParticle;
 
+    public KnockbackEffect KnockbackEffect;
+
+
     public void Start()
     {
+        TryGetComponent<KnockbackEffect>(out KnockbackEffect);
         spotlight.GetComponent<Light>().color = AttackingColour;
         target = GameObject.Find("Player").transform;
         anim.Play("NormalFlying");
@@ -44,12 +48,19 @@ public class FlyingEnemyHunter : MonoBehaviour
             hasHit = true;
             HealthManager healthMan = collision.gameObject.GetComponent<HealthManager>(); // damage player
             healthMan.Damage();
+            if (KnockbackEffect != null) {
+                KnockbackEffect.ApplyKnockback(collision.gameObject.GetComponent<CharacterController>(), transform.forward);
+                KnockbackEffect.ApplyKnockback(GetComponent<Rigidbody>(), -transform.forward);
+            }
         }
         if (collision.gameObject.GetComponent<powerSource>()) {
             Debug.Log("Hit Power Source");
             hasHit = true;
             powerSource powerSource = collision.gameObject.GetComponent<powerSource>();
             powerSource.TakeDamage();
+            if (KnockbackEffect != null) {
+                KnockbackEffect.ApplyKnockback(GetComponent<Rigidbody>(), -transform.forward);
+            }
         }
         else {
             //Destroy(this.gameObject); // deletes self
