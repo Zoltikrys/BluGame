@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
 
     public static bool gameIsPaused = false;
+    public static bool settingsMenuActive = false;
 
     public GameObject PauseMenuUI;
 
@@ -22,7 +23,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && settingsMenuActive == false)
         {
             if (gameIsPaused)
             {
@@ -57,6 +58,16 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Loading menu...");
         Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(0); //0 is the SceneManager, may need to change if that changes idk
+    }
+
+    public void ActivateSettings()
+    {
+        settingsMenuActive = true;
+    }
+
+    public void DeactivateSettings()
+    {
+        settingsMenuActive = false;
     }
 
     public void QuitGame()
