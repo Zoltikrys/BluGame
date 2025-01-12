@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
+            animator.SetBool("Grounded?", true);
         }
 
         isMagnetized = GetComponent<MagnetAbility>().isMagnetized;
@@ -99,6 +100,7 @@ public class PlayerController : MonoBehaviour
             if (groundedPlayer && Input.GetButtonDown("Jump")) // Default Unity input for jump is "Jump"
             {
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+                animator.SetBool("Grounded?", false) ;
             }
         }
 
