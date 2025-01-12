@@ -27,6 +27,8 @@ public class MagnetAbility : MonoBehaviour
     [Header("Magnet UI")]
     [SerializeField] private Image magnetBack;
     [SerializeField] private Image magnetFront;
+    [SerializeField] private GameObject magnetVibes;
+    [SerializeField] private List<ParticleSystem> magnetParticles;
 
     [field: SerializeField] public GameObject smallMagnetTarget { get; private set; }// Currently tracked small magnet
     private bool smallMagnetTargetMagnetised = false;
@@ -61,12 +63,19 @@ public class MagnetAbility : MonoBehaviour
                 if(GetComponent<Battery>().AttemptAddBatteryEffects(MagnetBatteryCost, true)){
                     isMagnetActive = true;
                     magnetFront.color = Color.white;
+                    magnetVibes.SetActive(true);
                 }
             }
             else {
                 isMagnetActive = false;
                 magnetFront.color = Color.clear;
                 GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
+                magnetVibes.SetActive(false);
+                foreach (ParticleSystem particles in magnetParticles) {
+                    particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+                }
+                magnetParticles.Clear();
+
             }
 
             if (!isMagnetActive) // Release any active magnet
@@ -111,6 +120,7 @@ public class MagnetAbility : MonoBehaviour
 
         if (smallMagnetTarget != null)
         {
+            
             smallMagnetTargetMagnetised = true;
             // Calculate stop position in front of the player
             Vector3 stopPosition = transform.position + transform.forward * smallMagnetStopDistance;
@@ -149,6 +159,7 @@ public class MagnetAbility : MonoBehaviour
             if (obj.CompareTag(bigMagnetTag))
             {
                 
+                
                 Vector3 directionToMagnet = (obj.transform.position - transform.position).normalized;
                 float distanceToMagnet = Vector3.Distance(transform.position, obj.transform.position);
 
@@ -157,7 +168,11 @@ public class MagnetAbility : MonoBehaviour
                     // Move the player toward the magnet
                     characterController.Move(directionToMagnet * bigMagnetPullSpeed * Time.deltaTime);
                     isMagnetized = true;
-                    
+
+                    if ((obj.GetComponent<ParticleSystem>() != null) && (!magnetParticles.Contains(obj.GetComponent<ParticleSystem>()))) {
+                        magnetParticles.Add(obj.GetComponent<ParticleSystem>());
+                        obj.GetComponent<ParticleSystem>().Play();
+                    }
                 }
             }
         }
@@ -187,6 +202,11 @@ public class MagnetAbility : MonoBehaviour
         smallMagnetTargetMagnetised = false;
         magnetFront.color = Color.clear;
         GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
+        magnetVibes.SetActive(false);
+        foreach (ParticleSystem particles in magnetParticles) {
+            particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+        magnetParticles.Clear();
     }
 
     private void OnDrawGizmos()
