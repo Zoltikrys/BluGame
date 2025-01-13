@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 public class bossShield : MonoBehaviour
 {
@@ -33,7 +28,8 @@ public class bossShield : MonoBehaviour
     private void Update()
     {
         target = player.transform.position;
-        bossEye.transform.LookAt(target);
+        if(bossHealth > 0) bossEye.transform.LookAt(target);
+        else bossEye.transform.LookAt(transform.forward);
 
         if (Input.GetKeyDown(KeyCode.G)) {
             DeathSequence();
@@ -56,6 +52,10 @@ public class bossShield : MonoBehaviour
     {
         Animator bossMainAnim = bossMain.GetComponent<Animator>();
         bossMainAnim.SetBool("Dead", true);
+
+        Boss boss = bossMain.GetComponent<Boss>();
+        boss.Death();
+
     }
 
 }

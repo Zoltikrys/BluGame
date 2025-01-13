@@ -95,6 +95,11 @@ public class FlyingEnemyVariant : Enemy
             powerSource.TakeDamage();
             GetComponent<HealthManager>().Damage();
         }
+        if(collision.gameObject.GetComponent<bossShield>()){
+            hasHit = true;
+            bossShield boss = collision.gameObject.GetComponent<bossShield>();
+            boss.TakeDamage();
+        }
         else {
             Debug.Log("Gonna explode now");
             //Destroy(this.gameObject); // deletes self
