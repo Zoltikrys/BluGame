@@ -8,6 +8,7 @@ public abstract class Enemy : MonoBehaviour {
     protected bool isPatrolling;
     protected bool isSearching;
     protected bool isAttacking;
+    protected bool isDead;
     protected bool hasHit = false;
     protected FieldOfView FOV;
     protected int currentPatrolPoint = 0;
@@ -21,6 +22,8 @@ public abstract class Enemy : MonoBehaviour {
     protected virtual void TargetingState(){ transform.LookAt(target); }
     protected virtual void IdleState() { transform.LookAt(Vector3.zero); }
     protected virtual void AttackState() {}
+
+    protected virtual void DeadState() { }
 
     protected virtual void Start(){
         target = GameObject.Find("Player").transform;
@@ -46,6 +49,9 @@ public abstract class Enemy : MonoBehaviour {
                 break;
             case NpcState.Searching:
                 SearchingState();
+                break;
+            case NpcState.Dead:
+                DeadState();
                 break;
         }
     }

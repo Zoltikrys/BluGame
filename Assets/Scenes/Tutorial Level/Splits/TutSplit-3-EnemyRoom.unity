@@ -584,6 +584,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 7736372647941765708, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13640,52 +13644,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1900090519}
     m_Modifications:
     - target: {fileID: -1123812824170141987, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
-      propertyPath: uniqueID
-      value: 52a30baa-18bb-4758-903b-e49b557a4e38
-      objectReference: {fileID: 0}
-    - target: {fileID: -1123812824170141987, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
       propertyPath: <UniqueID>k__BackingField
       value: 551ff4ab02092cc41894d0d487ec9aa3
-      objectReference: {fileID: 0}
-    - target: {fileID: -1123812824170141987, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
-      propertyPath: <TrackedValues>k__BackingField.isHPTracked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -1123812824170141987, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
-      propertyPath: <TrackedValues>k__BackingField.isDeathTracked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4198614521401788000, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
-      propertyPath: <b_Health>k__BackingField
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6142877506885641153, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
-      propertyPath: angle
-      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6224600381772812662, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
       propertyPath: m_Name
       value: FlyingEnemy 1 (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6347369606922364486, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6347369606922364486, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6634369268908500646, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6634369268908500646, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
-      propertyPath: timeToTarget
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6634369268908500646, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
-      propertyPath: patrolPoints.Array.size
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6634369268908500646, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
       propertyPath: patrolPoints.Array.data[0]
@@ -13746,10 +13710,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6224600381772812662, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2142552117}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
 --- !u!4 &1568766108 stripped
 Transform:
@@ -17751,25 +17712,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 68817977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2142552109 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6224600381772812662, guid: d056326e7fac9c24583cf26f0ca8ae12, type: 3}
-  m_PrefabInstance: {fileID: 1568766107}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2142552117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142552109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78a443169c157854d9de7677cd66d992, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  strength: 5
-  duration: 0.2
 --- !u!1001 &116324003215955616
 PrefabInstance:
   m_ObjectHideFlags: 0

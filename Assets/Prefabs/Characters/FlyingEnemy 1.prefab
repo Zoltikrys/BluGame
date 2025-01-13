@@ -56,7 +56,7 @@ MonoBehaviour:
   playerSeen: 0
   speed: 5
   attackCooldown: 3
-  KnockbackEffect: {fileID: 0}
+  KnockbackEffect: {fileID: 3184536671332464838}
   target: {fileID: 0}
   patrolPoints:
   - {fileID: 0}
@@ -164,7 +164,7 @@ MonoBehaviour:
       isDead: 0
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
-  <UniqueID>k__BackingField: 32a31303-305f-47bd-9d70-db6b3b542939
+  <UniqueID>k__BackingField: eb5e9e68-973a-4262-80b7-4d05f214fbf4
 --- !u!114 &4198614521401788000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,10 +182,11 @@ MonoBehaviour:
   <MaximumHP>k__BackingField: 10
   <Lives>k__BackingField: 3
   cooldownTime: 1
+  m_DamageCooldown: 0
   flashTime: 0
   meshRenderer: {fileID: 0}
   material: {fileID: 0}
-  anim: {fileID: 1203633023867932607}
+  animator: {fileID: 0}
   <RenderTarget>k__BackingField: {fileID: 0}
   damageSoundClips:
   - {fileID: 8300000, guid: ea3f799eb23b9ce45ad1d369d6451ec3, type: 3}

@@ -40,6 +40,9 @@ public class HealthManager : MonoBehaviour
         if(HPRenderer) HPRenderer.UpdateValues(b_Health, MaximumHP);
         
         animator = GetComponentInChildren<Animator>();
+        if(animator == null) {
+            animator = GetComponent<Animator>();
+        }
     }
 
     // Update is called once per frame
@@ -68,7 +71,7 @@ public class HealthManager : MonoBehaviour
 
         m_DamageCooldown = cooldownTime;
         b_Health -= 1;
-        Debug.Log(b_Health);
+        //Debug.Log(b_Health);
 
         //StartCoroutine(EFlash());
 
@@ -102,7 +105,7 @@ public class HealthManager : MonoBehaviour
     public void Heal()
     {
         b_Health += 1;
-        Debug.Log(b_Health);
+        //Debug.Log(b_Health);
 
         if(b_Health > MaximumHP) b_Health = MaximumHP;
 
@@ -120,7 +123,14 @@ public class HealthManager : MonoBehaviour
         animator.SetBool("Dead", true);
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        StartCoroutine("HandleRespawn", stateInfo);
+        if (CompareTag("Player")) {
+            StartCoroutine("HandleRespawn", stateInfo);
+        }
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 
     private IEnumerator HandleRespawn(AnimatorStateInfo stateInfo){

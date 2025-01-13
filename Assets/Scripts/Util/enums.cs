@@ -25,7 +25,7 @@ public enum CAMERA_TRANSITION_TYPE{
 }
 
 [System.Serializable]
-public enum NpcState { Idle, Patrolling, Targeting, Attack, Searching }
+public enum NpcState { Idle, Patrolling, Targeting, Attack, Searching, Dead }
 
 public enum TweenType{
     FORWARDS_ONLY,

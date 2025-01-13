@@ -82,6 +82,11 @@ public class FlyingEnemy : Enemy
         }
     }
 
+    protected override void DeadState()
+    {
+        anim.SetBool("Dead", true);
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -103,6 +108,7 @@ public class FlyingEnemy : Enemy
             powerSource powerSource = collision.gameObject.GetComponent<powerSource>();
             powerSource.TakeDamage();
             GetComponent<HealthManager>().Damage();
+            
         }
         else
         {
@@ -110,8 +116,12 @@ public class FlyingEnemy : Enemy
             //Destroy(this.gameObject); // deletes self
         }
 
+        if (GetComponent<HealthManager>().b_Health <= 0) {
+            CurrentState = NpcState.Dead;
+        }
+
         // Handle state transitions based on collisions
-        if (hasHit)
+        else if (hasHit)
         {
             CurrentState = NpcState.Targeting;
         }
