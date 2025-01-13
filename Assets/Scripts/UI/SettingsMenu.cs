@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -17,12 +18,16 @@ public class SettingsMenu : MonoBehaviour
 
     public TMPro.TMP_Dropdown resolutionDropdown;
 
-    Resolution[] resolutions;
+    List<Resolution> resolutions = new List<Resolution>();
+    Resolution fallbackResolution;
 
     //resolution
     private void Start()
     {
-        resolutions = Screen.resolutions;
+        fallbackResolution.width = 800;
+        fallbackResolution.height = 600;
+
+        resolutions = Screen.resolutions.ToList();
 
         resolutionDropdown.ClearOptions();
 
@@ -30,7 +35,7 @@ public class SettingsMenu : MonoBehaviour
 
 
         int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
+        for (int i = 0; i < resolutions.Count; i++)
         {
             string resolutionOption = resolutions[i].width + "x" + resolutions[i].height;
             resolutionOptions.Add(resolutionOption);
@@ -49,8 +54,13 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetResolution (int resolutionIndex)
     {
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        if(resolutions.Count == 0){
+            Screen.SetResolution(fallbackResolution.width, fallbackResolution.height, Screen.fullScreen);
+        }
+        else{
+            Resolution resolution = resolutions[resolutionIndex];
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        }
     }
 
     //volume
