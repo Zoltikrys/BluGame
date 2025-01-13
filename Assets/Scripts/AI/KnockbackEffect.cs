@@ -20,6 +20,8 @@ public class KnockbackEffect : MonoBehaviour
      public void ApplyKnockback(CharacterController targetRigidbody, Vector3 knockbackDirection)
     {
         if (targetRigidbody == null) return;
+        if (targetRigidbody.GetComponent<HealthManager>().b_Health < 1) return;
+        //if (targetRigidbody.GetComponent<HealthManager>().m_DamageCooldown > 0) return;
 
         knockbackDirection.Normalize();
 

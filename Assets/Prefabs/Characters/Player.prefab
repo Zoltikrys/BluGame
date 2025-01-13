@@ -65,7 +65,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.00001
-  m_Center: {x: 0, y: 0.2, z: 0}
+  m_Center: {x: 0, y: 0.26, z: 0}
 --- !u!114 &1365176956614713060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,8 +81,8 @@ MonoBehaviour:
   controller: {fileID: 107750649550718847}
   isMagnetized: 0
   animator: {fileID: 0}
-  playerSpeed: 3
-  rotationSpeed: 5
+  playerSpeed: 4
+  rotationSpeed: 6
   jumpHeight: 1
   gravity: -9.81
 --- !u!114 &8461529179585224728
@@ -121,8 +121,11 @@ MonoBehaviour:
   DebugConeColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   isMagnetized: 0
   isMagnetAbilityActive: 1
+  animator: {fileID: 0}
   magnetBack: {fileID: 0}
   magnetFront: {fileID: 0}
+  magnetVibes: {fileID: 0}
+  magnetParticles: []
   <smallMagnetTarget>k__BackingField: {fileID: 0}
   <MagnetBatteryCost>k__BackingField:
   - <Name>k__BackingField: MagnetInitialCost
@@ -161,7 +164,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  animator: {fileID: 0}
 --- !u!114 &1739906687256751477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,11 +176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c649326cbc669c439b1c212c1ad6a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <b_Health>k__BackingField: 5
+  <b_Health>k__BackingField: 10
   <StartingHP>k__BackingField: 10
   <MaximumHP>k__BackingField: 10
   <Lives>k__BackingField: 3
   cooldownTime: 1
+  m_DamageCooldown: 0
   flashTime: 0.2
   meshRenderer: {fileID: 0}
   material: {fileID: 0}
@@ -339,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d8d53d456e1553c40938d326091b5a1c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d8d53d456e1553c40938d326091b5a1c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -501,6 +504,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e94765744773b304e8593e2cde0b8f1d, type: 2}
+    - target: {fileID: 7952082571035021047, guid: d8d53d456e1553c40938d326091b5a1c, type: 3}
+      propertyPath: m_Name
+      value: Goggles
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952082571035021047, guid: d8d53d456e1553c40938d326091b5a1c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8328500595431254260, guid: d8d53d456e1553c40938d326091b5a1c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

@@ -67,7 +67,7 @@ public class MagnetAbility : MonoBehaviour
                     isMagnetActive = true;
                     magnetFront.color = Color.white;
                     animator.SetBool("Magnet?", true);
-                    magnetVibes.SetActive(true);
+                    //magnetVibes.SetActive(true);
                 }
             }
             else {
@@ -76,11 +76,11 @@ public class MagnetAbility : MonoBehaviour
                 magnetFront.color = Color.clear;
                 GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
                 animator.SetBool("Magnet?", false);
-                magnetVibes.SetActive(false);
-                foreach (ParticleSystem particles in magnetParticles) {
-                    particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
-                }
-                magnetParticles.Clear();
+                //magnetVibes.SetActive(false);
+                //foreach (ParticleSystem particles in magnetParticles) {
+                //    particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+                //}
+                //magnetParticles.Clear();
 
             }
 
@@ -176,10 +176,10 @@ public class MagnetAbility : MonoBehaviour
                     characterController.Move(directionToMagnet * bigMagnetPullSpeed * Time.deltaTime);
                     isMagnetized = true;
 
-                    if ((obj.GetComponent<ParticleSystem>() != null) && (!magnetParticles.Contains(obj.GetComponent<ParticleSystem>()))) {
-                        magnetParticles.Add(obj.GetComponent<ParticleSystem>());
-                        obj.GetComponent<ParticleSystem>().Play();
-                    }
+                    //if ((obj.GetComponent<ParticleSystem>() != null) && (!magnetParticles.Contains(obj.GetComponent<ParticleSystem>()))) {
+                    //    magnetParticles.Add(obj.GetComponent<ParticleSystem>());
+                    //    obj.GetComponent<ParticleSystem>().Play();
+                    //}
                 }
             }
         }
@@ -209,11 +209,11 @@ public class MagnetAbility : MonoBehaviour
         smallMagnetTargetMagnetised = false;
         magnetFront.color = Color.clear;
         GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
-        magnetVibes.SetActive(false);
-        foreach (ParticleSystem particles in magnetParticles) {
-            particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
-        }
-        magnetParticles.Clear();
+        //magnetVibes.SetActive(false);
+        //foreach (ParticleSystem particles in magnetParticles) {
+        //    particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+        //}
+        //magnetParticles.Clear();
     }
 
     private void OnDrawGizmos()

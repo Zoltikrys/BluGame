@@ -69,9 +69,9 @@ public class FlyingEnemyHunter : MonoBehaviour
             hasHit = true;
             bossShield bossShield = collision.gameObject.GetComponent<bossShield>();
             bossShield.TakeDamage();
-            if (KnockbackEffect != null) {
-                KnockbackEffect.ApplyKnockback(GetComponent<Rigidbody>(), -transform.forward);
-            }
+            //if (KnockbackEffect != null) {
+            //    KnockbackEffect.ApplyKnockback(GetComponent<Rigidbody>(), -transform.forward);
+            //}
         }
         else {
             //Destroy(this.gameObject); // deletes self

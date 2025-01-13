@@ -9,8 +9,9 @@ public class EndZone : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
 
     // Update is called once per frame
-    public void OnTriggerEnter()
+    public void OnTriggerEnter(Collider collider)
     {
+        if (collider.GetComponent<CharacterController>() == null) return;
         Time.timeScale = 0.0f;
         endScreen.gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(mainMenu);

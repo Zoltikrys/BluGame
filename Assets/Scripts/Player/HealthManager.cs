@@ -15,7 +15,7 @@ public class HealthManager : MonoBehaviour
     private float cooldownTime = 1.0f;
     private bool damageLock = false;
 
-    float m_DamageCooldown = 0;
+    public float m_DamageCooldown = 0;
 
     public float flashTime;
     public MeshRenderer meshRenderer;
@@ -70,10 +70,31 @@ public class HealthManager : MonoBehaviour
         b_Health -= 1;
         Debug.Log(b_Health);
 
-        StartCoroutine(EFlash());
+        //StartCoroutine(EFlash());
 
         if (b_Health <= 0)
         {
+            Death();
+        }
+    }
+
+    public void Damage(int damageValue)
+    {
+        if (damageLock) return;
+
+        if (m_DamageCooldown > 0) {
+            return;
+        }
+
+        SoundFXManager.instance.PlayRandomSoundFXClip(damageSoundClips, transform, 1f);
+
+        m_DamageCooldown = cooldownTime;
+        b_Health -= damageValue;
+        Debug.Log(b_Health);
+
+        //StartCoroutine(EFlash());
+
+        if (b_Health <= 0) {
             Death();
         }
     }
@@ -121,12 +142,13 @@ public class HealthManager : MonoBehaviour
         }
     }
 
-    IEnumerator EFlash()
-    {
-        material.SetColor("_Tint", Color.red);
-        yield return new WaitForSeconds(flashTime);
-        material.SetColor("_Tint", Color.white);
-    }
+    // Broken with new animated character
+    //IEnumerator EFlash()
+    //{
+    //    material.SetColor("_Tint", Color.red);
+    //    yield return new WaitForSeconds(flashTime);
+    //    material.SetColor("_Tint", Color.white);
+    //}
 
     public void Respawn(){
         b_Health = MaximumHP;

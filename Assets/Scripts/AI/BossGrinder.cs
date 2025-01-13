@@ -3,6 +3,8 @@ using UnityEngine;
 public class BossGrinder : MonoBehaviour
 {
     [field: SerializeField] public KnockbackEffect KnockbackEffect;
+    [SerializeField] private GameObject refobject;
+
     public void OnTriggerEnter(Collider collider){
         Debug.Log("Collision");
 

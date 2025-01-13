@@ -12,6 +12,7 @@ public class Laser : MonoBehaviour
     [field: SerializeField] public bool isActive = true;
     [field: SerializeField] public float WidthWhenLaserOn = 0.4f;
     [field: SerializeField] public LayerMask LayerMask;
+    [field: SerializeField] private int damageValue = 1;
 
     private RgbFilterObject rgbFilterObject;
 
@@ -50,7 +51,7 @@ public class Laser : MonoBehaviour
                     HealthManager health;
                     if(collidedObjects[i].collider.gameObject.TryGetComponent<HealthManager>(out health)){
                         if(isActive){
-                            health.Damage();
+                            health.Damage(damageValue);
                         }
                     }
                     

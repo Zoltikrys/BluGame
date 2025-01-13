@@ -42,9 +42,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(controller.isGrounded);
-        Debug.Log(playerVelocity.y);
-
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {

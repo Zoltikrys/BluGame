@@ -6,12 +6,13 @@ public class bossShield : MonoBehaviour
     [SerializeField] public int powerSourceTarget;
     [SerializeField] private GameObject endScreen;
     [SerializeField] private GameObject mainMenu;
-    [SerializeField] private Animator anim;
-    [SerializeField] private Vector3 target;
-    [SerializeField] private GameObject player;
+    private Animator anim;
+    private Vector3 target;
+    private GameObject player;
     [SerializeField] private GameObject bossEye;
     [SerializeField] private float bossHealth = 3f;
     [SerializeField] private GameObject bossMain;
+    [SerializeField] private EnemySpawner[] enemySpawner;
 
     public void Start()
     {
@@ -30,10 +31,6 @@ public class bossShield : MonoBehaviour
         target = player.transform.position;
         if(bossHealth > 0) bossEye.transform.LookAt(target);
         else bossEye.transform.LookAt(transform.forward);
-
-        if (Input.GetKeyDown(KeyCode.G)) {
-            DeathSequence();
-        }
     }
 
     public void TakeDamage()
@@ -42,7 +39,7 @@ public class bossShield : MonoBehaviour
             
             bossHealth--;
 
-            if (bossHealth <= 0) {
+            if (bossHealth == 0) {
                 DeathSequence();
             }
         }
@@ -50,8 +47,17 @@ public class bossShield : MonoBehaviour
 
     public void DeathSequence()
     {
+        foreach(var spawner in enemySpawner) {
+            spawner.GetComponent<EnemySpawner>();
+            spawner.enabled = false;
+        }
+
+        FlyingEnemyHunter[] others = (GameObject.FindObjectsOfType<FlyingEnemyHunter>());
+        foreach (FlyingEnemyHunter other in others) { Destroy(other.gameObject); }
+
+        gameObject.GetComponent<ParticleSystem>().Play();
         Animator bossMainAnim = bossMain.GetComponent<Animator>();
-        bossMainAnim.SetBool("Dead", true);
+        bossMainAnim.SetBool("isDead", true);
 
         Boss boss = bossMain.GetComponent<Boss>();
         boss.Death();
