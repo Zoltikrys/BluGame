@@ -8,7 +8,9 @@ public class Pickup : MonoBehaviour
 
     public void PickUp(Collider other){
         if(other == null) return;
-        
+
+        if (other.GetComponent<PlayerController>() == null) return;
+
         Battery battery;
         other.gameObject.TryGetComponent<Battery>(out battery);
 
@@ -37,6 +39,4 @@ public class Pickup : MonoBehaviour
         if(trackable) trackable.TrackedValues.HealthStatus.isDead = true;
         transform.gameObject.SetActive(false);
     }
-
-
 }

@@ -23,6 +23,7 @@ public class MagnetAbility : MonoBehaviour
     private bool isMagnetActive = false;
     public bool isMagnetized;
     public bool isMagnetAbilityActive = true;
+    [SerializeField] private Animator animator;
 
     [Header("Magnet UI")]
     [SerializeField] private Image magnetBack;
@@ -41,6 +42,8 @@ public class MagnetAbility : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         //controllerScript = GetComponent<PlayerController>();
+
+        animator = GetComponentInChildren<Animator>();
 
         if (magnetBack == null) {
             var canvasLayer = GameObject.FindGameObjectWithTag("UI_MAGBACK");
@@ -63,13 +66,16 @@ public class MagnetAbility : MonoBehaviour
                 if(GetComponent<Battery>().AttemptAddBatteryEffects(MagnetBatteryCost, true)){
                     isMagnetActive = true;
                     magnetFront.color = Color.white;
+                    animator.SetBool("Magnet?", true);
                     magnetVibes.SetActive(true);
                 }
             }
             else {
                 isMagnetActive = false;
+                isMagnetized = false;
                 magnetFront.color = Color.clear;
                 GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
+                animator.SetBool("Magnet?", false);
                 magnetVibes.SetActive(false);
                 foreach (ParticleSystem particles in magnetParticles) {
                     particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
@@ -87,6 +93,7 @@ public class MagnetAbility : MonoBehaviour
 
         if (isMagnetActive)
         {
+            isMagnetized = false;
             HandleSmallMagnets();
             HandleBigMagnets();
         }

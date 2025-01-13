@@ -1923,11 +1923,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1e5320fd487b78499a768ad364b127d, type: 3}
---- !u!1 &364505856 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7918446809395273470, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
-  m_PrefabInstance: {fileID: 1119673341}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &372337908 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7334833969615046904, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
@@ -5353,7 +5348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7736372647941765708, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8614,7 +8609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reqPower: 1
   powerSources: 0
-  goggles: {fileID: 364505856}
+  goggles: {fileID: 0}
   player: {fileID: 1400958525}
   anim: {fileID: 0}
   isGoggles: 1
