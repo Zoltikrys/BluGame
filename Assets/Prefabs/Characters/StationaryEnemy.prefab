@@ -316,6 +316,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5681594720515111584}
   - component: {fileID: 6605262549195290149}
+  - component: {fileID: 131720295189316057}
   m_Layer: 0
   m_Name: StationaryEnemy
   m_TagString: Untagged
@@ -363,6 +364,27 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &131720295189316057
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3915369591344202504}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e0f332ee9b705c747965426cfdb5da2f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4096752946141831382
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,6 +627,7 @@ MonoBehaviour:
   playerSeen: 0
   speed: 10
   attackCooldown: 3
+  KnockbackEffect: {fileID: 0}
   target: {fileID: 0}
   patrolPoints: []
 --- !u!136 &8720493338588979095
