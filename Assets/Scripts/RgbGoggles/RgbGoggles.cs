@@ -70,10 +70,6 @@ public class RgbGoggles : MonoBehaviour
                 UpdateWorldObjects();
             }
         }
-            
-        
-        
-
     }
 
     private void UpdateWorldObjects()
@@ -86,7 +82,7 @@ public class RgbGoggles : MonoBehaviour
         }
     }
 
-    private void GetFilterObjects()
+    public void GetFilterObjects()
     {
         FilterObjects.Clear();
         FilterObjects = GameObject.FindObjectsOfType<GameObject>().Where(obj => obj.layer == LayerMask.NameToLayer("RGB_FilterObjects")).ToList<GameObject>();
@@ -111,7 +107,6 @@ public class RgbGoggles : MonoBehaviour
                     
                 }
             }
-            
         }
     }
 
@@ -177,7 +172,7 @@ public class RgbGoggles : MonoBehaviour
         if(DebugText != null) DebugText.text = "GOGGLE_STATE: " + CurrentGoggleState.ToString();
     }
 
-    private void UpdateColorFlags(RGBSTATE state){
+    public void UpdateColorFlags(RGBSTATE state){
         switch(state){
             case RGBSTATE.R: colorFlags.r = true;
                              colorFlags.g = false;

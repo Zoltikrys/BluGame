@@ -1244,7 +1244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7736372647941765708, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8259434147950574378, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1750,6 +1750,10 @@ PrefabInstance:
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: isActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
+      propertyPath: damageValue
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: ShowDebugLaser
@@ -4621,63 +4625,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1044042522}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!1001 &631341636
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2179973888299719539, guid: 0828708ed601837419e422b919f9e39d, type: 3}
-      propertyPath: m_Name
-      value: AudioManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644204315613035918, guid: 0828708ed601837419e422b919f9e39d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644204315613035918, guid: 0828708ed601837419e422b919f9e39d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644204315613035918, guid: 0828708ed601837419e422b919f9e39d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644204315613035918, guid: 0828708ed601837419e422b919f9e39d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644204315613035918, guid: 0828708ed601837419e422b919f9e39d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644204315613035918, guid: 0828708ed601837419e422b919f9e39d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644204315613035918, guid: 0828708ed601837419e422b919f9e39d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644204315613035918, guid: 0828708ed601837419e422b919f9e39d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644204315613035918, guid: 0828708ed601837419e422b919f9e39d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644204315613035918, guid: 0828708ed601837419e422b919f9e39d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0828708ed601837419e422b919f9e39d, type: 3}
 --- !u!1 &691285091
 GameObject:
   m_ObjectHideFlags: 0
@@ -5820,7 +5767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000af5f2891cbdd44946033a9a7077db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <FilterLayer>k__BackingField: 1
+  <FilterLayer>k__BackingField: 4
   CollisionWhenHidden: 0
   ActiveOnColour: 0
   FadeInStyle:
@@ -6369,6 +6316,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
+      propertyPath: damageValue
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: ShowDebugLaser
       value: 1
       objectReference: {fileID: 0}
@@ -6706,6 +6657,10 @@ PrefabInstance:
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: isActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
+      propertyPath: damageValue
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: ShowDebugLaser
@@ -8708,6 +8663,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
+      propertyPath: damageValue
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: ShowDebugLaser
       value: 1
       objectReference: {fileID: 0}
@@ -8839,6 +8798,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3647002279214618310, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: <PrevGoggleState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -3647002279214618310, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: <GogglesActivated>k__BackingField
       value: 1
@@ -9108,6 +9071,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
+      propertyPath: damageValue
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: ShowDebugLaser
       value: 1
       objectReference: {fileID: 0}
@@ -9117,7 +9084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: CurrentLaserType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: LayerMask.m_Bits
@@ -9133,7 +9100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5714018211875444390, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: ActiveOnColour
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5714018211875444390, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: FadeInStyle.Style
@@ -9153,7 +9120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5714018211875444390, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: <FilterLayer>k__BackingField
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5714018211875444390, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: FadeInStyle.CollisionThresholdPercentage
@@ -9170,11 +9137,11 @@ PrefabInstance:
     - target: {fileID: 6771081978374929075, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9c643940d8039164ca6486af5969e956, type: 2}
+      objectReference: {fileID: 2100000, guid: 57875d3720f9f144a87b5f98fd770ee4, type: 2}
     - target: {fileID: 7003579363458312541, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
+      objectReference: {fileID: 2100000, guid: 86d1ddd84673afe48a65fd8b70b8d33f, type: 2}
     - target: {fileID: 7003579363458312541, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: m_Positions.Array.data[1].z
       value: 0
@@ -12301,6 +12268,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
+      propertyPath: damageValue
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: ShowDebugLaser
       value: 1
       objectReference: {fileID: 0}
@@ -12551,6 +12522,10 @@ PrefabInstance:
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: isActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
+      propertyPath: damageValue
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: ShowDebugLaser
@@ -13343,6 +13318,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
+      propertyPath: damageValue
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: ShowDebugLaser
       value: 1
       objectReference: {fileID: 0}
@@ -13352,7 +13331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: CurrentLaserType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4194395010217907975, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: LayerMask.m_Bits
@@ -13368,7 +13347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5714018211875444390, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: ActiveOnColour
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5714018211875444390, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: FadeInStyle.Style
@@ -13388,7 +13367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5714018211875444390, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: <FilterLayer>k__BackingField
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5714018211875444390, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: FadeInStyle.CollisionThresholdPercentage
@@ -13405,11 +13384,11 @@ PrefabInstance:
     - target: {fileID: 6771081978374929075, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9c643940d8039164ca6486af5969e956, type: 2}
+      objectReference: {fileID: 2100000, guid: 57875d3720f9f144a87b5f98fd770ee4, type: 2}
     - target: {fileID: 7003579363458312541, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 91b4aa75e97f53a409c17373207ae17f, type: 2}
+      objectReference: {fileID: 2100000, guid: 86d1ddd84673afe48a65fd8b70b8d33f, type: 2}
     - target: {fileID: 7003579363458312541, guid: 568fd5e660e234e4cb71f369ab1d8572, type: 3}
       propertyPath: m_Positions.Array.data[1].z
       value: 0
@@ -13983,6 +13962,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserRed
       objectReference: {fileID: 0}
+    - target: {fileID: 4638487495604497602, guid: 1c65252f2bbb95f459ef00cd4c694eac, type: 3}
+      propertyPath: damageValue
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7688355679792035280, guid: 1c65252f2bbb95f459ef00cd4c694eac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.64
@@ -14076,6 +14059,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4302965262637687494, guid: c892555bd2eb93343861bd04a00e6465, type: 3}
+      propertyPath: damageValue
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4678998602631720963, guid: c892555bd2eb93343861bd04a00e6465, type: 3}
       propertyPath: m_Name
       value: LaserBlue
@@ -14093,9 +14080,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 308827995}
     m_Modifications:
+    - target: {fileID: 2349804208663085867, guid: 2ff14c1848ff139459041348f4171e61, type: 3}
+      propertyPath: ActiveOnColour
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349804208663085867, guid: 2ff14c1848ff139459041348f4171e61, type: 3}
+      propertyPath: <FilterLayer>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3009257512738458066, guid: 2ff14c1848ff139459041348f4171e61, type: 3}
       propertyPath: m_Name
       value: LaserWhite
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697819164560414974, guid: 2ff14c1848ff139459041348f4171e61, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 57875d3720f9f144a87b5f98fd770ee4, type: 2}
+    - target: {fileID: 6043569294596517104, guid: 2ff14c1848ff139459041348f4171e61, type: 3}
+      propertyPath: damageValue
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043569294596517104, guid: 2ff14c1848ff139459041348f4171e61, type: 3}
+      propertyPath: CurrentLaserType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7161301627735112910, guid: 2ff14c1848ff139459041348f4171e61, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14137,6 +14144,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8535051213697560649, guid: 2ff14c1848ff139459041348f4171e61, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 86d1ddd84673afe48a65fd8b70b8d33f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14194,6 +14205,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserGreen
       objectReference: {fileID: 0}
+    - target: {fileID: 5910455010743645057, guid: 4fe1320d88c57b841a850c5532dc6de0, type: 3}
+      propertyPath: damageValue
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14213,7 +14228,6 @@ SceneRoots:
   - {fileID: 446631431}
   - {fileID: 308827995}
   - {fileID: 1177835098}
-  - {fileID: 631341636}
   - {fileID: 747177439}
   - {fileID: 1127953884}
   - {fileID: 697470931}

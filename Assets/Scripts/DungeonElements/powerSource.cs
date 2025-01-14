@@ -32,6 +32,7 @@ public class powerSource : MonoBehaviour
 
     public void DestroySequence()
     {
+        GetComponent<ParticleSystem>().Play();
         bossShield.GetComponent<bossShield>().powerSourceFlags ++;
         if( bossShield.GetComponent<bossShield>().powerSourceFlags == bossShield.GetComponent<bossShield>().powerSourceTarget)
         {

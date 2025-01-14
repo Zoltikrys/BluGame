@@ -95,11 +95,10 @@ public class SceneManager : MonoBehaviour
         StartCoroutine(WaitForSceneInitialization());
         StartCoroutine(WaitForPlayer());
 
-
-
         Debug.Log($"OnSceneLoaded called for {scene.name} in mode {mode}. Stack Trace: {System.Environment.StackTrace}");
         Player = GameObject.FindGameObjectWithTag("Player");
-        Player.GetComponent<RgbGoggles>().SetFilterObjects();
+        
+
         StateManager.SetRoomState(scene.name);
     
         SetSpawn(scene);
@@ -114,7 +113,11 @@ public class SceneManager : MonoBehaviour
             StateManager.SetPlayerState(Player, StateManager.PlayerInfo);
         }
         respawning = false;
-        
+
+
+        //Player.GetComponent<RgbGoggles>().GetFilterObjects();
+        //Player.GetComponent<RgbGoggles>().SetFilterObjects();
+        //Player.GetComponent<RgbGoggles>().TurnGogglesOff();
         Debug.Log($"Loaded scene {scene} {CAMERA_EFFECTS.ENTER_ROOM} {EnterTransition}");
         StartScreenTransition(CAMERA_EFFECTS.ENTER_ROOM, EnterTransition, () => {UnlockPlayer();});
     }

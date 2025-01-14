@@ -7,6 +7,12 @@ public class EndZone : MonoBehaviour
 {
     [SerializeField] private GameObject endScreen;
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private SceneManager sceneManager;
+
+    private void Start()
+    {
+        sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+    }
 
     // Update is called once per frame
     public void OnTriggerEnter(Collider collider)
@@ -17,8 +23,9 @@ public class EndZone : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(mainMenu);
     }
 
-    void MainMenu()
+    public void MainMenu()
     {
         Debug.Log("try if you must, but this hasn't been programmed yet.");
+        Application.Quit();
     }
 }
