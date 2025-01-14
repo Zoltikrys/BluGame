@@ -31,7 +31,7 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
     public void OnMovement(InputAction.CallbackContext context)
     {
         MovementInput = context.ReadValue<Vector2>();
-        print(MovementInput);
+        //print(MovementInput);
     }
 
 

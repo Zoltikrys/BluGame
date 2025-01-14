@@ -34,7 +34,9 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         int spawnIndex = Random.Range(0, spawnPoints.Length);
-        Instantiate(enemyPrefab, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
+        if(spawnPoints.Length != 0) {
+            Instantiate(enemyPrefab, spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
+        }
     }
 
     void CloseSpawner()
