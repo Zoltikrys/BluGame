@@ -20,6 +20,7 @@ public class DoorTransition : MonoBehaviour
     {
         if (collider.CompareTag("Player")){
             if(SceneManager) SceneManager.RequestLoadScene(SceneToLoad, SceneID, IndexOfSpawnPointInNextScene, ExitTransition, EnterTransition);
+            
         }
     }
 }

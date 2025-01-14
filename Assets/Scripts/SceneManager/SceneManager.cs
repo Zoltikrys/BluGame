@@ -53,7 +53,7 @@ public class SceneManager : MonoBehaviour
             throw new System.Exception($"Tried accessing invalid scene ({scene}). Exiting...");
         }
 
-        LockPlayer();
+        //LockPlayer();
         if(Player) Player.GetComponent<RgbGoggles>().TurnGogglesOff();
         if(Player) StateManager.StorePlayerInfo(Player);
         else {
@@ -95,8 +95,11 @@ public class SceneManager : MonoBehaviour
         StartCoroutine(WaitForSceneInitialization());
         StartCoroutine(WaitForPlayer());
 
+
+
         Debug.Log($"OnSceneLoaded called for {scene.name} in mode {mode}. Stack Trace: {System.Environment.StackTrace}");
         Player = GameObject.FindGameObjectWithTag("Player");
+        Player.GetComponent<RgbGoggles>().SetFilterObjects();
         StateManager.SetRoomState(scene.name);
     
         SetSpawn(scene);

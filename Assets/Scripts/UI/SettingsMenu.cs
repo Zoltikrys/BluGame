@@ -21,12 +21,12 @@ public class SettingsMenu : MonoBehaviour
     //resolution
     private void Start()
     {
-        fallbackResolution.width = 800;
-        fallbackResolution.height = 600;
+        fallbackResolution.width = 1920;
+        fallbackResolution.height = 1080;
 
         resolutions = Screen.resolutions.ToList();
 
-        resolutionDropdown.ClearOptions();
+        //resolutionDropdown.ClearOptions();
 
         List<string> resolutionOptions = new List<string>();
 
@@ -45,17 +45,22 @@ public class SettingsMenu : MonoBehaviour
         }
 
         resolutionDropdown.AddOptions(resolutionOptions);
+        Debug.Log($"{currentResolutionIndex}");
         resolutionDropdown.value = currentResolutionIndex;//automatically sets current resolution
+        Debug.Log($"{currentResolutionIndex}");
         resolutionDropdown.RefreshShownValue();
     }
 
     public void SetResolution (int resolutionIndex)
     {
+        Debug.Log("im firing xx");
+        Debug.Log(resolutions.Count);
         if(resolutions.Count == 0){
-            Screen.SetResolution(fallbackResolution.width, fallbackResolution.height, Screen.fullScreen);
+            Screen.SetResolution(1920, 1080, Screen.fullScreen);
         }
         else{
             Resolution resolution = resolutions[resolutionIndex];
+            Debug.Log($"{resolution} LOOK HERE ITS OVER HERE");
             Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         }
     }

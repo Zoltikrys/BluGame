@@ -68,6 +68,7 @@ public class upgradeTubeBehaviour : MonoBehaviour
             CloseDoor();
             player.GetComponent<PlayerController>().LockMovement();
             player.GetComponent<RgbGoggles>().GogglesActivated = true;
+            player.GetComponent<RgbGoggles>().gogglesObject.SetActive(true);
             //goggles.SetActive(true);   //Was this for the top of the upgrade tube?
 
             StartCoroutine(Cooldown(2f, OpenDoor));

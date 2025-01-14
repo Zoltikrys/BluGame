@@ -24,6 +24,7 @@ public class RgbGoggles : MonoBehaviour
     private ColorFlags prevColorFlagState;
     private bool GogglesOn = false;
     private int rgbNum = (int)RGBSTATE.R;
+    public GameObject gogglesObject;
 
     void Start(){
         colorFlags.r = false;
@@ -31,16 +32,21 @@ public class RgbGoggles : MonoBehaviour
         colorFlags.b = false;
         GetFilterObjects();
         SetFilterObjects();
-        
 
+        gogglesObject = GameObject.Find("Goggles");
+        if (!GogglesActivated) {
+            gogglesObject.SetActive(false);
+        }
     }
 
     void Activate(){
         GogglesActivated = true;
+        gogglesObject.SetActive(true);
     }
 
     void Deactivate(){
         GogglesActivated = false;
+        gogglesObject.SetActive(false);
     }
 
     void Update()
@@ -86,7 +92,8 @@ public class RgbGoggles : MonoBehaviour
         FilterObjects = GameObject.FindObjectsOfType<GameObject>().Where(obj => obj.layer == LayerMask.NameToLayer("RGB_FilterObjects")).ToList<GameObject>();
     }
 
-    private void SetFilterObjects(){
+    public void SetFilterObjects(){
+        Debug.Log("setting filter objects");
         foreach(GameObject filterObject in FilterObjects){
             RgbFilterObject obj = filterObject.GetComponent<RgbFilterObject>();
             if(obj != null){

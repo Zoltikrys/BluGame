@@ -19,7 +19,7 @@ public static class RoomDirectory{
         { LEVELS.Tutorial_Split_4_1_BatteryRoom2,  "TutSplit-4.1-BatteryRoom2"},
         { LEVELS.Tutorial_Split_5_Cooloff,         "TutSplit-5-Cooloff"},
         { LEVELS.Tutorial_Split_6_LaserCages,      "TutSplit-6-LaserCages"},
-        { LEVELS.Tutorial_Split_Final_BossRoom,    "TutSplit-Final-BossRoom"}
+        { LEVELS.Tutorial_Split_Final_BossRoom,    "TutSplit-Final-BossRoom"},
     };
 }
 
@@ -39,5 +39,5 @@ public enum LEVELS{
     Tutorial_Split_4_1_BatteryRoom2,
     Tutorial_Split_5_Cooloff,
     Tutorial_Split_6_LaserCages,
-    Tutorial_Split_Final_BossRoom
+    Tutorial_Split_Final_BossRoom,
 }

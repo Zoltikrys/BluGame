@@ -209,6 +209,7 @@ public class MagnetAbility : MonoBehaviour
         smallMagnetTargetMagnetised = false;
         magnetFront.color = Color.clear;
         GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
+        animator.SetBool("Magnet?", false);
         //magnetVibes.SetActive(false);
         //foreach (ParticleSystem particles in magnetParticles) {
         //    particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
