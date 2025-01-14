@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;  //Do not remove this, needed for new input system
 
 [DefaultExecutionOrder(-1)]
 public class PlayerController : MonoBehaviour
@@ -20,11 +18,13 @@ public class PlayerController : MonoBehaviour
     public float gravity = -9.81f;
 
     private PlayerLocomotionInput locomotionInput;
+    InputAction moveAction;
     
 
     private void Awake()
     {
         locomotionInput = GetComponent<PlayerLocomotionInput>();
+        //moveAction = locomotionInput.MovementInput
     }
 
     public void LockMovement(){
@@ -59,10 +59,10 @@ public class PlayerController : MonoBehaviour
         if (canMove) // Block input if player cannot move
         {
             // Get input
-            Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            Vector2 inputDirection = new Vector2(locomotionInput.MovementInput.x, locomotionInput.MovementInput.y);
 
             // Normalize input
-            Vector3 movementDirection = inputDirection.normalized;
+            Vector2 movementDirection = inputDirection.normalized;
 
             // Get camera's forward and right directions
             Vector3 cameraForward = Camera.main.transform.forward;
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
             cameraRight.Normalize();
 
             // Combine input with camera's forward and right
-            Vector3 relativeDirection = (cameraForward * movementDirection.z) + (cameraRight * movementDirection.x);
+            Vector3 relativeDirection = (cameraForward * movementDirection.y) + (cameraRight * movementDirection.x);
 
             // Move the character
             if (movementDirection.magnitude > 0.1f) // Check if input is significant
