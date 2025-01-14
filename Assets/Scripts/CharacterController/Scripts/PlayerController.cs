@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;  //Do not remove this, needed for new input system
 
 [DefaultExecutionOrder(-1)]
 public class PlayerController : MonoBehaviour
