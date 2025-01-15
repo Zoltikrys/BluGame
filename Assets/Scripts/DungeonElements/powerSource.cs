@@ -15,11 +15,6 @@ public class powerSource : MonoBehaviour
 
     [SerializeField] private GameObject batteryMesh;
 
-    private void Update()
-    {
-
-    }
-
     public void TakeDamage()
     {
         powerSourceCharge--;

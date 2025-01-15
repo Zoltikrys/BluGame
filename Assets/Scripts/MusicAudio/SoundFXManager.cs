@@ -13,48 +13,32 @@ public class SoundFXManager : MonoBehaviour
         instance = this;
     }
 
+    // Function to spawn audio clip, then destroy after use
     public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume)
     {
-        //spawn in gameObject
         AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
-
-        //assign audioClip
         audioSource.clip = audioClip;
 
         //assign volume
         audioSource.volume = volume;
-
-        //play sound
         audioSource.Play();
 
-        //get length of soundFX clip
         float clipLength = audioSource.clip.length;
-
-        //destroy clip after played
         Destroy(audioSource.gameObject, clipLength);
     }
 
+    // The same function, but used to play a random clip from an array
+    // Useful for damage sounds, footsteps, etc.
     public void PlayRandomSoundFXClip(AudioClip[] audioClip, Transform spawnTransform, float volume)
     {
-        //assign random index
         int rand = Random.Range(0, audioClip.Length);
-
-        //spawn in gameObject
         AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
 
-        //assign audioClip
         audioSource.clip = audioClip[rand];
-
-        //assign volume
         audioSource.volume = volume;
-
-        //play sound
         audioSource.Play();
 
-        //get length of soundFX clip
         float clipLength = audioSource.clip.length;
-
-        //destroy clip after played
         Destroy(audioSource.gameObject, clipLength);
     }
 }

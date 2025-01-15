@@ -28,11 +28,13 @@ public class MusicManager : MonoBehaviour
         PlayMusic("BGMPlaceholder", 0f);
     }
 
+    // Play Music function, can be called during scene transitions
     public void PlayMusic(string trackName, float fadeDuration = 0.5f)
     {
         StartCoroutine(AnimateMusicCrossfade(musicLibrary.GetClipFromName(trackName), fadeDuration));
     }
 
+    // Coroutine for music transitions
     IEnumerator AnimateMusicCrossfade(AudioClip nextTrack, float fadeDuration = 0.5f)
     {
         float percent = 0;
