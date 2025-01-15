@@ -56,4 +56,18 @@ public class FieldOfView : MonoBehaviour
         else if (canSeePlayer)
             canSeePlayer = false;
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, radius);
+
+        Vector3 forward = transform.forward * radius;
+        Vector3 leftBoundary = Quaternion.Euler(0, -angle / 2, 0) * forward;
+        Vector3 rightBoundary = Quaternion.Euler(0, angle / 2, 0) * forward;
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position, leftBoundary);
+        Gizmos.DrawRay(transform.position, rightBoundary);
+    }
 }
