@@ -5,22 +5,19 @@
  Player Movement:
  ``` 
  WSAD:  up, down, left and right respectively 
- Space  Jump
+ Space:  Jump
  ```
 
- Camera Controls:
- ```
-    Q -- Go back 1 camera preset
-    E -- Go forward 1 camera preset
- ```
- 
  RGB Goggle controls: 
  ```
-    R --  Turns on/off Red colour filter
-    G --  Turns on/off Green colour filter
-    B --  Turns on/off Blue colour filter
+    E --  Activate/Deactivate RGB Goggles
+    Mouse Wheel/Arrow Keys Left + Right --  Changes RGB Colour
+ ```
 
-```
+Magnet controls: 
+ ```
+    Q --  Activate/Deactivate Magnet
+ ```
 
 ## Camera Information
 The camera can do the following:
