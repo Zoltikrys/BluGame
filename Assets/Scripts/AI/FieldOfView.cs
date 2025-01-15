@@ -1,29 +1,40 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
 {
-    public float radius;
+    [Header("Field of View Settings")]
+    public float radius = 10f;
     [Range(0, 360)]
-    public float angle;
+    public float angle = 90f;
 
-    public GameObject playerRef;
-
+    [Header("Detection Settings")]
     public LayerMask targetMask;
     public LayerMask obstructionMask;
+    public float updateInterval = 0.2f;
 
-    public bool canSeePlayer;
+    [Header("References")]
+    [SerializeField] private Transform playerRef; // Assign via Inspector for better performance
+
+    public bool canSeePlayer { get; private set; }
 
     private void Start()
     {
-        playerRef = GameObject.FindGameObjectWithTag("Player");
+        if (!playerRef)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player)
+                playerRef = player.transform;
+            else
+                Debug.LogError("Player reference not assigned or found!");
+        }
+
         StartCoroutine(FOVRoutine());
     }
 
     private IEnumerator FOVRoutine()
     {
-        WaitForSeconds wait = new WaitForSeconds(0.2f);
+        WaitForSeconds wait = new WaitForSeconds(updateInterval);
 
         while (true)
         {
@@ -36,25 +47,29 @@ public class FieldOfView : MonoBehaviour
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
 
-        if (rangeChecks.Length != 0)
+        canSeePlayer = false; // Default to false unless a target is valid
+
+        foreach (Collider targetCollider in rangeChecks)
         {
-            Transform target = rangeChecks[0].transform;
-            Vector3 directionToTarget = (target.position - transform.position).normalized;
-
-            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+            Transform target = targetCollider.transform;
+            if (IsTargetInFieldOfView(target))
             {
-                float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
-                    canSeePlayer = true;
-                else
-                    canSeePlayer = false;
+                canSeePlayer = true;
+                break; // Stop checking once a valid target is found
             }
-            else
-                canSeePlayer = false;
         }
-        else if (canSeePlayer)
-            canSeePlayer = false;
+    }
+
+    private bool IsTargetInFieldOfView(Transform target)
+    {
+        Vector3 directionToTarget = (target.position - transform.position).normalized;
+        if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+        {
+            float distanceToTarget = Vector3.Distance(transform.position, target.position);
+            if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                return true;
+        }
+        return false;
     }
 
     private void OnDrawGizmosSelected()
