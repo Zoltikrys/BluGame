@@ -10,6 +10,7 @@ public class StateManager : MonoBehaviour
     [field: SerializeField] public Checkpoint CurrentCheckPoint { get; set; }
     [field: SerializeField] public PlayerInfo PlayerInfo {get; set;}    
     [field: SerializeField] private List<StateEntry> displayList = new List<StateEntry>();
+
     void Start(){
         DontDestroyOnLoad(this);
     }

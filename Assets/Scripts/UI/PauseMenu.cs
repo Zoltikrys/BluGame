@@ -62,7 +62,7 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Loading menu...");
         EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0); //0 is the SceneManager, may need to change if that changes idk
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1); //0 is the SceneManager, may need to change if that changes idk
     }
 
     public void ActivateSettings()
