@@ -17,21 +17,12 @@ public class upgradeTubeBehaviour : MonoBehaviour
     [SerializeField] private bool isGoggles;
     [SerializeField] private bool isMagnet;
 
-    //etc.
-
-    // Start is called before the first frame update
     void Start()
     {
+        // Assigns key variables
         anim = GetComponent<Animator>();
         goggles = GameObject.Find("Goggles");
         player = GameObject.Find("Player");
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Unlock()
@@ -61,21 +52,22 @@ public class upgradeTubeBehaviour : MonoBehaviour
         }
     }
 
+    // Function can be added to for more upgrade options in the future
     public void Upgrade()
     {
+        // Provides the Goggles upgrade
         if (isGoggles) {
             Debug.Log("Upgrading");
             CloseDoor();
             player.GetComponent<PlayerController>().LockMovement();
             player.GetComponent<RgbGoggles>().GogglesActivated = true;
             player.GetComponent<RgbGoggles>().gogglesObject.SetActive(true);
-            //goggles.SetActive(true);   //Was this for the top of the upgrade tube?
 
             StartCoroutine(Cooldown(2f, OpenDoor));
-            //anim.SetTrigger("Upgraded");
         }
     }
 
+    // Opens the door using the animator
     public void OpenDoor()
     {
         Debug.Log("Opening door");

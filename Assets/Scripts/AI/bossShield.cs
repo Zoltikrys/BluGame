@@ -20,12 +20,15 @@ public class bossShield : MonoBehaviour
         player = GameObject.FindWithTag("Player");
     }
 
+    // Boss Shield Opening function
+    // Animates the Eye to Open
     public void OpenSequence()
     {
-        Debug.Log("omg its openinggg");
+        Debug.Log("Boss Shield is Opening");
         anim.SetBool("EyeOpen", true);
     }
 
+    // If the boss eye is open, look at the player
     private void Update()
     {
         target = player.transform.position;
@@ -33,10 +36,11 @@ public class bossShield : MonoBehaviour
         else bossEye.transform.LookAt(transform.forward);
     }
 
+    // Allows the boss eye to take damage if open
     public void TakeDamage()
     {
-        if(anim.GetBool("EyeOpen") == true) {
-            
+        if (anim.GetBool("EyeOpen") == true) {
+
             bossHealth--;
 
             if (bossHealth == 0) {
@@ -45,6 +49,8 @@ public class bossShield : MonoBehaviour
         }
     }
 
+    // On death, eye spawners are deactivated
+    // and all remaining enemies are destroyed
     public void DeathSequence()
     {
         foreach(var spawner in enemySpawner) {
@@ -61,7 +67,6 @@ public class bossShield : MonoBehaviour
 
         Boss boss = bossMain.GetComponent<Boss>();
         boss.Death();
-
     }
 
 }
