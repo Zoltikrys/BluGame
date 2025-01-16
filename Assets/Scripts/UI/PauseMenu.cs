@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        PauseMenuUI.SetActive(false);
+        PauseMenuUI.SetActive(false); //make sure menu is inactive on start
     }
 
 
@@ -41,17 +41,17 @@ public class PauseMenu : MonoBehaviour
     private void Pause()
     {
         PauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; //stops movement of most things
         gameIsPaused = true;
 
-        EventSystem.current.SetSelectedGameObject(pauseMenuFirst);
+        EventSystem.current.SetSelectedGameObject(pauseMenuFirst); //set the first selected button
 
     }
 
     public void Resume()
     {
         PauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; //resets tiemscale
         gameIsPaused = false;
 
         EventSystem.current.SetSelectedGameObject(null);

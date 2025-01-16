@@ -26,13 +26,13 @@ public class SettingsMenu : MonoBehaviour
 
         resolutions = Screen.resolutions.ToList();
 
-        //resolutionDropdown.ClearOptions();
+        resolutionDropdown.ClearOptions(); //clears options
 
         List<string> resolutionOptions = new List<string>();
 
 
         int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Count; i++)
+        for (int i = 0; i < resolutions.Count; i++) //populating list with available options dependant on monitor
         {
             string resolutionOption = resolutions[i].width + "x" + resolutions[i].height;
             resolutionOptions.Add(resolutionOption);

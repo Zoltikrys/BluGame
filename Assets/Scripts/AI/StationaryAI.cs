@@ -41,9 +41,6 @@ public class StationaryAI : MonoBehaviour
             case CurrentState.Targeting:
                 TargetingState();
                 break;
-            case CurrentState.Attack:
-                AttackState();
-                break;
             }
         }
 
@@ -62,6 +59,7 @@ public class StationaryAI : MonoBehaviour
     {
         Debug.Log("Targeting...");
 
+        //Look at player
         Quaternion OriginalRot = transform.rotation;
         transform.LookAt(new Vector3(target.position.x,
                                      transform.position.y,
@@ -83,16 +81,6 @@ public class StationaryAI : MonoBehaviour
             Debug.Log("Returning to idle state");
             currentState = CurrentState.Idle;
         }
-        //wait for x amount of time idk
-
-    }
-
-    private void AttackState()
-    {
-        Debug.Log("Attacking...");
-        //attack code
-        //shoot projectile at player ig
-        //losing my mIIIIIIND
 
     }
 
@@ -112,4 +100,4 @@ public class StationaryAI : MonoBehaviour
 
 
 [System.Serializable]
-public enum CurrentState { Idle, Targeting, Attack }
+public enum CurrentState { Idle, Targeting }

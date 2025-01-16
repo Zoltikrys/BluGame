@@ -72,6 +72,8 @@ public class FieldOfView : MonoBehaviour
         return false;
     }
 
+
+    //Gizmos for viewing fov in editor
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
