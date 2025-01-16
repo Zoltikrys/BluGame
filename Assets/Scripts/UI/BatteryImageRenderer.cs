@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +9,4 @@ public class BatteryImageRenderer : BaseStatRenderer
     {
         batteryFill.fillAmount = current / max;
     }
-
-    
-
-    
 }

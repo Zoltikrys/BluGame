@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public struct RoomInfo{
     public int RoomId;
     public TrackedValues Tracked;
