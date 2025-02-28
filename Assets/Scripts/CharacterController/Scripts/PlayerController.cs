@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private bool canMove = true;
     public Animator animator;
 
+    public float pushPower = 2f; //force use to push boxes
+
     public float playerSpeed = 2.0f;
     public float rotationSpeed = 5.0f;
     public float jumpHeight = 1.0f;
@@ -120,4 +122,20 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Do something else here");
         }*/
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit) //pushing boxes
+    {
+        if (hit.transform.tag == "PushableBox")
+        {
+            Rigidbody box = hit.transform.GetComponent<Rigidbody>();
+
+            if (box != null)
+            {
+                Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z); //gets direction player is moving in
+                box.velocity = pushDirection * pushPower;
+            }
+        }
+    }
+
+
 }
