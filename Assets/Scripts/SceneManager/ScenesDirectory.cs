@@ -21,6 +21,7 @@ public static class RoomDirectory{
         { LEVELS.Tutorial_Split_6_LaserCages,      "TutSplit-6-LaserCages"},
         { LEVELS.Tutorial_Split_Final_BossRoom,    "TutSplit-Final-BossRoom"},
         { LEVELS.camtest_spline,                   "3dspline_vertical"}
+        { LEVELS.HubV3, "HubV3" },
     };
 }
 
@@ -41,5 +42,6 @@ public enum LEVELS{
     Tutorial_Split_5_Cooloff,
     Tutorial_Split_6_LaserCages,
     Tutorial_Split_Final_BossRoom,
-    camtest_spline
+    camtest_spline,
+    HubV3,
 }

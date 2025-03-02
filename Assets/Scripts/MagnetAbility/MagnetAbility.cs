@@ -8,6 +8,8 @@ public class MagnetAbility : MonoBehaviour
     public string smallMagnetTag = "SmallMagnet"; // Tag for small magnetic objects
     public float smallMagnetPullSpeed = 10f;     // Speed for pulling small magnets
     public float smallMagnetStopDistance = 1.5f; // Distance in front of the player
+    bool shootMode = false;
+    public int smallMagnetShootForce = 20; // Force applied when shooting
 
     [Header("Big Magnet Settings")]
     public string bigMagnetTag = "BigMagnet";    // Tag for big magnetic objects
@@ -88,6 +90,22 @@ public class MagnetAbility : MonoBehaviour
                 ReleaseSmallMagnet();
                 isMagnetized = false;
             }
+
+            
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (shootMode)
+            {
+                Debug.Log("Shoot mode off");
+                shootMode = false;
+            }
+            else if (!shootMode)
+            {
+                Debug.Log("Shoot mode on");
+                shootMode = true;
+            }
         }
 
         if (isMagnetActive)
@@ -97,6 +115,24 @@ public class MagnetAbility : MonoBehaviour
             HandleBigMagnets();
         }
     }
+
+    void ShootSmallMagnet()
+    {
+        if (smallMagnetTarget != null)
+        {
+            smallMagnetTarget.transform.SetParent(null); // Unparent the magnet
+            Rigidbody rb = smallMagnetTarget.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.velocity = new Vector3(0, 0, smallMagnetShootForce); //Shoot magnet
+                rb.useGravity = true;
+                rb.constraints = RigidbodyConstraints.None;
+
+            }
+            smallMagnetTarget = null; // Clear the reference
+        }
+    }
+
 
     void HandleSmallMagnets()
     {
@@ -191,12 +227,18 @@ public class MagnetAbility : MonoBehaviour
             smallMagnetTarget.transform.SetParent(null); // Unparent the magnet
             Rigidbody rb = smallMagnetTarget.GetComponent<Rigidbody>();
             if (rb != null)
-            {
-                rb.velocity = Vector3.zero; // Reset velocity
-                rb.useGravity = true;
-                rb.constraints = RigidbodyConstraints.None;
-
-            }
+                if (shootMode)
+                {
+                    rb.velocity = transform.forward * smallMagnetShootForce;    //new Vector3(0, 0, smallMagnetShootForce); //Shoot magnet
+                    rb.useGravity = true;
+                    rb.constraints = RigidbodyConstraints.None;
+                }
+                else
+                {
+                    rb.velocity = Vector3.zero; //Reset velocity
+                    rb.useGravity = true;
+                    rb.constraints = RigidbodyConstraints.None;
+                }
             smallMagnetTarget = null; // Clear the reference
         }
     }
