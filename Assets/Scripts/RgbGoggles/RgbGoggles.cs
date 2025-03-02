@@ -203,11 +203,14 @@ public class RgbGoggles : MonoBehaviour
 
         // If RGB goggles turned off, set screen dark else set set specific color or normal vision when all RGB on
         if (!GogglesOn) {
-            CurrentColor = new Color(RgbDeactivatedColor.r, RgbDeactivatedColor.g, RgbDeactivatedColor.b, RgbDeactivatedColor.a);
-            colorFilterScanlines.color = (Color.clear);
-            colorFilter.color = CurrentColor;
+            if(colorFilterScanlines && colorFilter){
+                CurrentColor = new Color(RgbDeactivatedColor.r, RgbDeactivatedColor.g, RgbDeactivatedColor.b, RgbDeactivatedColor.a);
+                colorFilterScanlines.color = (Color.clear);
+                colorFilter.color = CurrentColor;
+            }
+
         }
-        if (GogglesActivated && GogglesOn && colorFilter != null){
+        if (GogglesActivated && GogglesOn && colorFilter != null && colorFilterScanlines != null){
             colorFilter.color = CurrentColor;
             CurrentColor = new Color(CurrentColor.r, CurrentColor.g, CurrentColor.b, RgbActivatedAlpha);
             colorFilterScanlines.color = (Color.white);
