@@ -20,7 +20,7 @@ public static class RoomDirectory{
         { LEVELS.Tutorial_Split_5_Cooloff,         "TutSplit-5-Cooloff"},
         { LEVELS.Tutorial_Split_6_LaserCages,      "TutSplit-6-LaserCages"},
         { LEVELS.Tutorial_Split_Final_BossRoom,    "TutSplit-Final-BossRoom"},
-        { LEVELS.camtest_spline,                   "3dspline_vertical"}
+        { LEVELS.camtest_spline,                   "3dspline_vertical"},
         { LEVELS.HubV3, "HubV3" },
     };
 }
