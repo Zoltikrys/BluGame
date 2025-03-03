@@ -12,6 +12,11 @@ public class FloatingMagnetDrone : MonoBehaviour
     private int currentPointIndex = 0;
     private bool isPaused = false;
 
+    public ParticleSystem magnetEffect;
+    public Color attractColor = Color.blue;
+    public Color repelColor = Color.red;
+    private ParticleSystem.MainModule particleMain;
+
     private void Start()
     {
         if (patrolPoints.Length > 0)
@@ -19,6 +24,12 @@ public class FloatingMagnetDrone : MonoBehaviour
             transform.position = patrolPoints[0].position;
         }
         StartCoroutine(Patrol());
+
+        if (magnetEffect != null)
+        {
+            particleMain = magnetEffect.main;
+            UpdateParticleEffect();
+        }
     }
 
     private IEnumerator Patrol()
@@ -53,6 +64,20 @@ public class FloatingMagnetDrone : MonoBehaviour
                 Vector3 moveVector = forceDirection.normalized * magneticForce * Time.deltaTime;
                 playerController.Move(moveVector);
             }
+        }
+    }
+
+    public void SetMagnetMode(MagnetType newMode)
+    {
+        magnetMode = newMode;
+        UpdateParticleEffect();
+    }
+
+    private void UpdateParticleEffect()
+    {
+        if (magnetEffect != null)
+        {
+            particleMain.startColor = (magnetMode == MagnetType.Attract) ? attractColor : repelColor;
         }
     }
 }
