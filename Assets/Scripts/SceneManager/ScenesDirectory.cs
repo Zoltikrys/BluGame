@@ -21,6 +21,7 @@ public static class RoomDirectory{
         { LEVELS.Tutorial_Split_6_LaserCages,      "TutSplit-6-LaserCages"},
         { LEVELS.Tutorial_Split_Final_BossRoom,    "TutSplit-Final-BossRoom"},
         { LEVELS.HubV3, "HubV3" },
+        { LEVELS.Dungeon2Intro, "Dungeon2Intro" },
     };
 }
 
@@ -42,4 +43,5 @@ public enum LEVELS{
     Tutorial_Split_6_LaserCages,
     Tutorial_Split_Final_BossRoom,
     HubV3,
+    Dungeon2Intro,
 }
