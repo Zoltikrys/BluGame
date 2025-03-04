@@ -15,7 +15,6 @@ public class StationaryAI : MonoBehaviour
     public Transform firePoint; // Point from where the projectile will be shot
 
     public float shootInterval = 2f;
-
     private float shootTimer;
 
 

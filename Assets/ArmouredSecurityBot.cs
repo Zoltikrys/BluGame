@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class ArmouredSecurityBot : MonoBehaviour
@@ -7,30 +6,64 @@ public class ArmouredSecurityBot : MonoBehaviour
     public AttackType attackMode = AttackType.BulletHell;
 
     public GameObject floorVent;
-    public float attackInterval = 2f;
-    private bool isVulnerable = false;
-    private bool isHiding = false;
+
+    public float shootInterval = 2f;
+    private float shootTimer;
+
+    public bool isVulnerable = false;
+    public bool isHiding = false;
+
+    public GameObject bulletPrefab;
+    public Transform bulletSpawnPoint;
+    public int bulletCount = 8;
+    public float bulletSpeed = 5f;
+    public GameObject laserPrefab;
+    public Transform laserSpawnPoint;
 
     void Start()
     {
-        StartCoroutine(AttackRoutine());
+        //StartCoroutine(AttackRoutine());
     }
 
     private void Update()
     {
+        shootTimer += Time.deltaTime;
+        
 
-        if (transform.childCount == 2) //Minimum should be 2 as there should be at least the vent location and main body mesh
+
+        if (!isVulnerable)
+        {
+
+            if (shootTimer >= shootInterval)
+            {
+                if (attackMode == AttackType.BulletHell)
+                {
+                    FireBulletHell();
+                }
+                else if (attackMode == AttackType.Laser)
+                {
+                    FireLaser();
+                }
+
+                shootTimer = 0;
+            }
+            
+        }
+
+
+
+        if (transform.childCount == 2) // Minimum should be 2 as there should be at least the vent location and main body mesh
         {
             if (floorVent != null)
             {
                 Debug.Log("Hiding in vent");
                 transform.position = floorVent.transform.position;
                 gameObject.SetActive(false);
-            }   
+            }
         }
     }
 
-    private IEnumerator AttackRoutine()
+    /*private IEnumerator AttackRoutine()
     {
         while (!isVulnerable)
         {
@@ -44,35 +77,35 @@ public class ArmouredSecurityBot : MonoBehaviour
                 FireLaser();
             }
         }
-    }
-
-
-    /*private void BecomeVulnerable()
-    {
-        isVulnerable = true;
-        StopAllCoroutines();
-        StartCoroutine(HideInVent());
-    }
-
-    private IEnumerator HideInVent()
-    {
-        yield return new WaitForSeconds(1f); // Small delay before escaping
-        if (floorVent != null)
-        {
-            transform.position = floorVent.transform.position;
-            gameObject.SetActive(false);
-        }
     }*/
 
     private void FireBulletHell()
     {
         Debug.Log("Firing Bullet Hell Attack!");
-        // TODO: Implement actual projectile spawning
+        float angleStep = 360f / bulletCount;
+        float angle = 0f;
+
+        for (int i = 0; i < bulletCount; i++)
+        {
+            float bulletDirX = Mathf.Cos(angle * Mathf.Deg2Rad);
+            float bulletDirY = Mathf.Sin(angle * Mathf.Deg2Rad);
+            Vector3 bulletMoveDirection = new Vector3(bulletDirX, bulletDirY, 0f).normalized;
+
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+            if (bulletRb != null)
+            {
+                bulletRb.velocity = bulletMoveDirection * bulletSpeed;
+            }
+
+            angle += angleStep;
+        }
     }
 
     private void FireLaser()
     {
         Debug.Log("Firing Laser Attack!");
-        // TODO: Implement laser attack logic
+        GameObject laser = Instantiate(laserPrefab, laserSpawnPoint.position, Quaternion.identity);
+        laser.transform.forward = transform.forward;
     }
 }
