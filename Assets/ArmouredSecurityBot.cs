@@ -22,7 +22,7 @@ public class ArmouredSecurityBot : MonoBehaviour
 
     void Start()
     {
-        //StartCoroutine(AttackRoutine());
+
     }
 
     private void Update()
@@ -52,7 +52,7 @@ public class ArmouredSecurityBot : MonoBehaviour
 
 
 
-        if (transform.childCount == 2) // Minimum should be 2 as there should be at least the vent location and main body mesh
+        if (transform.childCount == 3) // Minimum should be 3 as there should be at least the vent location, main body mesh and bullet spawn point, may increase later with updates to code
         {
             if (floorVent != null)
             {
@@ -63,21 +63,6 @@ public class ArmouredSecurityBot : MonoBehaviour
         }
     }
 
-    /*private IEnumerator AttackRoutine()
-    {
-        while (!isVulnerable)
-        {
-            yield return new WaitForSeconds(attackInterval);
-            if (attackMode == AttackType.BulletHell)
-            {
-                FireBulletHell();
-            }
-            else if (attackMode == AttackType.Laser)
-            {
-                FireLaser();
-            }
-        }
-    }*/
 
     private void FireBulletHell()
     {
