@@ -73,8 +73,8 @@ public class ArmouredSecurityBot : MonoBehaviour
         for (int i = 0; i < bulletCount; i++)
         {
             float bulletDirX = Mathf.Cos(angle * Mathf.Deg2Rad);
-            float bulletDirY = Mathf.Sin(angle * Mathf.Deg2Rad);
-            Vector3 bulletMoveDirection = new Vector3(bulletDirX, bulletDirY, 0f).normalized;
+            float bulletDirZ = Mathf.Sin(angle * Mathf.Deg2Rad);
+            Vector3 bulletMoveDirection = new Vector3(bulletDirX, 0f, bulletDirZ).normalized;
 
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();

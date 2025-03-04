@@ -14,7 +14,7 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        //transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
 
@@ -35,7 +35,10 @@ public class Projectile : MonoBehaviour
 
 
         Debug.Log("Collided with " + other.gameObject.name); //for debugging
-
+        if (other.CompareTag("Projectile"))
+        {
+            return; //ignores collision with projectiles
+        }
         Destroy(gameObject); // Destroy on collision
     }
 }
