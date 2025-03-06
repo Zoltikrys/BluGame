@@ -57,8 +57,7 @@ Shader "Particles/Lightning" {
             o.color = v.color;
             o.texcoord.xy = TRANSFORM_TEX(v.texcoord,_MainTex);
             o.texcoord2 = TRANSFORM_TEX(v.texcoord,_Gradient);
-   
-            // Custom Data from particle system
+    
             o.texcoord.z = v.texcoord.z;
             o.texcoord.w = v.texcoord.w;
             UNITY_TRANSFER_FOG(o,o.vertex);
@@ -72,24 +71,18 @@ Shader "Particles/Lightning" {
           fixed4 frag (v2f i) : SV_Target
           {
             
-            // Custom Data from particle system
             float lifetime = i.texcoord.z;
             float randomOffset = i.texcoord.w;
-   
-            //fade the edges
+
             float gradientfalloff =  smoothstep(0.99, 0.95, i.texcoord2.x) * smoothstep(0.99,0.95,1- i.texcoord2.x);
-            // moving UVS
             float2 movingUV = float2(i.texcoord.x +randomOffset + (_Time.x * _Speed) ,i.texcoord.y);
             fixed tex = tex2D(_MainTex, movingUV)* gradientfalloff;
    
-            //cutoff for alpha
             float cutoff = step(lifetime, tex);
-   
-            // stretched uv for gradient map
+
             float2 uv = float2((tex * _Stretch)- lifetime + _Offset, 1) ;
             float4 colorMap = tex2D(_Gradient, uv);
    
-            // everything together
             fixed4 col;       
             col.rgb = colorMap.rgb * _TintColor * i.color.rgb;
             col.a = cutoff;
