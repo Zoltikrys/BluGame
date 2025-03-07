@@ -15,7 +15,7 @@ public class LinkedObject : MonoBehaviour
     [field: SerializeField] public bool Linked {get; set;}
     [field: SerializeField] public HashSet<LinkedObject> CurrentlyLinked = new HashSet<LinkedObject>(); 
     [field: SerializeField] public HashSet<LinkedObject> InRangeObjects = new HashSet<LinkedObject>();
-    [field: SerializeField] public ParticleSystem ParticleSystem {get; set;}
+    [field: SerializeField] public GameObject ParticleSystem {get; set;}
 
 
     void Start()
@@ -48,6 +48,7 @@ public class LinkedObject : MonoBehaviour
     private void UpdateParticles()
     {
         ParticleSystem.gameObject.SetActive(Linked);
+
     }
 
     private void RetrieveLinkedObjectsInRange(){
@@ -72,6 +73,7 @@ public class LinkedObject : MonoBehaviour
         CurrentlyLinked.Add(objectToLink);
         Linked = true;
         objectToLink.Link(this);
+        ParticleSystem.transform.LookAt(objectToLink.transform);
 
 
     }
