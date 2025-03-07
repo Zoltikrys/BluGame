@@ -36,23 +36,24 @@ public class ToggleSteam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (canIntereact)
         {
-            if (isPlaying)
+            if (Input.GetKeyDown(KeyCode.I))
             {
-                isPlaying = false;
-                steamEffect.Stop();
-                //Valve.transform.Rotate(new Vector3(0, 0, 1f));
-                //animate the valve turning but i dont wanna do that rn
-            }
+                if (isPlaying)
+                {
+                    isPlaying = false;
+                    steamEffect.Stop();
+                    //Valve.transform.Rotate(new Vector3(0, 0, 1f));
+                    //animate the valve turning but i dont wanna do that rn
+                }
 
-            else if (!isPlaying)
-            {
-                isPlaying = true;
-                steamEffect.Play();
+                else if (!isPlaying)
+                {
+                    isPlaying = true;
+                    steamEffect.Play();
+                }
             }
-
-            
-        }
+        }        
     }
 }
