@@ -48,6 +48,9 @@ public class LinkedObject : MonoBehaviour
     private void UpdateParticles()
     {
         ParticleSystem.gameObject.SetActive(Linked);
+        foreach(LinkedObject linkedObject in CurrentlyLinked){
+            ParticleSystem.transform.LookAt(linkedObject.transform);
+        }
 
     }
 
@@ -73,7 +76,7 @@ public class LinkedObject : MonoBehaviour
         CurrentlyLinked.Add(objectToLink);
         Linked = true;
         objectToLink.Link(this);
-        ParticleSystem.transform.LookAt(objectToLink.transform);
+
 
 
     }
