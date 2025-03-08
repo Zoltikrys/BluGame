@@ -35,10 +35,9 @@ public class LinkedObject : MonoBehaviour
         if(CurrentlyLinked.Count == 0) Linked = false;
 
 
-        if(CurrentlyLinked.Count >= 1 && Amount == LINKED_OBJECT_AMOUNT.SINGULAR) return;  // if connected and only allowed one linked object, continue
-        
+        if(CurrentlyLinked.Count >= 1 && Amount == LINKED_OBJECT_AMOUNT.SINGULAR) return;  // if connected and only allowed one linked object, continue 
         foreach(LinkedObject linkedObject in InRangeObjects){
-            if(linkedObject.Amount == LINKED_OBJECT_AMOUNT.SINGULAR && linkedObject.Linked) continue; // if other object ^
+            if(linkedObject.Amount == LINKED_OBJECT_AMOUNT.SINGULAR && linkedObject.Linked) continue; // if other object ^^^^
             if(!(linkedObject.Type == this.Type)) continue;  // skip different type of object
             Link(linkedObject);
         }
@@ -48,8 +47,12 @@ public class LinkedObject : MonoBehaviour
     private void UpdateParticles()
     {
         ParticleSystem.gameObject.SetActive(Linked);
+        
         foreach(LinkedObject linkedObject in CurrentlyLinked){
             ParticleSystem.transform.LookAt(linkedObject.transform);
+            linkedObject.ParticleSystem.GetComponent<Lightning>().SetDistances(this.transform, linkedObject.transform);
+            
+
         } 
     }
 
