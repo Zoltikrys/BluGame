@@ -9951,7 +9951,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 3de30ce53ec338c4abfe21b52d27366b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10082,8 +10082,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BaseElectric>k__BackingField: {fileID: 3045621030257293458}
   <DistanceElectric>k__BackingField: {fileID: 3933859486297413028}
-  startPoint: {fileID: 0}
-  endPoint: {fileID: 0}
-  arcSegments: 10
-  arcIntensity: 1.5
+  ArcSmoothness: 10
+  ArcIntensity: 1.5
   lineRenderer: {fileID: 0}

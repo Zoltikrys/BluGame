@@ -7,16 +7,16 @@ public class Lightning : MonoBehaviour
     [field: SerializeField] public GameObject BaseElectric {get; set;}
     [field: SerializeField] public GameObject DistanceElectric {get; set;}
 
-    public Transform startPoint;
-    public Transform endPoint;
-    public int arcSegments = 10;  // More segments = smoother arc
-    public float arcIntensity = 1.5f; // Strength of the jagged arcs
+    private Transform startPoint;
+    private Transform endPoint;
+    public int ArcSmoothness = 10;  // 
+    [field: SerializeField] public float ArcIntensity = 1.5f; // Strength of the jagged arcs
 
     public LineRenderer lineRenderer;
 
     void Start()
     {
-        lineRenderer.positionCount = arcSegments + 1; // Start, end, and middle points
+        lineRenderer.positionCount = ArcSmoothness + 1; // Start, end, and middle points
     }
 
     void Update()
@@ -26,20 +26,21 @@ public class Lightning : MonoBehaviour
 
     void GenerateArc()
     {
+        lineRenderer.positionCount = ArcSmoothness + 1; // Start, end, and middle points
         Vector3 start = startPoint.position;
         Vector3 end = endPoint.position;
-        Vector3 direction = (end - start) / arcSegments;
+        Vector3 direction = (end - start) / ArcSmoothness;
 
         lineRenderer.SetPosition(0, start);
 
-        for (int i = 1; i < arcSegments; i++)
+        for (int i = 1; i < ArcSmoothness; i++)
         {
             Vector3 point = start + direction * i;
-            point += Random.insideUnitSphere * arcIntensity; // Add random displacement
+            point += Random.insideUnitSphere * ArcIntensity;
             lineRenderer.SetPosition(i, point);
         }
 
-        lineRenderer.SetPosition(arcSegments, end);
+        lineRenderer.SetPosition(ArcSmoothness, end);
     }
     public void SetDistance(float distance){
         var main = GetMain(DistanceElectric);
