@@ -50,8 +50,7 @@ public class LinkedObject : MonoBehaviour
         ParticleSystem.gameObject.SetActive(Linked);
         foreach(LinkedObject linkedObject in CurrentlyLinked){
             ParticleSystem.transform.LookAt(linkedObject.transform);
-        }
-
+        } 
     }
 
     private void RetrieveLinkedObjectsInRange(){
@@ -76,7 +75,7 @@ public class LinkedObject : MonoBehaviour
         CurrentlyLinked.Add(objectToLink);
         Linked = true;
         objectToLink.Link(this);
-
+        ParticleSystem.transform.LookAt(objectToLink.transform);
 
 
     }
