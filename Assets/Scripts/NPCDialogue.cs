@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 
 public class NPCDialogue : MonoBehaviour
@@ -8,13 +9,21 @@ public class NPCDialogue : MonoBehaviour
 
     public bool canInteract = false;
     public GameObject BLU;
-    public GameObject d_template;
-    public GameObject canvas;
+    public GameObject dialoguePanel;
+    public TextMeshProUGUI dialogueText;
+    //public Text dialogueText;
+    public string[] dialogue;
+    private int index;
+
+    public float wordSpeed;
+
+    //public GameObject canvas;
 
     // Start is called before the first frame update
     void Start()
     {
         BLU = GameObject.Find("Player");
+        dialogueText.text = "";
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,6 +40,7 @@ public class NPCDialogue : MonoBehaviour
         if (other.tag == ("Player"))
         {
             canInteract = false;
+            zeroText(); //probably superfluous
         }
     }
 
@@ -38,19 +48,51 @@ public class NPCDialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canInteract)
-        {
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                //gameObject.SetActive(false);
-                Debug.Log("NPC TALKING");
-                //BLUReference.canMove;
 
-                BLU.GetComponent<PlayerController>().canMove = false;
-                //NewDialogue("HI");
-                //NewDialogue("KILL YOURSELF");
-                canvas.transform.GetChild(1).gameObject.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.I) && canInteract)
+        {
+
+            if(dialoguePanel.activeInHierarchy)
+            {
+                NextLine();
             }
+            else
+            {
+                BLU.GetComponent<PlayerController>().canMove = false;
+                dialoguePanel.SetActive(true);
+                StartCoroutine(Typing());
+            }
+        }
+    }
+
+    public void zeroText()
+    {
+        dialogueText.text = "";
+        index = 0;
+        dialoguePanel.SetActive (false);
+        BLU.GetComponent<PlayerController>().canMove = true;
+    }
+
+    IEnumerator Typing()
+    {
+        foreach(char letter in dialogue[index].ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(wordSpeed);
+        }
+    }
+
+    public void NextLine()
+    {
+        if (index < dialogue.Length - 1)
+        {
+            index++;
+            dialogueText.text = "";
+            StartCoroutine(Typing());
+        }
+        else
+        {
+            zeroText();
         }
     }
 }
