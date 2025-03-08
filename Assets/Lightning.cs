@@ -16,6 +16,8 @@ public class Lightning : MonoBehaviour
 
     void Start()
     {
+        startPoint = this.transform;
+        endPoint = startPoint;
         lineRenderer.positionCount = ArcSmoothness + 1; // Start, end, and middle points
     }
 
