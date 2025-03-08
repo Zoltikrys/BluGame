@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using System.Linq;
+using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class SettingsMenu : MonoBehaviour
 
     public TMPro.TMP_Dropdown resolutionDropdown;
 
+    public Toggle fullscreenToggle;
+
     List<Resolution> resolutions = new List<Resolution>();
     Resolution fallbackResolution;
 
@@ -23,6 +26,17 @@ public class SettingsMenu : MonoBehaviour
     {
         fallbackResolution.width = 1920;
         fallbackResolution.height = 1080;
+
+        if (Screen.fullScreen)
+        {
+            fullscreenToggle.isOn = true;
+        }
+        else
+        {
+            fullscreenToggle.isOn = false;
+        }
+
+        
 
         //resolutions = Screen.resolutions.ToList();
         resolutions = Screen.resolutions.Where(resolution => resolution.refreshRateRatio.value == 60).ToList();
@@ -53,7 +67,7 @@ public class SettingsMenu : MonoBehaviour
     public void SetResolution (int resolutionIndex)
     {
         if(resolutions.Count == 0){
-            Screen.SetResolution(1920, 1080, Screen.fullScreen);
+            //Screen.SetResolution(1920, 1080, Screen.fullScreen);
         }
         else{
             Resolution resolution = resolutions[resolutionIndex];
