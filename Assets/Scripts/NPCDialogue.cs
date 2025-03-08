@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using System.Linq;
 
 
 public class NPCDialogue : MonoBehaviour
@@ -14,6 +15,7 @@ public class NPCDialogue : MonoBehaviour
     //public Text dialogueText;
     public string[] dialogue;
     private int index;
+    private bool finishedTyping;
 
     public float wordSpeed;
 
@@ -75,24 +77,29 @@ public class NPCDialogue : MonoBehaviour
 
     IEnumerator Typing()
     {
+        finishedTyping = false;
         foreach(char letter in dialogue[index].ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
         }
+        finishedTyping = true;
     }
 
     public void NextLine()
     {
-        if (index < dialogue.Length - 1)
+        if (finishedTyping)
         {
-            index++;
-            dialogueText.text = "";
-            StartCoroutine(Typing());
-        }
-        else
-        {
-            zeroText();
+            if (index < dialogue.Length - 1)
+            {
+                index++;
+                dialogueText.text = "";
+                StartCoroutine(Typing());
+            }
+            else
+            {
+                zeroText();
+            }
         }
     }
 }
