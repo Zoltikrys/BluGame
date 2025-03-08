@@ -67,7 +67,7 @@ public class SettingsMenu : MonoBehaviour
     public void SetResolution (int resolutionIndex)
     {
         if(resolutions.Count == 0){
-            //Screen.SetResolution(1920, 1080, Screen.fullScreen);
+            Screen.SetResolution(1920, 1080, Screen.fullScreen);
         }
         else{
             Resolution resolution = resolutions[resolutionIndex];
