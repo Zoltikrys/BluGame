@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Lightning : MonoBehaviour
 {
-    [field: SerializeField] public GameObject BaseElectric {get; set;}
     [field: SerializeField] public GameObject DistanceElectric {get; set;}
 
     private Transform startPoint;
@@ -45,14 +44,14 @@ public class Lightning : MonoBehaviour
         lineRenderer.SetPosition(ArcSmoothness, end);
     }
     public void SetDistance(float distance){
-        var main = GetMain(DistanceElectric);
+        var main = GetParticleMain(DistanceElectric);
         main.startSpeed = distance;
         ParticleSystem particles;
         DistanceElectric.TryGetComponent<ParticleSystem>(out particles);
         particles.Play();
     }
 
-    private ParticleSystem.MainModule GetMain(GameObject gameObject){
+    private ParticleSystem.MainModule GetParticleMain(GameObject gameObject){
         ParticleSystem.MainModule foundMain;
         ParticleSystem particles;
         gameObject.TryGetComponent<ParticleSystem>(out particles);

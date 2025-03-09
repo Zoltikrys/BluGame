@@ -79,3 +79,8 @@ public enum LINKED_OBJECT_AMOUNT{
     SINGULAR,
     MULTIPLE
 }
+
+public enum LINKED_OBJECT_BLOCK_TYPE{
+    NONE,
+    BLOCKED_ON_OBJECTS
+}

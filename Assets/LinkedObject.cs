@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// Used to link two or more objects together. An example of this would be the electrical pylons.
@@ -8,17 +10,33 @@ public class LinkedObject : MonoBehaviour
 {
     [field: SerializeField] public LINKED_OBJECT_TYPE Type {get; set;}
     [field: SerializeField] public LINKED_OBJECT_AMOUNT Amount{ get; set;}
+    [field: SerializeField] public LINKED_OBJECT_BLOCK_TYPE BlockType{ get; set;}
+    [field: SerializeField] public bool IsDamaging {get; set;}
     [field: SerializeField] public float Radius {get; set;} = 1.0f;
     [field: SerializeField] public bool Active {get; set;} 
     [field: SerializeField] public bool Linked {get; set;}
-    [field: SerializeField] public HashSet<LinkedObject> CurrentlyLinked = new HashSet<LinkedObject>(); 
-    [field: SerializeField] public HashSet<LinkedObject> InRangeObjects = new HashSet<LinkedObject>();
+    [field: SerializeField] private HashSet<LinkedObject> CurrentlyLinked = new HashSet<LinkedObject>(); 
+    [field: SerializeField] private HashSet<LinkedObject> InRangeObjects = new HashSet<LinkedObject>();
+    [field: SerializeField] private HashSet<LinkedObject> LinkedObjectsToCull = new HashSet<LinkedObject>();
+    [field: SerializeField] private Dictionary<LinkedObject, GameObject> LineRenderers = new Dictionary<LinkedObject, GameObject>();
     [field: SerializeField] public GameObject ParticleSystem {get; set;}
     private bool blocked = false;
+    public Ray LinkDirection {get; set;}
 
     void Start()
     {
         InvokeRepeating(nameof(AttemptLinkObjects), 0, 0.2f);
+        if(IsDamaging) InvokeRepeating(nameof(ProcessDamage), 0, 0.2f);
+    }
+
+    private void ProcessDamage()
+    {
+        foreach(LinkedObject linkedObject in CurrentlyLinked){
+            HealthManager health;
+            linkedObject.TryGetComponent<HealthManager>(out health);
+            
+            if(health != null) health.Damage();
+        }
     }
 
     public void AttemptLinkObjects(){
@@ -27,10 +45,9 @@ public class LinkedObject : MonoBehaviour
 
         if(!Active) return;
 
-        // Find all objects in range, Clear any out of range from currently linked
+        // Find all objects in range, Clear any out of range from currently linked if no longer linked
         RetrieveLinkedObjectsInRange();
-        CurrentlyLinked.RemoveWhere(obj => !InRangeObjects.Contains(obj));
-        if(CurrentlyLinked.Count == 0) Linked = false;
+        CullLinkedObjects();
 
 
         if(CurrentlyLinked.Count >= 1 && Amount == LINKED_OBJECT_AMOUNT.SINGULAR) return;  // if connected and only allowed one linked object, continue 
@@ -47,6 +64,55 @@ public class LinkedObject : MonoBehaviour
         
     }
 
+    private void CullLinkedObjects()
+    {
+        LinkedObjectsToCull.Clear();
+        CurrentlyLinked.RemoveWhere(obj => !InRangeObjects.Contains(obj));
+        if(CurrentlyLinked.Count == 0) Linked = false;
+
+        if(BlockType == LINKED_OBJECT_BLOCK_TYPE.NONE) return; // dont remove blocked objects
+
+        // cull blocked objects
+        foreach(LinkedObject linkedObject in CurrentlyLinked){
+            SetLinkDirection(linkedObject);
+            var hits = GetSortedRaycastHits(LinkDirection, Radius);
+            
+            // This could use a rewrite -- I think we can get away with just checking [0, 1, 2] in the raycast hits
+            bool targetHit = false;
+            foreach(var hit in hits){
+                // dont block on self or target
+                if(hit.transform.gameObject == this) continue;
+                if(hit.transform.gameObject == linkedObject.transform.gameObject) {
+                    targetHit = true;
+                    break;
+                }
+
+                if(!targetHit){
+                    LinkedObjectsToCull.Add(linkedObject);
+                    break;
+                }
+            }
+        }
+
+        CurrentlyLinked.RemoveWhere(obj => LinkedObjectsToCull.Contains(obj));
+    }
+
+    private Vector3 DirectionToObject(Transform src, Transform dest){
+        return (dest.position - src.position).normalized;
+    }
+    
+    private void SetLinkDirection(LinkedObject linkedObject){
+        LinkDirection = new Ray(this.transform.position, DirectionToObject(this.transform, linkedObject.transform));
+    }
+
+    private RaycastHit[] GetSortedRaycastHits(Ray direction, float distance){
+        RaycastHit[] hitColliders = Physics.RaycastAll(direction, distance);
+        System.Array.Sort(hitColliders, (a, b) => a.distance.CompareTo(b.distance));
+
+        return hitColliders;
+
+    }
+
     private void UpdateParticles()
     {
         ParticleSystem.gameObject.SetActive(Linked);
@@ -58,7 +124,7 @@ public class LinkedObject : MonoBehaviour
     }
 
     private void RetrieveLinkedObjectsInRange(){
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, Radius, ~0);  // check everything
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, Radius, ~0);  // check everything  -- consider a mask here
         foreach (Collider collider in hitColliders)
         {
             if(collider.gameObject == this.gameObject) continue;  // skip this object in the collision detection;
