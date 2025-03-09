@@ -93,7 +93,7 @@ public class LinkedObject : MonoBehaviour
                 }
             }
         }
-
+        foreach(LinkedObject linkedObject in LinkedObjectsToCull) linkedObject.CurrentlyLinked.Remove(this);
         CurrentlyLinked.RemoveWhere(obj => LinkedObjectsToCull.Contains(obj));
     }
 

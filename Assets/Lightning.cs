@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Lightning : MonoBehaviour
@@ -8,7 +6,7 @@ public class Lightning : MonoBehaviour
 
     private Transform startPoint;
     private Transform endPoint;
-    public int ArcSmoothness = 10;  // 
+    public int ArcSmoothness = 10;  // points along the line
     [field: SerializeField] public float ArcIntensity = 1.5f; // Strength of the jagged arcs
 
     public LineRenderer lineRenderer;
