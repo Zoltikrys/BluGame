@@ -1,19 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VFX;
 
-public class ToggleSteam : MonoBehaviour
+public class ToggleRobotArm: MonoBehaviour
 {
-    public VisualEffect steamEffect;
+    public Animator animator;
     public bool canIntereact = false;
     public bool isPlaying = false;
-    //public GameObject Valve;
 
     // Start is called before the first frame update
     void Start()
     {
-        steamEffect.Stop();
+        animator.speed = 0f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,7 +24,6 @@ public class ToggleSteam : MonoBehaviour
         canIntereact = false;
     }
 
-
     // Update is called once per frame
     void Update()
     {
@@ -37,7 +34,7 @@ public class ToggleSteam : MonoBehaviour
                 if (isPlaying)
                 {
                     isPlaying = false;
-                    steamEffect.Stop();
+                    animator.speed = 0f;
                     //Valve.transform.Rotate(new Vector3(0, 0, 1f));
                     //animate the valve turning but i dont wanna do that rn
                 }
@@ -45,9 +42,9 @@ public class ToggleSteam : MonoBehaviour
                 else if (!isPlaying)
                 {
                     isPlaying = true;
-                    steamEffect.Play();
+                    animator.speed = 1f;
                 }
             }
-        }        
+        }
     }
 }
