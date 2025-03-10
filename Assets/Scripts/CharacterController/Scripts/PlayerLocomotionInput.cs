@@ -41,6 +41,7 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
         if (!context.performed)
         {
             //print(JumpPressed);
+            GetComponent<PlayerController>().Jump();
             return;
         }
         JumpPressed = true;

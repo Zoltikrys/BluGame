@@ -1,5 +1,7 @@
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
-using UnityEngine.InputSystem;  //Do not remove this, needed for new input system
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;  //Do not remove this, needed for new input system
 
 [DefaultExecutionOrder(-1)]
 public class PlayerController : MonoBehaviour
@@ -21,7 +23,6 @@ public class PlayerController : MonoBehaviour
 
     private PlayerLocomotionInput locomotionInput;
     InputAction moveAction;
-    
 
     private void Awake()
     {
@@ -98,11 +99,6 @@ public class PlayerController : MonoBehaviour
 
                 animator.SetBool("IsMoving", false);
             }
-            if (groundedPlayer && Input.GetButtonDown("Jump")) // Default Unity input for jump is "Jump"
-            {
-                playerVelocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
-                animator.SetBool("Grounded?", false) ;
-            }
         }
 
         playerVelocity.y += (gravity * Time.deltaTime);
@@ -137,5 +133,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Jump() {
+        if (groundedPlayer)        // Default Unity input for jump is "Jump"
+{
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
+            animator.SetBool("Grounded?", false);
+        }
+    }
 
 }

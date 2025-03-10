@@ -1958,10 +1958,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorOpenFlag: 0
-  leftDoor: {fileID: 1643455215}
-  rightDoor: {fileID: 501449009}
-  collider: {fileID: 0}
+  currentDoorStatus: 0
+  doorStatusToOpen: 0
+  doorCollider: {fileID: 0}
   animator: {fileID: 0}
+  triggeredElements: []
 --- !u!1 &422370328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,9 +2008,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cca015329003bd4fae0600170d25481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: {fileID: 102900000, guid: 2d87cfa1cf2532b4bab4cbbf3f89d79a, type: 3}
+  SceneToLoad: 0
   IndexOfSpawnPointInNextScene: 1
   SceneID: 0
+  <ExitTransition>k__BackingField: 0
+  <EnterTransition>k__BackingField: 0
 --- !u!65 &422370331
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3274,10 +3277,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorOpenFlag: 0
-  leftDoor: {fileID: 221635914}
-  rightDoor: {fileID: 594535892}
-  collider: {fileID: 0}
+  currentDoorStatus: 0
+  doorStatusToOpen: 0
+  doorCollider: {fileID: 0}
   animator: {fileID: 0}
+  triggeredElements: []
 --- !u!4 &648952936
 Transform:
   m_ObjectHideFlags: 0
@@ -4415,6 +4419,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1365176956614713060, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: jumpRef
+      value: 
+      objectReference: {fileID: 2787902130636210811, guid: d2a7c7b4dfd0779458298c718ba9f8e7, type: 3}
     - target: {fileID: 1464935671355033948, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4684,9 +4692,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cca015329003bd4fae0600170d25481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: {fileID: 102900000, guid: 2d87cfa1cf2532b4bab4cbbf3f89d79a, type: 3}
+  SceneToLoad: 0
   IndexOfSpawnPointInNextScene: 2
   SceneID: 0
+  <ExitTransition>k__BackingField: 0
+  <EnterTransition>k__BackingField: 0
 --- !u!1 &836414856
 GameObject:
   m_ObjectHideFlags: 0
@@ -6865,16 +6875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e536fb936b8f542b5febf0013321a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
-  angle: 50
-  playerRef: {fileID: 1711188220}
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 128
-  obstructionMask:
-    serializedVersion: 2
-    m_Bits: 4096
-  canSeePlayer: 0
 --- !u!1 &1273135669
 GameObject:
   m_ObjectHideFlags: 0
@@ -7545,9 +7545,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cca015329003bd4fae0600170d25481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: {fileID: 102900000, guid: 2d87cfa1cf2532b4bab4cbbf3f89d79a, type: 3}
+  SceneToLoad: 0
   IndexOfSpawnPointInNextScene: 1
   SceneID: 0
+  <ExitTransition>k__BackingField: 0
+  <EnterTransition>k__BackingField: 0
 --- !u!1 &1516357936
 GameObject:
   m_ObjectHideFlags: 0
@@ -8337,8 +8339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66bb9bea8e8f5ab40ab405ca4a53b82d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerSourceFlags: 0
-  powerSourceTarget: 1
 --- !u!1 &1610194622
 GameObject:
   m_ObjectHideFlags: 0
@@ -9078,6 +9078,7 @@ MonoBehaviour:
     <PositionToHit>k__BackingField: {x: 0, y: 0, z: 0}
     <RotationToHit>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
   type: 0
+  triggerType: 0
   DelayBeforeStarting: 1
   tweenIndex: 0
   paused: 0
@@ -9540,9 +9541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a612a248343d42d48b8c18d6e9c38c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerSourceCharge: 3
-  bossCharge: 0
-  bossShield: {fileID: 1603547984}
 --- !u!4 &1766342997
 Transform:
   m_ObjectHideFlags: 0
@@ -11268,10 +11266,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorOpenFlag: 0
-  leftDoor: {fileID: 76574801}
-  rightDoor: {fileID: 76574798}
-  collider: {fileID: 0}
+  currentDoorStatus: 0
+  doorStatusToOpen: 0
+  doorCollider: {fileID: 0}
   animator: {fileID: 0}
+  triggeredElements: []
 --- !u!4 &2042439310
 Transform:
   m_ObjectHideFlags: 0
