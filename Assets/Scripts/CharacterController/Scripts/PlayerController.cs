@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     public bool isMagnetized;
-    private bool canMove = true;
+    public bool canMove = true;
     public Animator animator;
 
     public float pushPower = 2f; //force use to push boxes
