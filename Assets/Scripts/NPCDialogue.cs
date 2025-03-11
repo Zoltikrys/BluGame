@@ -5,8 +5,7 @@ using System.Collections;
 using System.Linq;
 
 
-public class NPCDialogue : MonoBehaviour
-{
+public class NPCDialogue : MonoBehaviour {
 
     public bool canInteract = false;
     public GameObject BLU;
@@ -19,28 +18,25 @@ public class NPCDialogue : MonoBehaviour
 
     public float wordSpeed;
 
+    [SerializeField] private GameObject player;
+
     //public GameObject canvas;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         BLU = GameObject.Find("Player");
         dialogueText.text = "";
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerEnter(Collider other) {
         Debug.Log("In interact zone");
-        if (other.tag == ("Player"))
-        {
+        if (other.tag == ("Player")) {
             canInteract = true;
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == ("Player"))
-        {
+    private void OnTriggerExit(Collider other) {
+        if (other.tag == ("Player")) {
             canInteract = false;
             zeroText(); //probably superfluous
         }
@@ -48,22 +44,17 @@ public class NPCDialogue : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+    }
 
-        if (Input.GetKeyDown(KeyCode.I) && canInteract)
-        {
-
-            if(dialoguePanel.activeInHierarchy)
-            {
-                NextLine();
-            }
-            else
-            {
-                BLU.GetComponent<PlayerController>().canMove = false;
-                dialoguePanel.SetActive(true);
-                StartCoroutine(Typing());
-            }
+    public void NPCInteract() {
+        if (dialoguePanel.activeInHierarchy) {
+            NextLine();
+        }
+        else {
+            BLU.GetComponent<PlayerController>().canMove = false;
+            dialoguePanel.SetActive(true);
+            StartCoroutine(Typing());
         }
     }
 

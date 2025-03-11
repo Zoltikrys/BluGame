@@ -4,8 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;  //Do not remove this, needed for new input system
 
 [DefaultExecutionOrder(-1)]
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
 
     [SerializeField] private CharacterController controller;
     private Vector3 playerVelocity;
@@ -24,8 +23,7 @@ public class PlayerController : MonoBehaviour
     private PlayerLocomotionInput locomotionInput;
     InputAction moveAction;
 
-    private void Awake()
-    {
+    private void Awake(){
         locomotionInput = GetComponent<PlayerLocomotionInput>();
         //moveAction = locomotionInput.MovementInput
     }
@@ -38,29 +36,24 @@ public class PlayerController : MonoBehaviour
         canMove = true;
     }
     
-    void Start()
-    {
+    void Start(){
         animator = GetComponentInChildren<Animator>();
     }
 
-    void Update()
-    {
+    void Update(){
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
+        if (groundedPlayer && playerVelocity.y < 0){
             playerVelocity.y = 0f;
             animator.SetBool("Grounded?", true);
         }
 
         isMagnetized = GetComponent<MagnetAbility>().isMagnetized;
-        if(isMagnetized && playerVelocity.y < 0)
-        {
+        if(isMagnetized && playerVelocity.y < 0){
             playerVelocity.y = 0f;
         }
 
         
-        if (canMove) // Block input if player cannot move
-        {
+        if (canMove){               // Block input if player cannot move
             // Get input
             Vector2 inputDirection = new Vector2(locomotionInput.MovementInput.x, locomotionInput.MovementInput.y);
 
@@ -82,8 +75,7 @@ public class PlayerController : MonoBehaviour
             Vector3 relativeDirection = (cameraForward * movementDirection.y) + (cameraRight * movementDirection.x);
 
             // Move the character
-            if (movementDirection.magnitude > 0.1f) // Check if input is significant
-            {
+            if (movementDirection.magnitude > 0.1f) {              // Check if input is significant
                 controller.Move(relativeDirection * Time.deltaTime * playerSpeed);
 
                 animator.SetBool("IsMoving", true);
@@ -92,8 +84,7 @@ public class PlayerController : MonoBehaviour
                 Quaternion targetRotation = Quaternion.LookRotation(relativeDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             }
-            else
-            {
+            else {
                 // Stop character movement
                 controller.Move(Vector3.zero);
 
@@ -107,8 +98,7 @@ public class PlayerController : MonoBehaviour
 }
 
 
-    void OnCollisionEnter(Collision collision)
-    {
+    void OnCollisionEnter(Collision collision) {
         print(collision.gameObject.name + " is colliding with BLU");
 
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
@@ -119,14 +109,11 @@ public class PlayerController : MonoBehaviour
         }*/
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit) //pushing boxes
-    {
-        if (hit.transform.tag == "PushableBox")
-        {
+    private void OnControllerColliderHit(ControllerColliderHit hit){          //pushing boxes
+        if (hit.transform.tag == "PushableBox"){
             Rigidbody box = hit.transform.GetComponent<Rigidbody>();
 
-            if (box != null)
-            {
+            if (box != null){
                 Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z); //gets direction player is moving in
                 box.velocity = pushDirection * pushPower;
             }
@@ -134,11 +121,9 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Jump() {
-        if (groundedPlayer)        // Default Unity input for jump is "Jump"
-{
+        if (groundedPlayer){        // Default Unity input for jump is "Jump"
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
             animator.SetBool("Grounded?", false);
         }
     }
-
 }
