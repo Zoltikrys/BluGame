@@ -647,7 +647,7 @@ MonoBehaviour:
   dialogue:
   - Hello!
   - KILL YOURSELF!
-  wordSpeed: 0.06
+  wordSpeed: 0.03
   player: {fileID: 1192050788}
 --- !u!65 &1357069368
 BoxCollider:
@@ -1226,9 +1226,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2387659810505668965, guid: 957a746708dea154d87895b67aeb7386, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.47558594
+      objectReference: {fileID: 0}
     - target: {fileID: 2722350596212563341, guid: 957a746708dea154d87895b67aeb7386, type: 3}
       propertyPath: m_Name
       value: DialogueUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217895225489490925, guid: 957a746708dea154d87895b67aeb7386, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.8388672
       objectReference: {fileID: 0}
     - target: {fileID: 8694709534149759330, guid: 957a746708dea154d87895b67aeb7386, type: 3}
       propertyPath: m_Pivot.x
