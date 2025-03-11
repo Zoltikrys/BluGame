@@ -19,6 +19,11 @@ Magnet controls:
     Q --  Activate/Deactivate Magnet
  ```
 
+Interaction controls: 
+ ```
+    F --  Interact with Environment
+ ```
+
 ## Camera Information
 The camera can do the following:
 >1. Look at the player

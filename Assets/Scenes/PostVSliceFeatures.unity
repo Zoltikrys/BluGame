@@ -600,6 +600,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2613230712092152565, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
   m_PrefabInstance: {fileID: 1676253501}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &993222443 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6193293355873074235, guid: 528d6abdd5df8124490eaa510afec20c, type: 3}
+  m_PrefabInstance: {fileID: 625450922322923082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1192050788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1464935671355033948, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+  m_PrefabInstance: {fileID: 1676253501}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1357069366
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,7 +647,8 @@ MonoBehaviour:
   dialogue:
   - Hello!
   - KILL YOURSELF!
-  wordSpeed: 0.03
+  wordSpeed: 0.06
+  player: {fileID: 1192050788}
 --- !u!65 &1357069368
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -675,6 +686,11 @@ Transform:
   - {fileID: 71438368}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1490477431 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2797848246676380892, guid: d4d504598361b8247bacc65f9a5f79c0, type: 3}
+  m_PrefabInstance: {fileID: 2025292744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1655021301
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +876,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8461529179585224728, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: npc
+      value: 
+      objectReference: {fileID: 1357069366}
+    - target: {fileID: 8461529179585224728, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: steam
+      value: 
+      objectReference: {fileID: 993222443}
+    - target: {fileID: 8461529179585224728, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+      propertyPath: robotArm
+      value: 
+      objectReference: {fileID: 1490477431}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1090,7 +1118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3285416079738275430, guid: d4d504598361b8247bacc65f9a5f79c0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.08
+      value: 1.1118059
       objectReference: {fileID: 0}
     - target: {fileID: 3285416079738275430, guid: d4d504598361b8247bacc65f9a5f79c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1120,6 +1148,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4558102766296750934, guid: d4d504598361b8247bacc65f9a5f79c0, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1192050788}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1173,6 +1205,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2903826654170063404, guid: 528d6abdd5df8124490eaa510afec20c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1192050788}
     - target: {fileID: 6193293355873074235, guid: 528d6abdd5df8124490eaa510afec20c, type: 3}
       propertyPath: m_Name
       value: SteamPipe
