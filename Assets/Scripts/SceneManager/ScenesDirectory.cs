@@ -21,6 +21,12 @@ public static class RoomDirectory{
         { LEVELS.Tutorial_Split_6_LaserCages,      "TutSplit-6-LaserCages"},
         { LEVELS.Tutorial_Split_Final_BossRoom,    "TutSplit-Final-BossRoom"},
         { LEVELS.HubV3, "HubV3" },
+        { LEVELS.Dungeon2Intro, "Dungeon2Intro" },
+        { LEVELS.Dungeon2EntranceExit, "Dungeon2EntranceExit" },
+        { LEVELS.Dungeon2Foundry, "Dungeon2Foundry" },
+        { LEVELS.Dungeon2MagnetUnlock, "Dungeon2MagnetUnlock" },
+        { LEVELS.Dungeon2PostMagnet, "Dungeon2PostMagnet" },
+        { LEVELS.Dungeon2BossRoom, "Dungeon2BossRoom" },
     };
 }
 
@@ -42,4 +48,10 @@ public enum LEVELS{
     Tutorial_Split_6_LaserCages,
     Tutorial_Split_Final_BossRoom,
     HubV3,
+    Dungeon2Intro,
+    Dungeon2EntranceExit,
+    Dungeon2Foundry,
+    Dungeon2MagnetUnlock,
+    Dungeon2PostMagnet,
+    Dungeon2BossRoom,
 }
