@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -67,14 +68,18 @@ public class LinkedObject : MonoBehaviour
 
     private bool ShouldRemove(LinkedObject obj){
         bool shouldRemove = !InRangeObjects.Contains(obj);
-        if(shouldRemove) {
-            GameObject lineRenderer = null;
-            LineRenderers.TryGetValue(obj, out lineRenderer);
+        if(shouldRemove) RemoveLineRenderer(obj);
+        return shouldRemove;
+    }
+
+    private void RemoveLineRenderer(LinkedObject obj){
+        GameObject lineRenderer = null;
+        LineRenderers.TryGetValue(obj, out lineRenderer);
+        if(lineRenderer){
             LineRenderers.Remove(obj);
             Destroy(lineRenderer);
-
         }
-        return shouldRemove;
+
     }
 
     private void CullLinkedObjects()
@@ -107,7 +112,13 @@ public class LinkedObject : MonoBehaviour
                 }
             }
         }
-        foreach(LinkedObject linkedObject in LinkedObjectsToCull) linkedObject.CurrentlyLinked.Remove(this);
+        foreach(LinkedObject linkedObject in LinkedObjectsToCull) {
+            Debug.Log($"Unlinked {linkedObject.gameObject.name} from {this.name}");
+            linkedObject.CurrentlyLinked.Remove(this);
+            linkedObject.RemoveLineRenderer(this);
+
+            RemoveLineRenderer(linkedObject);
+        }
         CurrentlyLinked.RemoveWhere(obj => LinkedObjectsToCull.Contains(obj));
     }
 
