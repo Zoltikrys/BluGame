@@ -19,7 +19,8 @@ public class LinkedObject : MonoBehaviour
     [field: SerializeField] private HashSet<LinkedObject> InRangeObjects = new HashSet<LinkedObject>();
     [field: SerializeField] private HashSet<LinkedObject> LinkedObjectsToCull = new HashSet<LinkedObject>();
     [field: SerializeField] private Dictionary<LinkedObject, GameObject> LineRenderers = new Dictionary<LinkedObject, GameObject>();
-    [field: SerializeField] public GameObject ParticleSystem {get; set;}
+    [field: SerializeField] public GameObject TurnOnParticle {get; set;}
+    [field: SerializeField] public GameObject ParticlePrefab {get; set;}
     private bool blocked = false;
     public Ray LinkDirection {get; set;}
 
@@ -64,10 +65,23 @@ public class LinkedObject : MonoBehaviour
         
     }
 
+    private bool ShouldRemove(LinkedObject obj){
+        bool shouldRemove = !InRangeObjects.Contains(obj);
+        if(shouldRemove) {
+            GameObject lineRenderer = null;
+            LineRenderers.TryGetValue(obj, out lineRenderer);
+            LineRenderers.Remove(obj);
+            Destroy(lineRenderer);
+
+        }
+        return shouldRemove;
+    }
+
     private void CullLinkedObjects()
     {
         LinkedObjectsToCull.Clear();
-        CurrentlyLinked.RemoveWhere(obj => !InRangeObjects.Contains(obj));
+        CurrentlyLinked.RemoveWhere(obj => ShouldRemove(obj));
+
         if(CurrentlyLinked.Count == 0) Linked = false;
 
         if(BlockType == LINKED_OBJECT_BLOCK_TYPE.NONE) return; // dont remove blocked objects
@@ -115,11 +129,10 @@ public class LinkedObject : MonoBehaviour
 
     private void UpdateParticles()
     {
-        ParticleSystem.gameObject.SetActive(Linked);
-        
-        foreach(LinkedObject linkedObject in CurrentlyLinked){
-            ParticleSystem.transform.LookAt(linkedObject.transform);
-            linkedObject.ParticleSystem.GetComponent<Lightning>().SetDistances(this.transform, linkedObject.transform);
+        TurnOnParticle.SetActive(Linked);
+        foreach(KeyValuePair<LinkedObject, GameObject> valuePair in LineRenderers){
+            valuePair.Value.transform.LookAt(valuePair.Key.transform);
+            valuePair.Value.GetComponent<Lightning>().SetDistances(this.transform, valuePair.Key.transform);
         }
     }
 
@@ -150,7 +163,9 @@ public class LinkedObject : MonoBehaviour
         CurrentlyLinked.Add(objectToLink);
         Linked = true;
         objectToLink.Link(this);
-        ParticleSystem.transform.LookAt(objectToLink.transform);
+        var newLineRenderer = Instantiate(ParticlePrefab);
+        newLineRenderer.transform.parent = this.transform;
+        LineRenderers.Add(objectToLink, newLineRenderer);
     }
 
     public void Block(LinkedObject linkedObject){
