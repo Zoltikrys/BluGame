@@ -49,7 +49,9 @@ public class PlayerController : MonoBehaviour
         {
             playerVelocity.y = 0f;
             animator.SetBool("Grounded?", true);
+            Debug.Log("PLAYER GROUNDED");
         }
+        else Debug.Log("PLAYER UNGROUNDED");
 
         isMagnetized = GetComponent<MagnetAbility>().isMagnetized;
         if(isMagnetized && playerVelocity.y < 0)
