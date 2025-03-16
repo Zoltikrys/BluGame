@@ -16,7 +16,8 @@ public class ObjectSpawner : MonoBehaviour
     private void SpawnObject(){
         if(PrefabsToSpawn.Count > 0){
             int index = UnityEngine.Random.Range(0, PrefabsToSpawn.Count);
-            Instantiate(PrefabsToSpawn[index], objectContainer.transform);
+            var a = Instantiate(PrefabsToSpawn[index], objectContainer.transform);
+            a.transform.position = this.transform.position;
         }
     }
 }
