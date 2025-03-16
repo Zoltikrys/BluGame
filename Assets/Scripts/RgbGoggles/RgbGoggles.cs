@@ -26,6 +26,8 @@ public class RgbGoggles : MonoBehaviour
     private int rgbNum = (int)RGBSTATE.R;
     public GameObject gogglesObject;
 
+    bool wasKeyPressed = false;
+
     void Start(){
         colorFlags.r = false;
         colorFlags.g = false;
@@ -104,7 +106,6 @@ public class RgbGoggles : MonoBehaviour
                             obj.Show();
                         } else obj.Hide();
                     }
-                    
                 }
             }
         }
@@ -123,39 +124,39 @@ public class RgbGoggles : MonoBehaviour
     }
 
     bool HandleKeypress(){
-        bool wasKeyPressed = false;
         if(!GogglesActivated) return wasKeyPressed;
-
-        if(Input.GetKeyUp(KeyCode.E)){
-            GogglesOn = !GogglesOn;
-            wasKeyPressed = true;
-            if(!GogglesOn) TurnGogglesOff();
-            else{
-                prevColorFlagState.r = false;
-                prevColorFlagState.b = false;
-                prevColorFlagState.g = false;
-
-            }
-        }
-        if(GogglesOn){
-            if(Input.GetAxis("Mouse ScrollWheel") > 0 || Input.GetKeyUp(KeyCode.RightArrow)){
-                rgbNum <<= 1;
-                if(rgbNum > (int)RGBSTATE.B) rgbNum = (int)RGBSTATE.R; 
-                wasKeyPressed = true;
-                Debug.Log($"RGB UP: {rgbNum}");
-            }
-            if(Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyUp(KeyCode.LeftArrow)){
-                rgbNum >>= 1;
-                if(rgbNum < 1) rgbNum = (int)RGBSTATE.B;
-                wasKeyPressed = true;
-                Debug.Log($"RGB DOWN: {rgbNum}");
-            }
-        }
-
         UpdateColorFlags((RGBSTATE) rgbNum);
-
-
         return wasKeyPressed;
+    }
+
+    public void GoggleToggle() {
+        GogglesOn = !GogglesOn;
+        wasKeyPressed = true;
+        if (!GogglesOn) TurnGogglesOff();
+        else {
+            prevColorFlagState.r = false;
+            prevColorFlagState.b = false;
+            prevColorFlagState.g = false;
+
+        }
+    }
+
+    public void GoggleSwitchLeft() {
+        if (GogglesOn) {
+            rgbNum <<= 1;
+            if (rgbNum > (int)RGBSTATE.B) rgbNum = (int)RGBSTATE.R;
+            wasKeyPressed = true;
+            Debug.Log($"RGB UP: {rgbNum}");
+        }
+    }
+
+    public void GoggleSwitchRight() {
+        if (GogglesOn) {
+            rgbNum >>= 1;
+            if (rgbNum < 1) rgbNum = (int)RGBSTATE.B;
+            wasKeyPressed = true;
+            Debug.Log($"RGB DOWN: {rgbNum}");
+        }
     }
 
     private void UpdateGoggleState()

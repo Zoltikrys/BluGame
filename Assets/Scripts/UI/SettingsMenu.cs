@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using System.Linq;
+using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class SettingsMenu : MonoBehaviour
 
     public TMPro.TMP_Dropdown resolutionDropdown;
 
+    public Toggle fullscreenToggle;
+
     List<Resolution> resolutions = new List<Resolution>();
     Resolution fallbackResolution;
 
@@ -24,7 +27,19 @@ public class SettingsMenu : MonoBehaviour
         fallbackResolution.width = 1920;
         fallbackResolution.height = 1080;
 
-        resolutions = Screen.resolutions.ToList();
+        if (Screen.fullScreen)
+        {
+            fullscreenToggle.isOn = true;
+        }
+        else
+        {
+            fullscreenToggle.isOn = false;
+        }
+
+        
+
+        //resolutions = Screen.resolutions.ToList();
+        resolutions = Screen.resolutions.Where(resolution => resolution.refreshRateRatio.value == 60).ToList();
 
         resolutionDropdown.ClearOptions(); //clears options
 
@@ -34,7 +49,7 @@ public class SettingsMenu : MonoBehaviour
         int currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Count; i++) //populating list with available options dependant on monitor
         {
-            string resolutionOption = resolutions[i].width + "x" + resolutions[i].height;
+            string resolutionOption = resolutions[i].width + "x" + resolutions[i].height; //.ToString();
             resolutionOptions.Add(resolutionOption);
 
             if (resolutions[i].width == Screen.currentResolution.width &&

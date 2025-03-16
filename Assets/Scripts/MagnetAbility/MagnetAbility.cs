@@ -60,59 +60,48 @@ public class MagnetAbility : MonoBehaviour
     {
         // Toggle magnet ability
         if(smallMagnetTargetMagnetised && smallMagnetTarget == null) TurnOffMagnet(); // fires when our gameobject is consumed or deleted out of the scene.
-   
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Fire2"))
-        {
-            if(!isMagnetActive){
-                if(GetComponent<Battery>().AttemptAddBatteryEffects(MagnetBatteryCost, true)){
-                    isMagnetActive = true;
-                    magnetFront.color = Color.white;
-                    animator.SetBool("Magnet?", true);
-                    //magnetVibes.SetActive(true);
-                }
-            }
-            else {
-                isMagnetActive = false;
-                isMagnetized = false;
-                magnetFront.color = Color.clear;
-                GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
-                animator.SetBool("Magnet?", false);
-                //magnetVibes.SetActive(false);
-                //foreach (ParticleSystem particles in magnetParticles) {
-                //    particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
-                //}
-                //magnetParticles.Clear();
-
-            }
-
-            if (!isMagnetActive) // Release any active magnet
-            {
-                ReleaseSmallMagnet();
-                isMagnetized = false;
-            }
-
-            
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (shootMode)
-            {
-                Debug.Log("Shoot mode off");
-                shootMode = false;
-            }
-            else if (!shootMode)
-            {
-                Debug.Log("Shoot mode on");
-                shootMode = true;
-            }
-        }
 
         if (isMagnetActive)
         {
             isMagnetized = false;
             HandleSmallMagnets();
             HandleBigMagnets();
+        }
+    }
+
+    public void MagnetInput() {
+        if (!isMagnetActive) {
+            if (GetComponent<Battery>().AttemptAddBatteryEffects(MagnetBatteryCost, true)) {
+                isMagnetActive = true;
+                magnetFront.color = Color.white;
+                animator.SetBool("Magnet?", true);
+                //magnetVibes.SetActive(true);
+            }
+        }
+        else {
+            isMagnetActive = false;
+            isMagnetized = false;
+            magnetFront.color = Color.clear;
+            GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
+            animator.SetBool("Magnet?", false);
+            //magnetVibes.SetActive(false);
+            //foreach (ParticleSystem particles in magnetParticles) {
+            //    particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+            //}
+            //magnetParticles.Clear();
+            TurnOffMagnet();
+
+        }
+    }
+
+    public void ShootMode() {
+        if (shootMode) {
+            Debug.Log("Shoot mode off");
+            shootMode = false;
+        }
+        else if (!shootMode) {
+            Debug.Log("Shoot mode on");
+            shootMode = true;
         }
     }
 
