@@ -84,3 +84,10 @@ public enum LINKED_OBJECT_BLOCK_TYPE{
     NONE,
     BLOCKED_ON_OBJECTS
 }
+
+
+public enum CraneDirection{
+    NONE,
+    UP,
+    DOWN
+}
