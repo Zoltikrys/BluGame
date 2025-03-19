@@ -60,7 +60,7 @@ public class Laser : MonoBehaviour
                     DungeonElement dungeonElement;
                     if(gameObject.TryGetComponent<DungeonElement>(out dungeonElement)){
                         if(dungeonElement.type == DungeonElementType.LASER_INPUT){
-                            gameObject.
+                            //gameObject.
                         }
                     }
 
