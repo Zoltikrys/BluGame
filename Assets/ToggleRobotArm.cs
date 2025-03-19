@@ -16,6 +16,7 @@ public class ToggleRobotArm : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         canIntereact = true;
+        player.GetComponent<PlayerLocomotionInput>().robotArm = gameObject;
     }
 
     private void OnTriggerExit(Collider other) {
