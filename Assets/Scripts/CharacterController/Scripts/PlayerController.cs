@@ -112,9 +112,15 @@ public class PlayerController : MonoBehaviour {
     private void OnControllerColliderHit(ControllerColliderHit hit){          //pushing boxes
         if (hit.transform.tag == "PushableBox"){
             Rigidbody box = hit.transform.GetComponent<Rigidbody>();
-
-            if (box != null){
-                Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z); //gets direction player is moving in
+            Vector3 pushDirection;
+            if ((hit.moveDirection.x * hit.moveDirection.x) > (hit.moveDirection.z * hit.moveDirection.z))
+            {
+                pushDirection = new Vector3(hit.moveDirection.x, 0, 0);
+                box.velocity = pushDirection * pushPower;
+            }
+            else if ((hit.moveDirection.x * hit.moveDirection.x) < (hit.moveDirection.z * hit.moveDirection.z))
+            {
+                pushDirection = new Vector3(0, 0, hit.moveDirection.z);
                 box.velocity = pushDirection * pushPower;
             }
         }
