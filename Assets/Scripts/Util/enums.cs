@@ -47,7 +47,8 @@ public enum BatteryEffectType{
 
 public enum DungeonElementType{
     NONE,
-    BATTERY
+    BATTERY,
+    LASER_INPUT,
 }
 
 public enum TextRenderType{
