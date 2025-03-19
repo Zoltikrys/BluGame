@@ -48,21 +48,16 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
     }
 
     public void OnInteract(InputAction.CallbackContext context){
-        switch (context.phase){
-            case InputActionPhase.Performed:
+        if (context.performed){
                 if (npc != null && npc.GetComponent<NPCDialogue>().canInteract == true){
                     npc.GetComponent<NPCDialogue>().NPCInteract();
-                    break;
                 }
                 else if (steam != null && steam.GetComponent<ToggleSteam>().canIntereact == true){
                         steam.GetComponent<ToggleSteam>().SteamInteract();
-                        break;
                 }
                 else if (robotArm != null && robotArm.GetComponent<ToggleRobotArm>().canIntereact == true){
                     robotArm.GetComponent<ToggleRobotArm>().RobotArmInteract();
-                    break;
                 }
-                break;
         }
     }
 
