@@ -132,13 +132,14 @@ public class RgbGoggles : MonoBehaviour
     public void GoggleToggle() {
         GogglesOn = !GogglesOn;
         wasKeyPressed = true;
-        if (!GogglesOn) TurnGogglesOff();
+        if (!GogglesOn) { rgbNum = 0; TurnGogglesOff(); }
         else {
             prevColorFlagState.r = false;
             prevColorFlagState.b = false;
             prevColorFlagState.g = false;
-
+            rgbNum = 2;
         }
+
     }
 
     public void GoggleSwitchLeft() {
