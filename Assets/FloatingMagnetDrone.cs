@@ -12,6 +12,10 @@ public class FloatingMagnetDrone : MonoBehaviour
     private int currentPointIndex = 0;
     private bool isPaused = false;
 
+    public Renderer mesh;
+    public Material blue;
+    public Material red;
+
     public ParticleSystem magnetEffect;
     public Color attractColor = Color.blue;
     public Color repelColor = Color.red;
@@ -30,6 +34,16 @@ public class FloatingMagnetDrone : MonoBehaviour
             particleMain = magnetEffect.main;
             UpdateParticleEffect();
         }
+
+        if (magnetMode == MagnetType.Attract)
+        {
+            mesh.material = blue;
+        }
+        else if (magnetMode == MagnetType.Repel)
+        {
+            mesh.material = red;
+        }
+
     }
 
     private IEnumerator Patrol()
