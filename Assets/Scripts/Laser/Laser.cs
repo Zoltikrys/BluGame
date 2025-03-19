@@ -48,12 +48,22 @@ public class Laser : MonoBehaviour
             for(int i = 0; i < objectCount; i++){
                 if (collidedObjects[i].collider.gameObject != gameObject){ // Dont detect self
                     //Debug.Log($"Collided with: {collidedObjects[i].collider.gameObject.name}");
+                    GameObject gameObject = collidedObjects[i].collider.gameObject;
+
                     HealthManager health;
-                    if(collidedObjects[i].collider.gameObject.TryGetComponent<HealthManager>(out health)){
+                    if(gameObject.TryGetComponent<HealthManager>(out health)){
                         if(isActive){
                             health.Damage(damageValue);
                         }
                     }
+
+                    DungeonElement dungeonElement;
+                    if(gameObject.TryGetComponent<DungeonElement>(out dungeonElement)){
+                        if(dungeonElement.type == DungeonElementType.LASER_INPUT){
+                            gameObject.
+                        }
+                    }
+
                     
                     if(BlockOnCollision) {
                         float distanceToCollision = Vector3.Distance(ray.origin, collidedObjects[i].point);
@@ -62,6 +72,9 @@ public class Laser : MonoBehaviour
                         laser.SetPosition(1, ray.origin + ray.direction * clampedDistance);
                         break;
                     }
+
+
+
                     
                 }
             }

@@ -47,7 +47,8 @@ public enum BatteryEffectType{
 
 public enum DungeonElementType{
     NONE,
-    BATTERY
+    BATTERY,
+    LASER_INPUT,
 }
 
 public enum TextRenderType{
@@ -67,4 +68,27 @@ public enum RGB_FILTER_FADE_STYLE
 {
     INSTANT_FADE,
     SLOW_FADE
+}
+
+
+public enum LINKED_OBJECT_TYPE{
+    NONE,
+    ELECTRIC
+}
+
+public enum LINKED_OBJECT_AMOUNT{
+    SINGULAR,
+    MULTIPLE
+}
+
+public enum LINKED_OBJECT_BLOCK_TYPE{
+    NONE,
+    BLOCKED_ON_OBJECTS
+}
+
+
+public enum CraneDirection{
+    NONE,
+    UP,
+    DOWN
 }
