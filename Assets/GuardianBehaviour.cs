@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class GuardianBehaviour : MonoBehaviour
 {
@@ -48,15 +49,29 @@ public class GuardianBehaviour : MonoBehaviour
             Transform targetPoint = patrolPoints[currentPatrolIndex];
             navAgent.SetDestination(targetPoint.position);
 
-            while (navAgent.remainingDistance > navAgent.stoppingDistance)
+            // Set walking animation to true as soon as patrol starts
+            animator.SetBool("isWalking", true);
+
+            // Wait until the Golem reaches the patrol point
+            while (Vector3.Distance(transform.position, targetPoint.position) > navAgent.stoppingDistance)
             {
+                // If the Golem is still moving towards the patrol point, keep walking
+                animator.SetBool("isWalking", true);
                 yield return null;
             }
 
+            // Once at the patrol point, stop walking animation
+            animator.SetBool("isWalking", false);  // Stop walking animation
+            Debug.Log("Arrived at patrol point... isWalking: false");
+
             currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+
             yield return new WaitForSeconds(5f); // Pause at patrol points
         }
     }
+
+
+
 
     private void DetectPlayer()
     {
@@ -69,9 +84,11 @@ public class GuardianBehaviour : MonoBehaviour
     private IEnumerator AlertAndChase()
     {
         isChasing = true;
+        navAgent.speed = 0;
         animator.SetTrigger("Alert");
         yield return new WaitForSeconds(1f); // Alert animation time (placeholder)
         navAgent.speed = chaseSpeed;
+        animator.SetBool("isRunning", true);
         StartCoroutine(ChasePlayer());
     }
 
@@ -79,7 +96,7 @@ public class GuardianBehaviour : MonoBehaviour
     {
         float attackDistance = 1.5f; // Adjust based on model size
         float lostPlayerTime = 0f;
-        float lostThreshold = 3f; // Time before giving up chase
+        //float lostThreshold = 3f; // Time before giving up chase
 
         while (Vector3.Distance(transform.position, player.position) > attackDistance)
         {
@@ -96,7 +113,7 @@ public class GuardianBehaviour : MonoBehaviour
             {
                 lostPlayerTime = 0f; // Reset timer if player is seen again
             }
-
+            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.transform.position.z));
             navAgent.SetDestination(player.position);
             yield return null;
         }

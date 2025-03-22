@@ -441,8 +441,9 @@ MonoBehaviour:
   - {fileID: 1451209144}
   - {fileID: 1752634057}
   - {fileID: 1104966144}
-  patrolSpeed: 2
-  chaseSpeed: 5
+  patrolSpeed: 0.7
+  chaseSpeed: 3
+  lostThreshold: 3
   attackRange: 5
   player: {fileID: 291748702}
   animator: {fileID: 0}
@@ -456,11 +457,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 0.7
   m_Acceleration: 10
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_AngularSpeed: 45
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1070,7 +1071,7 @@ Animator:
   m_GameObject: {fileID: 2116197396}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7a1259cf8c599094ea3790ffc3b2affb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
