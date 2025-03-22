@@ -51,7 +51,7 @@ public class GuardianBehaviour : MonoBehaviour
             }
 
             currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-            yield return new WaitForSeconds(1f); // Pause at patrol points
+            yield return new WaitForSeconds(5f); // Pause at patrol points
         }
     }
 
