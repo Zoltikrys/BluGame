@@ -5,7 +5,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class GuardianBehaviour : MonoBehaviour
 {
-
     protected FieldOfView FOV;
 
     [SerializeField] private bool playerSeen;
@@ -70,9 +69,6 @@ public class GuardianBehaviour : MonoBehaviour
         }
     }
 
-
-
-
     private void DetectPlayer()
     {
         if (playerSeen)
@@ -113,7 +109,14 @@ public class GuardianBehaviour : MonoBehaviour
             {
                 lostPlayerTime = 0f; // Reset timer if player is seen again
             }
+
+            //Look at player
+            Quaternion OriginalRot = transform.rotation;
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.transform.position.z));
+            Quaternion NewRot = transform.rotation;
+            transform.rotation = OriginalRot;
+            transform.rotation = Quaternion.Lerp(transform.rotation, NewRot, 3f * Time.deltaTime);
+
             navAgent.SetDestination(player.position);
             yield return null;
         }
@@ -121,12 +124,11 @@ public class GuardianBehaviour : MonoBehaviour
         StartCoroutine(AttackPlayer()); // Transition to attack state
     }
 
-
     private IEnumerator ReturnToPatrol()
     {
         isChasing = false;
         navAgent.speed = patrolSpeed;
-        animator.SetTrigger("LostTarget"); // Optional animation when giving up chase
+        animator.SetBool("isRunning", false);
 
         // Find the nearest patrol point
         Transform nearestPatrolPoint = FindNearestPatrolPoint();
@@ -161,7 +163,6 @@ public class GuardianBehaviour : MonoBehaviour
                 nearestPoint = point;
             }
         }
-
         return nearestPoint;
     }
 
@@ -170,13 +171,13 @@ public class GuardianBehaviour : MonoBehaviour
         animator.SetTrigger("Attack"); // Play attack animation
         navAgent.isStopped = true; // Stop movement during attack
 
-        yield return new WaitForSeconds(1.5f); // Adjust based on attack animation time
+        yield return new WaitForSeconds(1.25f); // Adjust based on attack animation time
 
         // OPTIONAL: Check if Blu is still nearby before resuming chase
         if (Vector3.Distance(transform.position, player.position) <= attackRange)
         {
             // Apply damage logic here
-            Debug.Log("Golem attacks Blu!");
+            Debug.Log("Guardian attacks Blu!");
         }
 
         navAgent.isStopped = false; // Resume movement
