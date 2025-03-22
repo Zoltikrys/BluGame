@@ -397,7 +397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 990256187}
-  - component: {fileID: 990256186}
+  - component: {fileID: 990256191}
   - component: {fileID: 990256189}
   - component: {fileID: 990256188}
   - component: {fileID: 990256190}
@@ -408,29 +408,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &990256186
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990256185}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.8
-  m_Height: 2.4
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.2, z: 0}
 --- !u!4 &990256187
 Transform:
   m_ObjectHideFlags: 0
@@ -466,6 +443,7 @@ MonoBehaviour:
   - {fileID: 1104966144}
   patrolSpeed: 2
   chaseSpeed: 5
+  attackRange: 5
   player: {fileID: 291748702}
   animator: {fileID: 0}
 --- !u!195 &990256189
@@ -512,6 +490,27 @@ MonoBehaviour:
     m_Bits: 4096
   updateInterval: 0.2
   playerRef: {fileID: 291748702}
+--- !u!65 &990256191
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990256185}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4, y: 2.4, z: 0.5}
+  m_Center: {x: 0, y: 1.2, z: -0.04}
 --- !u!1 &1104966143
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,7 +642,7 @@ Transform:
   m_GameObject: {fileID: 1350980749}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.64, y: 0, z: 0}
+  m_LocalPosition: {x: 9.58, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

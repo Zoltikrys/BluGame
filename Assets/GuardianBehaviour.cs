@@ -15,6 +15,9 @@ public class GuardianBehaviour : MonoBehaviour
     public float chaseSpeed = 5f;
     //public float detectionRange = 5f;
     private bool isChasing = false;
+    public float lostThreshold = 3f; // Time before giving up chase
+
+    public float attackRange = 5f;
     public Transform player;
     public Animator animator;
     private NavMeshAgent navAgent;
@@ -67,17 +70,102 @@ public class GuardianBehaviour : MonoBehaviour
     {
         isChasing = true;
         animator.SetTrigger("Alert");
-        yield return new WaitForSeconds(1f); // Alert animation time
+        yield return new WaitForSeconds(1f); // Alert animation time (placeholder)
         navAgent.speed = chaseSpeed;
         StartCoroutine(ChasePlayer());
     }
 
     private IEnumerator ChasePlayer()
     {
-        while (Vector3.Distance(transform.position, player.position) > 1f)
+        float attackDistance = 1.5f; // Adjust based on model size
+        float lostPlayerTime = 0f;
+        float lostThreshold = 3f; // Time before giving up chase
+
+        while (Vector3.Distance(transform.position, player.position) > attackDistance)
         {
+            if (!playerSeen)
+            {
+                lostPlayerTime += Time.deltaTime;
+                if (lostPlayerTime >= lostThreshold)
+                {
+                    StartCoroutine(ReturnToPatrol());
+                    yield break;
+                }
+            }
+            else
+            {
+                lostPlayerTime = 0f; // Reset timer if player is seen again
+            }
+
             navAgent.SetDestination(player.position);
             yield return null;
         }
+
+        StartCoroutine(AttackPlayer()); // Transition to attack state
     }
+
+
+    private IEnumerator ReturnToPatrol()
+    {
+        isChasing = false;
+        navAgent.speed = patrolSpeed;
+        animator.SetTrigger("LostTarget"); // Optional animation when giving up chase
+
+        // Find the nearest patrol point
+        Transform nearestPatrolPoint = FindNearestPatrolPoint();
+
+        // Move to the nearest patrol point
+        navAgent.SetDestination(nearestPatrolPoint.position);
+
+        // Wait until it reaches the patrol point
+        while (navAgent.remainingDistance > navAgent.stoppingDistance)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(2f); // Small delay before resuming patrol
+
+        // Resume patrol from this point
+        currentPatrolIndex = System.Array.IndexOf(patrolPoints, nearestPatrolPoint);
+        StartCoroutine(Patrol());
+    }
+
+    private Transform FindNearestPatrolPoint()
+    {
+        Transform nearestPoint = patrolPoints[0];
+        float shortestDistance = Vector3.Distance(transform.position, nearestPoint.position);
+
+        foreach (Transform point in patrolPoints)
+        {
+            float distance = Vector3.Distance(transform.position, point.position);
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                nearestPoint = point;
+            }
+        }
+
+        return nearestPoint;
+    }
+
+    private IEnumerator AttackPlayer()
+    {
+        animator.SetTrigger("Attack"); // Play attack animation
+        navAgent.isStopped = true; // Stop movement during attack
+
+        yield return new WaitForSeconds(1.5f); // Adjust based on attack animation time
+
+        // OPTIONAL: Check if Blu is still nearby before resuming chase
+        if (Vector3.Distance(transform.position, player.position) <= attackRange)
+        {
+            // Apply damage logic here
+            Debug.Log("Golem attacks Blu!");
+        }
+
+        navAgent.isStopped = false; // Resume movement
+        StartCoroutine(ChasePlayer()); // Continue chasing if Blu is still in range
+    }
+
+
+
 }
