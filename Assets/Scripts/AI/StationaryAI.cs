@@ -5,7 +5,7 @@ public class StationaryAI : MonoBehaviour
     protected FieldOfView FOV;
 
     public CurrentState currentState;
-    public bool playerSeen; // public for testing purposes, change to private when implementation finished
+    [SerializeField] private bool playerSeen;
     public float rotateSpeed = 0.1f;
 
     [SerializeField] protected Transform target;

@@ -4,26 +4,34 @@ using UnityEngine.AI;
 
 public class GuardianBehaviour : MonoBehaviour
 {
+
+    protected FieldOfView FOV;
+
+    [SerializeField] private bool playerSeen;
+
     public Transform[] patrolPoints;
     private int currentPatrolIndex = 0;
     public float patrolSpeed = 2f;
     public float chaseSpeed = 5f;
-    public float detectionRange = 5f;
+    //public float detectionRange = 5f;
     private bool isChasing = false;
     public Transform player;
     public Animator animator;
-    private NavMeshAgent agent;
+    private NavMeshAgent navAgent;
 
     void Start()
     {
         animator = GetComponentInChildren<Animator>(); // Finds Animator in child objects
-        agent = GetComponent<NavMeshAgent>();
-        agent.speed = patrolSpeed;
+        navAgent = GetComponent<NavMeshAgent>();
+        navAgent.speed = patrolSpeed;
+        FOV = GetComponent<FieldOfView>();
+
         StartCoroutine(Patrol());
     }
 
     void Update()
     {
+        playerSeen = FOV.canSeePlayer;
         if (!isChasing)
         {
             DetectPlayer();
@@ -35,9 +43,9 @@ public class GuardianBehaviour : MonoBehaviour
         while (!isChasing)
         {
             Transform targetPoint = patrolPoints[currentPatrolIndex];
-            agent.SetDestination(targetPoint.position);
+            navAgent.SetDestination(targetPoint.position);
 
-            while (agent.remainingDistance > agent.stoppingDistance)
+            while (navAgent.remainingDistance > navAgent.stoppingDistance)
             {
                 yield return null;
             }
@@ -49,7 +57,7 @@ public class GuardianBehaviour : MonoBehaviour
 
     private void DetectPlayer()
     {
-        if (Vector3.Distance(transform.position, player.position) < detectionRange)
+        if (playerSeen)
         {
             StartCoroutine(AlertAndChase());
         }
@@ -60,7 +68,7 @@ public class GuardianBehaviour : MonoBehaviour
         isChasing = true;
         animator.SetTrigger("Alert");
         yield return new WaitForSeconds(1f); // Alert animation time
-        agent.speed = chaseSpeed;
+        navAgent.speed = chaseSpeed;
         StartCoroutine(ChasePlayer());
     }
 
@@ -68,7 +76,7 @@ public class GuardianBehaviour : MonoBehaviour
     {
         while (Vector3.Distance(transform.position, player.position) > 1f)
         {
-            agent.SetDestination(player.position);
+            navAgent.SetDestination(player.position);
             yield return null;
         }
     }
