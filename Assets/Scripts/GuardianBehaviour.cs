@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 using static UnityEngine.GraphicsBuffer;
 
 public class GuardianBehaviour : MonoBehaviour
@@ -20,7 +21,13 @@ public class GuardianBehaviour : MonoBehaviour
     public Transform player;
     public Animator animator;
     private NavMeshAgent navAgent;
+    
     public GameObject stompEffectPrefab;
+
+    public float stompEffectTime = 0;
+    public float stompEffectThreshold = 1.0f;
+    public Transform stompSpawnPoint;
+
     public float stompRadius = 3f;
     public int stompDamage = 10;
 
@@ -30,6 +37,7 @@ public class GuardianBehaviour : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
         navAgent.speed = patrolSpeed;
         FOV = GetComponent<FieldOfView>();
+
 
         StartCoroutine(Patrol());
     }
@@ -170,16 +178,27 @@ public class GuardianBehaviour : MonoBehaviour
 
     private IEnumerator AttackPlayer()
     {
+
+        
+
         animator.SetTrigger("Attack"); // Play attack animation
         navAgent.isStopped = true; // Stop movement during attack
 
-        yield return new WaitForSeconds(1.25f); // Attack animation time
+        yield return new WaitForSeconds(0.51f); // Attack animation time
 
         // Spawn stomp effect
         if (stompEffectPrefab != null)
         {
-            Instantiate(stompEffectPrefab, transform.position, Quaternion.identity); //need to do this too
+            stompEffectTime = 0;
+            //stompEffect.Play();
+
+            Vector3 stompVFXSpawn = new Vector3(stompSpawnPoint.position.x, 0f, stompSpawnPoint.position.z);
+
+            Instantiate(stompEffectPrefab, stompVFXSpawn, stompSpawnPoint.rotation);
+            //yield return new WaitForSeconds(0.49f);
+            //stompEffect.Stop();
         }
+
 
         // Damage nearby objects
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, stompRadius);
@@ -191,7 +210,7 @@ public class GuardianBehaviour : MonoBehaviour
                 // TODO: Apply damage to Blu's health system
             }
         }
-
+        yield return new WaitForSeconds(0.49f);
         navAgent.isStopped = false; // Resume movement
         StartCoroutine(ChasePlayer()); // Continue chasing if Blu is still in range
     }
