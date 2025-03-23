@@ -31,6 +31,8 @@ public class GuardianBehaviour : MonoBehaviour
     public float stompRadius = 3f;
     public int stompDamage = 10;
 
+    public KnockbackEffect knockback;
+
     void Start()
     {
         animator = GetComponentInChildren<Animator>(); // Finds Animator in child objects
@@ -208,6 +210,14 @@ public class GuardianBehaviour : MonoBehaviour
             {
                 Debug.Log("Guardian stomped Blu for " + stompDamage + " damage!");
                 // TODO: Apply damage to Blu's health system
+
+                HealthManager healthMan = hit.gameObject.GetComponent<HealthManager>(); // damage player
+                healthMan.Damage();
+                knockback.ApplyKnockback(hit.gameObject.GetComponent<CharacterController>(), transform.forward);
+
+
+
+
             }
         }
         yield return new WaitForSeconds(0.49f);
