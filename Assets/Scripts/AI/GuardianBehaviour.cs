@@ -23,6 +23,7 @@ public class GuardianBehaviour : MonoBehaviour
     private NavMeshAgent navAgent;
     
     public GameObject stompEffectPrefab;
+    public GameObject sparksEffectPrefab;
 
     public float stompEffectTime = 0;
     public float stompEffectThreshold = 1.0f;
@@ -197,6 +198,7 @@ public class GuardianBehaviour : MonoBehaviour
             Vector3 stompVFXSpawn = new Vector3(stompSpawnPoint.position.x, 0f, stompSpawnPoint.position.z);
 
             Instantiate(stompEffectPrefab, stompVFXSpawn, stompSpawnPoint.rotation);
+            Instantiate(sparksEffectPrefab, stompVFXSpawn, stompSpawnPoint.rotation);
             //yield return new WaitForSeconds(0.49f);
             //stompEffect.Stop();
         }

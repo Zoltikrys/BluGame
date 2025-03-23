@@ -4,26 +4,26 @@ using UnityEngine.VFX;
 public class DespawnScript : MonoBehaviour
 {
 
-    public float stompEffectTime = 0;
-    public float stompEffectThreshold = 0.5f;
-    public VisualEffect stompEffect;
+    public float vfxTime = 0;
+    public float vfxThreshold = 0.5f;
+    public VisualEffect vfxEffect;
     // Start is called before the first frame update
     void Start()
     {
-        stompEffect.Play();
+        vfxEffect.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (stompEffectTime >= stompEffectThreshold)
+        if (vfxTime >= vfxThreshold)
         {
-            stompEffect.Stop();
+            vfxEffect.Stop();
             Destroy(gameObject, 2f);
         }
         else
         {
-            stompEffectTime += Time.deltaTime;
+            vfxTime += Time.deltaTime;
         }
     }
 }
