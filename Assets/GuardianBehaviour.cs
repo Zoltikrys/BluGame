@@ -13,7 +13,6 @@ public class GuardianBehaviour : MonoBehaviour
     private int currentPatrolIndex = 0;
     public float patrolSpeed = 2f;
     public float chaseSpeed = 5f;
-    //public float detectionRange = 5f;
     private bool isChasing = false;
     public float lostThreshold = 3f; // Time before giving up chase
 
@@ -51,10 +50,10 @@ public class GuardianBehaviour : MonoBehaviour
             // Set walking animation to true as soon as patrol starts
             animator.SetBool("isWalking", true);
 
-            // Wait until the Golem reaches the patrol point
+            // Wait until the Guardian reaches the patrol point
             while (Vector3.Distance(transform.position, targetPoint.position) > navAgent.stoppingDistance)
             {
-                // If the Golem is still moving towards the patrol point, keep walking
+                // If the Guardian is still moving towards the patrol point, keep walking
                 animator.SetBool("isWalking", true);
                 yield return null;
             }
@@ -80,10 +79,11 @@ public class GuardianBehaviour : MonoBehaviour
     private IEnumerator AlertAndChase()
     {
         isChasing = true;
-        navAgent.speed = 0;
+        navAgent.isStopped = true; // Stop movement during animation
         animator.SetTrigger("Alert");
-        yield return new WaitForSeconds(1f); // Alert animation time (placeholder)
+        yield return new WaitForSeconds(1.16f); // Alert animation time
         navAgent.speed = chaseSpeed;
+        navAgent.isStopped = false; // Resume movement
         animator.SetBool("isRunning", true);
         StartCoroutine(ChasePlayer());
     }
@@ -92,7 +92,6 @@ public class GuardianBehaviour : MonoBehaviour
     {
         float attackDistance = 1.5f; // Adjust based on model size
         float lostPlayerTime = 0f;
-        //float lostThreshold = 3f; // Time before giving up chase
 
         while (Vector3.Distance(transform.position, player.position) > attackDistance)
         {
@@ -183,7 +182,4 @@ public class GuardianBehaviour : MonoBehaviour
         navAgent.isStopped = false; // Resume movement
         StartCoroutine(ChasePlayer()); // Continue chasing if Blu is still in range
     }
-
-
-
 }
