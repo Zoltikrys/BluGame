@@ -20,6 +20,9 @@ public class GuardianBehaviour : MonoBehaviour
     public Transform player;
     public Animator animator;
     private NavMeshAgent navAgent;
+    public GameObject stompEffectPrefab;
+    public float stompRadius = 3f;
+    public int stompDamage = 10;
 
     void Start()
     {
@@ -170,13 +173,23 @@ public class GuardianBehaviour : MonoBehaviour
         animator.SetTrigger("Attack"); // Play attack animation
         navAgent.isStopped = true; // Stop movement during attack
 
-        yield return new WaitForSeconds(1.25f); // Adjust based on attack animation time
+        yield return new WaitForSeconds(1.25f); // Attack animation time
 
-        // OPTIONAL: Check if Blu is still nearby before resuming chase
-        if (Vector3.Distance(transform.position, player.position) <= attackRange)
+        // Spawn stomp effect
+        if (stompEffectPrefab != null)
         {
-            // Apply damage logic here
-            Debug.Log("Guardian attacks Blu!");
+            Instantiate(stompEffectPrefab, transform.position, Quaternion.identity); //need to do this too
+        }
+
+        // Damage nearby objects
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, stompRadius);
+        foreach (Collider hit in hitColliders)
+        {
+            if (hit.CompareTag("Player"))
+            {
+                Debug.Log("Guardian stomped Blu for " + stompDamage + " damage!");
+                // TODO: Apply damage to Blu's health system
+            }
         }
 
         navAgent.isStopped = false; // Resume movement
