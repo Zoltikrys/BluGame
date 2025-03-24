@@ -512,6 +512,7 @@ Transform:
   m_Children:
   - {fileID: 2116197395}
   - {fileID: 982617696}
+  - {fileID: 1546995170}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &990256188
@@ -526,6 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c4d0b7c9bc86824f999171b8e6afa1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FOV: {fileID: 0}
   playerSeen: 0
   patrolPoints:
   - {fileID: 1451209144}
@@ -542,6 +544,7 @@ MonoBehaviour:
   stompEffectTime: 0
   stompEffectThreshold: 0.5
   stompSpawnPoint: {fileID: 982617696}
+  stompKnockbackPoint: {fileID: 1546995170}
   stompRadius: 3
   stompDamage: 10
   knockback: {fileID: 990256192}
@@ -622,7 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a443169c157854d9de7677cd66d992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 0
+  strength: 4
   duration: 1
 --- !u!1 &1104966143
 GameObject:
@@ -791,6 +794,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1546995169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1546995170}
+  m_Layer: 0
+  m_Name: StompKnockbackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1546995170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546995169}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 990256187}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1651170857
 GameObject:

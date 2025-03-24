@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class GuardianBehaviour : MonoBehaviour
 {
-    protected FieldOfView FOV;
+    [SerializeField] protected FieldOfView FOV;
 
     [SerializeField] private bool playerSeen;
 
@@ -28,6 +28,7 @@ public class GuardianBehaviour : MonoBehaviour
     public float stompEffectTime = 0;
     public float stompEffectThreshold = 1.0f;
     public Transform stompSpawnPoint;
+    public Transform stompKnockbackPoint;
 
     public float stompRadius = 3f;
     public int stompDamage = 10;
@@ -40,7 +41,6 @@ public class GuardianBehaviour : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
         navAgent.speed = patrolSpeed;
         FOV = GetComponent<FieldOfView>();
-
 
         StartCoroutine(Patrol());
     }
@@ -133,7 +133,6 @@ public class GuardianBehaviour : MonoBehaviour
             navAgent.SetDestination(player.position);
             yield return null;
         }
-
         StartCoroutine(AttackPlayer()); // Transition to attack state
     }
 
@@ -181,9 +180,6 @@ public class GuardianBehaviour : MonoBehaviour
 
     private IEnumerator AttackPlayer()
     {
-
-        
-
         animator.SetTrigger("Attack"); // Play attack animation
         navAgent.isStopped = true; // Stop movement during attack
 
@@ -193,33 +189,26 @@ public class GuardianBehaviour : MonoBehaviour
         if (stompEffectPrefab != null)
         {
             stompEffectTime = 0;
-            //stompEffect.Play();
 
             Vector3 stompVFXSpawn = new Vector3(stompSpawnPoint.position.x, 0f, stompSpawnPoint.position.z);
 
             Instantiate(stompEffectPrefab, stompVFXSpawn, stompSpawnPoint.rotation);
             Instantiate(sparksEffectPrefab, stompVFXSpawn, stompSpawnPoint.rotation);
-            //yield return new WaitForSeconds(0.49f);
-            //stompEffect.Stop();
         }
 
-
-        // Damage nearby objects
+        // Damage player
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, stompRadius);
         foreach (Collider hit in hitColliders)
         {
             if (hit.CompareTag("Player"))
             {
                 Debug.Log("Guardian stomped Blu for " + stompDamage + " damage!");
-                // TODO: Apply damage to Blu's health system
+
+                Vector3 stompOrigin = new Vector3(stompKnockbackPoint.position.x, 0f, stompKnockbackPoint.position.z);
 
                 HealthManager healthMan = hit.gameObject.GetComponent<HealthManager>(); // damage player
                 healthMan.Damage();
-                knockback.ApplyKnockback(hit.gameObject.GetComponent<CharacterController>(), transform.forward);
-
-
-
-
+                knockback.ApplyRadialKnockback(hit.gameObject.GetComponent<CharacterController>(), stompOrigin);
             }
         }
         yield return new WaitForSeconds(0.49f);

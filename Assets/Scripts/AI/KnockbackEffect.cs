@@ -27,6 +27,18 @@ public class KnockbackEffect : MonoBehaviour
         StartCoroutine(PerformKnockback(targetRigidbody, knockbackDirection));
     }
 
+    public void ApplyRadialKnockback(CharacterController targetController, Vector3 stompOrigin)
+    {
+        if (targetController == null) return;
+        if (targetController.GetComponent<HealthManager>().b_Health < 1) return;
+
+        // Calculate knockback direction outward from the stomp center
+        Vector3 knockbackDirection = (targetController.transform.position - stompOrigin).normalized;
+
+        StartCoroutine(PerformKnockback(targetController, knockbackDirection));
+    }
+
+
     private IEnumerator PerformKnockback(CharacterController targetController, Vector3 knockbackDirection)
     {
         float elapsedTime = 0f;
