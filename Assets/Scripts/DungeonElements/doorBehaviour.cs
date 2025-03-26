@@ -31,10 +31,7 @@ public class doorBehaviour : MonoBehaviour
         if(!IsTracked(trackedValues.UniqueID)){
             triggeredElements.Add(trackedValues.UniqueID);
             currentDoorStatus = triggeredElements.Count;
-            if (currentDoorStatus >= doorStatusToOpen && !doorOpenFlag) {
-                OpenDoor();
-            }
-
+            TestDoor();
         }
     }
        
@@ -43,10 +40,26 @@ public class doorBehaviour : MonoBehaviour
         if(IsTracked(trackedValues.UniqueID)){
             triggeredElements.Remove(trackedValues.UniqueID);
             currentDoorStatus = triggeredElements.Count;
-            if (currentDoorStatus < doorStatusToOpen && doorOpenFlag) {
-                CloseDoor();
-            }
+            TestDoor();
+        }
+    }
 
+    public void IncreaseDoorStatus()
+    {
+        currentDoorStatus += 1;
+        TestDoor();
+    }
+    public void DecreaseDoorStatus(){
+        currentDoorStatus -= 1;
+        TestDoor();
+    }
+
+    private void TestDoor(){
+        if (currentDoorStatus < doorStatusToOpen && doorOpenFlag) {
+                CloseDoor();
+        }
+        if (currentDoorStatus >= doorStatusToOpen && !doorOpenFlag) {
+                OpenDoor();
         }
     }
 

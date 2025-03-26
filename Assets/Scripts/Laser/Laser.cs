@@ -54,6 +54,16 @@ public class Laser : MonoBehaviour
                             health.Damage(damageValue);
                         }
                     }
+/*<<<<<<< Updated upstream
+=======
+
+                    DungeonElement dungeonElement;
+                    if(gameObject.TryGetComponent<DungeonElement>(out dungeonElement)){
+                        if(dungeonElement.type == DungeonElementType.LASER_INPUT){
+                        }
+                    }
+
+>>>>>>> Stashed changes*/
                     
                     if(BlockOnCollision) {
                         float distanceToCollision = Vector3.Distance(ray.origin, collidedObjects[i].point);

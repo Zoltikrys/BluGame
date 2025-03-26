@@ -37,6 +37,7 @@ public class NPCDialogue : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         Debug.Log("In interact zone");
+        player.GetComponent<PlayerLocomotionInput>().npc = gameObject;
         if (other.tag == ("Player")) {
             canInteract = true;
         }

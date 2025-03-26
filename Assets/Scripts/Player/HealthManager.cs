@@ -87,7 +87,7 @@ public class HealthManager : MonoBehaviour
             return;
         }
 
-        SoundFXManager.instance.PlayRandomSoundFXClip(damageSoundClips, transform, 1f);
+        //SoundFXManager.instance.PlayRandomSoundFXClip(damageSoundClips, transform, 1f);
 
         m_DamageCooldown = cooldownTime;
         b_Health -= damageValue;

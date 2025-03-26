@@ -16,6 +16,7 @@ public class ToggleSteam : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         canIntereact = true;
+        player.GetComponent<PlayerLocomotionInput>().steam = gameObject;
     }
 
     private void OnTriggerExit(Collider other) {

@@ -73,7 +73,7 @@ public class MagnetAbility : MonoBehaviour
         if (!isMagnetActive) {
             if (GetComponent<Battery>().AttemptAddBatteryEffects(MagnetBatteryCost, true)) {
                 isMagnetActive = true;
-                magnetFront.color = Color.white;
+                magnetFront.color = Color.white;                                                          /////////////////////////////
                 animator.SetBool("Magnet?", true);
                 //magnetVibes.SetActive(true);
             }
@@ -81,7 +81,7 @@ public class MagnetAbility : MonoBehaviour
         else {
             isMagnetActive = false;
             isMagnetized = false;
-            magnetFront.color = Color.clear;
+            magnetFront.color = Color.clear;                                                            ////////////////////////////
             GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
             animator.SetBool("Magnet?", false);
             //magnetVibes.SetActive(false);
@@ -237,7 +237,7 @@ public class MagnetAbility : MonoBehaviour
         isMagnetized = false;
         isMagnetActive = false;
         smallMagnetTargetMagnetised = false;
-        magnetFront.color = Color.clear;
+        magnetFront.color = Color.clear;                                                                            ////////////////////////////
         GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
         animator.SetBool("Magnet?", false);
         //magnetVibes.SetActive(false);
