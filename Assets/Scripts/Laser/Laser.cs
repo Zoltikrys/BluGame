@@ -54,7 +54,7 @@ public class Laser : MonoBehaviour
                             health.Damage(damageValue);
                         }
                     }
-<<<<<<< Updated upstream
+/*<<<<<<< Updated upstream
 =======
 
                     DungeonElement dungeonElement;
@@ -63,7 +63,7 @@ public class Laser : MonoBehaviour
                         }
                     }
 
->>>>>>> Stashed changes
+>>>>>>> Stashed changes*/
                     
                     if(BlockOnCollision) {
                         float distanceToCollision = Vector3.Distance(ray.origin, collidedObjects[i].point);
