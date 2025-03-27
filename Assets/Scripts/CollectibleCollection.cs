@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ColectibleCollection : MonoBehaviour
+public class CollectibleCollection : MonoBehaviour
 {
     private int Nuts = 0;
 
@@ -19,4 +17,16 @@ public class ColectibleCollection : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    public bool TrySpendParts(int amount)
+    {
+        if (Nuts >= amount)
+        {
+            Nuts -= amount;
+            collectibleText.text = "Spare Parts: " + Nuts.ToString();
+            return true;
+        }
+        return false;
+    }
+
 }
