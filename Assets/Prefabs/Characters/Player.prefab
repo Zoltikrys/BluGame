@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1739906687256751477}
   - component: {fileID: -3647002279214618310}
   - component: {fileID: 645921805136267893}
+  - component: {fileID: 7095104850097837077}
   - component: {fileID: 6875722939435530671}
   m_Layer: 7
   m_Name: Player
@@ -80,7 +81,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 107750649550718847}
   isMagnetized: 0
+  canMove: 1
   animator: {fileID: 0}
+  pushPower: 2
   playerSpeed: 4
   rotationSpeed: 6
   jumpHeight: 1
@@ -97,6 +100,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ecbd5040c7e394bbb811a42f2b62ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInNPCTrigger: 0
+  isInSteamTrigger: 0
+  isInRobotTrigger: 0
+  npc: {fileID: 0}
+  steam: {fileID: 0}
+  robotArm: {fileID: 0}
 --- !u!114 &3395225010870587025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +121,7 @@ MonoBehaviour:
   smallMagnetTag: SmallMagnet
   smallMagnetPullSpeed: 10
   smallMagnetStopDistance: 1.5
+  smallMagnetShootForce: 20
   bigMagnetTag: BigMagnet
   bigMagnetPullSpeed: 7
   bigMagnetRange: 20
@@ -298,6 +308,19 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   batteryFill: {fileID: 0}
+--- !u!114 &7095104850097837077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464935671355033948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1073e78db6c482d479cc6b30f20b8e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectibleText: {fileID: 0}
 --- !u!54 &6875722939435530671
 Rigidbody:
   m_ObjectHideFlags: 0

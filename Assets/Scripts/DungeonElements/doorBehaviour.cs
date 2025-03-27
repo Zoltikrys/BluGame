@@ -80,7 +80,7 @@ public class doorBehaviour : MonoBehaviour
         return triggeredElements.Contains(id);
     }
 
-    private void OpenDoor()
+    public void OpenDoor()
     {
         animator.SetBool("DoorOpen", true);
         Debug.Log($"{name} door opened");
