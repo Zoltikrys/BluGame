@@ -1151,8 +1151,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3696161809180337667, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1262182155}
   m_SourcePrefab: {fileID: 100100000, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+--- !u!1 &167897581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3696161809180337667, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
+  m_PrefabInstance: {fileID: 167897580}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &230282000
 Mesh:
   m_ObjectHideFlags: 0
@@ -11923,6 +11931,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1914305567752810346, guid: 622be046b9c3d584f9931a9ff72dc4fc, type: 3}
   m_PrefabInstance: {fileID: 167897580}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1262182155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167897581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000af5f2891cbdd44946033a9a7077db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <FilterLayer>k__BackingField: 1
+  CollisionWhenHidden: 0
+  ActiveOnColour: 1
+  FadeInStyle:
+    Style: 1
+    FadeDuration: 1
+    StartDelay: 0
+    CollisionThresholdPercentage: 0.9
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
+  FadeOutStyle:
+    Style: 1
+    FadeDuration: 1
+    StartDelay: 0
+    CollisionThresholdPercentage: 0.1
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
+  IsDisplayed: 0
+  Filterable: 1
 --- !u!1 &1266061801
 GameObject:
   m_ObjectHideFlags: 0
