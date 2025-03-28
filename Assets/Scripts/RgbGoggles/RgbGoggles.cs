@@ -22,11 +22,9 @@ public class RgbGoggles : MonoBehaviour
     [field: SerializeField] public List<BatteryEffect> RgbGoggleCosts = new List<BatteryEffect>();
 
     private ColorFlags prevColorFlagState;
-    private bool GogglesOn = false;
+    public bool GogglesOn = false;
     private int rgbNum = (int)RGBSTATE.R;
     public GameObject gogglesObject;
-
-    bool wasKeyPressed = false;
 
     void Start(){
         colorFlags.r = false;
@@ -38,6 +36,15 @@ public class RgbGoggles : MonoBehaviour
         gogglesObject = GameObject.Find("Goggles");
         if (!GogglesActivated && gogglesObject) {
             gogglesObject.SetActive(false);
+        }
+
+        if(colorFilter == null) {
+            var canvasLayer = GameObject.FindGameObjectWithTag("UI_FILTER");
+            if(canvasLayer != null) canvasLayer.TryGetComponent<Image>(out colorFilter);
+        }
+        if (colorFilterScanlines == null){
+            var canvasScanlines = GameObject.FindGameObjectWithTag("UI_FILTERSCANLINES");
+            if (canvasScanlines != null) canvasScanlines.TryGetComponent<Image>(out colorFilterScanlines);
         }
     }
 
@@ -51,29 +58,6 @@ public class RgbGoggles : MonoBehaviour
         gogglesObject.SetActive(false);
     }
 
-    void Update()
-    {
-        if(colorFilter == null) {
-            var canvasLayer = GameObject.FindGameObjectWithTag("UI_FILTER");
-            if(canvasLayer != null) canvasLayer.TryGetComponent<Image>(out colorFilter);
-        }
-        if (colorFilterScanlines == null){
-            var canvasScanlines = GameObject.FindGameObjectWithTag("UI_FILTERSCANLINES");
-            if (canvasScanlines != null) canvasScanlines.TryGetComponent<Image>(out colorFilterScanlines);
-        }
-        prevColorFlagState = colorFlags;
-
-        HandleKeypress();
-
-        if(colorFlags != prevColorFlagState){
-            if(GetComponent<Battery>().AttemptAddBatteryEffects(RgbGoggleCosts, true)){
-                UpdateGoggleState();
-                ProcessColorChange();
-                UpdateWorldObjects();
-            }
-        }
-    }
-
     private void UpdateWorldObjects()
     {
 
@@ -84,14 +68,13 @@ public class RgbGoggles : MonoBehaviour
         }
     }
 
-    public void GetFilterObjects()
+    private void GetFilterObjects()
     {
         FilterObjects.Clear();
         FilterObjects = GameObject.FindObjectsOfType<GameObject>().Where(obj => obj.layer == LayerMask.NameToLayer("RGB_FilterObjects")).ToList<GameObject>();
     }
 
-    public void SetFilterObjects(){
-        Debug.Log("setting filter objects");
+    private void SetFilterObjects(){
         foreach(GameObject filterObject in FilterObjects){
             RgbFilterObject obj = filterObject.GetComponent<RgbFilterObject>();
             if(obj != null){
@@ -115,48 +98,53 @@ public class RgbGoggles : MonoBehaviour
         colorFlags.r = false;
         colorFlags.g = false;
         colorFlags.b = false;
+        var oldState = CurrentGoggleState;
         CurrentGoggleState = RGBSTATE.ALL_OFF;
         GogglesOn = false;
-        ProcessColorChange(); 
+        SetWorld();
+        GetComponent<Battery>().RemoveBatteryEffects(RgbGoggleCosts);
+        CurrentGoggleState = oldState;
+        PrevGoggleState = oldState;
+        colorFlags = prevColorFlagState;
+    }
+
+    private void SetWorld(){
         UpdateGoggleState();
         UpdateWorldObjects();
-        GetComponent<Battery>().RemoveBatteryEffects(RgbGoggleCosts);
+        ProcessColorChange();
     }
 
-    bool HandleKeypress(){
-        if(!GogglesActivated) return wasKeyPressed;
-        UpdateColorFlags((RGBSTATE) rgbNum);
-        return wasKeyPressed;
-    }
 
     public void GoggleToggle() {
+        if(!GogglesActivated) return;
         GogglesOn = !GogglesOn;
-        wasKeyPressed = true;
-        if (!GogglesOn) { rgbNum = 0; TurnGogglesOff(); }
+        if (!GogglesOn) { TurnGogglesOff();}
         else {
-            prevColorFlagState.r = false;
-            prevColorFlagState.b = false;
-            prevColorFlagState.g = false;
-            rgbNum = 2;
+            if(GetComponent<Battery>().AttemptAddBatteryEffects(RgbGoggleCosts, true)){
+                UpdateColorFlags((RGBSTATE)rgbNum);
+                SetWorld();
+            }
         }
 
     }
 
     public void GoggleSwitchLeft() {
-        if (GogglesOn) {
+        if (GogglesOn && GogglesActivated) {
             rgbNum <<= 1;
             if (rgbNum > (int)RGBSTATE.B) rgbNum = (int)RGBSTATE.R;
-            wasKeyPressed = true;
-            Debug.Log($"RGB UP: {rgbNum}");
+            
+            UpdateColorFlags((RGBSTATE)rgbNum);
+            SetWorld();
         }
     }
 
     public void GoggleSwitchRight() {
-        if (GogglesOn) {
+        if (GogglesOn && GogglesActivated) {
             rgbNum >>= 1;
             if (rgbNum < 1) rgbNum = (int)RGBSTATE.B;
-            wasKeyPressed = true;
-            Debug.Log($"RGB DOWN: {rgbNum}");
+
+            UpdateColorFlags((RGBSTATE)rgbNum);
+            SetWorld();
         }
     }
 

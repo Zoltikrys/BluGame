@@ -35,6 +35,7 @@ Transform:
   m_Children:
   - {fileID: 2159166977786136660}
   - {fileID: 3162215491496001007}
+  - {fileID: 1667405354698266707}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &257588154855813014
@@ -127,8 +128,87 @@ MonoBehaviour:
   <Radius>k__BackingField: 5
   <Active>k__BackingField: 1
   <Linked>k__BackingField: 0
-  <TurnOnParticle>k__BackingField: {fileID: 7871548688023654304, guid: 6cbb553268fd6c440b960b9c0ee572f2, type: 3}
-  <ParticlePrefab>k__BackingField: {fileID: 7134224003727553779, guid: 01771615caf3d0e4197ba0dbf85d2b87, type: 3}
+  <TurnOnParticle>k__BackingField: {fileID: 0}
+  <ParticlePrefab>k__BackingField: {fileID: 0}
+--- !u!1001 &1200606398503894968
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6934057889649661415}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.93
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+      propertyPath: m_Name
+      value: TeslaCoil
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 8656759880742986495, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+--- !u!4 &1667405354698266707 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3462085f16bc8ab49985f41290329d02, type: 3}
+  m_PrefabInstance: {fileID: 1200606398503894968}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6645910591460888946
 PrefabInstance:
   m_ObjectHideFlags: 0
