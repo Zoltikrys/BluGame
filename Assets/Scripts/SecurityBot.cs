@@ -12,6 +12,8 @@ public class SecurityBot : MonoBehaviour
 
     public GameObject activeCollision;
     public GameObject hiddenCollision;
+    public GameObject vent;
+    [SerializeField] private Transform ventPos;
 
     public Animator animator;
 
@@ -31,7 +33,10 @@ public class SecurityBot : MonoBehaviour
     void Start()
     {
         animator = GetComponentInChildren<Animator>(); // Finds Animator in child objects
-        //animator.SetBool("isFiring", false);
+
+        activeCollision.SetActive(true);
+        hiddenCollision.SetActive(false);
+        ventPos.transform.position = new Vector3(ventPos.transform.position.x, vent.transform.position.y, ventPos.transform.position.z);
     }
 
     private void Update()
@@ -50,24 +55,20 @@ public class SecurityBot : MonoBehaviour
                 {
                     StartCoroutine(FireSingle());
                 }
-
                 shootTimer = 0;
             }
         }
 
-        if (transform.childCount == 5) // Minimum should be 4 as there should be at least the vent location, main body mesh and bullet spawn point, may increase later with updates to code
+        if (transform.childCount == 6) // Minimum should be 6 (childCount - 3)
         {
             isVulnerable = true;
             Debug.Log("Hiding in vent");
             animator.SetTrigger("Hiding");
-            //transform.position = floorVent.transform.position;
-            //gameObject.SetActive(false);
-
         }
 
         if (isVulnerable)
         {
-            if (gameObject.transform.position.y >= 0.85f)
+            if (gameObject.transform.position.y >= ventPos.transform.position.y)
             {
                 if (!deathWait)
                 {
@@ -80,11 +81,13 @@ public class SecurityBot : MonoBehaviour
                     float zPos = gameObject.transform.position.z;
                     gameObject.transform.position = new Vector3(xPos, yPos, zPos);
                 }
-
             }
-
-            //gameObject.transform.position.y = 0;
-            //gameObject.transform.position.y = 0f;
+            else
+            {
+                activeCollision.SetActive(false);
+                hiddenCollision.SetActive(true);
+            }
+            
         }
     }
 
@@ -93,9 +96,6 @@ public class SecurityBot : MonoBehaviour
         Debug.Log("Firing Bullet Hell Attack!");
         float angleStep = 360f / bulletCount;
         float angle = 0f;
-
-        // Fixed distance away from the spawn point
-        
 
         for (int i = 0; i < bulletCount; i++)
         {
