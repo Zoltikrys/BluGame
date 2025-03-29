@@ -5,6 +5,8 @@ public class SecurityBot : MonoBehaviour
     public enum AttackType { Multi, Single }
     public AttackType attackMode = AttackType.Multi;
 
+    [SerializeField] private float spawnOffset = 1.8f; // Distance from center the bullet spawns
+
     public GameObject floorVent;
 
     public float shootInterval = 2f;
@@ -17,7 +19,6 @@ public class SecurityBot : MonoBehaviour
     public Transform multiSpawnPoint;
     public int bulletCount = 8;
     public float bulletSpeed = 5f;
-    //public GameObject laserPrefab;
     public Transform singleSpawnPoint;
 
     void Start()
@@ -46,7 +47,7 @@ public class SecurityBot : MonoBehaviour
             }
         }
 
-        if (transform.childCount == 3) // Minimum should be 3 as there should be at least the vent location, main body mesh and bullet spawn point, may increase later with updates to code
+        if (transform.childCount == 4) // Minimum should be 4 as there should be at least the vent location, main body mesh and bullet spawn point, may increase later with updates to code
         {
             if (floorVent != null)
             {
@@ -63,13 +64,25 @@ public class SecurityBot : MonoBehaviour
         float angleStep = 360f / bulletCount;
         float angle = 0f;
 
+        // Fixed distance away from the spawn point
+        
+
         for (int i = 0; i < bulletCount; i++)
         {
+            // Calculate the spawn position based on the fixed distance and angle
+            float offsetX = Mathf.Cos(angle * Mathf.Deg2Rad) * spawnOffset;
+            float offsetZ = Mathf.Sin(angle * Mathf.Deg2Rad) * spawnOffset;
+
+            // The spawn position is offset from the center spawn point by the calculated offsets
+            Vector3 spawnPosition = multiSpawnPoint.position + new Vector3(offsetX, 0f, offsetZ);
+
+            // Calculate the direction for the bullet to move
             float bulletDirX = Mathf.Cos(angle * Mathf.Deg2Rad);
             float bulletDirZ = Mathf.Sin(angle * Mathf.Deg2Rad);
             Vector3 bulletMoveDirection = new Vector3(bulletDirX, 0f, bulletDirZ).normalized;
 
-            GameObject bullet = Instantiate(projectilePrefab, multiSpawnPoint.position, Quaternion.identity);
+            // Instantiate the bullet at the calculated spawn position
+            GameObject bullet = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             if (bulletRb != null)
             {
@@ -78,6 +91,8 @@ public class SecurityBot : MonoBehaviour
             angle += angleStep;
         }
     }
+
+
 
     private void FireSingle()
     {
@@ -91,6 +106,5 @@ public class SecurityBot : MonoBehaviour
         {
             bulletRb.velocity = bulletMoveDirection * bulletSpeed;
         }
-       //bullet.transform.forward = transform.forward;
     }
 }
