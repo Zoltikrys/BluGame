@@ -8,15 +8,19 @@ public class SecurityBot : MonoBehaviour
 
     [SerializeField] private float spawnOffset = 1.8f; // Distance from center the bullet spawns
 
-    public GameObject floorVent;
+    //public GameObject floorVent;
+
+    public GameObject activeCollision;
+    public GameObject hiddenCollision;
 
     public Animator animator;
 
     public float shootInterval = 2f;
     private float shootTimer;
 
+    private bool deathWait = false;
+
     public bool isVulnerable = false;
-    public bool isHiding = false;
 
     public GameObject projectilePrefab;
     public Transform multiSpawnPoint;
@@ -51,16 +55,36 @@ public class SecurityBot : MonoBehaviour
             }
         }
 
-        if (transform.childCount == 4) // Minimum should be 4 as there should be at least the vent location, main body mesh and bullet spawn point, may increase later with updates to code
+        if (transform.childCount == 5) // Minimum should be 4 as there should be at least the vent location, main body mesh and bullet spawn point, may increase later with updates to code
         {
-            if (floorVent != null)
+            isVulnerable = true;
+            Debug.Log("Hiding in vent");
+            animator.SetTrigger("Hiding");
+            //transform.position = floorVent.transform.position;
+            //gameObject.SetActive(false);
+
+        }
+
+        if (isVulnerable)
+        {
+            if (gameObject.transform.position.y >= 0.85f)
             {
-                isVulnerable = true;
-                Debug.Log("Hiding in vent");
-                animator.SetTrigger("Hiding");
-                //transform.position = floorVent.transform.position;
-                //gameObject.SetActive(false);
+                if (!deathWait)
+                {
+                    StartCoroutine(HideOffsetFix());
+                }
+                else if (deathWait)
+                {
+                    float xPos = gameObject.transform.position.x;
+                    float yPos = gameObject.transform.position.y - 0.01f;
+                    float zPos = gameObject.transform.position.z;
+                    gameObject.transform.position = new Vector3(xPos, yPos, zPos);
+                }
+
             }
+
+            //gameObject.transform.position.y = 0;
+            //gameObject.transform.position.y = 0f;
         }
     }
 
@@ -113,5 +137,11 @@ public class SecurityBot : MonoBehaviour
         {
             bulletRb.velocity = bulletMoveDirection * bulletSpeed;
         }
+    }
+
+    private IEnumerator HideOffsetFix()
+    {
+        yield return new WaitForSeconds(1f); // Hide animation time
+        deathWait = true;
     }
 }
