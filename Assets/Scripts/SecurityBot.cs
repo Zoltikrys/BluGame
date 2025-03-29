@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class SecurityBot : MonoBehaviour
@@ -8,6 +9,8 @@ public class SecurityBot : MonoBehaviour
     [SerializeField] private float spawnOffset = 1.8f; // Distance from center the bullet spawns
 
     public GameObject floorVent;
+
+    public Animator animator;
 
     public float shootInterval = 2f;
     private float shootTimer;
@@ -23,7 +26,8 @@ public class SecurityBot : MonoBehaviour
 
     void Start()
     {
-
+        animator = GetComponentInChildren<Animator>(); // Finds Animator in child objects
+        //animator.SetBool("isFiring", false);
     }
 
     private void Update()
@@ -40,7 +44,7 @@ public class SecurityBot : MonoBehaviour
                 }
                 else if (attackMode == AttackType.Single)
                 {
-                    FireSingle();
+                    StartCoroutine(FireSingle());
                 }
 
                 shootTimer = 0;
@@ -51,9 +55,11 @@ public class SecurityBot : MonoBehaviour
         {
             if (floorVent != null)
             {
+                isVulnerable = true;
                 Debug.Log("Hiding in vent");
-                transform.position = floorVent.transform.position;
-                gameObject.SetActive(false);
+                animator.SetTrigger("Hiding");
+                //transform.position = floorVent.transform.position;
+                //gameObject.SetActive(false);
             }
         }
     }
@@ -92,10 +98,11 @@ public class SecurityBot : MonoBehaviour
         }
     }
 
-
-
-    private void FireSingle()
+    private IEnumerator FireSingle()
     {
+        Debug.Log("Firing Single Attack!");
+        animator.SetTrigger("Firing");
+        yield return new WaitForSeconds(1.01f); // Shoot animation time
         Debug.Log("Firing Laser Attack!");
         GameObject bullet = Instantiate(projectilePrefab, singleSpawnPoint.position, Quaternion.identity);
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
