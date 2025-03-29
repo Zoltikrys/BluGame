@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class ArmouredSecurityBot : MonoBehaviour
+public class SecurityBot : MonoBehaviour
 {
-    public enum AttackType { BulletHell, Laser }
-    public AttackType attackMode = AttackType.BulletHell;
+    public enum AttackType { Multi, Single }
+    public AttackType attackMode = AttackType.Multi;
 
     public GameObject floorVent;
 
@@ -13,12 +13,12 @@ public class ArmouredSecurityBot : MonoBehaviour
     public bool isVulnerable = false;
     public bool isHiding = false;
 
-    public GameObject bulletPrefab;
-    public Transform bulletSpawnPoint;
+    public GameObject projectilePrefab;
+    public Transform multiSpawnPoint;
     public int bulletCount = 8;
     public float bulletSpeed = 5f;
-    public GameObject laserPrefab;
-    public Transform laserSpawnPoint;
+    //public GameObject laserPrefab;
+    public Transform singleSpawnPoint;
 
     void Start()
     {
@@ -28,29 +28,23 @@ public class ArmouredSecurityBot : MonoBehaviour
     private void Update()
     {
         shootTimer += Time.deltaTime;
-        
-
 
         if (!isVulnerable)
         {
-
             if (shootTimer >= shootInterval)
             {
-                if (attackMode == AttackType.BulletHell)
+                if (attackMode == AttackType.Multi)
                 {
-                    FireBulletHell();
+                    FireMulti();
                 }
-                else if (attackMode == AttackType.Laser)
+                else if (attackMode == AttackType.Single)
                 {
-                    FireLaser();
+                    FireSingle();
                 }
 
                 shootTimer = 0;
             }
-            
         }
-
-
 
         if (transform.childCount == 3) // Minimum should be 3 as there should be at least the vent location, main body mesh and bullet spawn point, may increase later with updates to code
         {
@@ -63,8 +57,7 @@ public class ArmouredSecurityBot : MonoBehaviour
         }
     }
 
-
-    private void FireBulletHell()
+    private void FireMulti()
     {
         Debug.Log("Firing Bullet Hell Attack!");
         float angleStep = 360f / bulletCount;
@@ -76,21 +69,28 @@ public class ArmouredSecurityBot : MonoBehaviour
             float bulletDirZ = Mathf.Sin(angle * Mathf.Deg2Rad);
             Vector3 bulletMoveDirection = new Vector3(bulletDirX, 0f, bulletDirZ).normalized;
 
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            GameObject bullet = Instantiate(projectilePrefab, multiSpawnPoint.position, Quaternion.identity);
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             if (bulletRb != null)
             {
                 bulletRb.velocity = bulletMoveDirection * bulletSpeed;
             }
-
             angle += angleStep;
         }
     }
 
-    private void FireLaser()
+    private void FireSingle()
     {
         Debug.Log("Firing Laser Attack!");
-        GameObject laser = Instantiate(laserPrefab, laserSpawnPoint.position, Quaternion.identity);
-        laser.transform.forward = transform.forward;
+        GameObject bullet = Instantiate(projectilePrefab, singleSpawnPoint.position, Quaternion.identity);
+        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+
+        Vector3 bulletMoveDirection = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized;
+
+        if (bulletRb != null)
+        {
+            bulletRb.velocity = bulletMoveDirection * bulletSpeed;
+        }
+       //bullet.transform.forward = transform.forward;
     }
 }
