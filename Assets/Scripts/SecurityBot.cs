@@ -12,10 +12,20 @@ public class SecurityBot : MonoBehaviour
 
     public GameObject activeCollision;
     public GameObject hiddenCollision;
-    public GameObject vent;
+    //public GameObject vent;
     [SerializeField] private Transform ventPos;
 
     public Animator animator;
+
+    [SerializeField] private Animator MultiTurret1;
+    [SerializeField] private Animator MultiTurret2;
+    [SerializeField] private Animator MultiTurret3;
+    [SerializeField] private Animator MultiTurret4;
+    [SerializeField] private Animator MultiTurret5;
+    [SerializeField] private Animator MultiTurret6;
+    [SerializeField] private Animator MultiTurret7;
+    [SerializeField] private Animator MultiTurret8;
+
 
     public float shootInterval = 2f;
     private float shootTimer;
@@ -32,11 +42,11 @@ public class SecurityBot : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponentInChildren<Animator>(); // Finds Animator in child objects
+        //animator = GetComponentInChildren<Animator>(); // Finds Animator in child objects
 
         activeCollision.SetActive(true);
         hiddenCollision.SetActive(false);
-        ventPos.transform.position = new Vector3(ventPos.transform.position.x, vent.transform.position.y, ventPos.transform.position.z);
+        //ventPos.transform.position = new Vector3(ventPos.transform.position.x, vent.transform.position.y, ventPos.transform.position.z);
     }
 
     private void Update()
@@ -49,7 +59,7 @@ public class SecurityBot : MonoBehaviour
             {
                 if (attackMode == AttackType.Multi)
                 {
-                    FireMulti();
+                    StartCoroutine(FireMulti());
                 }
                 else if (attackMode == AttackType.Single)
                 {
@@ -91,8 +101,21 @@ public class SecurityBot : MonoBehaviour
         }
     }
 
-    private void FireMulti()
+    private IEnumerator FireMulti()
     {
+        animator.SetTrigger("Firing");
+        MultiTurret1.SetTrigger("Firing");
+        MultiTurret2.SetTrigger("Firing");
+        MultiTurret3.SetTrigger("Firing");
+        MultiTurret4.SetTrigger("Firing");
+        MultiTurret5.SetTrigger("Firing");
+        MultiTurret6.SetTrigger("Firing");
+        MultiTurret7.SetTrigger("Firing");
+        MultiTurret8.SetTrigger("Firing");
+
+
+        yield return new WaitForSeconds(1.01f); // Shoot animation time
+
         Debug.Log("Firing Bullet Hell Attack!");
         float angleStep = 360f / bulletCount;
         float angle = 0f;
