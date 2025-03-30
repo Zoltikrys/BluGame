@@ -13,7 +13,10 @@ public class SecurityBot : MonoBehaviour
     public GameObject activeCollision;
     public GameObject hiddenCollision;
     //public GameObject vent;
-    [SerializeField] private Transform ventPos;
+    //[SerializeField] private Transform ventPos;
+    [SerializeField] private float ventOffset;
+
+    //[SerializeField] private Transform vent;
 
     public Animator animator;
 
@@ -46,7 +49,9 @@ public class SecurityBot : MonoBehaviour
 
         activeCollision.SetActive(true);
         hiddenCollision.SetActive(false);
-        //ventPos.transform.position = new Vector3(ventPos.transform.position.x, vent.transform.position.y, ventPos.transform.position.z);
+        //ventPos.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 0.35f , gameObject.transform.position.z);
+        ventOffset = gameObject.transform.position.y - 0.35f;
+
     }
 
     private void Update()
@@ -69,7 +74,7 @@ public class SecurityBot : MonoBehaviour
             }
         }
 
-        if (transform.childCount == 6) // Minimum should be 6 (childCount - 3)
+        if (transform.childCount == 5) // Minimum should be 5 (childCount - 3)
         {
             isVulnerable = true;
             Debug.Log("Hiding in vent");
@@ -78,7 +83,7 @@ public class SecurityBot : MonoBehaviour
 
         if (isVulnerable)
         {
-            if (gameObject.transform.position.y >= ventPos.transform.position.y)
+            if (gameObject.transform.position.y >= ventOffset)
             {
                 if (!deathWait)
                 {
