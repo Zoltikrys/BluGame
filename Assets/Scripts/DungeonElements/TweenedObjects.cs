@@ -11,11 +11,10 @@ public class TweenedObject : MonoBehaviour{
     public float DelayBeforeStarting = 1.0f;
     public int tweenIndex = 0;
     public bool paused = false;
-
-    public bool ForwardsAndBackwards = false;
     private bool nextTweenRequested = false;
     private bool isDestinationHit = false;
     private bool forward = true;
+    private bool isTweening = false;
 
 
     void Start(){
@@ -28,10 +27,14 @@ public class TweenedObject : MonoBehaviour{
     }
 
     IEnumerator TweenToTarget(TweenDestination target){
+        if(isTweening) yield break;
+        isTweening = true;
         float elapsedTime = 0f;
 
         Vector3 startingPosition = transform.position;
-        Quaternion startingRotation = Quaternion.Normalize(transform.rotation);
+        Quaternion startingRotation = transform.rotation;
+
+        Debug.Log($"Tween started -- Start: {startingPosition} - Target: {target.PositionToHit}");
 
         while (elapsedTime < target.TimeToArrive)
         {
@@ -40,7 +43,7 @@ public class TweenedObject : MonoBehaviour{
                 elapsedTime += Time.deltaTime;
 
                 transform.position = Vector3.Lerp(startingPosition, target.PositionToHit, elapsedTime / target.TimeToArrive);
-                transform.rotation = Quaternion.Lerp(startingRotation, Quaternion.Normalize(target.RotationToHit), elapsedTime / target.TimeToArrive);
+                transform.rotation = Quaternion.Lerp(startingRotation, target.RotationToHit, elapsedTime / target.TimeToArrive);
             }
             yield return null;
         }
@@ -48,7 +51,11 @@ public class TweenedObject : MonoBehaviour{
         transform.position = target.PositionToHit;
         transform.rotation = target.RotationToHit;
 
+        prevPosition = target;
+        isDestinationHit = true;
+
         yield return new WaitForSeconds(target.WaitAtDestinationTime);
+        isTweening = false;
 }
 
     IEnumerator StartTweeningList(){
@@ -63,7 +70,7 @@ public class TweenedObject : MonoBehaviour{
 
             if(!isDestinationHit) yield return StartCoroutine(TweenToTarget(target));
 
-            prevPosition = target;
+
 
             if(triggerType == TweenTrigger.NONE) GoToNextTween();
             else if(triggerType == TweenTrigger.ONEVENT && nextTweenRequested){
