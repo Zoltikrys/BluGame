@@ -16,6 +16,10 @@ public class MagnetAbility : MonoBehaviour
     public float bigMagnetPullSpeed = 5f;       // Speed to pull player toward big magnets
     public float bigMagnetRange = 20f;          // Range for detecting big magnets
 
+    [Header("Armour Magnet Settings")]
+    public string armourMagnetTag = "MagneticArmour"; // Tag for security bot armour
+
+
     [Header("General Settings")]
     public float detectionRadius = 20f; // Radius for detecting magnets
     public float FrontConeAngle = 60f;
@@ -59,7 +63,7 @@ public class MagnetAbility : MonoBehaviour
     void Update()
     {
         // Toggle magnet ability
-        if(smallMagnetTargetMagnetised && smallMagnetTarget == null) TurnOffMagnet(); // fires when our gameobject is consumed or deleted out of the scene.
+        if (smallMagnetTargetMagnetised && smallMagnetTarget == null) TurnOffMagnet(); // fires when our gameobject is consumed or deleted out of the scene.
 
         if (isMagnetActive)
         {
@@ -128,19 +132,19 @@ public class MagnetAbility : MonoBehaviour
         if (smallMagnetTarget == null) // Look for a new small magnet if none is being targeted
         {
             Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, detectionRadius);
-
             float MinDistance = Mathf.Infinity;
 
             foreach (Collider obj in nearbyObjects)
             {
-                if (obj.CompareTag(smallMagnetTag))
+                if (obj.CompareTag(smallMagnetTag) || obj.CompareTag(armourMagnetTag)) // Include armour pieces
                 {
                     Vector3 toObject = (obj.transform.position - transform.position).normalized;
                     float angle = Vector3.Angle(transform.forward, toObject);
 
                     if (angle <= FrontConeAngle / 2) // angle detection to make sure the magnet is magnetising from the front
                     {
-                        if(Vector3.Distance(transform.position, obj.transform.position) <= MinDistance){
+                        if (Vector3.Distance(transform.position, obj.transform.position) <= MinDistance)
+                        {
                             MinDistance = Vector3.Distance(transform.position, obj.transform.position);
                             smallMagnetTarget = obj.gameObject;
                         }
@@ -151,7 +155,6 @@ public class MagnetAbility : MonoBehaviour
 
         if (smallMagnetTarget != null)
         {
-            
             smallMagnetTargetMagnetised = true;
             // Calculate stop position in front of the player
             Vector3 stopPosition = transform.position + transform.forward * smallMagnetStopDistance;
@@ -162,8 +165,7 @@ public class MagnetAbility : MonoBehaviour
             {
                 Vector3 directionToStop = (stopPosition - smallMagnetTarget.transform.position).normalized;
                 float distanceToStop = Vector3.Distance(smallMagnetTarget.transform.position, stopPosition);
-                
-                
+
                 if (distanceToStop > 0.1f) // If not yet at stop position
                 {
                     rb.velocity = directionToStop * smallMagnetPullSpeed;
@@ -177,8 +179,6 @@ public class MagnetAbility : MonoBehaviour
                 }
             }
         }
-
-
     }
 
     void HandleBigMagnets()
