@@ -126,6 +126,7 @@ MonoBehaviour:
   damage: 1
   lifeTime: 5000
   knockback: {fileID: 8526051020240220401}
+  bulletRB: {fileID: 0}
 --- !u!114 &8526051020240220401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a443169c157854d9de7677cd66d992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: -15
+  strength: 15
   duration: 0.4
 --- !u!54 &140858197665559305
 Rigidbody:
