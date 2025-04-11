@@ -6,10 +6,12 @@ public class Projectile : MonoBehaviour
     public float damage = 10f;
     public float lifeTime = 5000f;
     public KnockbackEffect knockback;
+    [SerializeField] private Rigidbody bulletRB;
 
     void Start()
     {
-        Destroy(gameObject, lifeTime); // Destroy after lifeTime seconds
+        Destroy(gameObject, lifeTime); //Destroy after lifeTime seconds
+        bulletRB = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -17,18 +19,15 @@ public class Projectile : MonoBehaviour
         //transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-
-
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // Assumes player is tagged as "Player"
+        if (other.CompareTag("Player")) //Assumes player is tagged as "Player"
         {
             Debug.Log("Hit BLU");
-            //Code is breaking here because of the sound issue
+            //Code is breaking here because of the sound issue -- fix is just to add a SoundFXManager into the scene and give that a SoundFXObject reference
             HealthManager healthMan = other.gameObject.GetComponent<HealthManager>(); // damage player
             healthMan.Damage();
-            knockback.ApplyKnockback(other.gameObject.GetComponent<CharacterController>(), transform.forward);
+            knockback.ApplyKnockback(other.gameObject.GetComponent<CharacterController>(), bulletRB.velocity);
         }
 
 
@@ -39,6 +38,6 @@ public class Projectile : MonoBehaviour
         {
             return; //ignores collision with projectiles
         }
-        Destroy(gameObject); // Destroy on collision
+        Destroy(gameObject); //Destroy on collision
     }
 }

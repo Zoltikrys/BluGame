@@ -8,15 +8,10 @@ public class SecurityBot : MonoBehaviour
 
     [SerializeField] private float spawnOffset = 1.8f; // Distance from center the bullet spawns
 
-    //public GameObject floorVent;
-
     public GameObject activeCollision;
     public GameObject hiddenCollision;
-    //public GameObject vent;
-    //[SerializeField] private Transform ventPos;
-    [SerializeField] private float ventOffset;
 
-    //[SerializeField] private Transform vent;
+    [SerializeField] private float ventOffset;
 
     public Animator animator;
 
@@ -45,13 +40,9 @@ public class SecurityBot : MonoBehaviour
 
     void Start()
     {
-        //animator = GetComponentInChildren<Animator>(); // Finds Animator in child objects
-
         activeCollision.SetActive(true);
         hiddenCollision.SetActive(false);
-        //ventPos.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 0.35f , gameObject.transform.position.z);
         ventOffset = gameObject.transform.position.y - 0.35f;
-
     }
 
     private void Update()
