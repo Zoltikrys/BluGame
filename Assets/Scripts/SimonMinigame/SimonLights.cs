@@ -189,6 +189,7 @@ public class SimonLights : MonoBehaviour {
             simonEnded = false;
             simonIsRunning = false;
             currentFloorIndex = 0;
+            intersectAmount = 0;
             foreach(int value in floorInputs) {
                 Array.Clear(floorInputs, 0, floorInputs.Length);
             }
