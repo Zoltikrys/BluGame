@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Device;
 
 public class GreenFloorScript : MonoBehaviour {
 
     [SerializeField] private GameObject simonLightsInScene, greenFloor;
-    [SerializeField] private Material greenOn;
+    [SerializeField] private Material greenOn, red;
 
     Material greenOff;
 
@@ -16,16 +17,23 @@ public class GreenFloorScript : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        simonLightsInScene.GetComponent<SimonLights>().startSimon = true;
-        if (simonLightsInScene.GetComponent<SimonLights>().simonLightsAreRunning == false) {
-            if (other.transform.CompareTag("Player")) {
-                GreenFloorOn();
+        if (simonLightsInScene.GetComponent<SimonLights>().simonEnded == false) {
+            simonLightsInScene.GetComponent<SimonLights>().startSimon = true;
+            if (simonLightsInScene.GetComponent<SimonLights>().simonLightsAreRunning == false) {
+                if (other.transform.CompareTag("Player")) {
+                    GreenFloorOn();
+                }
             }
+        }
+        else if (simonLightsInScene.GetComponent<SimonLights>().simonEnded == true && simonLightsInScene.GetComponent<SimonLights>().canRestart == true) {
+            simonLightsInScene.GetComponent<SimonLights>().SimonRestart();
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        GreenFloorOff();
+        if (simonLightsInScene.GetComponent<SimonLights>().simonEnded == false && simonLightsInScene.GetComponent<SimonLights>().simonLightsAreRunning == false) {
+            GreenFloorOff();
+        }
     }
 
     public IEnumerator MatSwitch() {
@@ -33,6 +41,17 @@ public class GreenFloorScript : MonoBehaviour {
         yield return new WaitForSeconds(1);
         greenFloor.GetComponent<Renderer>().material = greenOff;
         yield return new WaitForSeconds(1);
+    }
+
+    public IEnumerator FailSwitch() {
+        greenFloor.GetComponent<Renderer>().material = red;
+        yield return new WaitForSeconds(1);
+        greenFloor.GetComponent<Renderer>().material = greenOff;
+        yield return new WaitForSeconds(1);
+    }
+
+    public void WinSwitch() {
+        greenFloor.GetComponent<Renderer>().material = greenOn;
     }
 
     private void GreenFloorOn() {
