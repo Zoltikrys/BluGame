@@ -5,7 +5,7 @@ using UnityEngine.Device;
 
 public class BlueFloorScript : MonoBehaviour {
 
-    [SerializeField] private GameObject simonLightsInScene, blueFloor;
+    [SerializeField] private GameObject simonLights, blueFloor;
     [SerializeField] private Material blueOn, red, green;
 
     Material blueOff;
@@ -14,24 +14,25 @@ public class BlueFloorScript : MonoBehaviour {
 
     private void Awake() {
         blueOff = blueFloor.GetComponent<Renderer>().material;
+            simonLights = GameObject.Find("SimonLights");
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (simonLightsInScene.GetComponent<SimonLights>().simonEnded == false) {
-            simonLightsInScene.GetComponent<SimonLights>().startSimon = true;
-            if (simonLightsInScene.GetComponent<SimonLights>().simonLightsAreRunning == false) {
+        if (simonLights.GetComponent<SimonLights>().simonEnded == false) {
+            simonLights.GetComponent<SimonLights>().startSimon = true;
+            if (simonLights.GetComponent<SimonLights>().simonLightsAreRunning == false) {
                 if (other.transform.CompareTag("Player")) {
                     BlueFloorOn();
                 }
             }
         }
-        else if (simonLightsInScene.GetComponent<SimonLights>().simonEnded == true && simonLightsInScene.GetComponent<SimonLights>().canRestart == true) {
-            simonLightsInScene.GetComponent<SimonLights>().SimonRestart();
+        else if (simonLights.GetComponent<SimonLights>().simonEnded == true && simonLights.GetComponent<SimonLights>().canRestart == true) {
+            simonLights.GetComponent<SimonLights>().SimonRestart();
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        if (simonLightsInScene.GetComponent<SimonLights>().simonEnded == false && simonLightsInScene.GetComponent<SimonLights>().simonLightsAreRunning == false) {
+        if (simonLights.GetComponent<SimonLights>().simonEnded == false && simonLights.GetComponent<SimonLights>().simonLightsAreRunning == false) {
             BlueFloorOff();
         }
     }
@@ -56,8 +57,8 @@ public class BlueFloorScript : MonoBehaviour {
 
     private void BlueFloorOn() {
         blueFloor.GetComponent<Renderer>().material = blueOn;
-        simonLightsInScene.GetComponent<SimonLights>().currentFloorValue = floorValue;
-        simonLightsInScene.GetComponent<SimonLights>().AddFloorValue();
+        simonLights.GetComponent<SimonLights>().currentFloorValue = floorValue;
+        simonLights.GetComponent<SimonLights>().AddFloorValue();
     }
 
     private void BlueFloorOff() {

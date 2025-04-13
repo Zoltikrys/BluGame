@@ -11,7 +11,7 @@ public class SimonLights : MonoBehaviour {
     private enum LightNumber { RED, BLUE, GREEN, YELLOW, DEFAULT };
 
     public int simonDifficulty = 4;
-    [SerializeField] private float lightDelay;
+    [SerializeField] private float lightDelay = 1.5f;
 
     public int[] lightPlayOrder, floorInputs;
     public int currentFloorValue;
@@ -22,6 +22,11 @@ public class SimonLights : MonoBehaviour {
     int currentFloorIndex, intersectAmount = 0;
 
     private void Awake() {
+        //Find floor triggers in scene
+        redTrigger = GameObject.Find("RedTrigger");
+        blueTrigger = GameObject.Find("BlueTrigger");
+        greenTrigger = GameObject.Find("GreenTrigger");
+        yellowTrigger = GameObject.Find("YellowTrigger");
         //Set materials
         redOff = redLight.GetComponent<Renderer>().material;
         blueOff = blueLight.GetComponent<Renderer>().material;
