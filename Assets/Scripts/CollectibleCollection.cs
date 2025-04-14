@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class CollectibleCollection : MonoBehaviour
@@ -6,6 +7,12 @@ public class CollectibleCollection : MonoBehaviour
     private int Nuts = 0;
 
     public TextMeshProUGUI collectibleText;
+
+    public void Start()
+    {
+        collectibleText =  GameObject.Find("SparePartsCounter").GetComponent<TextMeshProUGUI>();
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
