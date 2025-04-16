@@ -19,7 +19,7 @@ public class CollectibleCollection : MonoBehaviour
         if (other.transform.tag == "Collectible")
         {
             Nuts++;
-            collectibleText.text = "Spare Parts: " + Nuts.ToString();
+            collectibleText.text = Nuts.ToString();
             Debug.Log(Nuts);
             Destroy(other.gameObject);
         }
