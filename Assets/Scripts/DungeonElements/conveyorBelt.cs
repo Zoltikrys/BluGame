@@ -17,15 +17,19 @@ public class conveyorBelt : MonoBehaviour
     [SerializeField] private GameObject belt;
     [SerializeField] private float offset;
 
+    [SerializeField] private bool isActive = true;
+
+    private float activeSpeed;
+
     private void OnTriggerEnter(Collider other) {
         onBelt.Add(other.gameObject);
     }
 
     private void OnTriggerStay(Collider other) {
         rend = belt.GetComponent<Renderer>();
-        other.transform.position = Vector3.MoveTowards(other.transform.position, endpoint.position, speed * Time.deltaTime);
+        other.transform.position = Vector3.MoveTowards(other.transform.position, endpoint.position, activeSpeed * Time.deltaTime);
         if (other.CompareTag("Player")) {
-            other.GetComponent<CharacterController>().SimpleMove(speed * direction);
+            other.GetComponent<CharacterController>().SimpleMove(activeSpeed * direction);
         }
 
         //need to add section that stops this conveyor belt applying force when object is within the endpoint
@@ -36,17 +40,38 @@ public class conveyorBelt : MonoBehaviour
         onBelt.Remove(other.gameObject);
     }
 
-    void Update()
+    private void Update()
     {
-        offset += Time.deltaTime * -0.1f;
-
-        if(offset < 1f) {
-            offset -= 1f;
-        }
-        if(offset < -1f) {
-            offset += 1f;
-        }
-
         mat.mainTextureOffset = new Vector2(0, offset);
+
+        if (!isActive)
+        {
+            activeSpeed = 0f;
+        }
+        else if (isActive)
+        {
+            activeSpeed = speed;
+
+            offset += Time.deltaTime * -0.1f;
+
+            if (offset < 1f)
+            {
+                offset -= 1f;
+            }
+            if (offset < -1f)
+            {
+                offset += 1f;
+            }
+        }
+    }
+
+    public void ActivateConveyor()
+    {
+        isActive = true;
+    }
+
+    public void DeactivateConveyor()
+    {
+        isActive = false;
     }
 }
