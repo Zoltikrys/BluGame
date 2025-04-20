@@ -33,7 +33,7 @@ public class RgbGoggles : MonoBehaviour
         GetFilterObjects();
         SetFilterObjects();
 
-        gogglesObject = GameObject.Find("Goggles");
+        gogglesObject = GameObject.Find("Frame");
         if (!GogglesActivated && gogglesObject) {
             gogglesObject.SetActive(false);
         }
