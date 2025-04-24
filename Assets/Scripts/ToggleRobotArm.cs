@@ -11,15 +11,7 @@ public class ToggleRobotArm : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        if (!isPlaying)
-        {
-            animator.speed = 0f;
-        }
-        else if (isPlaying)
-        {
-            animator.speed = 1f;
-        }
-        
+        animator.speed = 0f;
     }
 
     private void OnTriggerEnter(Collider other) {
