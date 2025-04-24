@@ -95,6 +95,7 @@ public class HealthManager : MonoBehaviour
 
         //StartCoroutine(EFlash());
 
+        animator.SetTrigger("Hit");
         if (b_Health <= 0) {
             Death();
         }

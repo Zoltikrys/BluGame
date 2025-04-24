@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class CollectibleCollection : MonoBehaviour
@@ -7,12 +8,18 @@ public class CollectibleCollection : MonoBehaviour
 
     public TextMeshProUGUI collectibleText;
 
+    public void Start()
+    {
+        collectibleText =  GameObject.Find("SparePartsCounter").GetComponent<TextMeshProUGUI>();
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Collectible")
         {
             Nuts++;
-            collectibleText.text = "Spare Parts: " + Nuts.ToString();
+            collectibleText.text = Nuts.ToString();
             Debug.Log(Nuts);
             Destroy(other.gameObject);
         }

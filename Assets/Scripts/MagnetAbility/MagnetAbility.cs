@@ -98,10 +98,12 @@ public class MagnetAbility : MonoBehaviour
         if (shootMode) {
             Debug.Log("Shoot mode off");
             shootMode = false;
+            animator.SetBool("ShootMode", false);
         }
         else if (!shootMode) {
             Debug.Log("Shoot mode on");
             shootMode = true;
+            animator.SetBool("ShootMode", true);
         }
     }
 
