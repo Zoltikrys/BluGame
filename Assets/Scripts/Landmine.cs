@@ -13,7 +13,7 @@ public class Landmine : MonoBehaviour
     public float detonateTime = 4f;
     [SerializeField] public float detonateTimer = 0f;
 
-    [SerializeField] private float explosionAnimDone = 5f; //don't know how long this will be yet
+    [SerializeField] private float explosionAnimDone = 5f; //don't know how long this will be yet////////////////////////////////////////////////////////
     [SerializeField] private float explosionDeltaTime = 0f;
 
     [SerializeField] Collider explosionArea;
@@ -32,20 +32,21 @@ public class Landmine : MonoBehaviour
         }
 
 
-        if (canExplode)
+        if (canExplode)///////////////////////////////////////////////////////////////////////////////
         {
             //Play animation
             //play explosion vfx
             //hasExploded = true;
             explosionDeltaTime += Time.deltaTime;
 
-            /*
+            
             if (explosionDeltaTime >= explosionAnimDone)
             {
                 hasExploded = true;
                 //delete self
+                Destroy(gameObject);
             }
-            */
+            
 
         }
     }
@@ -71,7 +72,7 @@ public class Landmine : MonoBehaviour
 
                     //knockback
                     knockback.ApplyRadialKnockback(other.gameObject.GetComponent<CharacterController>(), transform.position);
-                    hasExploded = true; //remove later
+                    //hasExploded = true; //remove later
                 }
             }
 
