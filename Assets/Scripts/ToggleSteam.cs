@@ -7,7 +7,7 @@ public class ToggleSteam : MonoBehaviour {
     public bool isPlaying = false;
     //public GameObject Valve;
 
-    [SerializeField] private GameObject player;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start() {
@@ -15,12 +15,17 @@ public class ToggleSteam : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        canIntereact = true;
-        player.GetComponent<PlayerLocomotionInput>().steam = gameObject;
+        if (other.tag == ("Player")) {
+            player = other.gameObject;
+            player.GetComponent<PlayerLocomotionInput>().steam = gameObject;
+            canIntereact = true;
+            other.transform.GetChild(1).gameObject.GetComponent<InteractText>().ShowText();
+        }
     }
 
     private void OnTriggerExit(Collider other) {
         canIntereact = false;
+        other.transform.GetChild(1).gameObject.GetComponent<InteractText>().HideText();
     }
 
 

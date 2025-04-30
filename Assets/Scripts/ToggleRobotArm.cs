@@ -7,28 +7,25 @@ public class ToggleRobotArm : MonoBehaviour {
     public bool canIntereact = false;
     public bool isPlaying = false;
 
-    [SerializeField] private GameObject player;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start() {
-        if (!isPlaying)
-        {
-            animator.speed = 0f;
-        }
-        else if (isPlaying)
-        {
-            animator.speed = 1f;
-        }
-        
+        animator.speed = 0f;
     }
 
     private void OnTriggerEnter(Collider other) {
-        canIntereact = true;
-        player.GetComponent<PlayerLocomotionInput>().robotArm = gameObject;
+        if (other.tag == ("Player")) {
+            player = other.gameObject;
+            player.GetComponent<PlayerLocomotionInput>().robotArm = gameObject;
+            canIntereact = true;
+            other.transform.GetChild(1).gameObject.GetComponent<InteractText>().ShowText();
+        }
     }
 
     private void OnTriggerExit(Collider other) {
         canIntereact = false;
+        other.transform.GetChild(1).gameObject.GetComponent<InteractText>().HideText();
     }
 
     // Update is called once per frame

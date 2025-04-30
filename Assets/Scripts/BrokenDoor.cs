@@ -6,7 +6,11 @@ public class BrokenDoor : MonoBehaviour
     [SerializeField] private int partsRequiredToFix = 5;
     private bool isFixed = false;
 
+    public bool canInteract = false;
+
     [SerializeField] private doorBehaviour door;
+
+    private GameObject player;
 
     public VisualEffect smokeEffect;
     public VisualEffect sparksEffect;
@@ -45,20 +49,39 @@ public class BrokenDoor : MonoBehaviour
     {
         if (isFixed) return;
 
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.L)) // Or your interact key
-        {
-            CollectibleCollection playerParts = other.GetComponent<CollectibleCollection>();
 
-            if (playerParts != null && playerParts.TrySpendParts(partsRequiredToFix))
-            {
-                Debug.Log("Door fixed!");
-                isFixed = true;
-                door.OpenDoor(); 
-            }
-            else
-            {
-                Debug.Log("Not enough parts to fix the door.");
-            }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player")) {
+            //set player gameObject
+            player = other.gameObject;
+            //set brokenDoor as gameobject in PlayerLocomotionInput
+            player.GetComponent<PlayerLocomotionInput>().brokenDoor = gameObject;
+            //player can now interact with door
+            canInteract = true;
+            //show interact icon above player
+            other.transform.GetChild(1).gameObject.GetComponent<InteractText>().ShowText();
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        //player can NOT interact with door
+        canInteract = false;
+        //hide interact icon above player
+        other.transform.GetChild(1).gameObject.GetComponent<InteractText>().HideText();
+    }
+
+    public void BrokenDoorInteract() {
+        CollectibleCollection playerParts = player.GetComponent<CollectibleCollection>();
+
+        if (playerParts != null && playerParts.TrySpendParts(partsRequiredToFix)) {
+            Debug.Log("Door fixed!");
+            isFixed = true;
+            door.OpenDoor();
+        }
+        else {
+            Debug.Log("Not enough parts to fix the door.");
         }
     }
 }

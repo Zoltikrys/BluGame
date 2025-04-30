@@ -24,7 +24,7 @@ public class NPCDialogue : MonoBehaviour {
     private Quaternion originalRotation;
 
 
-    [SerializeField] private GameObject player;
+    private GameObject player;
     [SerializeField] private Transform playerTransform;
 
     //public GameObject canvas;
@@ -37,9 +37,11 @@ public class NPCDialogue : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         Debug.Log("In interact zone");
-        player.GetComponent<PlayerLocomotionInput>().npc = gameObject;
         if (other.tag == ("Player")) {
+            player = other.gameObject;
+            player.GetComponent<PlayerLocomotionInput>().npc = gameObject;
             canInteract = true;
+            other.transform.GetChild(1).gameObject.GetComponent<InteractText>().ShowText();
         }
     }
 
@@ -47,6 +49,7 @@ public class NPCDialogue : MonoBehaviour {
         if (other.tag == ("Player")) {
             canInteract = false;
             zeroText(); //probably superfluous
+            other.transform.GetChild(1).gameObject.GetComponent<InteractText>().HideText();
         }
     }
 

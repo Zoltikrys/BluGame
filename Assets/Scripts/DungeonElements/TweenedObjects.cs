@@ -26,16 +26,6 @@ public class TweenedObject : MonoBehaviour{
         StartCoroutine(StartTweeningList());
     }
 
-    public void Unpause()
-    {
-        paused = false;
-    }
-
-    public void Pause()
-    {
-        paused = true;
-    }
-
     IEnumerator TweenToTarget(TweenDestination target){
         if(isTweening) yield break;
         isTweening = true;
