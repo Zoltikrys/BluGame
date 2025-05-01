@@ -154,16 +154,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackMode: 1
-  floorVent: {fileID: 4850333637335230655}
+  spawnOffset: 1.8
+  activeCollision: {fileID: 0}
+  hiddenCollision: {fileID: 0}
+  ventOffset: 0
+  animator: {fileID: 0}
+  MultiTurret1: {fileID: 0}
+  MultiTurret2: {fileID: 0}
+  MultiTurret3: {fileID: 0}
+  MultiTurret4: {fileID: 0}
+  MultiTurret5: {fileID: 0}
+  MultiTurret6: {fileID: 0}
+  MultiTurret7: {fileID: 0}
+  MultiTurret8: {fileID: 0}
   shootInterval: 2
   isVulnerable: 0
-  isHiding: 0
-  bulletPrefab: {fileID: 9427921330711406, guid: d98d3f0c65596d84e9ba6aad59448965, type: 3}
-  bulletSpawnPoint: {fileID: 1629907379134467686}
+  projectilePrefab: {fileID: 0}
+  multiSpawnPoint: {fileID: 0}
   bulletCount: 8
   bulletSpeed: 5
-  laserPrefab: {fileID: 9427921330711406, guid: d98d3f0c65596d84e9ba6aad59448965, type: 3}
-  laserSpawnPoint: {fileID: 1629907379134467686}
+  singleSpawnPoint: {fileID: 0}
 --- !u!1 &4850333637335230655
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +345,18 @@ PrefabInstance:
       value: SmallMagnet (2)
       objectReference: {fileID: 0}
     - target: {fileID: 705073758299602902, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 705073758299602902, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 705073758299602902, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 705073758299602902, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.39
       objectReference: {fileID: 0}
@@ -401,6 +423,18 @@ PrefabInstance:
       value: SmallMagnet
       objectReference: {fileID: 0}
     - target: {fileID: 705073758299602902, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 705073758299602902, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 705073758299602902, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 705073758299602902, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -465,6 +499,18 @@ PrefabInstance:
     - target: {fileID: 181054880773170540, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
       propertyPath: m_Name
       value: SmallMagnet (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 705073758299602902, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 705073758299602902, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 705073758299602902, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 705073758299602902, guid: 85c0dc5b928c5bd4ea2ea39909a85af2, type: 3}
       propertyPath: m_LocalPosition.x
