@@ -20,6 +20,13 @@ public class PlayerController : MonoBehaviour {
     public float jumpHeight = 1.0f;
     public float gravity = -9.81f;
 
+    [SerializeField] private float coyoteTime = 0.1f; //Time after leaving the ground that the player is still able to jump for
+    private float coyoteTimeCounter;
+
+    [SerializeField] private float jumpBufferTime = 0.2f; //Time before landing that you can press jump
+    private float jumpBufferCounter;
+
+
     private PlayerLocomotionInput locomotionInput;
     InputAction moveAction;
 
@@ -40,20 +47,50 @@ public class PlayerController : MonoBehaviour {
         animator = GetComponentInChildren<Animator>();
     }
 
-    void Update(){
+    void Update()
+    {
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0){
             playerVelocity.y = 0f;
             animator.SetBool("Grounded?", true);
         }
 
+        // Check if we can actually jump
+        if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f)
+        {
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            animator.SetBool("Grounded?", false);
+
+            // Reset timers after jumping
+            coyoteTimeCounter = 0f;
+            jumpBufferCounter = 0f;
+        }
+
+
         isMagnetized = GetComponent<MagnetAbility>().isMagnetized;
         if(isMagnetized && playerVelocity.y < 0){
             playerVelocity.y = 0f;
         }
 
-        
-        if (canMove){               // Block input if player cannot move
+        //////////////////////////////////////////////////////////
+        // Handle Coyote Time
+        if (groundedPlayer)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+            
+
+        // Handle Jump Buffer
+        jumpBufferCounter -= Time.deltaTime;
+        ////////////////////////////////////////////////////////
+
+
+        if (canMove) //Block input if player cannot move
+        {               
             // Get input
             Vector2 inputDirection = new Vector2(locomotionInput.MovementInput.x, locomotionInput.MovementInput.y);
 
@@ -94,8 +131,7 @@ public class PlayerController : MonoBehaviour {
 
         playerVelocity.y += (gravity * Time.deltaTime);
         controller.Move(playerVelocity * Time.deltaTime);
-
-}
+    }
 
 
     void OnCollisionEnter(Collision collision) {
@@ -126,10 +162,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void Jump() {
-        if (groundedPlayer){        // Default Unity input for jump is "Jump"
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
-            animator.SetBool("Grounded?", false);
-        }
+    public void Jump()
+    {
+        jumpBufferCounter = jumpBufferTime;  // Start jump buffer timer when jump is pressed
     }
+
 }
