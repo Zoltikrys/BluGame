@@ -175,6 +175,9 @@ public class MagnetAbility : MonoBehaviour
                     rb.useGravity = false;
                     rb.constraints = RigidbodyConstraints.FreezeRotation;
                 }
+
+                SetOtherSmallMagnetsKinematic(true); // Make all other small magnets kinematic while holding
+
             }
         }
 
@@ -230,6 +233,10 @@ public class MagnetAbility : MonoBehaviour
                 }
             smallMagnetTarget = null; // Clear the reference
         }
+
+        SetOtherSmallMagnetsKinematic(false); // Return all small magnets to non-kinematic
+
+
     }
 
     public void TurnOffMagnet(){
@@ -246,6 +253,31 @@ public class MagnetAbility : MonoBehaviour
         //}
         //magnetParticles.Clear();
     }
+
+    void SetOtherSmallMagnetsKinematic(bool makeKinematic)
+    {
+        GameObject[] allMagnets = GameObject.FindGameObjectsWithTag(smallMagnetTag);
+        foreach (GameObject magnet in allMagnets)
+        {
+            if (smallMagnetTarget != null && magnet == smallMagnetTarget)
+                continue; // Skip the one we're holding
+
+            Rigidbody rb = magnet.GetComponent<Rigidbody>();
+            if (rb != null)
+                rb.isKinematic = makeKinematic;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     private void OnDrawGizmos()
     {

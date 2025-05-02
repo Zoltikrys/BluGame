@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour {
     public NpcState CurrentState;
-    public bool playerSeen; // public for testing purposes, change to private when implementation finished
+    public bool playerSeen;
     protected bool isTargeting;
     protected bool isPatrolling;
     protected bool isSearching;
