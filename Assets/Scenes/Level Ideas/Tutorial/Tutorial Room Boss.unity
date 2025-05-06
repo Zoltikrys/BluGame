@@ -1412,7 +1412,7 @@ PrefabInstance:
     - target: {fileID: 6775184281768580417, guid: 9afe14133618ee64891286db12a6d4b0, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1851066061}
     - target: {fileID: 6775184281768580417, guid: 9afe14133618ee64891286db12a6d4b0, type: 3}
       propertyPath: offset.y
       value: 14
@@ -6356,7 +6356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2613230712092152565, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.076663
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2613230712092152565, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16876,6 +16876,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3820302487809681779, guid: 0111d8400d963df42b23603b91d5be35, type: 3}
+--- !u!4 &1851066061 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2613230712092152565, guid: 71e818fe967b0d84abbb677cd60dcd8b, type: 3}
+  m_PrefabInstance: {fileID: 434791266}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1864867838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22069,6 +22074,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3395895935561847139, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5949221298068107372, guid: 940ac71ca0022ae479abcee9e6e8f64c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -23821,6 +23830,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2073314543}
+  - {fileID: 342165508}
   - {fileID: 1900956682}
   - {fileID: 850175340}
   - {fileID: 1836253283}
@@ -23834,7 +23844,6 @@ SceneRoots:
   - {fileID: 2064742443}
   - {fileID: 1041095315}
   - {fileID: 1690692227}
-  - {fileID: 342165508}
   - {fileID: 895531187}
   - {fileID: 2119688343}
   - {fileID: 260515551}
