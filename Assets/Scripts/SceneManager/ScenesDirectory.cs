@@ -28,6 +28,10 @@ public static class RoomDirectory{
         { LEVELS.Dungeon2MagnetUnlock, "Dungeon2MagnetUnlock" },
         { LEVELS.Dungeon2PostMagnet, "Dungeon2PostMagnet" },
         { LEVELS.Dungeon2BossRoom, "Dungeon2BossRoom" },
+        { LEVELS.TutorialRoom1, "Tutorial Room 1" },
+        { LEVELS.TutorialRoom2, "Tutorial Room 2" },
+        { LEVELS.TutorialRoom3, "Tutorial Room 3" },
+        { LEVELS.TutorialRoom4, "Tutorial Room 4" },
     };
 }
 
@@ -56,4 +60,8 @@ public enum LEVELS{
     Dungeon2MagnetUnlock,
     Dungeon2PostMagnet,
     Dungeon2BossRoom,
+    TutorialRoom1,
+    TutorialRoom2,
+    TutorialRoom3,
+    TutorialRoom4,
 }
