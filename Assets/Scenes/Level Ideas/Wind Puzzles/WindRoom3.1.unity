@@ -459,6 +459,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6754101591360454734, guid: 957841aea58450e4eaeca4308df09592, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de72deb50157dac4489079ec38888c3b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -571,7 +575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 931371744}
-  offset: {x: 2.11, y: 0, z: 0}
+  offset: {x: 0, y: 0, z: 0}
   minWorldLimits: {x: 3.99, y: 11.96, z: -9.14}
   maxWorldLimits: {x: 8.1, y: 13.4, z: -0.06}
 --- !u!114 &681819857
@@ -1257,6 +1261,69 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b173845b167cc15488e9a287e9da3097, type: 3}
+--- !u!1 &1024882635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1024882636}
+  m_Layer: 0
+  m_Name: SpawnPoints
+  m_TagString: SpawnPoints
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1024882636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024882635}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.75, y: 1.795, z: -4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1072620651}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1072620650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1072620651}
+  m_Layer: 0
+  m_Name: SouthSpawn
+  m_TagString: SpawnPoints
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1072620651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072620650}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.75, y: 5.205, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1024882636}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1074237117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2001,6 +2068,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6754101591360454734, guid: 957841aea58450e4eaeca4308df09592, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de72deb50157dac4489079ec38888c3b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2036,8 +2107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cca015329003bd4fae0600170d25481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: 0
-  IndexOfSpawnPointInNextScene: 0
+  SceneToLoad: 28
+  IndexOfSpawnPointInNextScene: 1
   SceneID: 0
   <ExitTransition>k__BackingField: 1
   <EnterTransition>k__BackingField: 1
@@ -2169,3 +2240,4 @@ SceneRoots:
   - {fileID: 2044080778}
   - {fileID: 931371743}
   - {fileID: 783040750}
+  - {fileID: 1024882636}
