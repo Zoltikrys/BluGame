@@ -122,6 +122,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &9941481 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5386797129928840617, guid: 586c3f65783953d44a7e9e1ad220bcb7, type: 3}
+  m_PrefabInstance: {fileID: 2137418701}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec6876c1ff2e544283ef9352c35d70f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &39379308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1144,7 +1155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2269962996790488932, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.9300003
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2269962996790488932, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1193,11 +1204,11 @@ PrefabInstance:
     - target: {fileID: 3936322520663063094, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
       propertyPath: OnExitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1451668723}
+      objectReference: {fileID: 9941481}
     - target: {fileID: 3936322520663063094, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
       propertyPath: OnEnterEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1451668723}
+      objectReference: {fileID: 9941481}
     - target: {fileID: 3936322520663063094, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
       propertyPath: OnExitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -4788,6 +4799,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1417721718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8001994465861018587, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
+  m_PrefabInstance: {fileID: 1451668721}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1423327436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4858,12 +4874,28 @@ PrefabInstance:
       value: ConveyorBeltPrototype
       objectReference: {fileID: 0}
     - target: {fileID: 4646006316021075901, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
+      propertyPath: mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 91626e78646ae3a4e915c2ff6ac02aa8, type: 2}
+    - target: {fileID: 4646006316021075901, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
+      propertyPath: belt
+      value: 
+      objectReference: {fileID: 1417721718}
+    - target: {fileID: 4646006316021075901, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
       propertyPath: speed
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4646006316021075901, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
       propertyPath: isActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646006316021075901, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
+      propertyPath: direction.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646006316021075901, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
+      propertyPath: direction.z
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5025284751601860975, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
       propertyPath: m_LocalScale.z
@@ -4919,17 +4951,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5025284751601860975, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
   m_PrefabInstance: {fileID: 1451668721}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1451668723 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1486986622577230416, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
-  m_PrefabInstance: {fileID: 1451668721}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1451668724 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4646006316021075901, guid: 1487c8ab9f4ef0543bfaba921740b361, type: 3}
   m_PrefabInstance: {fileID: 1451668721}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1451668723}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8114cbc695ed61c4ca74530452955542, type: 3}
@@ -8078,6 +8105,10 @@ PrefabInstance:
     - target: {fileID: 3214205481887428293, guid: 586c3f65783953d44a7e9e1ad220bcb7, type: 3}
       propertyPath: m_Name
       value: DoorPrototype (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386797129928840617, guid: 586c3f65783953d44a7e9e1ad220bcb7, type: 3}
+      propertyPath: doorStatusToOpen
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
