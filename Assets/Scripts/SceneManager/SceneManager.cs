@@ -60,7 +60,7 @@ public class SceneManager : MonoBehaviour
             bat.CurrentBatteryCharge = 0;
             bat.MaxCharge = 0.0f;
             bat.MinCharge = 0.0f;
-            StateManager.StorePlayerInfo(10, false, false, 3, bat);
+            StateManager.StorePlayerInfo(10, false, false, 3, 0, bat);
         }
 
         if(CurrentScene != LEVELS.NO_SCENE) StateManager.SetRoomState(sceneName);
