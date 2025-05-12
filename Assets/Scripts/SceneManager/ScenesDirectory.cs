@@ -32,6 +32,11 @@ public static class RoomDirectory{
         { LEVELS.TutorialRoom2, "Tutorial Room 2" },
         { LEVELS.TutorialRoom3, "Tutorial Room 3" },
         { LEVELS.TutorialRoom4, "Tutorial Room 4" },
+        { LEVELS.TutorialRoom5, "Tutorial Room 5" },
+        { LEVELS.TutorialRoom5_1, "Tutorial Room 5.1" },
+        { LEVELS.TutorialRoom6, "Tutorial Room 6" },
+        { LEVELS.TutorialRoom6_1, "Tutorial Room 6.1" },
+
         { LEVELS.TutorialRoomBoss, "Tutorial Room Boss" },
         { LEVELS.WindRoom1, "WindRoom1" },
         { LEVELS.WindRoom2, "WindRoom2" },
@@ -70,7 +75,18 @@ public enum LEVELS{
     TutorialRoom2,
     TutorialRoom3,
     TutorialRoom4,
+    TutorialRoom5,
+    TutorialRoom5_1,
+    TutorialRoom6,
+    TutorialRoom6_1,
+
+
+
     TutorialRoomBoss,
+
+
+
+
     WindRoom1,
     WindRoom2,
     WindRoom3,
