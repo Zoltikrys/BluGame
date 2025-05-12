@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RobotArm
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6d82e50b798852e47ace16101723adf1, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2842315194387325166, guid: 6d82e50b798852e47ace16101723adf1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -173,6 +177,7 @@ MonoBehaviour:
   animator: {fileID: 1046382798581335902}
   canIntereact: 0
   isPlaying: 0
+  player: {fileID: 0}
 --- !u!65 &6093477648154845627
 BoxCollider:
   m_ObjectHideFlags: 0

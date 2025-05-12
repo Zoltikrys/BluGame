@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 2d0f9ac8dfba4554badb8cc7aba1114a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d0f9ac8dfba4554badb8cc7aba1114a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d0f9ac8dfba4554badb8cc7aba1114a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d0f9ac8dfba4554badb8cc7aba1114a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -117,8 +117,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.50000006, y: 0.5000001, z: 0.5000002}
-  m_Center: {x: 0, y: -4.2351647e-22, z: -0.00000002980233}
+  m_Size: {x: 1.2500001, y: 1.2500002, z: 1.25}
+  m_Center: {x: -0.00000059604645, y: 0.0000012815002, z: -0.0002444983}
 --- !u!54 &266036604342426530
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 0
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -203,4 +203,4 @@ MonoBehaviour:
       isDead: 0
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
-  <UniqueID>k__BackingField: 3a33e55c-a9ab-46fd-ba6b-7bcc67d7ad0e
+  <UniqueID>k__BackingField: 7b5a700d-d653-4873-9c5b-f109608122f9

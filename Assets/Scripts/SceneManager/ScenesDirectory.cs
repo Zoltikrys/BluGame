@@ -28,6 +28,16 @@ public static class RoomDirectory{
         { LEVELS.Dungeon2MagnetUnlock, "Dungeon2MagnetUnlock" },
         { LEVELS.Dungeon2PostMagnet, "Dungeon2PostMagnet" },
         { LEVELS.Dungeon2BossRoom, "Dungeon2BossRoom" },
+        { LEVELS.TutorialRoom1, "Tutorial Room 1" },
+        { LEVELS.TutorialRoom2, "Tutorial Room 2" },
+        { LEVELS.TutorialRoom3, "Tutorial Room 3" },
+        { LEVELS.TutorialRoom4, "Tutorial Room 4" },
+        { LEVELS.TutorialRoomBoss, "Tutorial Room Boss" },
+        { LEVELS.WindRoom1, "WindRoom1" },
+        { LEVELS.WindRoom2, "WindRoom2" },
+        { LEVELS.WindRoom3, "WindRoom3" },
+        { LEVELS.WindRoom3_1, "WindRoom3.1" },
+        { LEVELS.WindRoom4, "WindRoom4" },
     };
 }
 
@@ -56,4 +66,14 @@ public enum LEVELS{
     Dungeon2MagnetUnlock,
     Dungeon2PostMagnet,
     Dungeon2BossRoom,
+    TutorialRoom1,
+    TutorialRoom2,
+    TutorialRoom3,
+    TutorialRoom4,
+    TutorialRoomBoss,
+    WindRoom1,
+    WindRoom2,
+    WindRoom3,
+    WindRoom3_1,
+    WindRoom4,
 }

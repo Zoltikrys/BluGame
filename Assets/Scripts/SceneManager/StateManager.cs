@@ -63,7 +63,7 @@ public class StateManager : MonoBehaviour
     {
         CurrentCheckPoint = new Checkpoint(scene, roomId, requestedSpawnPoint, 
                                            new PlayerInfo(PlayerInfo.HP, PlayerInfo.RGB_GoggleState, PlayerInfo.MagnetState,
-                                                          PlayerInfo.BatteryCharge, PlayerInfo.MaxBatteryCharge, PlayerInfo.Lives,
+                                                          PlayerInfo.BatteryCharge, PlayerInfo.MaxBatteryCharge, PlayerInfo.Lives, PlayerInfo.Nuts,
                                                           DeepCopyUtils.DeepCopyBatteryEffectList(PlayerInfo.QueuedEffects), 
                                                           DeepCopyUtils.DeepCopyBatteryEffectList(PlayerInfo.ProcessingEffects)),
                                            DeepCopyUtils.DeepCopyStateTracker(StateTracker));
@@ -76,9 +76,11 @@ public class StateManager : MonoBehaviour
             HealthManager currentPlayerHealth;
             RgbGoggles currentPlayerGoggles;
             Battery currentBattery;
+            CollectibleCollection collectibleCollection;
             player.TryGetComponent<HealthManager>(out currentPlayerHealth);
             player.TryGetComponent<RgbGoggles>(out currentPlayerGoggles);
             player.TryGetComponent<Battery>(out currentBattery);
+            player.TryGetComponent<CollectibleCollection>(out collectibleCollection);
 
             if(currentPlayerHealth) {
                 Debug.Log($"Setting health to {playerInfo.HP} and lives to {playerInfo.Lives}");
@@ -86,6 +88,7 @@ public class StateManager : MonoBehaviour
                 currentPlayerHealth.Lives = playerInfo.Lives;
             }
             if(currentPlayerGoggles) currentPlayerGoggles.GogglesActivated = playerInfo.RGB_GoggleState;
+            if(collectibleCollection) collectibleCollection.SetNut(playerInfo.Nuts);
             if(currentBattery){
                 Debug.Log($"Setting battery to: {playerInfo.BatteryCharge}/{playerInfo.MaxBatteryCharge}");
                 currentBattery.CurrentBatteryCharge = playerInfo.BatteryCharge;
@@ -100,11 +103,12 @@ public class StateManager : MonoBehaviour
         }
     }
 
-    public void StorePlayerInfo(int hp, bool goggleState, bool magnetState, int lives, Battery battery){
+    public void StorePlayerInfo(int hp, bool goggleState, bool magnetState, int lives, int nuts, Battery battery){
         PlayerInfo = new PlayerInfo(hp, goggleState, magnetState, 
                                     battery.CurrentBatteryCharge, 
                                     battery.MaxCharge,
                                     lives,
+                                    nuts,
                                     DeepCopyUtils.DeepCopyBatteryEffectList(battery.QueuedBatteryEffects),
                                     DeepCopyUtils.DeepCopyBatteryEffectList(battery.ProcessingBatteryEffects));
         Debug.Log($"Battery input: {battery.CurrentBatteryCharge}/{battery.MaxCharge}");
@@ -121,6 +125,7 @@ public class StateManager : MonoBehaviour
                                     player.GetComponent<Battery>().CurrentBatteryCharge,
                                     player.GetComponent<Battery>().MaxCharge,
                                     player.GetComponent<HealthManager>().Lives,
+                                    player.GetComponent<CollectibleCollection>().Nuts,
                                     DeepCopyUtils.DeepCopyBatteryEffectList(player.GetComponent<Battery>().QueuedBatteryEffects),
                                     DeepCopyUtils.DeepCopyBatteryEffectList(player.GetComponent<Battery>().ProcessingBatteryEffects));
         Debug.Log($"[BATTERY]Stored {PlayerInfo.QueuedEffects.Count} queued effects, {PlayerInfo.ProcessingEffects.Count} processing effects");
@@ -166,16 +171,18 @@ public class PlayerInfo{
     [field: SerializeField] public float BatteryCharge;
     [field: SerializeField] public float MaxBatteryCharge;
     [field: SerializeField] public int Lives;
+    [field: SerializeField] public int Nuts;
     [field: SerializeField] public List<BatteryEffect> QueuedEffects = new List<BatteryEffect>();
     [field: SerializeField] public List<BatteryEffect> ProcessingEffects = new List<BatteryEffect>();
 
-    public PlayerInfo(int health, bool rgbState, bool magnetState, float batteryCharge, float maxCharge, int lives, List<BatteryEffect> queuedEffects, List<BatteryEffect> processingEffects){
+    public PlayerInfo(int health, bool rgbState, bool magnetState, float batteryCharge, float maxCharge, int lives, int nuts, List<BatteryEffect> queuedEffects, List<BatteryEffect> processingEffects){
         HP = health;
         RGB_GoggleState = rgbState;
         MagnetState = magnetState;
         BatteryCharge = batteryCharge;
         MaxBatteryCharge = maxCharge;
         Lives = lives;
+        Nuts = nuts;
         QueuedEffects = DeepCopyUtils.DeepCopyBatteryEffectList(queuedEffects);
         ProcessingEffects = DeepCopyUtils.DeepCopyBatteryEffectList(processingEffects);
     }

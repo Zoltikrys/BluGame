@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using System.Collections.Generic;
 
 [DefaultExecutionOrder(-2)]
 public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomotionMapActions {
@@ -8,10 +9,7 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
     public Vector2 MovementInput { get; private set; }
     public bool JumpPressed { get; private set; }
 
-    public bool isInNPCTrigger = false, isInSteamTrigger = false, isInRobotTrigger = false;
-
-    public GameObject npc, steam, robotArm;
-
+    public GameObject npc, steam, robotArm, brokenDoor;
 
     private void OnEnable() {
         PlayerControls = new PlayerControls();
@@ -35,8 +33,6 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
         //print(MovementInput);
     }
 
-
-
     public void OnJump(InputAction.CallbackContext context) {
         if (context.performed) {
             //print(JumpPressed);
@@ -48,16 +44,24 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
     }
 
     public void OnInteract(InputAction.CallbackContext context){
+        //On interact button pressed
         if (context.performed){
-                if (npc != null && npc.GetComponent<NPCDialogue>().canInteract == true){
-                    npc.GetComponent<NPCDialogue>().NPCInteract();
-                }
-                else if (steam != null && steam.GetComponent<ToggleSteam>().canIntereact == true){
-                        steam.GetComponent<ToggleSteam>().SteamInteract();
-                }
-                else if (robotArm != null && robotArm.GetComponent<ToggleRobotArm>().canIntereact == true){
-                    robotArm.GetComponent<ToggleRobotArm>().RobotArmInteract();
-                }
+            //check for NPC interaction
+            if (npc != null && npc.GetComponent<NPCDialogue>().canInteract == true) {
+                npc.GetComponent<NPCDialogue>().NPCInteract();
+            }
+            //check for Steam Pipe interaction
+            else if (steam != null && steam.GetComponent<ToggleSteam>().canIntereact == true) {
+                steam.GetComponent<ToggleSteam>().SteamInteract();
+            }
+            //check for Robot Arm interaction
+            else if (robotArm != null && robotArm.GetComponent<ToggleRobotArm>().canIntereact == true) {
+                robotArm.GetComponent<ToggleRobotArm>().RobotArmInteract();
+            }
+            //check for Broken Door interaction
+            else if (brokenDoor != null && brokenDoor.GetComponent<BrokenDoor>().canInteract == true) {
+                brokenDoor.GetComponent<BrokenDoor>().BrokenDoorInteract();
+            }
         }
     }
 
