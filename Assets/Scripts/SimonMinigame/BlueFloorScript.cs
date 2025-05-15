@@ -18,17 +18,26 @@ public class BlueFloorScript : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (simonLights.GetComponent<SimonLights>().simonEnded == false) {
-            simonLights.GetComponent<SimonLights>().startSimon = true;
-            if (simonLights.GetComponent<SimonLights>().simonLightsAreRunning == false) {
-                if (other.transform.CompareTag("Player")) {
-                    BlueFloorOn();
+
+        if (other.CompareTag("Player"))
+        {
+            if (simonLights.GetComponent<SimonLights>().simonEnded == false)
+            {
+                simonLights.GetComponent<SimonLights>().startSimon = true;
+                if (simonLights.GetComponent<SimonLights>().simonLightsAreRunning == false)
+                {
+                    if (other.transform.CompareTag("Player"))
+                    {
+                        BlueFloorOn();
+                    }
                 }
             }
+            else if (simonLights.GetComponent<SimonLights>().simonEnded == true && simonLights.GetComponent<SimonLights>().canRestart == true)
+            {
+                simonLights.GetComponent<SimonLights>().SimonRestart();
+            }
         }
-        else if (simonLights.GetComponent<SimonLights>().simonEnded == true && simonLights.GetComponent<SimonLights>().canRestart == true) {
-            simonLights.GetComponent<SimonLights>().SimonRestart();
-        }
+        
     }
 
     private void OnTriggerExit(Collider other) {
