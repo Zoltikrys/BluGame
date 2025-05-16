@@ -42,7 +42,7 @@ public class CollectibleCollection : MonoBehaviour
         if (Nuts >= amount)
         {
             Nuts -= amount;
-            collectibleText.text = "Spare Parts: " + Nuts.ToString();
+            collectibleText.text = Nuts.ToString();
             return true;
         }
         return false;
