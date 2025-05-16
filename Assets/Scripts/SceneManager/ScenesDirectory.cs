@@ -41,11 +41,24 @@ public static class RoomDirectory{
         { LEVELS.HUBROOM, "HUB ROOM" },
 
         { LEVELS.TutorialRoomBoss, "Tutorial Room Boss" },
+
         { LEVELS.WindRoom1, "WindRoom1" },
         { LEVELS.WindRoom2, "WindRoom2" },
         { LEVELS.WindRoom3, "WindRoom3" },
         { LEVELS.WindRoom3_1, "WindRoom3.1" },
         { LEVELS.WindRoom4, "WindRoom4" },
+
+        { LEVELS.Shuki1, "Shuki 1" },
+        { LEVELS.Shuki2, "Shuki 2" },
+        { LEVELS.Shuki3, "Shuki 3" },
+
+        { LEVELS.BossLeadup1, "BossLeadup1" },
+        { LEVELS.BossLeadup2, "BossLeadup2" },
+        { LEVELS.BossLeadup3, "BossLeadup3" },
+
+
+
+
     };
 }
 
@@ -98,4 +111,12 @@ public enum LEVELS{
     WindRoom3,
     WindRoom3_1,
     WindRoom4,
+
+    Shuki1,
+    Shuki2,
+    Shuki3,
+
+    BossLeadup1,
+    BossLeadup2,
+    BossLeadup3,
 }
