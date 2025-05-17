@@ -857,6 +857,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5815112477307389719, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 730711898}
+    - target: {fileID: 5815112477307389719, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
+      propertyPath: BoxCollider
+      value: 
+      objectReference: {fileID: 730711899}
     - target: {fileID: 6928088814824663156, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
       propertyPath: m_Name
       value: PressurePlatePrototype
@@ -907,6 +915,16 @@ MonoBehaviour:
       DestroyDelay: 0
   IsDisplayed: 0
   Filterable: 1
+--- !u!95 &730711898 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2987715966282467166, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
+  m_PrefabInstance: {fileID: 730711895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &730711899 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 1871511807889649414, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
+  m_PrefabInstance: {fileID: 730711895}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &783040750
 PrefabInstance:
   m_ObjectHideFlags: 0
