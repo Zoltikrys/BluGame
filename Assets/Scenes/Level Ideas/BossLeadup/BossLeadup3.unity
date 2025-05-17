@@ -7890,8 +7890,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cacf8f8cda3fdd747b6da33b54813555, type: 3}
   m_PrefabInstance: {fileID: 184436108}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1374751747
-MeshCollider:
+--- !u!65 &1374751747
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -7908,10 +7908,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1760081653314428908, guid: cacf8f8cda3fdd747b6da33b54813555, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 3.972661, y: 0.96756715, z: 0.07343519}
+  m_Center: {x: -2.0062747, y: 0.48378363, z: -0.0062706694}
 --- !u!1001 &1384626497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18134,6 +18133,7 @@ GameObject:
   - component: {fileID: 1907714758476045485}
   - component: {fileID: 5650602457807229479}
   - component: {fileID: 4345816788398926334}
+  - component: {fileID: 7207559691471871530}
   m_Layer: 0
   m_Name: Railing_Broken_Part_6
   m_TagString: Untagged
@@ -18141,6 +18141,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!64 &7207559691471871530
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207559691471871529}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5344856710220757940, guid: cacf8f8cda3fdd747b6da33b54813555, type: 3}
 --- !u!1 &8282060576976476255
 GameObject:
   m_ObjectHideFlags: 0
@@ -18152,6 +18174,7 @@ GameObject:
   - component: {fileID: 1914000388206054490}
   - component: {fileID: 3061471547627735813}
   - component: {fileID: 8551516621596937153}
+  - component: {fileID: 8551516621596937154}
   m_Layer: 0
   m_Name: Railing_Broken_Part_10
   m_TagString: Untagged
@@ -18279,6 +18302,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8551516621596937154
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8282060576976476255}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7619317002593595159, guid: cacf8f8cda3fdd747b6da33b54813555, type: 3}
 --- !u!1 &8708530068338016097
 GameObject:
   m_ObjectHideFlags: 0
