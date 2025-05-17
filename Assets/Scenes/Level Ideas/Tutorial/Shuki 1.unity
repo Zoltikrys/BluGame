@@ -598,6 +598,14 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5815112477307389719, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 90056362}
+    - target: {fileID: 5815112477307389719, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
+      propertyPath: BoxCollider
+      value: 
+      objectReference: {fileID: 90056363}
+    - target: {fileID: 5815112477307389719, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
       propertyPath: triggerEventOne.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -668,6 +676,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a7b66652eb26c4e8ffe08b25120ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &90056362 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2987715966282467166, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
+  m_PrefabInstance: {fileID: 90056359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &90056363 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 1871511807889649414, guid: 585be42378df2d945a6e91bb825e0054, type: 3}
+  m_PrefabInstance: {fileID: 90056359}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &94501139
 Mesh:
   m_ObjectHideFlags: 0
