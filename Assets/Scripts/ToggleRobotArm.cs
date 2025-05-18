@@ -11,15 +11,7 @@ public class ToggleRobotArm : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        if (!isPlaying)
-        {
-            animator.speed = 0f;
-        }
-        else if (isPlaying)
-        {
-            animator.speed = 1f;
-        }
-        
+        animator.speed = 0f;
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -32,8 +24,11 @@ public class ToggleRobotArm : MonoBehaviour {
     }
 
     private void OnTriggerExit(Collider other) {
-        canIntereact = false;
-        other.transform.GetChild(1).gameObject.GetComponent<InteractText>().HideText();
+        if (other.tag == ("Player"))
+        {
+            canIntereact = false;
+            other.transform.GetChild(1).gameObject.GetComponent<InteractText>().HideText();
+        }
     }
 
     // Update is called once per frame

@@ -13,8 +13,8 @@ public class FloatingMagnetDrone : MonoBehaviour
     private bool isPaused = false;
 
     public Renderer mesh;
-    public Material blue;
     public Material red;
+    public Material blue;
 
     public ParticleSystem magnetEffect;
     public Color attractColor = Color.blue;
@@ -37,11 +37,11 @@ public class FloatingMagnetDrone : MonoBehaviour
 
         if (magnetMode == MagnetType.Attract)
         {
-            mesh.material = blue;
+            mesh.material = red;
         }
         else if (magnetMode == MagnetType.Repel)
         {
-            mesh.material = red;
+            mesh.material = blue;
         }
 
     }

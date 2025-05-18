@@ -18,17 +18,26 @@ public class GreenFloorScript : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (simonLights.GetComponent<SimonLights>().simonEnded == false) {
-            simonLights.GetComponent<SimonLights>().startSimon = true;
-            if (simonLights.GetComponent<SimonLights>().simonLightsAreRunning == false) {
-                if (other.transform.CompareTag("Player")) {
-                    GreenFloorOn();
+        if (other.CompareTag("Player"))
+        {
+            if (simonLights.GetComponent<SimonLights>().simonEnded == false)
+            {
+                simonLights.GetComponent<SimonLights>().startSimon = true;
+                if (simonLights.GetComponent<SimonLights>().simonLightsAreRunning == false)
+                {
+                    if (other.transform.CompareTag("Player"))
+                    {
+                        GreenFloorOn();
+                    }
                 }
             }
+            else if (simonLights.GetComponent<SimonLights>().simonEnded == true && simonLights.GetComponent<SimonLights>().canRestart == true)
+            {
+                simonLights.GetComponent<SimonLights>().SimonRestart();
+            }
         }
-        else if (simonLights.GetComponent<SimonLights>().simonEnded == true && simonLights.GetComponent<SimonLights>().canRestart == true) {
-            simonLights.GetComponent<SimonLights>().SimonRestart();
-        }
+
+        
     }
 
     private void OnTriggerExit(Collider other) {

@@ -8,6 +8,8 @@ public class SimonLights : MonoBehaviour {
     [SerializeField] private Material redOn, blueOn, greenOn, yellowOn;
     [SerializeField] private GameObject redLight, blueLight, greenLight, yellowLight, redTrigger, blueTrigger, greenTrigger, yellowTrigger;
 
+    public doorBehaviour door;
+
     private enum LightNumber { RED, BLUE, GREEN, YELLOW, DEFAULT };
 
     public int simonDifficulty = 4;
@@ -178,6 +180,7 @@ public class SimonLights : MonoBehaviour {
         yellowTrigger.GetComponent<YellowFloorScript>().StartCoroutine("WinSwitch");
 
         ////////////////////////////////////////////////////////////////////////////////////      ADD WIN FUNCTION HERE
+        door.IncreaseDoorStatus();
         
 
     }

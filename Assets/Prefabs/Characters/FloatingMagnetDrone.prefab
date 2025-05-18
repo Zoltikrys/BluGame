@@ -287,7 +287,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 15
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4970,7 +4970,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 4.53
+  m_Radius: 3.61
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &9126713338012100259
 MonoBehaviour:
@@ -4992,11 +4992,11 @@ MonoBehaviour:
   moveSpeed: 3
   pauseTime: 1
   mesh: {fileID: 2719419089414424042}
-  blue: {fileID: 2100000, guid: 921a308d1b76dd343a21481e309d97ad, type: 2}
   red: {fileID: 2100000, guid: 11ea32ccae3971f4481e3c79cb7edb9d, type: 2}
+  blue: {fileID: 2100000, guid: 921a308d1b76dd343a21481e309d97ad, type: 2}
   magnetEffect: {fileID: 3600959418410913420}
-  attractColor: {r: 0, g: 0, b: 1, a: 1}
-  repelColor: {r: 1, g: 0, b: 0, a: 1}
+  attractColor: {r: 1, g: 0, b: 0, a: 1}
+  repelColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1001 &5468036934103351604
 PrefabInstance:
   m_ObjectHideFlags: 0

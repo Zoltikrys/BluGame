@@ -32,7 +32,11 @@ public class bossShield : MonoBehaviour
     private void Update()
     {
         target = player.transform.position;
-        if(bossHealth > 0) bossEye.transform.LookAt(target);
+        if (bossHealth > 0)
+        {
+            bossEye.transform.LookAt(target);
+            bossEye.transform.Rotate(90f, 0f, 0);
+        }
         else bossEye.transform.LookAt(transform.forward);
     }
 

@@ -14,17 +14,24 @@ public class upgradeTubeBehaviour : MonoBehaviour
     [SerializeField] private bool isGoggles;
     [SerializeField] private bool isMagnet;
 
+    [SerializeField] private GameObject LeftDoor;
+    [SerializeField] private GameObject RightDoor;
+
     void Start()
     {
         // Assigns key variables
         anim = GetComponent<Animator>();
         goggles = GameObject.Find("Goggles");
         player = GameObject.Find("Player");
+        LeftDoor = GameObject.Find("LeftDoor");
+        RightDoor = GameObject.Find("RightDoor");
     }
 
     public void Unlock()
     {
-        anim.Play("openTube");
+        LeftDoor.SetActive(false);
+        RightDoor.SetActive(false);
+        //anim.Play("openTube"); animations broke
     }
 
     public void PowerCheck()
@@ -68,8 +75,10 @@ public class upgradeTubeBehaviour : MonoBehaviour
     public void OpenDoor()
     {
         Debug.Log("Opening door");
-        anim.StopPlayback();
-        anim.Play("openTube");
+        LeftDoor.SetActive(false);
+        RightDoor.SetActive(false);
+        //anim.StopPlayback();
+        //anim.Play("openTube");
         player.GetComponent<PlayerController>().UnlockMovement();
 
         Interactable interactable;
@@ -79,8 +88,10 @@ public class upgradeTubeBehaviour : MonoBehaviour
 
     public void CloseDoor()
     {
-        anim.StopPlayback();
-        anim.Play("closeTube");
+        //anim.StopPlayback();
+        //anim.Play("closeTube");
+        LeftDoor.SetActive(true);
+        RightDoor.SetActive(true);
     }
 
     IEnumerator Cooldown(float waitTime, Action callback)

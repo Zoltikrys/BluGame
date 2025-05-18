@@ -1,16 +1,17 @@
 using TMPro;
-using UnityEditor.VersionControl;
+//using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class CollectibleCollection : MonoBehaviour
 {
-    private int Nuts = 0;
+    public int Nuts = 0;
 
     public TextMeshProUGUI collectibleText;
 
     public void Start()
     {
         collectibleText =  GameObject.Find("SparePartsCounter").GetComponent<TextMeshProUGUI>();
+        if(collectibleText) collectibleText.text = Nuts.ToString();
     }
 
 
@@ -18,11 +19,22 @@ public class CollectibleCollection : MonoBehaviour
     {
         if (other.transform.tag == "Collectible")
         {
-            Nuts++;
-            collectibleText.text = Nuts.ToString();
+            AddNut(1);
             Debug.Log(Nuts);
             Destroy(other.gameObject);
         }
+    }
+
+    public void AddNut(int amount){
+        Nuts += amount;
+        if(collectibleText) collectibleText.text = Nuts.ToString();
+        Debug.Log(Nuts);
+    }
+
+    public void SetNut(int amount){
+        Nuts = amount;
+        if(collectibleText) collectibleText.text = Nuts.ToString();
+        Debug.Log(Nuts);
     }
 
     public bool TrySpendParts(int amount)
@@ -30,7 +42,7 @@ public class CollectibleCollection : MonoBehaviour
         if (Nuts >= amount)
         {
             Nuts -= amount;
-            collectibleText.text = "Spare Parts: " + Nuts.ToString();
+            collectibleText.text = Nuts.ToString();
             return true;
         }
         return false;

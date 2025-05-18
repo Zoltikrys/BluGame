@@ -83,5 +83,46 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8731888436712380578, guid: d1e5320fd487b78499a768ad364b127d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 131927383567341154}
   m_SourcePrefab: {fileID: 100100000, guid: d1e5320fd487b78499a768ad364b127d, type: 3}
+--- !u!1 &2338579667012742915 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8731888436712380578, guid: d1e5320fd487b78499a768ad364b127d, type: 3}
+  m_PrefabInstance: {fileID: 6438365794776381345}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &131927383567341154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2338579667012742915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000af5f2891cbdd44946033a9a7077db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <FilterLayer>k__BackingField: 0
+  CollisionWhenHidden: 0
+  ActiveOnColour: 1
+  FadeInStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0.9
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
+  FadeOutStyle:
+    Style: 0
+    FadeDuration: 0
+    StartDelay: 0
+    CollisionThresholdPercentage: 0.1
+    RevealStyle:
+      Style: 0
+      DestroyDelay: 0
+  IsDisplayed: 0
+  Filterable: 1
