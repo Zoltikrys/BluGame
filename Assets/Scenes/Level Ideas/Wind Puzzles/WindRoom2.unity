@@ -357,7 +357,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 303779049}
+  m_Mesh: {fileID: 1091906573}
 --- !u!33 &76222763
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -2278,7 +2278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cca015329003bd4fae0600170d25481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: 32
+  SceneToLoad: 33
   IndexOfSpawnPointInNextScene: 1
   SceneID: 0
   <ExitTransition>k__BackingField: 1
@@ -3227,7 +3227,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1875399405469941257, guid: 586c3f65783953d44a7e9e1ad220bcb7, type: 3}
       propertyPath: SceneToLoad
-      value: 6
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 2937289720613956516, guid: 586c3f65783953d44a7e9e1ad220bcb7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8628,7 +8628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cca015329003bd4fae0600170d25481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: 34
+  SceneToLoad: 35
   IndexOfSpawnPointInNextScene: 0
   SceneID: 0
   <ExitTransition>k__BackingField: 1
@@ -12446,7 +12446,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1875399405469941257, guid: 586c3f65783953d44a7e9e1ad220bcb7, type: 3}
       propertyPath: SceneToLoad
-      value: 6
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875399405469941257, guid: 586c3f65783953d44a7e9e1ad220bcb7, type: 3}
+      propertyPath: IndexOfSpawnPointInNextScene
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2937289720613956516, guid: 586c3f65783953d44a7e9e1ad220bcb7, type: 3}
       propertyPath: m_LocalPosition.x

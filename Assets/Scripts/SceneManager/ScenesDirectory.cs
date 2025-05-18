@@ -39,6 +39,7 @@ public static class RoomDirectory{
         { LEVELS.TutorialRoom7, "Tutorial Room 7" },
 
         { LEVELS.HUB1, "HUB1" },
+        { LEVELS.HUB2, "HUB2" },
 
         { LEVELS.TutorialRoomBoss, "Tutorial Room Boss" },
 
