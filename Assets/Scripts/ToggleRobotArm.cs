@@ -24,8 +24,11 @@ public class ToggleRobotArm : MonoBehaviour {
     }
 
     private void OnTriggerExit(Collider other) {
-        canIntereact = false;
-        other.transform.GetChild(1).gameObject.GetComponent<InteractText>().HideText();
+        if (other.tag == ("Player"))
+        {
+            canIntereact = false;
+            other.transform.GetChild(1).gameObject.GetComponent<InteractText>().HideText();
+        }
     }
 
     // Update is called once per frame
