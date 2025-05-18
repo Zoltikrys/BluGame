@@ -60,6 +60,7 @@ public class MagnetAbility : MonoBehaviour
     {
         // Toggle magnet ability
         if(smallMagnetTargetMagnetised && smallMagnetTarget == null) TurnOffMagnet(); // fires when our gameobject is consumed or deleted out of the scene.
+        if(!isMagnetAbilityActive) return;
 
         if (isMagnetActive)
         {
@@ -70,6 +71,7 @@ public class MagnetAbility : MonoBehaviour
     }
 
     public void MagnetInput() {
+        if(!isMagnetAbilityActive) return;
         if (!isMagnetActive) {
             if (GetComponent<Battery>().AttemptAddBatteryEffects(MagnetBatteryCost, true)) {
                 isMagnetActive = true;

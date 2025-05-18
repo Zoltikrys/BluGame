@@ -16,7 +16,7 @@ public class upgradeTubeBehaviour : MonoBehaviour
 
     [SerializeField] private GameObject LeftDoor;
     [SerializeField] private GameObject RightDoor;
-
+    [SerializeField] private CapsuleCollider CapsuleCollider;
     void Start()
     {
         // Assigns key variables
@@ -25,6 +25,8 @@ public class upgradeTubeBehaviour : MonoBehaviour
         player = GameObject.Find("Player");
         LeftDoor = GameObject.Find("LeftDoor");
         RightDoor = GameObject.Find("RightDoor");
+        
+        if(powerSources >= reqPower) Unlock();
     }
 
     public void Unlock()
@@ -51,7 +53,7 @@ public class upgradeTubeBehaviour : MonoBehaviour
         if(other == null) return;
         
         if(other.gameObject == player){
-            GetComponent<CapsuleCollider>().enabled = false;
+            CapsuleCollider.enabled = false;
             Upgrade();
         }
     }
@@ -61,12 +63,21 @@ public class upgradeTubeBehaviour : MonoBehaviour
     {
         // Provides the Goggles upgrade
         if (isGoggles) {
-            Debug.Log("Upgrading");
+            Debug.Log("Upgrading Goggles");
             CloseDoor();
             player.GetComponent<PlayerController>().LockMovement();
             player.GetComponent<RgbGoggles>().GogglesActivated = true;
             player.GetComponent<RgbGoggles>().gogglesObject.SetActive(true);
 
+            StartCoroutine(Cooldown(2f, OpenDoor));
+        }
+        // Provides the magnet upgrade
+        if(isMagnet){
+            Debug.Log("Upgrading Magnet");
+            CloseDoor();
+            player.GetComponent<PlayerController>().LockMovement();
+            player.GetComponent<MagnetAbility>().isMagnetAbilityActive = true;
+            player.GetComponent<MagnetAbility>().enabled = true;
             StartCoroutine(Cooldown(2f, OpenDoor));
         }
     }

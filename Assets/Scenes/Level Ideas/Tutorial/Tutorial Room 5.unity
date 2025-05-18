@@ -6922,6 +6922,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 911203645}
+  - component: {fileID: 911203646}
   m_Layer: 0
   m_Name: Blue
   m_TagString: SpawnPoints
@@ -6944,6 +6945,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1355752578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &911203646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911203644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e2eb9da7cdbaf48a1ca6d887f59e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCheckpoint: 1
 --- !u!4 &936250894 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3819318902227131679, guid: ce62aeb3d8f8d014a8d363d9474f5ef7, type: 3}
@@ -9398,6 +9412,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1298813797}
+  - component: {fileID: 1298813798}
   m_Layer: 0
   m_Name: Entrance
   m_TagString: SpawnPoints
@@ -9420,6 +9435,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1355752578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1298813798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298813796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e2eb9da7cdbaf48a1ca6d887f59e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCheckpoint: 1
 --- !u!1001 &1310270052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11375,6 +11403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1574141255}
+  - component: {fileID: 1574141256}
   m_Layer: 0
   m_Name: Green
   m_TagString: SpawnPoints
@@ -11397,6 +11426,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1355752578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1574141256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574141254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e2eb9da7cdbaf48a1ca6d887f59e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCheckpoint: 1
 --- !u!4 &1574363603 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3819318902227131679, guid: ce62aeb3d8f8d014a8d363d9474f5ef7, type: 3}

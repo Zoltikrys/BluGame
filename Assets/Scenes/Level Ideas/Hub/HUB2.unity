@@ -1950,6 +1950,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 889745879}
+  - component: {fileID: 889745880}
   m_Layer: 0
   m_Name: NorthSpawnPoint
   m_TagString: SpawnPoints
@@ -1972,6 +1973,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 818296387}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &889745880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889745878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e2eb9da7cdbaf48a1ca6d887f59e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCheckpoint: 1
 --- !u!1001 &970966886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3176,6 +3190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1290412458}
+  - component: {fileID: 1290412459}
   m_Layer: 0
   m_Name: SouthSpawnPoint
   m_TagString: SpawnPoints
@@ -3198,6 +3213,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 818296387}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1290412459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290412457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e2eb9da7cdbaf48a1ca6d887f59e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCheckpoint: 1
 --- !u!1001 &1310592387
 PrefabInstance:
   m_ObjectHideFlags: 0

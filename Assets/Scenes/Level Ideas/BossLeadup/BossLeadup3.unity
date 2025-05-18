@@ -872,6 +872,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3253546795344471717, guid: f25186e472d094a47867794dae795a3e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e00fca993a957141aaae32c1335e89f, type: 2}
     - target: {fileID: 6172491982702185863, guid: f25186e472d094a47867794dae795a3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.1200173
@@ -912,10 +916,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3253546795344471717, guid: f25186e472d094a47867794dae795a3e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0e00fca993a957141aaae32c1335e89f, type: 2}
     - target: {fileID: 7965873652648003999, guid: f25186e472d094a47867794dae795a3e, type: 3}
       propertyPath: m_Name
       value: Currency_B (1)
@@ -5403,6 +5403,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3253546795344471717, guid: f25186e472d094a47867794dae795a3e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e00fca993a957141aaae32c1335e89f, type: 2}
     - target: {fileID: 6172491982702185863, guid: f25186e472d094a47867794dae795a3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.112822
@@ -5443,10 +5447,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3253546795344471717, guid: f25186e472d094a47867794dae795a3e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0e00fca993a957141aaae32c1335e89f, type: 2}
     - target: {fileID: 7965873652648003999, guid: f25186e472d094a47867794dae795a3e, type: 3}
       propertyPath: m_Name
       value: Currency_B
@@ -7511,6 +7511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1298813797}
+  - component: {fileID: 1298813798}
   m_Layer: 0
   m_Name: SouthDoor
   m_TagString: SpawnPoints
@@ -7533,6 +7534,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1355752578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1298813798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298813796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e2eb9da7cdbaf48a1ca6d887f59e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCheckpoint: 1
 --- !u!1001 &1305711002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17428,6 +17442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2113210732}
+  - component: {fileID: 2113210733}
   m_Layer: 0
   m_Name: NorthDoor
   m_TagString: SpawnPoints
@@ -17450,6 +17465,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1355752578}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2113210733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113210731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e2eb9da7cdbaf48a1ca6d887f59e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCheckpoint: 1
 --- !u!1001 &2113494937
 PrefabInstance:
   m_ObjectHideFlags: 0
