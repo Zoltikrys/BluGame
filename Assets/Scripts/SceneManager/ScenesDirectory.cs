@@ -38,7 +38,7 @@ public static class RoomDirectory{
         { LEVELS.TutorialRoom6_1, "Tutorial Room 6.1" },
         { LEVELS.TutorialRoom7, "Tutorial Room 7" },
 
-        { LEVELS.HUBROOM, "HUB ROOM" },
+        { LEVELS.HUB1, "HUB1" },
 
         { LEVELS.TutorialRoomBoss, "Tutorial Room Boss" },
 
@@ -102,7 +102,8 @@ public enum LEVELS{
     TutorialRoom6_1,
     TutorialRoom7,
 
-    HUBROOM,
+    HUB1,
+    HUB2,
 
 
 
