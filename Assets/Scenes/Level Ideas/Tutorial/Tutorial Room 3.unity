@@ -2316,6 +2316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 588467480}
+  - component: {fileID: 588467481}
   m_Layer: 0
   m_Name: SouthSpawn
   m_TagString: SpawnPoints
@@ -2338,6 +2339,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 560397729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &588467481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588467479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e2eb9da7cdbaf48a1ca6d887f59e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCheckpoint: 1
 --- !u!1001 &606324623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3479,6 +3493,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 326806254}
     m_Modifications:
+    - target: {fileID: 4958523970483352321, guid: f457304eabe2c5540989591e2dd744d6, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6172491982702185863, guid: f25186e472d094a47867794dae795a3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.1989975
@@ -3518,10 +3536,6 @@ PrefabInstance:
     - target: {fileID: 6172491982702185863, guid: f25186e472d094a47867794dae795a3e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958523970483352321, guid: f457304eabe2c5540989591e2dd744d6, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7965873652648003999, guid: f25186e472d094a47867794dae795a3e, type: 3}
       propertyPath: m_Name
@@ -6242,6 +6256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1359970046}
+  - component: {fileID: 1359970047}
   m_Layer: 0
   m_Name: NorthSpawn
   m_TagString: SpawnPoints
@@ -6264,6 +6279,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 560397729}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1359970047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359970045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e2eb9da7cdbaf48a1ca6d887f59e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCheckpoint: 1
 --- !u!1001 &1389175873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6606,6 +6634,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 326806254}
     m_Modifications:
+    - target: {fileID: 4958523970483352321, guid: f457304eabe2c5540989591e2dd744d6, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6172491982702185863, guid: f25186e472d094a47867794dae795a3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.2330017
@@ -6645,10 +6677,6 @@ PrefabInstance:
     - target: {fileID: 6172491982702185863, guid: f25186e472d094a47867794dae795a3e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -59.813
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958523970483352321, guid: f457304eabe2c5540989591e2dd744d6, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7965873652648003999, guid: f25186e472d094a47867794dae795a3e, type: 3}
       propertyPath: m_Name

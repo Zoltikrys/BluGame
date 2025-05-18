@@ -3406,6 +3406,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 505344292}
+  - component: {fileID: 505344293}
   m_Layer: 0
   m_Name: Entrance
   m_TagString: SpawnPoints
@@ -3428,6 +3429,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2001236644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &505344293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505344291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e2eb9da7cdbaf48a1ca6d887f59e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCheckpoint: 1
 --- !u!4 &505345354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7523459769681260091, guid: bcf31b9f5a9ee7146be44b9f6f6ff599, type: 3}
