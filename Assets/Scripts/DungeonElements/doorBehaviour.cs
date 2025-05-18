@@ -89,7 +89,7 @@ public class doorBehaviour : MonoBehaviour
         doorCollider.GetComponent<Collider>().enabled = true;
     }
 
-    private void CloseDoor()
+    public void CloseDoor()
     {
         animator.SetBool("DoorOpen", false);
         Debug.Log($"{name} door closed");

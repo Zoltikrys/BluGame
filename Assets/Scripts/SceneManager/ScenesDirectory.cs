@@ -66,6 +66,8 @@ public static class RoomDirectory{
         { LEVELS.Magnet6_1, "Magnet 6.1" },
         { LEVELS.Magnet7, "Magnet 7" },
 
+        { LEVELS.EndingScene, "EndingScene" },
+
     };
 }
 
@@ -136,4 +138,6 @@ public enum LEVELS{
     Magnet6,
     Magnet6_1,
     Magnet7,
+
+    EndingScene,
 }
