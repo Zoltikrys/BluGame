@@ -56,8 +56,13 @@ public static class RoomDirectory{
         { LEVELS.BossLeadup2, "BossLeadup2" },
         { LEVELS.BossLeadup3, "BossLeadup3" },
 
-
-
+        { LEVELS.Magnet1, "Magnet 1" },
+        { LEVELS.Magnet2, "Magnet 2" },
+        { LEVELS.Magnet3, "Magnet 3" },
+        { LEVELS.Magnet4, "Magnet 4" },
+        { LEVELS.Magnet5, "Magnet 5" },
+        { LEVELS.Magnet6, "Magnet 6" },
+        { LEVELS.Magnet6_1, "Magnet 6.1" },
 
     };
 }
@@ -119,4 +124,12 @@ public enum LEVELS{
     BossLeadup1,
     BossLeadup2,
     BossLeadup3,
+
+    Magnet1,
+    Magnet2,
+    Magnet3,
+    Magnet4,
+    Magnet5,
+    Magnet6,
+    Magnet6_1,
 }
