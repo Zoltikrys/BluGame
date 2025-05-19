@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MagneticMaterial
+  m_Name: MagneticSphere
   m_Shader: {fileID: -6465566751694194690, guid: 0862223ad0dfb2341a81bfc7854defe2, type: 3}
   m_Parent: {fileID: -876546973899608171, guid: 0862223ad0dfb2341a81bfc7854defe2, type: 3}
   m_ModifiedSerializedProperties: 0
@@ -39,8 +39,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _Clamp: 0.5
-    - _OutlineDistance: -0.05
+    - _OutlineDistance: -0.9
     - _QueueControl: 0
+    - _Speed: 5
     - _Transparency: 0.8
     m_Colors:
     - _MagneticColour: {r: 0.18811014, g: 1.5510511, b: 1.7338843, a: 1}

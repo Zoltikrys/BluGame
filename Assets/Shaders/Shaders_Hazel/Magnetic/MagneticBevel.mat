@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2012590007192943912
+--- !u!114 &-434495389823952329
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,9 +20,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MagneticMaterial 1
-  m_Shader: {fileID: -6465566751694194690, guid: 0862223ad0dfb2341a81bfc7854defe2, type: 3}
-  m_Parent: {fileID: -876546973899608171, guid: 0862223ad0dfb2341a81bfc7854defe2, type: 3}
+  m_Name: MagneticBevel
+  m_Shader: {fileID: -6465566751694194690, guid: 7e79708d57cf8dc4e9e7289b37ded8da, type: 3}
+  m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -35,14 +35,29 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Clamp: 0.5
-    - _OutlineDistance: -0.45
+    - _EdgeEnd: 0.5
+    - _EdgeStart: 0.25
+    - _FragDepth: 50
+    - _OutlineDistance: 0.1
     - _QueueControl: 0
+    - _QueueOffset: 0
     - _Speed: 5
     - _Transparency: 0.8
     m_Colors:
-    - _MagneticColour: {r: 0.18811014, g: 1.5510511, b: 1.7338843, a: 1}
+    - _MagneticColour: {r: 0.8679245, g: 0.4640904, b: 0.21698113, a: 0}
   m_BuildTextureStacks: []
