@@ -77,10 +77,12 @@ public class StateManager : MonoBehaviour
             RgbGoggles currentPlayerGoggles;
             Battery currentBattery;
             CollectibleCollection collectibleCollection;
+            MagnetAbility magnetAbility;
             player.TryGetComponent<HealthManager>(out currentPlayerHealth);
             player.TryGetComponent<RgbGoggles>(out currentPlayerGoggles);
             player.TryGetComponent<Battery>(out currentBattery);
             player.TryGetComponent<CollectibleCollection>(out collectibleCollection);
+            player.TryGetComponent<MagnetAbility>(out magnetAbility);
 
             if(currentPlayerHealth) {
                 Debug.Log($"Setting health to {playerInfo.HP} and lives to {playerInfo.Lives}");
@@ -88,7 +90,9 @@ public class StateManager : MonoBehaviour
                 currentPlayerHealth.Lives = playerInfo.Lives;
             }
             if(currentPlayerGoggles) currentPlayerGoggles.GogglesActivated = playerInfo.RGB_GoggleState;
+            if(magnetAbility) magnetAbility.isMagnetAbilityActive = playerInfo.MagnetState;
             if(collectibleCollection) collectibleCollection.SetNut(playerInfo.Nuts);
+            
             if(currentBattery){
                 Debug.Log($"Setting battery to: {playerInfo.BatteryCharge}/{playerInfo.MaxBatteryCharge}");
                 currentBattery.CurrentBatteryCharge = playerInfo.BatteryCharge;
