@@ -24,7 +24,7 @@ public class MusicManager : MonoBehaviour
     //temporary function to start the background music, will need to remove later
     private void Start()
     {
-        PlayMusic("BGMPlaceholder", 0f);
+        PlayMusic("BLU Main Music", 0f);
     }
 
     // Play Music function, can be called during scene transitions
