@@ -26,6 +26,8 @@ public class RgbGoggles : MonoBehaviour
     private int rgbNum = (int)RGBSTATE.R;
     public GameObject gogglesObject;
 
+    public GameObject terrainScannerVFXPrefab;
+
     void Start(){
         colorFlags.r = false;
         colorFlags.g = false;
