@@ -190,7 +190,7 @@ public class GuardianBehaviour : MonoBehaviour
         {
             stompEffectTime = 0;
 
-            Vector3 stompVFXSpawn = new Vector3(stompSpawnPoint.position.x, 0f, stompSpawnPoint.position.z);
+            Vector3 stompVFXSpawn = new Vector3(stompSpawnPoint.position.x, stompSpawnPoint.position.y, stompSpawnPoint.position.z);
 
             Instantiate(stompEffectPrefab, stompVFXSpawn, stompSpawnPoint.rotation);
             Instantiate(sparksEffectPrefab, stompVFXSpawn, stompSpawnPoint.rotation);
@@ -204,7 +204,7 @@ public class GuardianBehaviour : MonoBehaviour
             {
                 Debug.Log("Guardian stomped Blu for " + stompDamage + " damage!");
 
-                Vector3 stompOrigin = new Vector3(stompKnockbackPoint.position.x, 0f, stompKnockbackPoint.position.z);
+                Vector3 stompOrigin = new Vector3(stompKnockbackPoint.position.x, stompKnockbackPoint.position.y, stompKnockbackPoint.position.z);
 
                 HealthManager healthMan = hit.gameObject.GetComponent<HealthManager>(); // damage player
                 healthMan.Damage();
