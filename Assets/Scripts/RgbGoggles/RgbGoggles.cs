@@ -26,7 +26,10 @@ public class RgbGoggles : MonoBehaviour
     private int rgbNum = (int)RGBSTATE.R;
     public GameObject gogglesObject;
 
-    public GameObject terrainScannerVFXPrefab;
+    public GameObject terrainScannerVFXPrefabRed;
+    public GameObject terrainScannerVFXPrefabGreen;
+    public GameObject terrainScannerVFXPrefabBlue;
+
 
     void Start(){
         colorFlags.r = false;
@@ -114,6 +117,23 @@ public class RgbGoggles : MonoBehaviour
         UpdateGoggleState();
         UpdateWorldObjects();
         ProcessColorChange();
+
+        if (GogglesActivated && GogglesOn && terrainScannerVFXPrefabRed != null && terrainScannerVFXPrefabGreen != null && terrainScannerVFXPrefabBlue != null)
+        {
+            switch (CurrentGoggleState)
+            {
+                case RGBSTATE.R:
+                    Instantiate(terrainScannerVFXPrefabRed, transform.position, Quaternion.identity);
+                    break;
+                case RGBSTATE.G:
+                    Instantiate(terrainScannerVFXPrefabGreen, transform.position, Quaternion.identity);
+                    break;
+                case RGBSTATE.B:
+                    Instantiate(terrainScannerVFXPrefabBlue, transform.position, Quaternion.identity);
+                    break;
+            }
+        }
+
     }
 
 
