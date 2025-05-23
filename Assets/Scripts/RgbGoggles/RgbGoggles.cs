@@ -118,21 +118,26 @@ public class RgbGoggles : MonoBehaviour
         UpdateWorldObjects();
         ProcessColorChange();
 
-        if (GogglesActivated && GogglesOn && terrainScannerVFXPrefabRed != null && terrainScannerVFXPrefabGreen != null && terrainScannerVFXPrefabBlue != null)
+        GameObject vfxInstance = null;
+
+        switch (CurrentGoggleState)
         {
-            switch (CurrentGoggleState)
-            {
-                case RGBSTATE.R:
-                    Instantiate(terrainScannerVFXPrefabRed, transform.position, Quaternion.identity);
-                    break;
-                case RGBSTATE.G:
-                    Instantiate(terrainScannerVFXPrefabGreen, transform.position, Quaternion.identity);
-                    break;
-                case RGBSTATE.B:
-                    Instantiate(terrainScannerVFXPrefabBlue, transform.position, Quaternion.identity);
-                    break;
-            }
+            case RGBSTATE.R:
+                vfxInstance = Instantiate(terrainScannerVFXPrefabRed, transform.position, Quaternion.identity);
+                break;
+            case RGBSTATE.G:
+                vfxInstance = Instantiate(terrainScannerVFXPrefabGreen, transform.position, Quaternion.identity);
+                break;
+            case RGBSTATE.B:
+                vfxInstance = Instantiate(terrainScannerVFXPrefabBlue, transform.position, Quaternion.identity);
+                break;
         }
+
+        if (vfxInstance != null)
+        {
+            Destroy(vfxInstance, 5f); //deletes after playing
+        }
+
 
     }
 

@@ -32,6 +32,13 @@ public class MagnetAbility : MonoBehaviour
     [SerializeField] private GameObject magnetVibes;
     [SerializeField] private List<ParticleSystem> magnetParticles;
 
+    [Header("Magnet Visuals")]
+    [SerializeField] private Material magnetBevelMat;
+    [SerializeField] private GameObject magneticBeam;
+    [SerializeField] private Transform beamOrigin; // the point on the player the beam starts from
+
+
+
     [field: SerializeField] public GameObject smallMagnetTarget { get; private set; }// Currently tracked small magnet
     private bool smallMagnetTargetMagnetised = false;
     private CharacterController characterController; // Reference to player movement
@@ -129,9 +136,16 @@ public class MagnetAbility : MonoBehaviour
     {
         if (smallMagnetTarget == null) // Look for a new small magnet if none is being targeted
         {
+            // Disable beam if not pulling anything
+            if (magneticBeam != null && magneticBeam.activeSelf)
+            {
+                magneticBeam.SetActive(false);
+            }
+
             Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, detectionRadius);
 
             float MinDistance = Mathf.Infinity;
+            GameObject newTarget = null;
 
             foreach (Collider obj in nearbyObjects)
             {
@@ -140,12 +154,33 @@ public class MagnetAbility : MonoBehaviour
                     Vector3 toObject = (obj.transform.position - transform.position).normalized;
                     float angle = Vector3.Angle(transform.forward, toObject);
 
-                    if (angle <= FrontConeAngle / 2) // angle detection to make sure the magnet is magnetising from the front
+                    if (angle <= FrontConeAngle / 2)
                     {
-                        if(Vector3.Distance(transform.position, obj.transform.position) <= MinDistance){
-                            MinDistance = Vector3.Distance(transform.position, obj.transform.position);
-                            smallMagnetTarget = obj.gameObject;
+                        float distance = Vector3.Distance(transform.position, obj.transform.position);
+                        if (distance <= MinDistance)
+                        {
+                            MinDistance = distance;
+                            newTarget = obj.gameObject;
                         }
+                    }
+                }
+            }
+
+            // Assign new target and apply material if found
+            if (newTarget != null)
+            {
+                smallMagnetTarget = newTarget;
+
+                Renderer rend = smallMagnetTarget.GetComponent<Renderer>();
+                if (rend != null && magnetBevelMat != null)
+                {
+                    Material[] originalMats = rend.materials;
+                    if (originalMats.Length == 1)
+                    {
+                        Material[] newMats = new Material[2];
+                        newMats[0] = originalMats[0];
+                        newMats[1] = magnetBevelMat;
+                        rend.materials = newMats;
                     }
                 }
             }
@@ -153,8 +188,8 @@ public class MagnetAbility : MonoBehaviour
 
         if (smallMagnetTarget != null)
         {
-            
             smallMagnetTargetMagnetised = true;
+
             // Calculate stop position in front of the player
             Vector3 stopPosition = transform.position + transform.forward * smallMagnetStopDistance;
 
@@ -164,27 +199,51 @@ public class MagnetAbility : MonoBehaviour
             {
                 Vector3 directionToStop = (stopPosition - smallMagnetTarget.transform.position).normalized;
                 float distanceToStop = Vector3.Distance(smallMagnetTarget.transform.position, stopPosition);
-                
-                
-                if (distanceToStop > 0.1f) // If not yet at stop position
+
+                if (distanceToStop > 0.1f)
                 {
                     rb.velocity = directionToStop * smallMagnetPullSpeed;
                 }
                 else
                 {
-                    rb.velocity = Vector3.zero; // Stop movement
-                    smallMagnetTarget.transform.SetParent(transform); // Parent to the player
+                    rb.velocity = Vector3.zero;
+                    smallMagnetTarget.transform.SetParent(transform);
                     rb.useGravity = false;
                     rb.constraints = RigidbodyConstraints.FreezeRotation;
                 }
 
-                SetOtherSmallMagnetsKinematic(true); // Make all other small magnets kinematic while holding
+                SetOtherSmallMagnetsKinematic(true);
+            }
 
+            // Update and show magnetic beam
+            if (magneticBeam != null && beamOrigin != null)
+            {
+                magneticBeam.SetActive(true);
+
+                Vector3 start = beamOrigin.position;
+                Vector3 end = smallMagnetTarget.transform.position;
+                Vector3 direction = end - start;
+                float distance = direction.magnitude;
+
+                // Position at midpoint
+                magneticBeam.transform.position = start + direction * 0.5f;
+
+                // Scale lengthwise (Y-axis)
+                magneticBeam.transform.localScale = new Vector3(
+                    magneticBeam.transform.localScale.x,
+                    distance * 0.5f,
+                    magneticBeam.transform.localScale.z
+                );
+
+                // Rotate to face the magnet
+                magneticBeam.transform.rotation = Quaternion.LookRotation(direction);
+                magneticBeam.transform.Rotate(90f, 0f, 0f); // Adjust for vertical cylinder
             }
         }
-
-
     }
+
+
+
 
     void HandleBigMagnets()
     {
@@ -233,6 +292,24 @@ public class MagnetAbility : MonoBehaviour
                     rb.useGravity = true;
                     rb.constraints = RigidbodyConstraints.None;
                 }
+
+            // Remove second material on release
+            if (smallMagnetTarget != null)
+            {
+                Renderer rend = smallMagnetTarget.GetComponent<Renderer>();
+                if (rend != null)
+                {
+                    Material[] currentMats = rend.materials;
+                    if (currentMats.Length > 1)
+                    {
+                        Material[] newMats = new Material[1];
+                        newMats[0] = currentMats[0];
+                        rend.materials = newMats;
+                    }
+                }
+            }
+
+            magneticBeam.SetActive(false);
             smallMagnetTarget = null; // Clear the reference
         }
 
