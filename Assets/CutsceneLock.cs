@@ -1,30 +1,58 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Playables;
 
 public class CutsceneLock : MonoBehaviour
 {
-    [field: SerializeField] public PlayerController player;
-    [field: SerializeField] public PlayableDirector director;
+    [SerializeField] private PlayerController player;
+    [SerializeField] private PlayableDirector director;
 
-    void Awake()
+    private void Start()
     {
-        director.played += DirectorStarted;
-        director.stopped += DirectorEnded;
-        director.Play();
+        if (player == null)
+        {
+            Debug.LogError("CutsceneLock: PlayerController is not assigned.");
+            return;
+        }
+
+        if (director == null)
+        {
+            Debug.LogError("CutsceneLock: PlayableDirector is not assigned.");
+            return;
+        }
+
+        director.played += OnCutsceneStarted;
+        director.stopped += OnCutsceneEnded;
+
+        // Wait one frame to ensure everything is initialized
+        StartCoroutine(InitializeCutscene());
     }
 
-    private void DirectorEnded(PlayableDirector director)
+    private IEnumerator InitializeCutscene()
     {
-        if(player) player.UnlockMovement();
+        yield return null;
+
+        if (director.state == PlayState.Playing)
+        {
+            // Director is already playing
+            OnCutsceneStarted(director);
+        }
+        else
+        {
+            // Start the cutscene
+            director.Play();
+        }
     }
 
-    private void DirectorStarted(PlayableDirector director)
+    private void OnCutsceneStarted(PlayableDirector d)
     {
-        if(player) player.LockMovement();
+        Debug.Log("Cutscene started.");
+        player.LockMovement();
     }
 
+    private void OnCutsceneEnded(PlayableDirector d)
+    {
+        Debug.Log("Cutscene ended.");
+        player.UnlockMovement();
+    }
 }
