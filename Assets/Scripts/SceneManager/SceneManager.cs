@@ -256,6 +256,7 @@ public class SceneManager : MonoBehaviour
     public void GameOverRespawn()
     {
         StateManager.CurrentCheckPoint.PlayerInfo.Lives = 3;
+        StateManager.CurrentCheckPoint.PlayerInfo.HP = 10;
         Respawn();
     }
 
