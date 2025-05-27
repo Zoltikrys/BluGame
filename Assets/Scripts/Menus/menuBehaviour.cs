@@ -6,15 +6,18 @@ using UnityEngine.UI;
 public class menuBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenuFirst;
+    [SerializeField] private GameObject creditsFirst;
 
     public LEVELS scenetoload;
     public SceneManager sceneManager;
     public GameObject fadeScreen;
     public bool fadeOut = false;
+    public GameObject credits;
 
     public void Start()
     {
         sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+        credits.SetActive(false);
     }
 
     public void LoadLevel()
@@ -35,11 +38,25 @@ public class menuBehaviour : MonoBehaviour
         Application.Quit();
     }
 
+    public void Credits()
+    {
+        credits.SetActive(true);
+    }
+
+    public void LeaveCredits()
+    {
+        credits.SetActive(false);
+    }
+
     public void SetSelectedButton()
     {
         EventSystem.current.SetSelectedGameObject(mainMenuFirst);
     }
 
+    public void SetSelectedButtonCredits()
+    {
+        EventSystem.current.SetSelectedGameObject(creditsFirst);
+    }
 
     public void LeavingMenu()
     {
