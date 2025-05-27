@@ -20,20 +20,12 @@ public class ArmouredSecurityBot : MonoBehaviour
     public GameObject laserPrefab;
     public Transform laserSpawnPoint;
 
-    void Start()
-    {
-
-    }
-
     private void Update()
     {
         shootTimer += Time.deltaTime;
         
-
-
         if (!isVulnerable)
         {
-
             if (shootTimer >= shootInterval)
             {
                 if (attackMode == AttackType.BulletHell)
@@ -47,10 +39,7 @@ public class ArmouredSecurityBot : MonoBehaviour
 
                 shootTimer = 0;
             }
-            
         }
-
-
 
         if (transform.childCount == 3) // Minimum should be 3 as there should be at least the vent location, main body mesh and bullet spawn point, may increase later with updates to code
         {
@@ -62,7 +51,6 @@ public class ArmouredSecurityBot : MonoBehaviour
             }
         }
     }
-
 
     private void FireBulletHell()
     {
@@ -82,7 +70,6 @@ public class ArmouredSecurityBot : MonoBehaviour
             {
                 bulletRb.velocity = bulletMoveDirection * bulletSpeed;
             }
-
             angle += angleStep;
         }
     }

@@ -37,8 +37,6 @@ public class MagnetAbility : MonoBehaviour
     [SerializeField] private GameObject magneticBeam;
     [SerializeField] private Transform beamOrigin; // the point on the player the beam starts from
 
-
-
     [field: SerializeField] public GameObject smallMagnetTarget { get; private set; }// Currently tracked small magnet
     private bool smallMagnetTargetMagnetised = false;
     private CharacterController characterController; // Reference to player movement
@@ -49,7 +47,6 @@ public class MagnetAbility : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        //controllerScript = GetComponent<PlayerController>();
 
         animator = GetComponentInChildren<Animator>();
 
@@ -82,24 +79,18 @@ public class MagnetAbility : MonoBehaviour
         if (!isMagnetActive) {
             if (GetComponent<Battery>().AttemptAddBatteryEffects(MagnetBatteryCost, true)) {
                 isMagnetActive = true;
-                magnetFront.color = Color.white;                                                          /////////////////////////////
+                magnetFront.color = Color.white;
                 animator.SetBool("Magnet?", true);
-                //magnetVibes.SetActive(true);
             }
         }
-        else {
+        else 
+        {
             isMagnetActive = false;
             isMagnetized = false;
-            magnetFront.color = Color.clear;                                                            ////////////////////////////
+            magnetFront.color = Color.clear;
             GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
             animator.SetBool("Magnet?", false);
-            //magnetVibes.SetActive(false);
-            //foreach (ParticleSystem particles in magnetParticles) {
-            //    particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
-            //}
-            //magnetParticles.Clear();
             TurnOffMagnet();
-
         }
     }
 
@@ -130,7 +121,6 @@ public class MagnetAbility : MonoBehaviour
             smallMagnetTarget = null; // Clear the reference
         }
     }
-
 
     void HandleSmallMagnets()
     {
@@ -242,9 +232,6 @@ public class MagnetAbility : MonoBehaviour
         }
     }
 
-
-
-
     void HandleBigMagnets()
     {
         Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, detectionRadius);
@@ -263,11 +250,6 @@ public class MagnetAbility : MonoBehaviour
                     // Move the player toward the magnet
                     characterController.Move(directionToMagnet * bigMagnetPullSpeed * Time.deltaTime);
                     isMagnetized = true;
-
-                    //if ((obj.GetComponent<ParticleSystem>() != null) && (!magnetParticles.Contains(obj.GetComponent<ParticleSystem>()))) {
-                    //    magnetParticles.Add(obj.GetComponent<ParticleSystem>());
-                    //    obj.GetComponent<ParticleSystem>().Play();
-                    //}
                 }
             }
         }
@@ -308,14 +290,10 @@ public class MagnetAbility : MonoBehaviour
                     }
                 }
             }
-
             magneticBeam.SetActive(false);
             smallMagnetTarget = null; // Clear the reference
         }
-
         SetOtherSmallMagnetsKinematic(false); // Return all small magnets to non-kinematic
-
-
     }
 
     public void TurnOffMagnet(){
@@ -323,14 +301,9 @@ public class MagnetAbility : MonoBehaviour
         isMagnetized = false;
         isMagnetActive = false;
         smallMagnetTargetMagnetised = false;
-        magnetFront.color = Color.clear;                                                                            ////////////////////////////
+        magnetFront.color = Color.clear;
         GetComponent<Battery>().RemoveBatteryEffects(MagnetBatteryCost);
         animator.SetBool("Magnet?", false);
-        //magnetVibes.SetActive(false);
-        //foreach (ParticleSystem particles in magnetParticles) {
-        //    particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
-        //}
-        //magnetParticles.Clear();
     }
 
     void SetOtherSmallMagnetsKinematic(bool makeKinematic)
@@ -346,17 +319,6 @@ public class MagnetAbility : MonoBehaviour
                 rb.isKinematic = makeKinematic;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
     private void OnDrawGizmos()
     {
