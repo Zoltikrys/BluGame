@@ -101,15 +101,20 @@ public class MagnetAbility : MonoBehaviour
     }
 
     public void ShootMode() {
-        if (shootMode) {
-            Debug.Log("Shoot mode off");
-            shootModeUI.SetActive(false);
-            shootMode = false;
-        }
-        else if (!shootMode) {
-            Debug.Log("Shoot mode on");
-            shootModeUI.SetActive(true);
-            shootMode = true;
+        if(isMagnetAbilityActive == true)
+        {
+            if (shootMode)
+            {
+                Debug.Log("Shoot mode off");
+                shootModeUI.SetActive(false);
+                shootMode = false;
+            }
+            else if (!shootMode)
+            {
+                Debug.Log("Shoot mode on");
+                shootModeUI.SetActive(true);
+                shootMode = true;
+            }
         }
     }
 
