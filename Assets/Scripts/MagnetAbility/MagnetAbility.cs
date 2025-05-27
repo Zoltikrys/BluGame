@@ -31,6 +31,7 @@ public class MagnetAbility : MonoBehaviour
     [SerializeField] private Image magnetFront;
     [SerializeField] private GameObject magnetVibes;
     [SerializeField] private List<ParticleSystem> magnetParticles;
+    [SerializeField] private GameObject shootModeUI;
 
     [Header("Magnet Visuals")]
     [SerializeField] private Material magnetBevelMat;
@@ -57,6 +58,11 @@ public class MagnetAbility : MonoBehaviour
         if (magnetFront == null) {
             var canvasScanlines = GameObject.FindGameObjectWithTag("UI_MAGFRONT");
             if (canvasScanlines != null) canvasScanlines.TryGetComponent<Image>(out magnetFront);
+        }
+        if (shootModeUI == null)
+        {
+            shootModeUI = GameObject.FindWithTag("UI_SHOOTMODE");
+            shootModeUI.SetActive(false);
         }
     }
 
@@ -97,10 +103,12 @@ public class MagnetAbility : MonoBehaviour
     public void ShootMode() {
         if (shootMode) {
             Debug.Log("Shoot mode off");
+            shootModeUI.SetActive(false);
             shootMode = false;
         }
         else if (!shootMode) {
             Debug.Log("Shoot mode on");
+            shootModeUI.SetActive(true);
             shootMode = true;
         }
     }
